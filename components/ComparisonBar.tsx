@@ -18,12 +18,12 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   let gradientDirection;
   if (metric === "Spotify Rank") {
     gradientDirection = isArtist2Higher 
-      ? 'linear-gradient(90deg, #419369 0%, #081111 80%)' // Green on lower (left) if right is higher (worse)
-      : 'linear-gradient(90deg, #081111 30%, #419369 100%)'; // Green on lower (right) if left is higher (worse)
+      ? 'linear-gradient(90deg, #419369 0%, #081111 50%)' // Green on lower (left) if right is higher (worse)
+      : 'linear-gradient(90deg, #081111 50%, #419369 100%)'; // Green on lower (right) if left is higher (worse)
   } else {
     gradientDirection = isArtist2Higher 
-      ? 'linear-gradient(90deg, #081111 30%, #419369 100%)'  // Dark to green (right side higher)
-      : 'linear-gradient(90deg, #419369 0%, #081111 80%)'; // Green to dark (left side higher)
+      ? 'linear-gradient(90deg, #081111 50%, #419369 100%)'  // Dark to green (right side higher)
+      : 'linear-gradient(90deg, #419369 0%, #081111 50%)'; // Green to dark (left side higher)
   }
   return (
     <div
