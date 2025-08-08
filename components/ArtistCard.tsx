@@ -3,9 +3,9 @@ import React from 'react';
 interface ArtistCardProps {
   artistName: string;
   spotifyImageUrl?: string;
-  activeYears: string;
-  songsCount: number;
-  albumsCount: number;
+  activeYears?: string;
+  songsCount?: number;
+  albumsCount?: number;
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = ({
@@ -34,11 +34,11 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
 
       {/* Artist Name */}
       <h2 className="text-2xl font-bold text-white mb-2 text-center">
-        {artistName.toUpperCase()}
+        {artistName?.toUpperCase()}
       </h2>
 
       {/* Active Years */}
-      <p className="text-gray-300 text-sm mb-6 font-medium">{activeYears}</p>
+  <p className="text-gray-300 text-sm mb-6 font-medium">{activeYears || '—'}</p>
 
       {/* Statistics */}
       <div className="flex gap-4">
@@ -51,7 +51,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
             boxShadow: '0 0 4px 0 #38D985 inset, 0 0 2.6px 1px #38D985'
           }}
         >
-          <div className="text-white font-bold text-lg">{songsCount}</div>
+          <div className="text-white font-bold text-lg">{songsCount ?? '—'}</div>
           <div className="text-gray-300 text-sm font-medium">Songs</div>
         </div>
 
@@ -65,7 +65,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
             boxShadow: '0 0 4px 0 #38D985 inset, 0 0 2.6px 1px #38D985'
           }}
         >
-          <div className="text-white font-bold text-lg">{albumsCount}</div>
+          <div className="text-white font-bold text-lg">{albumsCount ?? '—'}</div>
           <div className="text-gray-300 text-sm font-medium">Albums</div>
         </div>
       </div>

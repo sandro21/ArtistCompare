@@ -1,8 +1,15 @@
 import React from 'react';
 import ArtistCard from './ArtistCard';
-import { artists } from '../data/artists';
+import { artists as staticArtists } from '../data/artists';
 
-const Info: React.FC = () => {
+interface InfoProps {
+  artistA?: any;
+  artistB?: any;
+}
+
+const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
+  const a = artistA || staticArtists[0];
+  const b = artistB || staticArtists[1];
   return (
     <div
       style={{
@@ -17,21 +24,25 @@ const Info: React.FC = () => {
       className="flex justify-between items-center p-10"
     >
       {/* Artist 1 */}
-      <ArtistCard
-        artistName={artists[0].artistName}
-        spotifyImageUrl={artists[0].spotifyImageUrl}
-        activeYears={artists[0].activeYears}
-        songsCount={artists[0].songsCount}
-        albumsCount={artists[0].albumsCount}
-      />
+      {a && (
+        <ArtistCard
+          artistName={a.artistName || a.name}
+          spotifyImageUrl={a.spotifyImageUrl || a.image || a.spotifyImage}
+          activeYears={a.activeYears}
+          songsCount={a.songsCount}
+          albumsCount={a.albumsCount}
+        />
+      )}
       {/* Artist 2 */}
-      <ArtistCard
-        artistName={artists[1].artistName}
-        spotifyImageUrl={artists[1].spotifyImageUrl}
-        activeYears={artists[1].activeYears}
-        songsCount={artists[1].songsCount}
-        albumsCount={artists[1].albumsCount}
-      />
+      {b && (
+        <ArtistCard
+          artistName={b.artistName || b.name}
+          spotifyImageUrl={b.spotifyImageUrl || b.image || b.spotifyImage}
+          activeYears={b.activeYears}
+          songsCount={b.songsCount}
+          albumsCount={b.albumsCount}
+        />
+      )}
     </div>
   );
 };
