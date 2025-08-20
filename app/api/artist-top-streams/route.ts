@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getTrackDetails } from '../../../lib/spotify';
 
 // Simple in-memory cache (per server instance) to avoid hammering upstream
 interface CacheEntry { data: any; expires: number }
@@ -12,6 +13,8 @@ interface ScrapedTrack {
   totalStreamsFormatted: string;
   dailyStreams?: number | null;
   dailyStreamsFormatted?: string | null;
+  albumImage?: string | null;
+  albumName?: string | null;
 }
 
 function parseNumber(raw: string): number {
@@ -41,10 +44,11 @@ function extractTopFive(html: string): ScrapedTrack[] {
     const linkMatch = row.match(/<a href=\"(https:\/\/open.spotify.com\/track\/[^\"']+)\"[^>]*>([^<]+)<\/a>/);
     if (!linkMatch) continue;
     let title = linkMatch[2].trim();
-    title = title.replace(/^\*\s*/, ''); // remove leading asterisk used for artist credit marks
+    title = title.replace(/^\*\s*/, '');
     const url = linkMatch[1];
+
     // Extract all <td> contents
-  const tdMatches = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gm)].map(r => r[1]);
+    const tdMatches = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gm)].map(r => r[1]);
     if (tdMatches.length < 3) continue;
     const totalStreamsRaw = tdMatches[1];
     const dailyStreamsRaw = tdMatches[2];
@@ -61,6 +65,33 @@ function extractTopFive(html: string): ScrapedTrack[] {
     if (tracks.length === 5) break;
   }
   return tracks;
+}
+
+async function enrichWithAlbumCovers(tracks: ScrapedTrack[]): Promise<ScrapedTrack[]> {
+  const enrichedTracks = await Promise.allSettled(
+    tracks.map(async (track) => {
+      try {
+        // Extract track ID from Spotify URL
+        const trackIdMatch = track.url.match(/track\/([a-zA-Z0-9]+)/);
+        if (trackIdMatch) {
+          const trackDetails = await getTrackDetails(trackIdMatch[1]);
+          return {
+            ...track,
+            albumImage: trackDetails.albumImage,
+            albumName: trackDetails.albumName,
+          };
+        }
+      } catch (error) {
+        // If Spotify API fails, just return the track without album info
+        console.warn(`Failed to fetch album for track ${track.name}:`, error);
+      }
+      return track;
+    })
+  );
+
+  return enrichedTracks.map((result, index) => 
+    result.status === 'fulfilled' ? result.value : tracks[index]
+  );
 }
 
 export async function GET(request: Request) {
@@ -82,8 +113,9 @@ export async function GET(request: Request) {
     }
     const html = await resp.text();
     const tracks = extractTopFive(html);
-    CACHE.set(cacheKey, { data: tracks, expires: Date.now() + TTL_MS });
-    return NextResponse.json({ tracks, source: 'kworb', cached: false, fetchedAt: new Date().toISOString() });
+    const enrichedTracks = await enrichWithAlbumCovers(tracks);
+    CACHE.set(cacheKey, { data: enrichedTracks, expires: Date.now() + TTL_MS });
+    return NextResponse.json({ tracks: enrichedTracks, cached: false, fetchedAt: new Date().toISOString() });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Fetch failed' }, { status: 500 });
   }

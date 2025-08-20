@@ -63,3 +63,22 @@ export async function searchArtists(query: string, limit = 5) {
     followers: a.followers?.total
   }));
 }
+
+export async function getTrackDetails(trackId: string) {
+  const token = await fetchAccessToken();
+  const resp = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!resp.ok) {
+    const text = await resp.text();
+    throw new Error(`Spotify track error ${resp.status}: ${text}`);
+  }
+  const track: any = await resp.json();
+  return {
+    id: track.id,
+    name: track.name,
+    albumName: track.album?.name,
+    albumImage: track.album?.images?.[0]?.url || null,
+    artists: track.artists?.map((a: any) => a.name) || []
+  };
+}

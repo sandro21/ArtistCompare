@@ -1,2 +1,0 @@
-// ShapeBlur removed.
-export {};

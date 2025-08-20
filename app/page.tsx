@@ -53,6 +53,7 @@ export default function Home() {
             artistAName={duo[0]?.artistName || duo[0]?.name}
             artistBName={duo[1]?.artistName || duo[1]?.name}
           />
+          
           <Streams />
           <Charts />
           <Awards />

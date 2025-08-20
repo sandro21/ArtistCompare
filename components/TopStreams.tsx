@@ -9,6 +9,8 @@ interface TrackRow {
   totalStreamsFormatted: string;
   dailyStreams?: number | null;
   dailyStreamsFormatted?: string | null;
+  albumImage?: string | null;
+  albumName?: string | null;
 }
 
 interface TopStreamsProps {
@@ -52,17 +54,44 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
       .finally(() => setLoadingB(false));
   }, [artistBId]);
 
-  const renderTable = (rows: TrackRow[] | null, loading: boolean, error: string | null, title: string) => (
+  const renderTable = (rows: TrackRow[] | null, loading: boolean, error: string | null, title: string, isRightSide: boolean = false) => (
     <div className="flex-1 min-w-[250px]">
-      <h4 className="text-sm tracking-wide text-emerald-300 mb-2 font-semibold">{title}</h4>
+      <h4 className={`text-sm tracking-wide text-emerald-300 mb-2 font-semibold ${isRightSide ? 'text-right' : ''}`}>{title}</h4>
       {loading && <div className="text-xs text-emerald-300/70">Loading...</div>}
       {error && <div className="text-xs text-red-400">{error}</div>}
       {!loading && !error && rows && (
         <ul className="space-y-1 text-xs">
           {rows.map(t => (
-            <li key={t.url} className="flex justify-between gap-3 p-2 rounded-lg border border-emerald-400/30 bg-black/30">
-              <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate max-w-[55%]">{t.name}</a>
-              <span className="tabular-nums text-emerald-200 text-right">{t.totalStreamsFormatted}</span>
+            <li key={t.url} className="flex justify-between items-center gap-3 p-2 rounded-lg border border-emerald-400/30 bg-black/30">
+              {isRightSide ? (
+                <>
+                  <span className="tabular-nums text-emerald-200">{t.totalStreamsFormatted}</span>
+                  <div className="flex items-center gap-2 flex-1 justify-end">
+                    <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate text-right">{t.name}</a>
+                    {t.albumImage && (
+                      <img 
+                        src={t.albumImage} 
+                        alt={t.albumName || t.name}
+                        className="w-8 h-8 rounded object-cover border border-emerald-400/40"
+                      />
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2 flex-1">
+                    {t.albumImage && (
+                      <img 
+                        src={t.albumImage} 
+                        alt={t.albumName || t.name}
+                        className="w-8 h-8 rounded object-cover border border-emerald-400/40"
+                      />
+                    )}
+                    <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate">{t.name}</a>
+                  </div>
+                  <span className="tabular-nums text-emerald-200 text-right">{t.totalStreamsFormatted}</span>
+                </>
+              )}
             </li>
           ))}
         </ul>
@@ -71,12 +100,11 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
   );
 
   return (
-    <SectionWrapper header="Top Streamed Songs (Kworb)">
+    <SectionWrapper header="Top Streamed Songs">
       <div className="flex flex-col md:flex-row gap-6">
-        {renderTable(aData, loadingA, errorA, artistAName)}
-        {renderTable(bData, loadingB, errorB, artistBName)}
+        {renderTable(aData, loadingA, errorA, artistAName, false)}
+        {renderTable(bData, loadingB, errorB, artistBName, true)}
       </div>
-      <div className="mt-3 text-[10px] uppercase tracking-wider text-gray-500">Source: kworb.net (top 5 parsed) | Cached 1h | Not official Spotify totals</div>
     </SectionWrapper>
   );
 };
