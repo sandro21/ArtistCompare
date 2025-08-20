@@ -8,6 +8,7 @@ import Charts from "../components/Charts";
 import Awards from "../components/Awards";
 import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
+import Description from "../components/Description";
 import { artists as staticArtists } from "../data/artists";
 
 export default function Home() {
@@ -25,13 +26,15 @@ export default function Home() {
   }, [pair]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen gap-24 pt-16 px-6">
+    <div className="flex flex-col items-center min-h-screen gap-12 pt-8 px-6 pb-16">
       <section className="w-full flex flex-col items-center gap-12">
         <h1 className="text-center text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
           Artist Comparison
         </h1>
         <SearchBar onSelectPair={onSelectPair} />
       </section>
+
+      {!showContent && <Description />}
 
       {showContent && (
         <section className="flex flex-col items-center gap-20 w-full ">
@@ -53,8 +56,8 @@ export default function Home() {
             artistAName={duo[0]?.artistName || duo[0]?.name}
             artistBName={duo[1]?.artistName || duo[1]?.name}
           />
-          
-          <Streams />
+
+          <Streams artistA={duo[0]} artistB={duo[1]} />
           <Charts />
           <Awards />
           <RiaaCertifications />

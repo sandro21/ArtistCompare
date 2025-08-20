@@ -4,23 +4,67 @@ interface ComparisonBarProps {
   artist1Value: number;
   artist2Value: number;
   metric: string;
+  artist1Rank?: number | null;
+  artist2Rank?: number | null;
 }
+
+// Helper function to get ordinal suffix (1st, 2nd, 3rd, 4th, etc.)
+const getOrdinalSuffix = (num: number): string => {
+  const j = num % 10;
+  const k = num % 100;
+  if (j === 1 && k !== 11) {
+    return 'st';
+  }
+  if (j === 2 && k !== 12) {
+    return 'nd';
+  }
+  if (j === 3 && k !== 13) {
+    return 'rd';
+  }
+  return 'th';
+};
+
+// Helper function to format large numbers with billions/millions
+const formatNumber = (num: number): string => {
+  if (num >= 1000000000) {
+    const billions = (num / 1000000000).toFixed(1);
+    return `${billions} billion`;
+  } else if (num >= 1000000) {
+    const millions = (num / 1000000).toFixed(1);
+    return `${millions} million`;
+  } else if (num >= 1000) {
+    return num.toLocaleString();
+  } else {
+    return num.toString();
+  }
+};
 
 const ComparisonBar: React.FC<ComparisonBarProps> = ({
   artist1Value,
   artist2Value,
   metric,
+  artist1Rank,
+  artist2Rank,
 }) => {
   // Determine which value is higher to set gradient direction
   let isArtist2Higher = artist2Value > artist1Value;
 
-  // For 'Spotify Rank', lower is better, so reverse the logic
+  // For bars with ranking data, use ranking to determine better performance (lower rank is better)
+  // Otherwise, use the raw values (higher is better)
   let gradientDirection;
-  if (metric === "Spotify Rank") {
+  if (artist1Rank && artist2Rank) {
+    // When both have ranks, lower rank is better
+    const isArtist2BetterRank = artist2Rank < artist1Rank;
+    gradientDirection = isArtist2BetterRank
+      ? 'linear-gradient(90deg, #081111 50%, #419369 100%)' // Green on right (better rank)
+      : 'linear-gradient(90deg, #419369 0%, #081111 50%)'; // Green on left (better rank)
+  } else if (metric.includes("Rank") || metric.includes("Ranking")) {
+    // Legacy support for pure ranking metrics
     gradientDirection = isArtist2Higher 
       ? 'linear-gradient(90deg, #419369 0%, #081111 50%)' // Green on lower (left) if right is higher (worse)
       : 'linear-gradient(90deg, #081111 50%, #419369 100%)'; // Green on lower (right) if left is higher (worse)
   } else {
+    // Default: higher values are better
     gradientDirection = isArtist2Higher 
       ? 'linear-gradient(90deg, #081111 50%, #419369 100%)'  // Dark to green (right side higher)
       : 'linear-gradient(90deg, #419369 0%, #081111 50%)'; // Green to dark (left side higher)
@@ -37,7 +81,8 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
     >
       {/* Artist 1 Value (Left) */}
       <div className="text-white font-bold text-lg">
-        {artist1Value.toLocaleString()}
+        {formatNumber(artist1Value)}
+        {artist1Rank && <span className="text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
       </div>
       
       {/* Metric Label (Center) */}
@@ -46,8 +91,9 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       </div>
       
       {/* Artist 2 Value (Right) */}
-      <div className="text-white font-bold text-lg">
-        {artist2Value.toLocaleString()}
+      <div className="text-white font-bold text-lg text-right">
+        {artist2Rank && <span className="text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
+        {formatNumber(artist2Value)}
       </div>
     </div>
   );

@@ -56,44 +56,59 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
 
   const renderTable = (rows: TrackRow[] | null, loading: boolean, error: string | null, title: string, isRightSide: boolean = false) => (
     <div className="flex-1 min-w-[250px]">
-      <h4 className={`text-sm tracking-wide text-emerald-300 mb-2 font-semibold ${isRightSide ? 'text-right' : ''}`}>{title}</h4>
       {loading && <div className="text-xs text-emerald-300/70">Loading...</div>}
       {error && <div className="text-xs text-red-400">{error}</div>}
       {!loading && !error && rows && (
-        <ul className="space-y-1 text-xs">
-          {rows.map(t => (
-            <li key={t.url} className="flex justify-between items-center gap-3 p-2 rounded-lg border border-emerald-400/30 bg-black/30">
-              {isRightSide ? (
-                <>
-                  <span className="tabular-nums text-emerald-200">{t.totalStreamsFormatted}</span>
-                  <div className="flex items-center gap-2 flex-1 justify-end">
-                    <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate text-right">{t.name}</a>
-                    {t.albumImage && (
-                      <img 
-                        src={t.albumImage} 
-                        alt={t.albumName || t.name}
-                        className="w-8 h-8 rounded object-cover border border-emerald-400/40"
-                      />
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex items-center gap-2 flex-1">
-                    {t.albumImage && (
-                      <img 
-                        src={t.albumImage} 
-                        alt={t.albumName || t.name}
-                        className="w-8 h-8 rounded object-cover border border-emerald-400/40"
-                      />
-                    )}
-                    <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate">{t.name}</a>
-                  </div>
-                  <span className="tabular-nums text-emerald-200 text-right">{t.totalStreamsFormatted}</span>
-                </>
-              )}
-            </li>
-          ))}
+        <ul className="space-y-1 text-sm">
+          {rows.map((t, index) => {
+            // Compare with the same position track from the other side
+            const otherSideData = isRightSide ? aData : bData;
+            const otherTrack = otherSideData?.[index];
+            const isHigher = otherTrack ? t.totalStreams > otherTrack.totalStreams : false;
+            const isLower = otherTrack ? t.totalStreams < otherTrack.totalStreams : false;
+            
+            return (
+              <li key={t.url} className="flex justify-between items-center gap-3 p-2 rounded-lg border border-emerald-400/30 bg-black/30">
+                {isRightSide ? (
+                  <>
+                    <span className={`tabular-nums flex-shrink-0 ${
+                      isHigher ? 'text-emerald-400 font-bold' : 
+                      isLower ? 'text-emerald-100' : 
+                      'text-emerald-200'
+                    }`}>{t.totalStreamsFormatted}</span>
+                    <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
+                      <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate text-right min-w-0 max-w-[200px]">{t.name}</a>
+                      {t.albumImage && (
+                        <img 
+                          src={t.albumImage} 
+                          alt={t.albumName || t.name}
+                          className="w-9 h-9 rounded object-cover border border-emerald-400/40 flex-shrink-0"
+                        />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      {t.albumImage && (
+                        <img 
+                          src={t.albumImage} 
+                          alt={t.albumName || t.name}
+                          className="w-9 h-9 rounded object-cover border border-emerald-400/40 flex-shrink-0"
+                        />
+                      )}
+                      <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate min-w-0 max-w-[200px]">{t.name}</a>
+                    </div>
+                    <span className={`tabular-nums text-right flex-shrink-0 ${
+                      isHigher ? 'text-emerald-400 font-bold' : 
+                      isLower ? 'text-emerald-100' : 
+                      'text-emerald-200'
+                    }`}>{t.totalStreamsFormatted}</span>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
