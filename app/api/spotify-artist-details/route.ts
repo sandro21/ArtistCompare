@@ -174,8 +174,6 @@ async function fetchSpotifyDiscography(spotifyId: string) {
 
   return {
     totalTracks: estimatedUniqueTracks,
-    totalAlbums: albums.length,
-    totalSingles: singles.length,
-    totalReleases: mainArtistReleases.length
+    totalAlbums: albums.length
   };
 }
