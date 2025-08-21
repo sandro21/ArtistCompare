@@ -55,8 +55,8 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   let gradientDirection;
   
   if (isEqual) {
-    // When values are equal, show a balanced gradient
-    gradientDirection = 'linear-gradient(90deg, #419369 0%, #419369 50%, #419369 100%)'; // Full green for tie
+    // When values are equal, show a gradient that's green in the middle and black on both sides
+    gradientDirection = 'linear-gradient(90deg, #081111 0%, #419369 50%, #081111 100%)'; // Black to green to black for tie
   } else if (artist1Rank && artist2Rank) {
     // When both have ranks, lower rank is better
     const isArtist2BetterRank = artist2Rank < artist1Rank;
