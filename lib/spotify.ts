@@ -82,3 +82,65 @@ export async function getTrackDetails(trackId: string) {
     artists: track.artists?.map((a: any) => a.name) || []
   };
 }
+
+export async function getArtistReleaseYears(artistId: string): Promise<string | null> {
+  try {
+    const token = await fetchAccessToken();
+    
+    // Get all albums for the artist (albums, singles, compilations)
+    // We'll use a large limit to get as many releases as possible
+    const params = new URLSearchParams({
+      include_groups: 'album,single',
+      market: 'US',
+      limit: '50'
+    });
+    
+    const resp = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?${params.toString()}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!resp.ok) {
+      console.error(`Spotify albums error ${resp.status}`);
+      return null;
+    }
+
+    const data: any = await resp.json();
+    const albums = data.items || [];
+    
+    if (albums.length === 0) {
+      return null;
+    }
+
+    // Extract release years from all albums
+    const releaseYears = albums
+      .map((album: any) => {
+        const releaseDate = album.release_date;
+        if (releaseDate) {
+          // Release date can be YYYY, YYYY-MM, or YYYY-MM-DD
+          const year = parseInt(releaseDate.split('-')[0]);
+          return isNaN(year) ? null : year;
+        }
+        return null;
+      })
+      .filter((year: number | null) => year !== null)
+      .sort((a: number, b: number) => a - b); // Sort ascending
+
+    if (releaseYears.length === 0) {
+      return null;
+    }
+
+    const firstYear = releaseYears[0];
+    const lastYear = releaseYears[releaseYears.length - 1];
+    
+    // If same year, just return the year, otherwise return range with duration
+    if (firstYear === lastYear) {
+      return `${firstYear}`;
+    } else {
+      const duration = lastYear - firstYear + 1; // +1 to include both start and end years
+      return `${firstYear} - ${lastYear} (${duration} Years)`;
+    }
+  } catch (error) {
+    console.error('Error fetching artist release years:', error);
+    return null;
+  }
+}

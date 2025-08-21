@@ -35,6 +35,8 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
 
   const [aSpotifyDetails, setASpotifyDetails] = useState<SpotifyDetails | null>(null);
   const [bSpotifyDetails, setBSpotifyDetails] = useState<SpotifyDetails | null>(null);
+  const [aReleaseYears, setAReleaseYears] = useState<string | null>(null);
+  const [bReleaseYears, setBReleaseYears] = useState<string | null>(null);
   const [loadingA, setLoadingA] = useState(false);
   const [loadingB, setLoadingB] = useState(false);
 
@@ -43,19 +45,31 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
     if (!a?.spotifyId) return;
     
     setLoadingA(true);
-    fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(a.spotifyId)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          console.error('Error fetching artist A details:', data.error);
+    
+    // Fetch both song/album details and release years in parallel
+    Promise.all([
+      fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(a.spotifyId)}`).then(res => res.json()),
+      fetch(`/api/spotify-release-years?spotifyId=${encodeURIComponent(a.spotifyId)}`).then(res => res.json())
+    ])
+      .then(([detailsData, yearsData]) => {
+        if (detailsData.error) {
+          console.error('Error fetching artist A details:', detailsData.error);
           setASpotifyDetails(null);
         } else {
-          setASpotifyDetails(data);
+          setASpotifyDetails(detailsData);
+        }
+        
+        if (yearsData.error) {
+          console.error('Error fetching artist A release years:', yearsData.error);
+          setAReleaseYears(null);
+        } else {
+          setAReleaseYears(yearsData.activeYears);
         }
       })
       .catch(error => {
-        console.error('Error fetching artist A details:', error);
+        console.error('Error fetching artist A data:', error);
         setASpotifyDetails(null);
+        setAReleaseYears(null);
       })
       .finally(() => {
         setLoadingA(false);
@@ -67,19 +81,31 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
     if (!b?.spotifyId) return;
     
     setLoadingB(true);
-    fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(b.spotifyId)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          console.error('Error fetching artist B details:', data.error);
+    
+    // Fetch both song/album details and release years in parallel
+    Promise.all([
+      fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(b.spotifyId)}`).then(res => res.json()),
+      fetch(`/api/spotify-release-years?spotifyId=${encodeURIComponent(b.spotifyId)}`).then(res => res.json())
+    ])
+      .then(([detailsData, yearsData]) => {
+        if (detailsData.error) {
+          console.error('Error fetching artist B details:', detailsData.error);
           setBSpotifyDetails(null);
         } else {
-          setBSpotifyDetails(data);
+          setBSpotifyDetails(detailsData);
+        }
+        
+        if (yearsData.error) {
+          console.error('Error fetching artist B release years:', yearsData.error);
+          setBReleaseYears(null);
+        } else {
+          setBReleaseYears(yearsData.activeYears);
         }
       })
       .catch(error => {
-        console.error('Error fetching artist B details:', error);
+        console.error('Error fetching artist B data:', error);
         setBSpotifyDetails(null);
+        setBReleaseYears(null);
       })
       .finally(() => {
         setLoadingB(false);
@@ -103,7 +129,7 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
         <ArtistCard
           artistName={a.artistName || a.name}
           spotifyImageUrl={a.spotifyImageUrl || a.image || a.spotifyImage}
-          activeYears={a.activeYears}
+          activeYears={aReleaseYears || a.activeYears}
           songsCount={loadingA ? undefined : aSpotifyDetails?.totalTracks}
           albumsCount={loadingA ? undefined : aSpotifyDetails?.totalAlbums}
         />
@@ -113,7 +139,7 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
         <ArtistCard
           artistName={b.artistName || b.name}
           spotifyImageUrl={b.spotifyImageUrl || b.image || b.spotifyImage}
-          activeYears={b.activeYears}
+          activeYears={bReleaseYears || b.activeYears}
           songsCount={loadingB ? undefined : bSpotifyDetails?.totalTracks}
           albumsCount={loadingB ? undefined : bSpotifyDetails?.totalAlbums}
         />

@@ -38,7 +38,22 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
       </h2>
 
       {/* Active Years */}
-  <p className="text-gray-300 text-sm mb-6 font-medium">{activeYears || '—'}</p>
+      <p className="text-gray-300 text-sm mb-6 font-medium">
+        {activeYears ? (
+          <span>
+            {activeYears.includes('(') ? (
+              <>
+                {activeYears.split('(')[0].trim()}
+                <span className="text-green-400 ml-1">({activeYears.split('(')[1]}</span>
+              </>
+            ) : (
+              activeYears
+            )}
+          </span>
+        ) : (
+          '—'
+        )}
+      </p>
 
       {/* Statistics */}
       <div className="flex gap-4">
