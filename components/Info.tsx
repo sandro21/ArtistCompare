@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ArtistCard from './ArtistCard';
-import { artists as staticArtists } from '../data/artists';
 
 interface InfoProps {
   artistA?: any;
@@ -14,9 +13,25 @@ interface SpotifyDetails {
   totalReleases: number;
 }
 
+// Empty fallback object for missing artist data
+const emptyArtist = {
+  artistName: '',
+  name: '',
+  spotifyId: null,
+  spotifyImageUrl: '',
+  activeYears: '',
+  songsCount: 0,
+  albumsCount: 0,
+  streams: {
+    spotifyRank: 0,
+    monthlyListeners: 0,
+    totalStreams: 0,
+  }
+};
+
 const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
-  const a = artistA || staticArtists[0];
-  const b = artistB || staticArtists[1];
+  const a = artistA || emptyArtist;
+  const b = artistB || emptyArtist;
 
   const [aSpotifyDetails, setASpotifyDetails] = useState<SpotifyDetails | null>(null);
   const [bSpotifyDetails, setBSpotifyDetails] = useState<SpotifyDetails | null>(null);

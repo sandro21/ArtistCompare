@@ -9,7 +9,40 @@ import Awards from "../components/Awards";
 import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import Description from "../components/Description";
-import { artists as staticArtists } from "../data/artists";
+
+// Empty fallback objects for when no artists are selected
+const emptyArtist = {
+  artistName: '',
+  name: '',
+  spotifyId: null,
+  spotifyImageUrl: '',
+  activeYears: '',
+  songsCount: 0,
+  albumsCount: 0,
+  streams: {
+    spotifyRank: 0,
+    monthlyListeners: 0,
+    totalStreams: 0,
+  },
+  riaaCertifications: {
+    Gold: 0,
+    Platinum: 0,
+    Diamond: 0,
+  },
+  charts: {
+    billboardHot100Number1s: 0,
+    billboardHot100Top10s: 0,
+    billboard200Number1s: 0,
+    totalWeeksOnHot100: 0,
+  },
+  awards: {
+    grammyWins: 0,
+    grammyNominations: 0,
+    americanMusicAwards: 0,
+    betAwards: 0,
+    mtvVMAs: 0,
+  },
+};
 
 export default function Home() {
   const [pair, setPair] = useState<{ a: any; b: any } | null>(null);
@@ -22,7 +55,7 @@ export default function Home() {
 
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
-    return staticArtists.slice(0, 2);
+    return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
   }, [pair]);
 
   return (
@@ -58,9 +91,9 @@ export default function Home() {
           />
 
           <Streams artistA={duo[0]} artistB={duo[1]} />
-          <Charts />
-          <Awards />
-          <RiaaCertifications />
+          <Charts artistA={duo[0]} artistB={duo[1]} />
+          <Awards artistA={duo[0]} artistB={duo[1]} />
+          <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
         </section>
       )}
     </div>

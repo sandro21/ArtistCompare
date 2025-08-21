@@ -1,15 +1,35 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
 import SectionWrapper from './SectionWrapper';
-import { artists } from '../data/artists';
 
-const Charts: React.FC = () => {
+interface ChartsProps {
+  artistA: any;
+  artistB: any;
+}
+
+const Charts: React.FC<ChartsProps> = ({ artistA, artistB }) => {
   return (
     <SectionWrapper header="Billboard Charts">
-      <ComparisonBar artist1Value={artists[0].charts.billboardHot100Number1s} artist2Value={artists[1].charts.billboardHot100Number1s} metric="Hot 100 #1s" />
-      <ComparisonBar artist1Value={artists[0].charts.billboardHot100Top10s} artist2Value={artists[1].charts.billboardHot100Top10s} metric="Hot 100 Top 10s" />
-      <ComparisonBar artist1Value={artists[0].charts.billboard200Number1s} artist2Value={artists[1].charts.billboard200Number1s} metric="Billboard 200 #1s" />
-      <ComparisonBar artist1Value={artists[0].charts.totalWeeksOnHot100} artist2Value={artists[1].charts.totalWeeksOnHot100} metric="Total Weeks on Hot 100" />
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.billboardHot100Number1s || 0} 
+        artist2Value={artistB?.charts?.billboardHot100Number1s || 0} 
+        metric="Hot 100 #1s" 
+      />
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.billboardHot100Top10s || 0} 
+        artist2Value={artistB?.charts?.billboardHot100Top10s || 0} 
+        metric="Hot 100 Top 10s" 
+      />
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.billboard200Number1s || 0} 
+        artist2Value={artistB?.charts?.billboard200Number1s || 0} 
+        metric="Billboard 200 #1s" 
+      />
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.totalWeeksOnHot100 || 0} 
+        artist2Value={artistB?.charts?.totalWeeksOnHot100 || 0} 
+        metric="Total Weeks on Hot 100" 
+      />
     </SectionWrapper>
   );
 };

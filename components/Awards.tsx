@@ -1,13 +1,17 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
 import SectionWrapper from './SectionWrapper';
-import { artists } from '../data/artists';
 import { getGrammyData } from '../lib/grammy';
 
-const Awards: React.FC = () => {
-  // Get Grammy data from our JSON file
-  const artist1GrammyData = getGrammyData(artists[0].artistName);
-  const artist2GrammyData = getGrammyData(artists[1].artistName);
+interface AwardsProps {
+  artistA: any;
+  artistB: any;
+}
+
+const Awards: React.FC<AwardsProps> = ({ artistA, artistB }) => {
+  // Get Grammy data from our JSON file using the actual selected artists
+  const artist1GrammyData = getGrammyData(artistA?.artistName || artistA?.name || '');
+  const artist2GrammyData = getGrammyData(artistB?.artistName || artistB?.name || '');
 
   return (
     <SectionWrapper header="Awards">
@@ -21,9 +25,9 @@ const Awards: React.FC = () => {
         artist2Value={artist2GrammyData?.nominations || 0} 
         metric="Grammy Nominations" 
       />
-      <ComparisonBar artist1Value={artists[0].awards.americanMusicAwards} artist2Value={artists[1].awards.americanMusicAwards} metric="American Music Awards" />
-      <ComparisonBar artist1Value={artists[0].awards.betAwards} artist2Value={artists[1].awards.betAwards} metric="BET Awards" />
-      <ComparisonBar artist1Value={artists[0].awards.mtvVMAs} artist2Value={artists[1].awards.mtvVMAs} metric="MTV VMAs" />
+      <ComparisonBar artist1Value={artistA?.awards?.americanMusicAwards || 0} artist2Value={artistB?.awards?.americanMusicAwards || 0} metric="American Music Awards" />
+      <ComparisonBar artist1Value={artistA?.awards?.betAwards || 0} artist2Value={artistB?.awards?.betAwards || 0} metric="BET Awards" />
+      <ComparisonBar artist1Value={artistA?.awards?.mtvVMAs || 0} artist2Value={artistB?.awards?.mtvVMAs || 0} metric="MTV VMAs" />
     </SectionWrapper>
   );
 };

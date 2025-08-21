@@ -24,11 +24,24 @@ export function getGrammyData(artistName: string): { wins: number; nominations: 
     };
   }
   
-  // If no exact match, try partial match (in case of slight variations)
-  const partialMatch = grammyData.find((artist: GrammyData) =>
-    artist.artist.toLowerCase().includes(artistName.toLowerCase()) ||
-    artistName.toLowerCase().includes(artist.artist.toLowerCase())
-  );
+  // If no exact match, try very restrictive partial match for slight variations only
+  // Only match if the names are very similar (difference of a few characters)
+  const partialMatch = grammyData.find((artist: GrammyData) => {
+    const artistLower = artist.artist.toLowerCase().trim();
+    const searchLower = artistName.toLowerCase().trim();
+    
+    // Only allow partial match if:
+    // 1. The search name is at least 80% of the database name length
+    // 2. AND one contains the other as a substantial part (not just 1-2 characters)
+    if (searchLower.length < artistLower.length * 0.8) return false;
+    if (artistLower.length < searchLower.length * 0.8) return false;
+    
+    // Check for substantial overlap (at least 4 characters and 70% similarity)
+    const minLength = Math.min(artistLower.length, searchLower.length);
+    if (minLength < 4) return false;
+    
+    return artistLower.includes(searchLower) || searchLower.includes(artistLower);
+  });
   
   if (partialMatch) {
     return {

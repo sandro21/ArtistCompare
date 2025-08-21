@@ -48,11 +48,16 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
 }) => {
   // Determine which value is higher to set gradient direction
   let isArtist2Higher = artist2Value > artist1Value;
+  let isEqual = artist1Value === artist2Value;
 
   // For bars with ranking data, use ranking to determine better performance (lower rank is better)
   // Otherwise, use the raw values (higher is better)
   let gradientDirection;
-  if (artist1Rank && artist2Rank) {
+  
+  if (isEqual) {
+    // When values are equal, show a balanced gradient
+    gradientDirection = 'linear-gradient(90deg, #419369 0%, #419369 50%, #419369 100%)'; // Full green for tie
+  } else if (artist1Rank && artist2Rank) {
     // When both have ranks, lower rank is better
     const isArtist2BetterRank = artist2Rank < artist1Rank;
     gradientDirection = isArtist2BetterRank
