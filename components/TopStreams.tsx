@@ -29,9 +29,9 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
   const [errorB, setErrorB] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!artistAId) return;
+    if (!artistAId || !artistAName) return;
     setLoadingA(true); setErrorA(null); setAData(null);
-    fetch(`/api/artist-top-streams?artistId=${encodeURIComponent(artistAId)}`)
+    fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistAName)}&spotifyId=${encodeURIComponent(artistAId)}&topTracksOnly=true`)
       .then(r => r.json())
       .then(json => {
         if (json.error) throw new Error(json.error);
@@ -39,12 +39,12 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
       })
       .catch(e => setErrorA(e.message || 'Failed'))
       .finally(() => setLoadingA(false));
-  }, [artistAId]);
+  }, [artistAId, artistAName]);
 
   useEffect(() => {
-    if (!artistBId) return;
+    if (!artistBId || !artistBName) return;
     setLoadingB(true); setErrorB(null); setBData(null);
-    fetch(`/api/artist-top-streams?artistId=${encodeURIComponent(artistBId)}`)
+    fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistBName)}&spotifyId=${encodeURIComponent(artistBId)}&topTracksOnly=true`)
       .then(r => r.json())
       .then(json => {
         if (json.error) throw new Error(json.error);
@@ -52,7 +52,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
       })
       .catch(e => setErrorB(e.message || 'Failed'))
       .finally(() => setLoadingB(false));
-  }, [artistBId]);
+  }, [artistBId, artistBName]);
 
   const renderTable = (rows: TrackRow[] | null, loading: boolean, error: string | null, title: string, isRightSide: boolean = false) => (
     <div className="flex-1 min-w-[250px]">
