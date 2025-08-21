@@ -117,12 +117,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
     }
   }, [selectedA, selectedB, onSelectPair]);
 
-  const baseInputClasses = "w-full h-16 rounded-2xl bg-transparent border border-emerald-400 px-4 py-3 text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
+  const baseInputClasses = "w-full h-16 rounded-full bg-transparent border border-emerald-400 px-4 py-3 text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
   const listClasses = "absolute z-20 mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm";
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
         {/* Artist A */}
         <div className="relative">
           <label className="block mb-2 text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>

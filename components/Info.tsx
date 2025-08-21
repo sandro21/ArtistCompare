@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ArtistCard from './ArtistCard';
 import { artists as staticArtists } from '../data/artists';
 
@@ -7,9 +7,69 @@ interface InfoProps {
   artistB?: any;
 }
 
+interface SpotifyDetails {
+  totalTracks: number;
+  totalAlbums: number;
+  totalSingles: number;
+  totalReleases: number;
+}
+
 const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
   const a = artistA || staticArtists[0];
   const b = artistB || staticArtists[1];
+
+  const [aSpotifyDetails, setASpotifyDetails] = useState<SpotifyDetails | null>(null);
+  const [bSpotifyDetails, setBSpotifyDetails] = useState<SpotifyDetails | null>(null);
+  const [loadingA, setLoadingA] = useState(false);
+  const [loadingB, setLoadingB] = useState(false);
+
+  // Fetch Spotify details for Artist A
+  useEffect(() => {
+    if (!a?.spotifyId) return;
+    
+    setLoadingA(true);
+    fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(a.spotifyId)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Error fetching artist A details:', data.error);
+          setASpotifyDetails(null);
+        } else {
+          setASpotifyDetails(data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching artist A details:', error);
+        setASpotifyDetails(null);
+      })
+      .finally(() => {
+        setLoadingA(false);
+      });
+  }, [a?.spotifyId]);
+
+  // Fetch Spotify details for Artist B
+  useEffect(() => {
+    if (!b?.spotifyId) return;
+    
+    setLoadingB(true);
+    fetch(`/api/spotify-artist-details?spotifyId=${encodeURIComponent(b.spotifyId)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Error fetching artist B details:', data.error);
+          setBSpotifyDetails(null);
+        } else {
+          setBSpotifyDetails(data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching artist B details:', error);
+        setBSpotifyDetails(null);
+      })
+      .finally(() => {
+        setLoadingB(false);
+      });
+  }, [b?.spotifyId]);
   return (
     <div
       style={{
@@ -29,8 +89,8 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
           artistName={a.artistName || a.name}
           spotifyImageUrl={a.spotifyImageUrl || a.image || a.spotifyImage}
           activeYears={a.activeYears}
-          songsCount={a.songsCount}
-          albumsCount={a.albumsCount}
+          songsCount={loadingA ? undefined : aSpotifyDetails?.totalTracks}
+          albumsCount={loadingA ? undefined : aSpotifyDetails?.totalAlbums}
         />
       )}
       {/* Artist 2 */}
@@ -39,8 +99,8 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
           artistName={b.artistName || b.name}
           spotifyImageUrl={b.spotifyImageUrl || b.image || b.spotifyImage}
           activeYears={b.activeYears}
-          songsCount={b.songsCount}
-          albumsCount={b.albumsCount}
+          songsCount={loadingB ? undefined : bSpotifyDetails?.totalTracks}
+          albumsCount={loadingB ? undefined : bSpotifyDetails?.totalAlbums}
         />
       )}
     </div>
