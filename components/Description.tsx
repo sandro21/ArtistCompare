@@ -18,7 +18,7 @@ const features = [
 const Description = () => {
 	return (
 		<section
-			className="w-full max-w-7xl mt-4 mb-0 p-10 rounded-[1.75rem] border border-emerald-400/50"
+			className="w-full max-w-7xl mt-4 mb-0 p-15 rounded-[6rem] border border-emerald-400/50"
 			style={{
 				background:
 					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(65, 147, 105, 0.25) 100%)",
@@ -43,7 +43,7 @@ const Description = () => {
 				{features.map((feature) => (
 					<div
 						key={feature.title}
-						className="p-6 rounded-2xl border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20"
+						className="py-10 rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20"
 						style={{
 							background: "rgba(0,0,0,0.2)",
 						}}
@@ -52,7 +52,7 @@ const Description = () => {
 							style={{
 								width: "4rem",
 								height: "4rem",
-								borderRadius: "1rem",
+								borderRadius: "10rem",
 								background:
 									"linear-gradient(135deg, #4BE295 0%, #419369 100%)",
 								boxShadow: "0 0 20px rgba(75, 226, 149, 0.4)",
