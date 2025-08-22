@@ -1,12 +1,16 @@
-import React from 'react';
-
 interface SectionWrapperProps {
   children: React.ReactNode;
   className?: string;
   header?: string;
+  headerClassName?: string; // ✅ new
 }
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, className, header }) => {
+const SectionWrapper: React.FC<SectionWrapperProps> = ({ 
+  children, 
+  className, 
+  header, 
+  headerClassName 
+}) => {
   return (
     <div
       style={{
@@ -18,7 +22,9 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, className, he
       className={`p-8 w-full max-w-3xl ${className ?? ''}`}
     >
       {header && (
-        <div className="font-bold text-2xl text-white mb-6 text-center">{header}</div>
+        <div className={`font-bold text-2xl text-white text-center ${headerClassName ?? 'mb-6'}`}>
+          {header}
+        </div>
       )}
       {children}
     </div>

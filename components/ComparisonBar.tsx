@@ -4,6 +4,7 @@ interface ComparisonBarProps {
   artist1Value: number;
   artist2Value: number;
   metric: string;
+  subtitle?: string;
   artist1Rank?: number | null;
   artist2Rank?: number | null;
 }
@@ -43,6 +44,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   artist1Value,
   artist2Value,
   metric,
+  subtitle,
   artist1Rank,
   artist2Rank,
 }) => {
@@ -91,8 +93,9 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       </div>
       
       {/* Metric Label (Center) */}
-      <div className="text-white text-base font-medium">
-        {metric}
+      <div className="text-white text-base font-medium flex flex-col items-center leading-tight">
+        <span>{metric}</span>
+        {subtitle && <span className="text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
       </div>
       
       {/* Artist 2 Value (Right) */}

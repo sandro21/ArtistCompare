@@ -1,8 +1,8 @@
-import React from 'react';
-import ComparisonBar from './ComparisonBar';
+import React, { useState } from 'react';
 import SectionWrapper from './SectionWrapper';
-import hot100Data from '@/data/billboard-hot100-stats.json';
-import billboard200Data from '@/data/billboard200-stats.json';
+import AlbumsChart from './AlbumsChart';
+import SongsChart from './SongsChart';
+import ToggleSwitch from './ToggleSwitch';
 
 interface ChartsProps {
   artistA: any;
@@ -10,53 +10,29 @@ interface ChartsProps {
 }
 
 const Charts: React.FC<ChartsProps> = ({ artistA, artistB }) => {
-  // Get Billboard stats by directly indexing the JSON data
-  const artistAHot100 = (hot100Data.artists as any)[artistA?.artistName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
-  const artistBHot100 = (hot100Data.artists as any)[artistB?.artistName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
-  
-  const artistA200 = (billboard200Data.artists as any)[artistA?.artistName] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
-  const artistB200 = (billboard200Data.artists as any)[artistB?.artistName] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
+  const [showAlbums, setShowAlbums] = useState(true); // Default to albums
 
   return (
-    <SectionWrapper header="Billboard Charts">
-      {/* Hot 100 Metrics */}
-      <ComparisonBar 
-        artist1Value={artistAHot100.hot100.entries} 
-        artist2Value={artistBHot100.hot100.entries} 
-        metric="Hot 100 Entries" 
-      />
-      <ComparisonBar 
-        artist1Value={artistAHot100.hot100.top10s} 
-        artist2Value={artistBHot100.hot100.top10s} 
-        metric="Hot 100 Top 10s" 
-      />
-      <ComparisonBar 
-        artist1Value={artistAHot100.hot100.number1s} 
-        artist2Value={artistBHot100.hot100.number1s} 
-        metric="Hot 100 #1s" 
+    <SectionWrapper header="Billboard Charts" headerClassName="mb-3">
+      <ToggleSwitch
+        leftLabel="Albums"
+        rightLabel="Songs"
+        isLeft={showAlbums}
+        onToggle={setShowAlbums}
       />
 
-      {/* Billboard 200 Metrics */}
-      <ComparisonBar 
-        artist1Value={artistA200.billboard200.entries} 
-        artist2Value={artistB200.billboard200.entries} 
-        metric="Billboard 200 Entries" 
-      />
-      <ComparisonBar 
-        artist1Value={artistA200.billboard200.top10s} 
-        artist2Value={artistB200.billboard200.top10s} 
-        metric="Billboard 200 Top 10s" 
-      />
-      <ComparisonBar 
-        artist1Value={artistA200.billboard200.number1s} 
-        artist2Value={artistB200.billboard200.number1s} 
-        metric="Billboard 200 #1s" 
-      />
-      <ComparisonBar 
-        artist1Value={artistA200.billboard200.wks_on_chart} 
-        artist2Value={artistB200.billboard200.wks_on_chart} 
-        metric="Total Weeks On Chart" 
-      />
+      {/* Conditional Chart Rendering with smooth transition */}
+      <div className="transition-all duration-300 ease-in-out">
+        {showAlbums ? (
+          <div className="animate-in slide-in-from-right-5 fade-in duration-300">
+            <AlbumsChart artistA={artistA} artistB={artistB} />
+          </div>
+        ) : (
+          <div className="animate-in slide-in-from-left-5 fade-in duration-300">
+            <SongsChart artistA={artistA} artistB={artistB} />
+          </div>
+        )}
+      </div>
     </SectionWrapper>
   );
 };
