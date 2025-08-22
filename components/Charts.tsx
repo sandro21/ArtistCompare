@@ -10,10 +10,11 @@ interface ChartsProps {
 const Charts: React.FC<ChartsProps> = ({ artistA, artistB }) => {
   return (
     <SectionWrapper header="Billboard Charts">
+      {/* Hot 100 Metrics */}
       <ComparisonBar 
-        artist1Value={artistA?.charts?.billboardHot100Number1s || 0} 
-        artist2Value={artistB?.charts?.billboardHot100Number1s || 0} 
-        metric="Hot 100 #1s" 
+        artist1Value={artistA?.charts?.hot100Entries || 0} 
+        artist2Value={artistB?.charts?.hot100Entries || 0} 
+        metric="Hot 100 Entries" 
       />
       <ComparisonBar 
         artist1Value={artistA?.charts?.billboardHot100Top10s || 0} 
@@ -21,14 +22,26 @@ const Charts: React.FC<ChartsProps> = ({ artistA, artistB }) => {
         metric="Hot 100 Top 10s" 
       />
       <ComparisonBar 
+        artist1Value={artistA?.charts?.billboardHot100Number1s || 0} 
+        artist2Value={artistB?.charts?.billboardHot100Number1s || 0} 
+        metric="Hot 100 #1s" 
+      />
+
+      {/* Billboard 200 Metrics */}
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.billboard200Entries || 0} 
+        artist2Value={artistB?.charts?.billboard200Entries || 0} 
+        metric="Billboard 200 Entries" 
+      />
+      <ComparisonBar 
+        artist1Value={artistA?.charts?.billboard200Top10s || 0} 
+        artist2Value={artistB?.charts?.billboard200Top10s || 0} 
+        metric="Billboard 200 Top 10s" 
+      />
+      <ComparisonBar 
         artist1Value={artistA?.charts?.billboard200Number1s || 0} 
         artist2Value={artistB?.charts?.billboard200Number1s || 0} 
         metric="Billboard 200 #1s" 
-      />
-      <ComparisonBar 
-        artist1Value={artistA?.charts?.totalWeeksOnHot100 || 0} 
-        artist2Value={artistB?.charts?.totalWeeksOnHot100 || 0} 
-        metric="Total Weeks on Hot 100" 
       />
     </SectionWrapper>
   );
