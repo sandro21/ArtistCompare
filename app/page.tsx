@@ -9,6 +9,7 @@ import Awards from "../components/Awards";
 import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import Description from "../components/Description";
+import StickyArtistImages from "../components/StickyArtistImages";
 
 // Empty fallback objects for when no artists are selected
 const emptyArtist = {
@@ -62,7 +63,7 @@ export default function Home() {
     <div className="flex flex-col items-center min-h-screen gap-12 pt-8 px-6 pb-16">
       <section className="w-full flex flex-col items-center gap-12">
         <h1 className="text-center text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
-          Artist Comparison
+          Artist Compare
         </h1>
         <SearchBar onSelectPair={onSelectPair} />
       </section>
@@ -70,7 +71,10 @@ export default function Home() {
       {!showContent && <Description />}
 
       {showContent && (
-        <section className="flex flex-col items-center gap-20 w-full ">
+        <section className="flex flex-col items-center gap-20 w-full relative">
+          {/* Sticky Artist Images */}
+          <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
+          
           <GlareHover
             glareColor="#ffffff"
             glareOpacity={0.3}

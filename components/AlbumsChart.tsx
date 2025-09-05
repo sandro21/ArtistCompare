@@ -33,7 +33,7 @@ const AlbumsChart: React.FC<AlbumsChartProps> = ({ artistA, artistB }) => {
       <ComparisonBar 
         artist1Value={artistA200.billboard200.wks_on_chart} 
         artist2Value={artistB200.billboard200.wks_on_chart} 
-        metric="Weeks" 
+        metric="Total Weeks" 
       />
       <div className="text-emerald-400 text-xs font-semibold tracking-wide mt-1 text-left w-full">
         From: Billboard 200<span className="align-super text-[10px] ml-0.5">™</span>
