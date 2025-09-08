@@ -39,9 +39,6 @@ const emptyArtist = {
   awards: {
     grammyWins: 0,
     grammyNominations: 0,
-    americanMusicAwards: 0,
-    betAwards: 0,
-    mtvVMAs: 0,
   },
 };
 
@@ -97,7 +94,7 @@ export default function Home() {
           <Streams artistA={duo[0]} artistB={duo[1]} />
           <Charts artistA={duo[0]} artistB={duo[1]} />
           <Awards artistA={duo[0]} artistB={duo[1]} />
-          <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
+          {/* <RiaaCertifications artistA={duo[0]} artistB={duo[1]} /> */}
         </section>
       )}
     </div>
