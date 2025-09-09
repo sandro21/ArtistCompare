@@ -10,9 +10,10 @@ import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import Description from "../components/Description";
 import StickyArtistImages from "../components/StickyArtistImages";
+import type { Artist, ArtistPair } from "../types";
 
 // Empty fallback objects for when no artists are selected
-const emptyArtist = {
+const emptyArtist: Artist = {
   artistName: '',
   name: '',
   spotifyId: null,
@@ -43,10 +44,10 @@ const emptyArtist = {
 };
 
 export default function Home() {
-  const [pair, setPair] = useState<{ a: any; b: any } | null>(null);
+  const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
 
-  const onSelectPair = useCallback((a: any, b: any) => {
+  const onSelectPair = useCallback((a: Artist, b: Artist) => {
     setPair({ a, b });
     setShowContent(true);
   }, []);
@@ -68,7 +69,7 @@ export default function Home() {
       {!showContent && <Description />}
 
       {showContent && (
-        <section className="flex flex-col items-center gap-18 w-full relative">
+        <section className="flex flex-col items-center gap-20 w-full relative">
           {/* Sticky Artist Images */}
           <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
           
@@ -80,13 +81,13 @@ export default function Home() {
             transitionDuration={1200}
             playOnce={false}
             className="w-auto h-auto bg-transparent border-none"
-            style={{ background: 'none', width: 'auto', height: 'auto', border: 'none', borderRadius: '5rem' }}
+            style={{ background: 'none', width: 'auto', height: 'auto', border: 'none', borderRadius: '3rem' }}
           >
             <Info artistA={duo[0]} artistB={duo[1]} />
           </GlareHover>
           <TopStreams
-            artistAId={duo[0]?.spotifyId}
-            artistBId={duo[1]?.spotifyId}
+            artistAId={duo[0]?.spotifyId || undefined}
+            artistBId={duo[1]?.spotifyId || undefined}
             artistAName={duo[0]?.artistName || duo[0]?.name}
             artistBName={duo[1]?.artistName || duo[1]?.name}
           />
@@ -95,7 +96,6 @@ export default function Home() {
           <Charts artistA={duo[0]} artistB={duo[1]} />
           <Awards artistA={duo[0]} artistB={duo[1]} />
           <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
-          {/* <RiaaCertifications artistA={duo[0]} artistB={duo[1]} /> */}
         </section>
       )}
     </div>

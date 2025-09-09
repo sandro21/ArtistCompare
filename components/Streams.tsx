@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ComparisonBar from './ComparisonBar';
 import SectionWrapper from './SectionWrapper';
-
-interface SelectedArtist {
-  artistName: string;
-  spotifyImageUrl: string;
-  spotifyId: string;
-}
+import type { Artist } from '../types';
 
 interface StreamsProps {
-  artistA: SelectedArtist | null;
-  artistB: SelectedArtist | null;
+  artistA: Artist | null;
+  artistB: Artist | null;
 }
 
 interface MusicMetrics {
@@ -61,7 +56,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
 
   // Fetch metrics for Artist A
   useEffect(() => {
-    if (!artistA) {
+    if (!artistA || !artistA.spotifyId || !artistA.artistName) {
       setMetricsA(null);
       return;
     }
@@ -70,7 +65,8 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
       setLoadingA(true);
       setErrorA(null);
       try {
-        const response = await fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistA.artistName)}&spotifyId=${artistA.spotifyId}`);
+        const artistName = artistA.artistName || artistA.name || '';
+        const response = await fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistName)}&spotifyId=${artistA.spotifyId}`);
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
@@ -89,7 +85,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
 
   // Fetch metrics for Artist B
   useEffect(() => {
-    if (!artistB) {
+    if (!artistB || !artistB.spotifyId || !artistB.artistName) {
       setMetricsB(null);
       return;
     }
@@ -98,7 +94,8 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
       setLoadingB(true);
       setErrorB(null);
       try {
-        const response = await fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistB.artistName)}&spotifyId=${artistB.spotifyId}`);
+        const artistName = artistB.artistName || artistB.name || '';
+        const response = await fetch(`/api/music-metrics?artistName=${encodeURIComponent(artistName)}&spotifyId=${artistB.spotifyId}`);
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }

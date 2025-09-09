@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
+import { getTrackDetails } from '../../../lib/spotify';
 
 // Simple in-memory cache for top tracks to avoid repeated requests
 interface CacheEntry { data: any; expires: number }
@@ -271,8 +272,6 @@ async function fetchTopTracksFromKworb(spotifyId: string) {
 
 // Function to enrich Kworb tracks with album covers (similar to old implementation)
 async function enrichKworbTracksWithAlbumCovers(tracks: any[]) {
-  const { getTrackDetails } = await import('../../../lib/spotify');
-  
   const enrichedTracks = await Promise.allSettled(
     tracks.map(async (track) => {
       try {

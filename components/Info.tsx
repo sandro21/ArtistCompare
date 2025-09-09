@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ArtistCard from './ArtistCard';
+import type { Artist } from '../types';
 
 interface InfoProps {
-  artistA?: any;
-  artistB?: any;
+  artistA?: Artist | null;
+  artistB?: Artist | null;
 }
 
 interface SpotifyDetails {
@@ -117,7 +118,7 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
         width: '40rem',
         height: '24rem',
         flexShrink: 0,
-        borderRadius: '5rem',
+        borderRadius: '3rem',
         border: '1px solid #4BE295',
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 53.85%, rgba(65, 147, 105, 0.28) 100%)',
         boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
@@ -127,8 +128,8 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
       {/* Artist 1 */}
       {a && (
         <ArtistCard
-          artistName={a.artistName || a.name}
-          spotifyImageUrl={a.spotifyImageUrl || a.image || a.spotifyImage}
+          artistName={(a.artistName || a.name) || ''}
+          spotifyImageUrl={a.spotifyImageUrl || ''}
           activeYears={aReleaseYears || a.activeYears}
           songsCount={loadingA ? undefined : aSpotifyDetails?.totalTracks}
           albumsCount={loadingA ? undefined : aSpotifyDetails?.totalAlbums}
@@ -137,8 +138,8 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
       {/* Artist 2 */}
       {b && (
         <ArtistCard
-          artistName={b.artistName || b.name}
-          spotifyImageUrl={b.spotifyImageUrl || b.image || b.spotifyImage}
+          artistName={(b.artistName || b.name) || ''}
+          spotifyImageUrl={b.spotifyImageUrl || ''}
           activeYears={bReleaseYears || b.activeYears}
           songsCount={loadingB ? undefined : bSpotifyDetails?.totalTracks}
           albumsCount={loadingB ? undefined : bSpotifyDetails?.totalAlbums}

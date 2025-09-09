@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import type { Artist } from '../types';
 
 interface StickyArtistImagesProps {
-  artistA: any;
-  artistB: any;
+  artistA: Artist | null;
+  artistB: Artist | null;
 }
 
 const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artistB }) => {
@@ -57,9 +58,9 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
               boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
             }}
           >
-            {artistA?.spotifyImageUrl || artistA?.image || artistA?.spotifyImage ? (
+            {artistA?.spotifyImageUrl ? (
               <img
-                src={artistA.spotifyImageUrl || artistA.image || artistA.spotifyImage}
+                src={artistA.spotifyImageUrl}
                 alt={`${artistA.artistName || artistA.name} profile`}
                 className="w-full h-full object-cover"
               />
@@ -100,9 +101,9 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
               boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
             }}
           >
-            {artistB?.spotifyImageUrl || artistB?.image || artistB?.spotifyImage ? (
+            {artistB?.spotifyImageUrl ? (
               <img
-                src={artistB.spotifyImageUrl || artistB.image || artistB.spotifyImage}
+                src={artistB.spotifyImageUrl}
                 alt={`${artistB.artistName || artistB.name} profile`}
                 className="w-full h-full object-cover"
               />

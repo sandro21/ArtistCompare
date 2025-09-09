@@ -1,16 +1,20 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
 import hot100Data from '@/data/billboard-hot100-stats.json';
+import type { Artist } from '../types';
 
 interface SongsChartProps {
-  artistA: any;
-  artistB: any;
+  artistA: Artist | null;
+  artistB: Artist | null;
 }
 
 const SongsChart: React.FC<SongsChartProps> = ({ artistA, artistB }) => {
   // Get Hot 100 stats by directly indexing the JSON data
-  const artistAHot100 = (hot100Data.artists as any)[artistA?.artistName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
-  const artistBHot100 = (hot100Data.artists as any)[artistB?.artistName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
+  const artistAName = artistA?.artistName || artistA?.name || '';
+  const artistBName = artistB?.artistName || artistB?.name || '';
+  
+  const artistAHot100 = (hot100Data.artists as any)[artistAName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
+  const artistBHot100 = (hot100Data.artists as any)[artistBName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
 
   return (
     <>

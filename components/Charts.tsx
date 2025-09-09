@@ -3,10 +3,11 @@ import SectionWrapper from './SectionWrapper';
 import AlbumsChart from './AlbumsChart';
 import SongsChart from './SongsChart';
 import ToggleSwitch from './ToggleSwitch';
+import type { Artist } from '../types';
 
 interface ChartsProps {
-  artistA: any;
-  artistB: any;
+  artistA: Artist | null;
+  artistB: Artist | null;
 }
 
 const Charts: React.FC<ChartsProps> = ({ artistA, artistB }) => {

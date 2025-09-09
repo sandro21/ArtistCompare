@@ -1,10 +1,11 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
 import SectionWrapper from './SectionWrapper';
+import type { Artist } from '../types';
 
 interface RiaaCertificationsProps {
-  artistA: any;
-  artistB: any;
+  artistA: Artist | null;
+  artistB: Artist | null;
 }
 
 const RiaaCertifications: React.FC<RiaaCertificationsProps> = ({ artistA, artistB }) => {
