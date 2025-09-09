@@ -68,7 +68,7 @@ export default function Home() {
       {!showContent && <Description />}
 
       {showContent && (
-        <section className="flex flex-col items-center gap-20 w-full relative">
+        <section className="flex flex-col items-center gap-18 w-full relative">
           {/* Sticky Artist Images */}
           <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
           
@@ -80,7 +80,7 @@ export default function Home() {
             transitionDuration={1200}
             playOnce={false}
             className="w-auto h-auto bg-transparent border-none"
-            style={{ background: 'none', width: 'auto', height: 'auto', border: 'none', borderRadius: '1.5rem' }}
+            style={{ background: 'none', width: 'auto', height: 'auto', border: 'none', borderRadius: '5rem' }}
           >
             <Info artistA={duo[0]} artistB={duo[1]} />
           </GlareHover>
@@ -94,6 +94,7 @@ export default function Home() {
           <Streams artistA={duo[0]} artistB={duo[1]} />
           <Charts artistA={duo[0]} artistB={duo[1]} />
           <Awards artistA={duo[0]} artistB={duo[1]} />
+          <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
           {/* <RiaaCertifications artistA={duo[0]} artistB={duo[1]} /> */}
         </section>
       )}

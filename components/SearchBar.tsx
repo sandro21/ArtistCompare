@@ -127,7 +127,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
         <div className="relative">
           <label className="block mb-2 text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>
           {selectedA ? (
-            <div className="flex items-center justify-between gap-4 p-4 rounded-2xl border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
+            <div className="flex items-center justify-between gap-4 p-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
               <div className="flex items-center gap-4">
                 <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className="w-14 h-14 rounded-full object-cover border border-emerald-400/50" />
                 <span className="font-bold text-2xl text-white">{selectedA.artistName}</span>
@@ -184,7 +184,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
         <div className="relative">
           <label className="block mb-2 text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist Two</label>
           {selectedB ? (
-            <div className="flex items-center justify-between gap-4 p-4 rounded-2xl border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
+            <div className="flex items-center justify-between gap-4 p-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
               <div className="flex items-center gap-4">
                 <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className="w-14 h-14 rounded-full object-cover border border-emerald-400/50" />
                 <span className="font-bold text-2xl text-white">{selectedB.artistName}</span>

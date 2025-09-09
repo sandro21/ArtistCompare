@@ -117,7 +117,7 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
         width: '40rem',
         height: '24rem',
         flexShrink: 0,
-        borderRadius: '1.5rem',
+        borderRadius: '5rem',
         border: '1px solid #4BE295',
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 53.85%, rgba(65, 147, 105, 0.28) 100%)',
         boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'

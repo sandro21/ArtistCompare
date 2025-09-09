@@ -17,14 +17,19 @@ const features = [
 
 const Description = () => {
 	return (
-		<section
-			className="w-full max-w-7xl mt-4 mb-0 p-15 rounded-[6rem] border border-emerald-400/50"
-			style={{
-				background:
-					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(65, 147, 105, 0.25) 100%)",
-				boxShadow: "0 0 25px -5px #419369 inset, 0 0 25px -5px #419369",
-			}}
-		>
+		   <section
+			   className="w-full max-w-7xl mt-4 mb-0 px-15 py-11 rounded-[8rem] border border-emerald-400/50"
+			   style={{
+				   position: "absolute",
+				   left: 0,
+				   right: 0,
+				   bottom: 70,
+				   margin: "0 auto",
+				   background:
+					   "linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(65, 147, 105, 0.25) 100%)",
+				   boxShadow: "0 0 25px -5px #419369 inset, 0 0 25px -5px #419369",
+			   }}
+		   >
 			<div className="text-center mb-10">
 				<h2 className="text-3xl md:text-4xl font-bold text-white">
 					Battle Your Favorite{" "}
@@ -43,7 +48,7 @@ const Description = () => {
 				{features.map((feature) => (
 					<div
 						key={feature.title}
-						className="py-10 rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20"
+						className="py-6 rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20"
 						style={{
 							background: "rgba(0,0,0,0.2)",
 						}}

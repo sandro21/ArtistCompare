@@ -14,10 +14,10 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
   return (
     <div
       style={{
-        borderRadius: '1.75rem',
+        borderRadius: '3rem',
         border: '1px solid #38D985',
         background: 'rgba(0, 0, 0, 0.69)',
-        boxShadow: '0 0 18.3px -3px #38D985 inset, 0 0 20.6px -3px #38D985',
+        boxShadow: '0 0 18.3px 3px #38d9865e inset, 0 0 20.6px -3px #38D985',
       }}
       className={`p-8 w-full max-w-3xl ${className ?? ''}`}
     >
