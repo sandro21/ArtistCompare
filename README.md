@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Artist Compare 🎵
 
-## Getting Started
+A modern web app for comparing music artists across streaming, charts, RIAA certifications, and more.  
+Built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[View the deployed site here!](https://artist-compare.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+- **Artist Search:** Instantly search and select two artists to compare.
+- **Sticky Artist Images:** Artist images stick to the sides as you scroll, making it easy to see which stats belong to which artist.
+- **Streaming Stats:** Compare Spotify monthly listeners, total streams, and more.
+- **RIAA Certifications:** See Gold, Platinum, and Diamond certifications (coming soon).
+- **Chart Performance:** Billboard Hot 100 and 200 stats.
+- **Awards:** Grammy wins and nominations.
+- **Responsive Design:** Works beautifully on desktop and mobile.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
+- [Vercel](https://vercel.com/) (for deployment)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- If an external API is down, the app will gracefully show fallback messages.
+
+## Next Steps
+- Add More Stats
+- Add Branding
+- SEO Ready
+
+
+**Made with ❤️ by SK**
