@@ -33,7 +33,7 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
 
   return (
     <div 
-      className={`transition-all duration-500 ease-in-out z-40 ${
+      className={`transition-all duration-500 ease-in-out z-40 hidden sm:block ${
         isSticky 
           ? 'fixed top-16 w-screen pointer-events-none' 
           : 'absolute opacity-0 pointer-events-none'

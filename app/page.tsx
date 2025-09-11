@@ -69,7 +69,7 @@ export default function Home() {
       {!showContent && <Description />}
 
       {showContent && (
-        <section className="flex flex-col items-center gap-20 w-full relative">
+        <section className="flex flex-col items-center gap-8 sm:gap-20 w-full relative">
           {/* Sticky Artist Images */}
           <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
           

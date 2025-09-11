@@ -87,20 +87,20 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       className="flex justify-between items-center px-6 py-4 mb-4"
     >
       {/* Artist 1 Value (Left) */}
-      <div className="text-white font-bold text-lg">
+      <div className="text-white font-bold text-sm sm:text-lg">
         {formatNumber(artist1Value)}
-        {artist1Rank && <span className="text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
+        {artist1Rank && <span className="text-xs sm:text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
       </div>
       
       {/* Metric Label (Center) */}
-      <div className="text-white text-base font-medium flex flex-col items-center leading-tight">
+      <div className="text-white text-sm sm:text-base font-medium flex flex-col items-center leading-tight">
         <span>{metric}</span>
-        {subtitle && <span className="text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
+        {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
       </div>
       
       {/* Artist 2 Value (Right) */}
-      <div className="text-white font-bold text-lg text-right">
-        {artist2Rank && <span className="text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
+      <div className="text-white font-bold text-sm sm:text-lg text-right">
+        {artist2Rank && <span className="text-xs sm:text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
         {formatNumber(artist2Value)}
       </div>
     </div>

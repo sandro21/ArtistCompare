@@ -117,22 +117,26 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
     }
   }, [selectedA, selectedB, onSelectPair]);
 
-  const baseInputClasses = "w-full h-16 rounded-full bg-transparent border border-emerald-400 px-4 py-3 text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
-  const listClasses = "absolute z-20 mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm";
+  const baseInputClasses = "w-full h-12 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
+  const listClasses = "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm";
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+    <div className="flex flex-col gap-3 sm:gap-6 w-full max-w-3xl mx-auto">
+      <div className="grid grid-cols-2 gap-3 sm:gap-16">
         {/* Artist A */}
         <div className="relative">
-          <label className="block mb-2 text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>
+          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>
           {selectedA ? (
-            <div className="flex items-center justify-between gap-4 p-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
-              <div className="flex items-center gap-4">
-                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className="w-14 h-14 rounded-full object-cover border border-emerald-400/50" />
-                <span className="font-bold text-2xl text-white">{selectedA.artistName}</span>
+            <div className="flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className="w-10 h-10 sm:w-14 sm:h-14 rounded-full object-cover border border-emerald-400/50" />
+                <span className="font-bold text-sm sm:text-2xl text-white">{selectedA.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-sm text-emerald-300 hover:text-white font-medium px-3 py-1 w-16 text-center">Change</button>
+              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-emerald-300 hover:text-white p-1 rounded-full hover:bg-emerald-500/20 transition-colors" title="Change artist">
+                <svg className="w-4 h-4 sm:w-9 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           ) : (
             <div>
@@ -146,15 +150,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
                 <div className="relative">
                   <ul className={listClasses}>
                     {loadingA && (
-                      <li className="px-4 py-3 text-sm text-emerald-300/70 font-medium">Searching...</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-emerald-300/70 font-medium">Searching...</li>
                     )}
                     {errorA && !loadingA && (
-                      <li className="px-4 py-3 text-sm text-red-400 font-medium">{errorA}</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-red-400 font-medium">{errorA}</li>
                     )}
                     {!loadingA && !errorA && resultsA.map(r => (
                       <li key={r.id}>
                         <button
-                          className="flex items-center gap-4 w-full text-left px-4 py-3 hover:bg-emerald-500/20 rounded-xl"
+                          className="flex items-center gap-2 sm:gap-4 w-full text-left px-3 sm:px-4 py-2 sm:py-3 hover:bg-emerald-500/20 rounded-xl"
                           onClick={() => {
                             // Build a minimal SelectedArtist object from API result
                             setSelectedA({
@@ -165,14 +169,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
                             setResultsA([]);
                           }}
                         >
-                          {r.image && <img src={r.image} className="w-10 h-10 rounded-full object-cover border border-emerald-400/40" />}
-                          {!r.image && <div className="w-10 h-10 rounded-full border border-emerald-400/40 flex items-center justify-center text-xs text-emerald-300 font-medium">N/A</div>}
-                          <span className="text-base font-medium text-white">{r.name}</span>
+                          {r.image && <img src={r.image} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-emerald-400/40" />}
+                          {!r.image && <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-emerald-400/40 flex items-center justify-center text-xs text-emerald-300 font-medium">N/A</div>}
+                          <span className="text-sm sm:text-base font-medium text-white">{r.name}</span>
                         </button>
                       </li>
                     ))}
                     {!loadingA && !errorA && resultsA.length === 0 && queryA.trim() && (
-                      <li className="px-4 py-3 text-sm text-emerald-300/60 font-medium">No results</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-emerald-300/60 font-medium">No results</li>
                     )}
                   </ul>
                 </div>
@@ -182,14 +186,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
         </div>
         {/* Artist B */}
         <div className="relative">
-          <label className="block mb-2 text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist Two</label>
+          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist Two</label>
           {selectedB ? (
-            <div className="flex items-center justify-between gap-4 p-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
-              <div className="flex items-center gap-4">
-                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className="w-14 h-14 rounded-full object-cover border border-emerald-400/50" />
-                <span className="font-bold text-2xl text-white">{selectedB.artistName}</span>
+            <div className="flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className="w-10 h-10 sm:w-14 sm:h-14 rounded-full object-cover border border-emerald-400/50" />
+                <span className="font-bold text-sm sm:text-2xl text-white">{selectedB.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-sm text-emerald-300 hover:text-white font-medium px-3 py-1 w-16 text-center">Change</button>
+              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-emerald-300 hover:text-white p-1 rounded-full hover:bg-emerald-500/20 transition-colors" title="Change artist">
+                <svg className="w-4 h-4 sm:w-9 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           ) : (
             <div>
@@ -203,15 +211,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
                 <div className="relative">
                   <ul className={listClasses}>
                     {loadingB && (
-                      <li className="px-4 py-3 text-sm text-emerald-300/70 font-medium">Searching...</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-emerald-300/70 font-medium">Searching...</li>
                     )}
                     {errorB && !loadingB && (
-                      <li className="px-4 py-3 text-sm text-red-400 font-medium">{errorB}</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-red-400 font-medium">{errorB}</li>
                     )}
                     {!loadingB && !errorB && resultsB.map(r => (
                       <li key={r.id}>
                         <button
-                          className="flex items-center gap-4 w-full text-left px-4 py-3 hover:bg-emerald-500/20 rounded-xl"
+                          className="flex items-center gap-2 sm:gap-4 w-full text-left px-3 sm:px-4 py-2 sm:py-3 hover:bg-emerald-500/20 rounded-xl"
                           onClick={() => {
                             setSelectedB({
                               artistName: r.name,
@@ -221,14 +229,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
                             setResultsB([]);
                           }}
                         >
-                          {r.image && <img src={r.image} className="w-10 h-10 rounded-full object-cover border border-emerald-400/40" />}
-                          {!r.image && <div className="w-10 h-10 rounded-full border border-emerald-400/40 flex items-center justify-center text-xs text-emerald-300 font-medium">N/A</div>}
-                          <span className="text-base font-medium text-white">{r.name}</span>
+                          {r.image && <img src={r.image} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-emerald-400/40" />}
+                          {!r.image && <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-emerald-400/40 flex items-center justify-center text-xs text-emerald-300 font-medium">N/A</div>}
+                          <span className="text-sm sm:text-base font-medium text-white">{r.name}</span>
                         </button>
                       </li>
                     ))}
                     {!loadingB && !errorB && resultsB.length === 0 && queryB.trim() && (
-                      <li className="px-4 py-3 text-sm text-emerald-300/60 font-medium">No results</li>
+                      <li className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-emerald-300/60 font-medium">No results</li>
                     )}
                   </ul>
                 </div>

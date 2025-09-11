@@ -16,9 +16,9 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
   albumsCount,
 }) => {
   return (
-    <div className="flex flex-col items-center mx-4">
+    <div className="flex flex-col items-center mx-2 sm:mx-4 w-full sm:w-auto">
       {/* Artist Image */}
-      <div className="w-30 h-30 rounded-full bg-gray-300 flex items-center justify-center mb-4">
+      <div className="w-16 h-16 sm:w-30 sm:h-30 rounded-full bg-gray-300 flex items-center justify-center mb-2 sm:mb-4">
         {spotifyImageUrl ? (
           <img
             src={spotifyImageUrl}
@@ -26,19 +26,19 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
             className="w-full h-full rounded-full object-cover"
           />
         ) : (
-          <span className="text-gray-600 text-sm text-center px-2 font-medium">
+          <span className="text-gray-600 text-xs sm:text-sm text-center px-1 sm:px-2 font-medium">
             {artistName.toUpperCase()}_SPOTIFY_IMAGE
           </span>
         )}
       </div>
 
       {/* Artist Name */}
-      <h2 className="text-2xl font-bold text-white mb-2 text-center">
+      <h2 className="text-sm sm:text-2xl font-bold text-white mb-1 sm:mb-2 text-center leading-tight">
         {artistName?.toUpperCase()}
       </h2>
 
       {/* Active Years */}
-      <p className="text-gray-300 text-sm mb-6 font-medium">
+      <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-6 font-medium text-center">
         {activeYears ? (
           <span>
             {activeYears.includes('(') ? (
@@ -56,32 +56,32 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
       </p>
 
       {/* Statistics */}
-      <div className="flex gap-4">
+      <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-center">
         {/* Songs Count */}
         <div 
-          className="px-4 py-3 text-center min-w-[80px]"
+          className="px-2 sm:px-4 py-2 sm:py-3 text-center flex-1 sm:flex-none sm:min-w-[80px]"
           style={{
-            borderRadius: '2.46875rem',
+            borderRadius: '1.2rem',
             background: '#0C1919',
-            boxShadow: '0 0 4px 0 #38D985 inset, 0 0 2.6px 1px #38D985'
+            boxShadow: '0 0 2px 0 #38D985 inset, 0 0 1.3px 0.5px #38D985'
           }}
         >
-          <div className="text-white font-bold text-lg">{songsCount ?? '—'}</div>
-          <div className="text-gray-300 text-sm font-medium">Songs</div>
+          <div className="text-white font-bold text-sm sm:text-lg">{songsCount ?? '—'}</div>
+          <div className="text-gray-300 text-xs sm:text-sm font-medium">Songs</div>
         </div>
 
         {/* Albums Count */}
         <div 
-          className="px-6 py-3 text-center"
+          className="px-3 sm:px-6 py-2 sm:py-3 text-center flex-1 sm:flex-none"
           style={{
-            minWidth: '110px',
-            borderRadius: '2.46875rem',
+            minWidth: '60px',
+            borderRadius: '1.2rem',
             background: '#0C1919',
-            boxShadow: '0 0 4px 0 #38D985 inset, 0 0 2.6px 1px #38D985'
+            boxShadow: '0 0 2px 0 #38D985 inset, 0 0 1.3px 0.5px #38D985'
           }}
         >
-          <div className="text-white font-bold text-lg">{albumsCount ?? '—'}</div>
-          <div className="text-gray-300 text-sm font-medium">Albums</div>
+          <div className="text-white font-bold text-sm sm:text-lg">{albumsCount ?? '—'}</div>
+          <div className="text-gray-300 text-xs sm:text-sm font-medium">Albums</div>
         </div>
       </div>
     </div>

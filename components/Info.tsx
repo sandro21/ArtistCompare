@@ -115,15 +115,16 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
   return (
     <div
       style={{
-        width: '40rem',
-        height: '24rem',
+        width: '100%',
+        maxWidth: '40rem',
+        height: 'auto',
+        minHeight: '12rem',
         flexShrink: 0,
-        borderRadius: '3rem',
         border: '1px solid #4BE295',
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 53.85%, rgba(65, 147, 105, 0.28) 100%)',
-        boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
+        boxShadow: '0 0 8px -2px #419369 inset, 0 0 10px 1px #419369'
       }}
-      className="flex justify-between items-center p-10"
+      className="flex flex-row justify-between items-center p-4 sm:p-10 gap-2 sm:gap-0 rounded-[3rem]"
     >
       {/* Artist 1 */}
       {a && (
