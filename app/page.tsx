@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useRef } from "react";
 import Info from "../components/Info";
 import TopStreams from "../components/TopStreams";
 import Streams from "../components/Streams";
@@ -46,11 +46,54 @@ const emptyArtist: Artist = {
 export default function Home() {
   const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
+  const searchBarRef = useRef<any>(null);
 
   const onSelectPair = useCallback((a: Artist, b: Artist) => {
     setPair({ a, b });
-    setShowContent(true);
+    // Desktop/tablet (>= md): immediately show content; Mobile/smaller waits for "Compare"
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setShowContent(true);
+    } else {
+      setShowContent(false);
+    }
   }, []);
+
+  const handleBattleClick = useCallback(async (artist1: string, artist2: string) => {
+    try {
+      // Search for both artists
+      const [search1, search2] = await Promise.all([
+        fetch(`/api/spotify-search?q=${encodeURIComponent(artist1)}&limit=1`),
+        fetch(`/api/spotify-search?q=${encodeURIComponent(artist2)}&limit=1`)
+      ]);
+
+      const [data1, data2] = await Promise.all([
+        search1.json(),
+        search2.json()
+      ]);
+
+      if (data1.results?.[0] && data2.results?.[0]) {
+        const artistA = {
+          artistName: data1.results[0].name,
+          spotifyImageUrl: data1.results[0].image || 'https://via.placeholder.com/64?text=?',
+          spotifyId: data1.results[0].id,
+        } as Artist;
+
+        const artistB = {
+          artistName: data2.results[0].name,
+          spotifyImageUrl: data2.results[0].image || 'https://via.placeholder.com/64?text=?',
+          spotifyId: data2.results[0].id,
+        } as Artist;
+
+        // Set artists in search bars and call onSelectPair
+        if (searchBarRef.current) {
+          searchBarRef.current.setSelectedArtists(artistA, artistB);
+        }
+        onSelectPair(artistA, artistB);
+      }
+    } catch (error) {
+      console.error('Error searching for artists:', error);
+    }
+  }, [onSelectPair]);
 
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
@@ -58,15 +101,17 @@ export default function Home() {
   }, [pair]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen gap-6 pt-8 px-4 sm:px-6 pb-16 sm:gap-12">
+    <div className="flex flex-col items-center min-h-screen gap-12 pt-8 px-4 sm:px-6 pb-24 sm:pb-16 sm:gap-12">
       <section className="w-full flex flex-col items-center gap-12 sm:gap-6">
         <h1 className="text-center text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
           Artist Compare
         </h1>
-        <SearchBar onSelectPair={onSelectPair} />
+        <SearchBar ref={searchBarRef} onSelectPair={onSelectPair} showStats={showContent} />
       </section>
 
-      {!showContent && <Description />}
+      {!showContent && (
+        <Description onBattleClick={handleBattleClick} />
+      )}
 
       {showContent && (
         <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative">
@@ -98,6 +143,24 @@ export default function Home() {
           <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
         </section>
       )}
+
+      {/* Mobile-only Compare button (no container background or borders) */}
+      {!showContent && (
+        <div className="md:hidden fixed inset-x-0 bottom-14 z-[999] pointer-events-none">
+          <div className="mx-auto max-w-[80%] px-3 pointer-events-auto">
+            <button
+              disabled={!pair}
+              onClick={() => pair && setShowContent(true)}
+              className={`w-full py-3 text-lg font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_20px_rgba(16,185,129,0.5)] ${
+                pair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
+              }`}
+            >
+              Compare
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

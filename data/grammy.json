@@ -660,5 +660,6 @@
   {"artist": "Ed Sheeran", "wins": 4, "nominations": 19},
   {"artist": "Celine Dion", "wins": 5, "nominations": 16},
   {"artist": "The Rolling Stones", "wins": 3, "nominations": 13},
-  {"artist": "Shakira", "wins": 3, "nominations": 15}
+  {"artist": "Shakira", "wins": 3, "nominations": 15},
+  {"artist": "Pusha T", "wins": 0, "nominations": 6}
 ]

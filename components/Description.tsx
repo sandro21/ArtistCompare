@@ -1,5 +1,9 @@
 "use client";
 
+interface DescriptionProps {
+  onBattleClick?: (artist1: string, artist2: string) => void;
+}
+
 const features = [
 	{
 		title: "Real-Time Stream Counts",
@@ -18,18 +22,18 @@ const features = [
 	},
 ];
 
-const Description = () => {
+const Description = ({ onBattleClick }: DescriptionProps) => {
 	return (
 		<section
-			className="w-full max-w-7xl mx-auto mt-4 sm:mt-8 px-4 sm:px-15 py-6 sm:py-11 rounded-2xl sm:rounded-[8rem] border border-emerald-400/50 relative"
+			className="w-[95%]  mx-auto mt-4 pb-10 pt-5 px-2 sm:mt-8 px-2 sm:px-15 py-3 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
 			style={{
 				background:
-					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(65, 147, 105, 0.25) 100%)",
-				boxShadow: "0 0 25px -5px #419369 inset, 0 0 25px -5px #419369",
+					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(64, 167, 114, 0.25) 100%)",
+				boxShadow: "none",
 			}}
 		>
-			{/* Header */}
-			<div className="text-center mb-6 sm:mb-10">
+			{/* Desktop/Tablet content only */}
+			<div className="hidden sm:block text-center mb-6 sm:mb-10">
 				<h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
 					Battle Your Favorite{" "}
 					<span className="text-lg sm:text-2xl font-light text-red-500 italic">
@@ -43,8 +47,8 @@ const Description = () => {
 				</p>
 			</div>
 
-			{/* Features Grid */}
-			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center">
+			{/* Features Grid (desktop/tablet only) */}
+			<div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center">
 				{features.map((feature) => (
 					<div
 						key={feature.title}
@@ -60,7 +64,7 @@ const Description = () => {
 								borderRadius: "10rem",
 								background:
 									"linear-gradient(135deg, #4BE295 0%, #419369 100%)",
-								boxShadow: "0 0 20px rgba(75, 226, 149, 0.4)",
+								boxShadow: "none",
 							}}
 							className="mx-auto flex items-center justify-center mb-3 sm:mb-5"
 						>
@@ -74,6 +78,63 @@ const Description = () => {
 						</h3>
 					</div>
 				))}
+			</div>
+
+			{/* Mobile-only trending battles section */}
+			<div className="sm:hidden">
+				<div className="text-center mb-4">
+					<h3 className="text-xl font-bold text-white">Trending Battles</h3>
+				</div>
+				<div className="flex flex-wrap gap-x-0 gap-y-2 justify-around pt-2">
+					<button 
+						onClick={() => onBattleClick?.("Young Thug", "Gunna")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-300 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Young Thug vs Gunna
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Drake", "Kendrick Lamar")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Drake vs Kendrick Lamar
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Nicki Minaj vs SZA
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Ice Spice", "Latto")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Ice Spice vs Latto
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Pusha T vs Travis Scott
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Taylor Swift vs Beyoncé
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Dua Lipa", "Doja Cat")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Dua Lipa vs Doja Cat
+					</button>
+					<button 
+						onClick={() => onBattleClick?.("Bad Bunny", "Peso Pluma")}
+						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
+					>
+						Bad Bunny vs Peso Pluma
+					</button>
+				</div>
 			</div>
 		</section>
 	);
