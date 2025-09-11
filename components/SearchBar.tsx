@@ -143,7 +143,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
   return (
     <div className="flex flex-col gap-2 sm:gap-6 w-full max-w-3xl mx-auto">
       {!showStats && <h2 className="sm:hidden text-white text-xl font-extrabold text-center mb-1">Choose Two Artists</h2>}
-      <div className={`grid gap-2 sm:gap-16 ${showStats ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
+      <div className={`grid gap-3 sm:gap-16 ${showStats ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
         {/* Artist A */}
         <div className="relative">
           <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>
