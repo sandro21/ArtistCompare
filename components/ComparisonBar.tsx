@@ -101,24 +101,24 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
         background: gradientDirection,
         width: '100%',
       }}
-      className="flex justify-between items-center px-6 py-4 mb-4"
+      className="flex justify-between items-center px-6 py-2.5 mb-4"
     >
       {/* Artist 1 Value (Left) */}
-      <div className="text-white font-bold text-sm sm:text-lg">
+      <div className="text-white font-bold text-base sm:text-lg">
         <span className="sm:hidden">{formatNumberMobile(artist1Value)}</span>
         <span className="hidden sm:inline">{formatNumber(artist1Value)}</span>
-        {artist1Rank && <span className="text-xs sm:text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
+        {artist1Rank && <span className="text-sm sm:text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
       </div>
       
       {/* Metric Label (Center) */}
-      <div className={`text-white text-sm sm:text-base font-medium flex flex-col items-center leading-tight text-center w-[50px] sm:w-auto whitespace-normal break-words ${labelClassName ?? ''}`}>
+      <div className={`text-white text-m sm:text-lg font-medium flex flex-col items-center leading-tight text-center w-[50px] sm:w-auto whitespace-normal break-words ${labelClassName ?? ''}`}>
         <span>{metric}</span>
         {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
       </div>
       
       {/* Artist 2 Value (Right) */}
-      <div className="text-white font-bold text-sm sm:text-lg text-right">
-        {artist2Rank && <span className="text-xs sm:text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
+      <div className="text-white font-bold text-lg sm:text-lg text-right">
+        {artist2Rank && <span className="text-sm sm:text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
         <span className="sm:hidden">{formatNumberMobile(artist2Value)}</span>
         <span className="hidden sm:inline">{formatNumber(artist2Value)}</span>
       </div>
