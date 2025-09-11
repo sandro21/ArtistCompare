@@ -34,7 +34,7 @@ const SongsChart: React.FC<SongsChartProps> = ({ artistA, artistB }) => {
         artist2Value={artistBHot100.hot100.entries} 
         metric="Entries" 
       />
-      <div className="text-emerald-400 text-xs font-semibold tracking-wide mt-1 text-left w-full">
+      <div className="text-emerald-400 text-xs font-semibold tracking-wide mt-1 text-center w-full sm:text-left">
         From: Billboard Hot 100<span className="align-super text-[10px] ml-0.5">™</span>
       </div>
     </>

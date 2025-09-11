@@ -28,6 +28,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
   const [errorA, setErrorA] = useState<string | null>(null);
   const [errorB, setErrorB] = useState<string | null>(null);
 
+
   useEffect(() => {
     if (!artistAId || !artistAName) return;
     setLoadingA(true); setErrorA(null); setAData(null);
@@ -59,7 +60,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
       {loading && <div className="text-xs text-emerald-300/70">Loading...</div>}
       {error && <div className="text-xs text-red-400">{error}</div>}
       {!loading && !error && rows && (
-        <ul className="space-y-1 text-sm">
+        <ul className="space-y-1 sm:space-y-2 text-sm">
           {rows.map((t, index) => {
             // Compare with the same position track from the other side
             const otherSideData = isRightSide ? aData : bData;
@@ -73,8 +74,10 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                     <div className="flex items-center gap-2 flex-1 justify-end min-w-0 sm:order-2">
                       <div className="flex flex-col items-end">
-                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate text-right min-w-0 max-w-[200px]">{t.name}</a>
-                        <span className={`tabular-nums text-right text-xs sm:hidden ${
+                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 text-right min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
+                          {t.name}
+                        </a>
+                        <span className={`tabular-nums text-right text-xs sm:block md:hidden ${
                           isHigher ? 'text-emerald-400 font-bold' : 
                           isLower ? 'text-emerald-100' : 
                           'text-emerald-200'
@@ -88,7 +91,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         />
                       )}
                     </div>
-                    <span className={`tabular-nums text-right flex-shrink-0 hidden sm:block sm:order-1 ${
+                    <span className={`tabular-nums text-right flex-shrink-0 hidden md:block md:order-1 ${
                       isHigher ? 'text-emerald-400 font-bold' : 
                       isLower ? 'text-emerald-100' : 
                       'text-emerald-200'
@@ -105,15 +108,17 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         />
                       )}
                       <div className="flex flex-col">
-                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 truncate min-w-0 max-w-[200px]">{t.name}</a>
-                        <span className={`tabular-nums text-xs sm:hidden ${
+                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 min-w-0 max-w-[60px] sm:max-w-[120px] md:max-w-[150px] truncate block" title={t.name}>
+                          {t.name}
+                        </a>
+                        <span className={`tabular-nums text-xs sm:block md:hidden ${
                           isHigher ? 'text-emerald-400 font-bold' : 
                           isLower ? 'text-emerald-100' : 
                           'text-emerald-200'
                         }`}>{t.totalStreamsFormatted}</span>
                       </div>
                     </div>
-                    <span className={`tabular-nums text-right flex-shrink-0 hidden sm:block ${
+                    <span className={`tabular-nums text-right flex-shrink-0 hidden md:block ${
                       isHigher ? 'text-emerald-400 font-bold' : 
                       isLower ? 'text-emerald-100' : 
                       'text-emerald-200'
@@ -130,7 +135,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
 
   return (
     <SectionWrapper header="Top Streamed Songs">
-      <div className="flex flex-row gap-3 md:gap-6">
+      <div className="flex flex-row gap-1 md:gap-6">
         {renderTable(aData, loadingA, errorA, artistAName, false)}
         {renderTable(bData, loadingB, errorB, artistBName, true)}
       </div>

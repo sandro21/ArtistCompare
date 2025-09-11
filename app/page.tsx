@@ -58,7 +58,7 @@ export default function Home() {
   }, [pair]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen gap-12 pt-8 px-6 pb-16">
+    <div className="flex flex-col items-center min-h-screen gap-6 pt-8 px-4 sm:px-6 pb-16">
       <section className="w-full flex flex-col items-center gap-12">
         <h1 className="text-center text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
           Artist Compare
@@ -69,7 +69,7 @@ export default function Home() {
       {!showContent && <Description />}
 
       {showContent && (
-        <section className="flex flex-col items-center gap-8 sm:gap-20 w-full relative">
+        <section className="flex flex-col items-center gap-10 sm:gap-20 w-full relative">
           {/* Sticky Artist Images */}
           <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
           
@@ -80,8 +80,8 @@ export default function Home() {
             glareSize={400}
             transitionDuration={1200}
             playOnce={false}
-            className="w-auto h-auto bg-transparent border-none"
-            style={{ background: 'none', width: 'auto', height: 'auto', border: 'none', borderRadius: '3rem' }}
+            className="w-full h-auto bg-transparent border-none"
+            style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
           >
             <Info artistA={duo[0]} artistB={duo[1]} />
           </GlareHover>

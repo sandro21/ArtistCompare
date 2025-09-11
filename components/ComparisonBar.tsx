@@ -7,6 +7,7 @@ interface ComparisonBarProps {
   subtitle?: string;
   artist1Rank?: number | null;
   artist2Rank?: number | null;
+  labelClassName?: string; // optional extra classes for the metric label container
 }
 
 // Helper function to get ordinal suffix (1st, 2nd, 3rd, 4th, etc.)
@@ -40,6 +41,21 @@ const formatNumber = (num: number): string => {
   }
 };
 
+// Helper function to format numbers for mobile (shorter format)
+const formatNumberMobile = (num: number): string => {
+  if (num >= 1000000000) {
+    const billions = (num / 1000000000).toFixed(1);
+    return `${billions}b`;
+  } else if (num >= 1000000) {
+    const millions = (num / 1000000).toFixed(1);
+    return `${millions}m`;
+  } else if (num >= 1000) {
+    return num.toLocaleString();
+  } else {
+    return num.toString();
+  }
+};
+
 const ComparisonBar: React.FC<ComparisonBarProps> = ({
   artist1Value,
   artist2Value,
@@ -47,6 +63,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   subtitle,
   artist1Rank,
   artist2Rank,
+  labelClassName,
 }) => {
   // Determine which value is higher to set gradient direction
   let isArtist2Higher = artist2Value > artist1Value;
@@ -88,12 +105,13 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
     >
       {/* Artist 1 Value (Left) */}
       <div className="text-white font-bold text-sm sm:text-lg">
-        {formatNumber(artist1Value)}
+        <span className="sm:hidden">{formatNumberMobile(artist1Value)}</span>
+        <span className="hidden sm:inline">{formatNumber(artist1Value)}</span>
         {artist1Rank && <span className="text-xs sm:text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
       </div>
       
       {/* Metric Label (Center) */}
-      <div className="text-white text-sm sm:text-base font-medium flex flex-col items-center leading-tight">
+      <div className={`text-white text-sm sm:text-base font-medium flex flex-col items-center leading-tight text-center w-[50px] sm:w-auto whitespace-normal break-words ${labelClassName ?? ''}`}>
         <span>{metric}</span>
         {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
       </div>
@@ -101,7 +119,8 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       {/* Artist 2 Value (Right) */}
       <div className="text-white font-bold text-sm sm:text-lg text-right">
         {artist2Rank && <span className="text-xs sm:text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
-        {formatNumber(artist2Value)}
+        <span className="sm:hidden">{formatNumberMobile(artist2Value)}</span>
+        <span className="hidden sm:inline">{formatNumber(artist2Value)}</span>
       </div>
     </div>
   );

@@ -163,6 +163,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
         artist1Value={parseMetricValue(metricsA.totalStreams)} 
         artist2Value={parseMetricValue(metricsB.totalStreams)} 
         metric="All-Time Streams"
+        labelClassName="max-w-[120px] sm:max-w-[140px] md:max-w-none"
         artist1Rank={metricsA.streamRank}
         artist2Rank={metricsB.streamRank}
       />
@@ -176,7 +177,8 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
       <ComparisonBar 
         artist1Value={parseMetricValue(metricsA.followers)} 
         artist2Value={parseMetricValue(metricsB.followers)} 
-        metric="Spotify Followers" 
+        metric="Spotify Followers"
+        labelClassName="max-w-[120px] sm:max-w-[140px] md:max-w-none"
       />
     </SectionWrapper>
   );

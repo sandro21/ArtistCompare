@@ -16,10 +16,10 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
       style={{
         borderRadius: '3rem',
         border: '1px solid #38D985',
-        background: 'rgba(0, 0, 0, 0.69)',
-        boxShadow: '0 0 18.3px 3px #38d9865e inset, 0 0 20.6px -3px #38D985',
+        background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(65, 147, 105, 0.24) 110%)',
+        boxShadow: '0 0 30px -17px rgba(56, 217, 134, 0.83) inset, 0 0 30px -8px rgba(56, 217, 134, 0.74)',
       }}
-      className={`p-8 w-full max-w-3xl ${className ?? ''}`}
+      className={`px-3 py-6 sm:px-8 w-full max-w-3xl`}
     >
       {header && (
         <div className={`font-bold text-2xl text-white text-center ${headerClassName ?? 'mb-6'}`}>

@@ -125,7 +125,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
       <div className="grid grid-cols-2 gap-3 sm:gap-16">
         {/* Artist A */}
         <div className="relative">
-          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>
+          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold">Artist One</label>
           {selectedA ? (
             <div className="flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
               <div className="flex items-center gap-2 sm:gap-4">
@@ -186,7 +186,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSelectPair }) => {
         </div>
         {/* Artist B */}
         <div className="relative">
-          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm tracking-wide text-emerald-300 uppercase font-semibold">Artist Two</label>
+          <label className="block mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold">Artist Two</label>
           {selectedB ? (
             <div className="flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30">
               <div className="flex items-center gap-2 sm:gap-4">
