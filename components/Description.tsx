@@ -25,7 +25,7 @@ const features = [
 const Description = ({ onBattleClick }: DescriptionProps) => {
 	return (
 		<section
-			className="w-[95%]  mx-auto mt-4 pb-10 pt-5 px-2 sm:mt-8 px-2 sm:px-15 py-3 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
+			className="w-[95%] mx-auto mt-3 pb-6 pt-4 px-2 sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
 			style={{
 				background:
 					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(64, 167, 114, 0.25) 100%)",
@@ -82,10 +82,10 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 
 			{/* Mobile-only trending battles section */}
 			<div className="sm:hidden">
-				<div className="text-center mb-4">
+				<div className="text-center mb-3">
 					<h3 className="text-xl font-bold text-white">Trending Battles</h3>
 				</div>
-				<div className="flex flex-wrap gap-x-0 gap-y-2 justify-around pt-2">
+				<div className="flex flex-wrap gap-x-1 gap-y-2 justify-center pt-1">
 					<button 
 						onClick={() => onBattleClick?.("Young Thug", "Gunna")}
 						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-300 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"

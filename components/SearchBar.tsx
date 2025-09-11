@@ -135,15 +135,15 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
 
   const baseInputClasses = showStats 
     ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300"
-    : "w-full h-16 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-4 sm:px-4 py-3 sm:py-3 text-lg sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
+    : "w-full h-14 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-4 sm:px-4 py-3 sm:py-3 text-lg sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
   const listClasses = showStats
     ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm"
     : "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-md sm:backdrop-blur-sm";
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-6 w-full max-w-3xl mx-auto">
-      {!showStats && <h2 className="sm:hidden text-white text-2xl font-extrabold text-center mb-1">Choose Two Artists</h2>}
-      <div className={`grid gap-3 sm:gap-16 ${showStats ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
+    <div className="flex flex-col gap-2 sm:gap-6 w-full max-w-3xl mx-auto">
+      {!showStats && <h2 className="sm:hidden text-white text-xl font-extrabold text-center mb-1">Choose Two Artists</h2>}
+      <div className={`grid gap-2 sm:gap-16 ${showStats ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
         {/* Artist A */}
         <div className="relative">
           <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>

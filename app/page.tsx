@@ -101,9 +101,9 @@ export default function Home() {
   }, [pair]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen gap-12 pt-8 px-4 sm:px-6 pb-24 sm:pb-16 sm:gap-12">
-      <section className="w-full flex flex-col items-center gap-12 sm:gap-6">
-        <h1 className="text-center text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
+    <div className="flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-4 px-4 sm:px-6 pb-24 sm:pb-16 sm:gap-12">
+      <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
+        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
           Artist Compare
         </h1>
         <SearchBar ref={searchBarRef} onSelectPair={onSelectPair} showStats={showContent} />
@@ -144,20 +144,18 @@ export default function Home() {
         </section>
       )}
 
-      {/* Mobile-only Compare button (no container background or borders) */}
+      {/* Mobile-only Compare button */}
       {!showContent && (
-        <div className="md:hidden fixed inset-x-0 bottom-14 z-[999] pointer-events-none">
-          <div className="mx-auto max-w-[80%] px-3 pointer-events-auto">
-            <button
-              disabled={!pair}
-              onClick={() => pair && setShowContent(true)}
-              className={`w-full py-3 text-lg font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_20px_rgba(16,185,129,0.5)] ${
-                pair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
-              }`}
-            >
-              Compare
-            </button>
-          </div>
+        <div className="md:hidden w-full max-w-md mx-auto px-4 mt-3">
+          <button
+            disabled={!pair}
+            onClick={() => pair && setShowContent(true)}
+            className={`w-full py-3 text-lg font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_20px_rgba(16,185,129,0.5)] ${
+              pair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
+            }`}
+          >
+            Compare
+          </button>
         </div>
       )}
 
