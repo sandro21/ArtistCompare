@@ -108,7 +108,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         />
                       )}
                       <div className="flex flex-col">
-                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 min-w-0 max-w-[60px] sm:max-w-[120px] md:max-w-[150px] truncate block" title={t.name}>
+                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
                           {t.name}
                         </a>
                         <span className={`tabular-nums text-xs sm:block md:hidden ${
