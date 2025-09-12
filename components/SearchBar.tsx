@@ -18,6 +18,8 @@ interface SelectedArtist extends Record<string, any> {
 interface SearchBarProps {
   onSelectPair: (artistA: SelectedArtist, artistB: SelectedArtist) => void;
   showStats?: boolean;
+  onCompareClick?: () => void;
+  hasPair?: boolean;
 }
 
 interface SearchBarRef {
@@ -25,7 +27,7 @@ interface SearchBarRef {
 }
 
 // Temporary local search over static list; will be replaced with API search later
-const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair, showStats = false }, ref) => {
+const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair, showStats = false, onCompareClick, hasPair = false }, ref) => {
   const [queryA, setQueryA] = useState("");
   const [queryB, setQueryB] = useState("");
   const [resultsA, setResultsA] = useState<ArtistOption[]>([]);
@@ -135,17 +137,16 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
 
   const baseInputClasses = showStats 
     ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300"
-    : "w-full h-14 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-4 sm:px-4 py-3 sm:py-3 text-lg sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300";
+    : "w-full h-16 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-4 sm:px-4 py-3 sm:py-3 text-lg sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_20px_rgba(16,185,129,0.6)] transition-shadow duration-300";
   const listClasses = showStats
     ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm"
     : "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-md sm:backdrop-blur-sm";
 
   return (
-    <div className="flex flex-col gap-2 sm:gap-6 w-full max-w-3xl mx-auto">
-      {!showStats && <h2 className="sm:hidden text-white text-xl font-extrabold text-center mb-1">Choose Two Artists</h2>}
-      <div className={`grid gap-3 sm:gap-16 ${showStats ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
+    <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-3xl mx-auto">
+      <div className={`${showStats ? 'grid grid-cols-2 gap-3 sm:gap-16' : 'mt-7 flex flex-col sm:flex-row gap-3 sm:gap-16 items-center justify-center'}`}>
         {/* Artist A */}
-        <div className="relative">
+        <div className={`relative ${showStats ? 'w-full' : 'w-full max-w-sm order-0'}`}>
           <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>
           {selectedA ? (
             <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-4 sm:px-4 py-3 sm:py-3'}`}>
@@ -163,7 +164,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
             <div>
               <input
                 className={baseInputClasses}
-                placeholder={showStats ? "Search for an artist..." : "Search Artist 1"}
+                placeholder={showStats ? "Search for an artist..." : "Search Artist 1..."}
                 value={queryA}
                 onChange={e => setQueryA(e.target.value)}
               />
@@ -205,8 +206,16 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
             </div>
           )}
         </div>
+        
+        {/* VS Text - only show when not showing stats */}
+        {!showStats && (
+          <div className="flex items-center justify-center sm:hidden order-1">
+            <span className="text-2xl font-bold bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]">VS</span>
+          </div>
+        )}
+        
         {/* Artist B */}
-        <div className="relative">
+        <div className={`relative ${showStats ? 'w-full' : 'w-full max-w-sm order-2'}`}>
           <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist Two</label>
           {selectedB ? (
             <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-4 sm:px-4 py-3 sm:py-3'}`}>
@@ -266,6 +275,21 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
           )}
         </div>
       </div>
+      
+      {/* Compare button - only show when not showing stats and on mobile */}
+      {!showStats && onCompareClick && (
+        <div className="md:hidden w-full flex justify-center px-4 mt-6">
+          <button
+            disabled={!hasPair}
+            onClick={onCompareClick}
+            className={`w-[50%] py-3 text-2xl font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_10px_rgba(16,185,129,0.3)] ${
+              hasPair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
+            }`}
+          >
+            Compare
+          </button>
+        </div>
+      )}
     </div>
   );
 });

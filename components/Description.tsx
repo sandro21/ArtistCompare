@@ -25,7 +25,7 @@ const features = [
 const Description = ({ onBattleClick }: DescriptionProps) => {
 	return (
 		<section
-			className="w-[95%] mx-auto mt-3 pb-6 pt-4 px-2 sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
+			className="w-[95%] mx-auto mt-5 pb-4 pt-3 px-0 sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
 			style={{
 				background:
 					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(64, 167, 114, 0.25) 100%)",
@@ -81,59 +81,51 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 			</div>
 
 			{/* Mobile-only trending battles section */}
-			<div className="sm:hidden">
-				<div className="text-center mb-3">
-					<h3 className="text-xl font-bold text-white">Trending Battles</h3>
-				</div>
-				<div className="flex flex-wrap gap-x-1 gap-y-2 justify-center pt-1">
-					<button 
-						onClick={() => onBattleClick?.("Young Thug", "Gunna")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-300 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Young Thug vs Gunna
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Drake", "Kendrick Lamar")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Drake vs Kendrick Lamar
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Nicki Minaj vs SZA
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Ice Spice", "Latto")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Ice Spice vs Latto
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Pusha T vs Travis Scott
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Taylor Swift vs Beyoncé
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Dua Lipa", "Doja Cat")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Dua Lipa vs Doja Cat
-					</button>
-					<button 
-						onClick={() => onBattleClick?.("Bad Bunny", "Peso Pluma")}
-						className="bg-emerald-700 text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
-					>
-						Bad Bunny vs Peso Pluma
-					</button>
+			<div className="sm:hidden w-full h-full flex flex-col px-4">
+				<h3 className="text-lg font-bold text-white mb-4 text-center">Trending Battles</h3>
+				<div className="flex flex-col gap-3 flex-1">
+					<div className="flex gap-2">
+						<button 
+							onClick={() => onBattleClick?.("Young Thug", "Gunna")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-300 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Young Thug vs Gunna
+						</button>
+						<button 
+							onClick={() => onBattleClick?.("Drake", "Kendrick Lamar")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Drake vs Kendrick Lamar
+						</button>
+					</div>
+					<div className="flex gap-2">
+						<button 
+							onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Nicki Minaj vs SZA
+						</button>
+						<button 
+							onClick={() => onBattleClick?.("Ice Spice", "Latto")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Ice Spice vs Latto
+						</button>
+					</div>
+					<div className="flex gap-2">
+						<button 
+							onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Pusha T vs Travis Scott
+						</button>
+						<button 
+							onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
+							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
+						>
+							Taylor Swift vs Beyoncé
+						</button>
+					</div>
 				</div>
 			</div>
 		</section>

@@ -101,12 +101,25 @@ export default function Home() {
   }, [pair]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-4 px-4 sm:px-6 pb-24 sm:pb-16 sm:gap-12">
+    <div className={`flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-6 px-4 sm:px-6 sm:gap-12 ${showContent ? 'pb-24 sm:pb-16' : ''}`}>
       <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
-        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
-          Artist Compare
-        </h1>
-        <SearchBar ref={searchBarRef} onSelectPair={onSelectPair} showStats={showContent} />
+        <div className="text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
+            Artist Compare
+          </h1>
+          {!showContent && (
+            <p className="sm:hidden text-base text-gray-400 font-medium mt-2">
+              Pick two artists. See who wins.
+            </p>
+          )}
+        </div>
+        <SearchBar 
+          ref={searchBarRef} 
+          onSelectPair={onSelectPair} 
+          showStats={showContent}
+          onCompareClick={() => pair && setShowContent(true)}
+          hasPair={!!pair}
+        />
       </section>
 
       {!showContent && (
@@ -144,20 +157,6 @@ export default function Home() {
         </section>
       )}
 
-      {/* Mobile-only Compare button */}
-      {!showContent && (
-        <div className="md:hidden w-full max-w-md mx-auto px-4 mt-3">
-          <button
-            disabled={!pair}
-            onClick={() => pair && setShowContent(true)}
-            className={`w-full py-3 text-lg font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_20px_rgba(16,185,129,0.5)] ${
-              pair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
-            }`}
-          >
-            Compare
-          </button>
-        </div>
-      )}
 
     </div>
   );
