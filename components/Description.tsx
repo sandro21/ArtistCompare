@@ -25,7 +25,7 @@ const features = [
 const Description = ({ onBattleClick }: DescriptionProps) => {
 	return (
 		<section
-			className="w-[95%] mx-auto mt-5 pb-4 pt-3 px-0 sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[8rem] border border-emerald-400/100 relative"
+			className="w-[95%] mx-auto mt-5 pb-4 pt-3 px-0 sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[6rem] border border-emerald-400/100 relative"
 			style={{
 				background:
 					"linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(64, 167, 114, 0.25) 100%)",
@@ -33,7 +33,7 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 			}}
 		>
 			{/* Desktop/Tablet content only */}
-			<div className="hidden sm:block text-center mb-6 sm:mb-10">
+			<div className="hidden sm:block text-center mb-6 sm:mb-14">
 				<h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
 					Battle Your Favorite{" "}
 					<span className="text-lg sm:text-2xl font-light text-red-500 italic">
@@ -47,37 +47,71 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 				</p>
 			</div>
 
-			{/* Features Grid (desktop/tablet only) */}
-			<div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center">
-				{features.map((feature) => (
-					<div
-						key={feature.title}
-						className="py-4 sm:py-6 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20"
-						style={{
-							background: "rgba(0,0,0,0.2)",
-						}}
+			{/* Desktop/Tablet trending battles section */}
+			<div className="hidden sm:block w-full h-full flex flex-col px-4 background-color: rgba(255, 0, 0, 0.2);">
+				<h3 className="text-3xl font-bold text-white mb-6 text-center">Trending Comparisions</h3>
+				<div className="grid grid-cols-2 lg:grid-cols-3 gap-2 text-center lg:background-color: rgba(255, 0, 0, 0.2);">
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Young Thug", "Gunna")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
 					>
-						<div
-							style={{
-								width: "3rem",
-								height: "3rem",
-								borderRadius: "10rem",
-								background:
-									"linear-gradient(135deg, #4BE295 0%, #419369 100%)",
-								boxShadow: "none",
-							}}
-							className="mx-auto flex items-center justify-center mb-3 sm:mb-5"
-						>
-							<span className="text-white font-bold text-lg sm:text-2xl">
-								{feature.icon}
-							</span>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Young Thug vs Gunna
 						</div>
-						<h3 className="font-bold text-base sm:text-xl text-white mb-2 sm:mb-3 px-2">
-							<span className="sm:hidden">{feature.short}</span>
-							<span className="hidden sm:inline">{feature.title}</span>
-						</h3>
-					</div>
-				))}
+					</button>
+				</div>
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Drake", "Kendrick Lamar")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+					>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Drake vs Kendrick Lamar
+						</div>
+					</button>
+				</div>
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+					>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Nicki Minaj vs SZA
+						</div>
+					</button>
+				</div>
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Ice Spice", "Latto")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+					>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Ice Spice vs Latto
+						</div>
+					</button>
+				</div>
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+					>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Pusha T vs Travis Scott
+						</div>
+					</button>
+				</div>
+				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+					<button 
+						onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
+						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+					>
+						<div className="text-white font-bold text-sm sm:text-lg px-2">
+							Taylor Swift vs Beyoncé
+						</div>
+					</button>
+				</div>
+				</div>
 			</div>
 
 			{/* Mobile-only trending battles section */}

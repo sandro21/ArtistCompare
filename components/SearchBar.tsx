@@ -233,7 +233,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
             <div>
               <input
                 className={baseInputClasses}
-                placeholder={showStats ? "Search for an artist..." : "Search Artist 2"}
+                placeholder={showStats ? "Search for an artist..." : "Search Artist 2..."}
                 value={queryB}
                 onChange={e => setQueryB(e.target.value)}
               />
