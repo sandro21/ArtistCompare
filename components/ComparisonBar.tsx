@@ -107,7 +107,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       <div className="text-white font-bold text-base sm:text-lg">
         <span className="sm:hidden">{formatNumberMobile(artist1Value)}</span>
         <span className="hidden sm:inline">{formatNumber(artist1Value)}</span>
-        {artist1Rank && <span className="text-sm sm:text-sm font-normal ml-2">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
+        {artist1Rank && <span className="text-sm sm:text-sm font-normal ml-2 hidden sm:inline">({artist1Rank}{getOrdinalSuffix(artist1Rank)})</span>}
       </div>
       
       {/* Metric Label (Center) */}
@@ -118,7 +118,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       
       {/* Artist 2 Value (Right) */}
       <div className="text-white font-bold text-lg sm:text-lg text-right">
-        {artist2Rank && <span className="text-sm sm:text-sm font-normal mr-2">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
+        {artist2Rank && <span className="text-sm sm:text-sm font-normal mr-2 hidden sm:inline">({artist2Rank}{getOrdinalSuffix(artist2Rank)})</span>}
         <span className="sm:hidden">{formatNumberMobile(artist2Value)}</span>
         <span className="hidden sm:inline">{formatNumber(artist2Value)}</span>
       </div>
