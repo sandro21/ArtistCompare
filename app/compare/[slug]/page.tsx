@@ -3,13 +3,13 @@ import { notFound, redirect } from 'next/navigation'
 import { deobfuscateArtistNames } from '../../../lib/seo-utils'
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params
+  const { slug } = await params
   const artists = deobfuscateArtistNames(slug)
   
   if (!artists) {
@@ -61,8 +61,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function ComparePage({ params }: Props) {
-  const { slug } = params
+export default async function ComparePage({ params }: Props) {
+  const { slug } = await params
   const artists = deobfuscateArtistNames(slug)
   
   if (!artists) {

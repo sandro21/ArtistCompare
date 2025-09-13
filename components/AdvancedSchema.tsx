@@ -84,25 +84,35 @@ export default function AdvancedSchema({ artist1, artist2, comparisonData }: Adv
 
     // Add FAQ schema if we have comparison data
     if (comparisonData) {
-      schema["@type"] = "FAQPage";
-      schema["mainEntity"] = [
-        {
-          "@type": "Question",
-          "name": `Who is more successful: ${artist1} or ${artist2}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `Compare ${artist1} and ${artist2} using our comprehensive statistics including Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.`
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": `Who is more successful: ${artist1} or ${artist2}?`,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `Compare ${artist1} and ${artist2} using our comprehensive statistics including Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.`
+            }
+          },
+          {
+            "@type": "Question", 
+            "name": `What are the key differences between ${artist1} and ${artist2}?`,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `Our comparison tool shows detailed statistics for ${artist1} and ${artist2} including chart performance, awards, certifications, and streaming numbers to highlight their differences.`
+            }
           }
-        },
-        {
-          "@type": "Question", 
-          "name": `What are the key differences between ${artist1} and ${artist2}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `Our comparison tool shows detailed statistics for ${artist1} and ${artist2} including chart performance, awards, certifications, and streaming numbers to highlight their differences.`
-          }
-        }
-      ];
+        ]
+      };
+      
+      // Add FAQ schema as separate script
+      const faqScript = document.createElement('script');
+      faqScript.type = 'application/ld+json';
+      faqScript.textContent = JSON.stringify(faqSchema);
+      faqScript.id = 'faq-schema';
+      document.head.appendChild(faqScript);
     }
 
     // Add the schema to the page
@@ -123,6 +133,10 @@ export default function AdvancedSchema({ artist1, artist2, comparisonData }: Adv
       const schemaElement = document.getElementById('advanced-schema');
       if (schemaElement) {
         schemaElement.remove();
+      }
+      const faqElement = document.getElementById('faq-schema');
+      if (faqElement) {
+        faqElement.remove();
       }
     };
   }, [artist1, artist2, comparisonData]);

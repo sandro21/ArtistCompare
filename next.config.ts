@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['gsap', 'three'],
-    optimizeCss: true,
     scrollRestoration: true,
   },
   

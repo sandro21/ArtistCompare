@@ -47,7 +47,7 @@ export default function SEOContent({ artist1, artist2 }: SEOContentProps) {
     { artist1: 'Taylor Swift', artist2: 'Ariana Grande', description: 'Pop superstars with massive fanbases and chart success' },
     { artist1: 'The Weeknd', artist2: 'Bruno Mars', description: 'R&B and pop artists with distinct musical approaches' },
     { artist1: 'Billie Eilish', artist2: 'Olivia Rodrigo', description: 'Gen Z pop stars with unique sounds and massive appeal' },
-    { artist1: 'Post Malone', artist2: 'Travis Scott', artist2: 'Hip-hop artists with different musical styles' },
+    { artist1: 'Post Malone', artist2: 'Travis Scott', description: 'Hip-hop artists with different musical styles' },
     { artist1: 'Ed Sheeran', artist2: 'John Mayer', description: 'Singer-songwriters with guitar-driven music' }
   ];
 

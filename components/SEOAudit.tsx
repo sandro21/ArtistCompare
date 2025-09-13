@@ -18,7 +18,17 @@ export default function SEOAudit({ pageType, artist1, artist2 }: SEOAuditProps) 
     if (process.env.NODE_ENV !== 'development') return;
 
     const runAudit = () => {
-      const results = {
+      const results: {
+        pageType: string;
+        timestamp: string;
+        checks: Array<{
+          type: string;
+          status: string;
+          message: string;
+          current: number;
+          recommended?: number;
+        }>;
+      } = {
         pageType,
         timestamp: new Date().toISOString(),
         checks: []

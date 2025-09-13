@@ -2,6 +2,16 @@
 
 import { useEffect } from 'react';
 
+// Extend Window interface for gtag
+declare global {
+  interface Window {
+    gtag: {
+      (...args: any[]): void;
+      q: any[];
+    };
+  }
+}
+
 interface SEOMonitoringProps {
   pageType: 'home' | 'comparison';
   artist1?: string;

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://artist-compare.vercel.app' // Update with your actual domain
   
   // Popular artist comparisons for SEO
