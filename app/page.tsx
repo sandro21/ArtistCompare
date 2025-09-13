@@ -1,5 +1,6 @@
 "use client";
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Info from "../components/Info";
 import TopStreams from "../components/TopStreams";
 import Streams from "../components/Streams";
@@ -10,6 +11,7 @@ import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import Description from "../components/Description";
 import StickyArtistImages from "../components/StickyArtistImages";
+import { generateComparisonUrl } from "../lib/seo-utils";
 import type { Artist, ArtistPair } from "../types";
 
 // Empty fallback objects for when no artists are selected
@@ -47,6 +49,8 @@ export default function Home() {
   const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
   const searchBarRef = useRef<any>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const onSelectPair = useCallback((a: Artist, b: Artist) => {
     setPair({ a, b });
@@ -55,6 +59,12 @@ export default function Home() {
       setShowContent(true);
     } else {
       setShowContent(false);
+    }
+    
+    // Generate SEO-friendly URL and update browser history
+    if (a.artistName && b.artistName) {
+      const seoUrl = generateComparisonUrl(a.artistName, b.artistName);
+      window.history.replaceState({}, '', seoUrl);
     }
   }, []);
 
@@ -95,6 +105,17 @@ export default function Home() {
     }
   }, [onSelectPair]);
 
+  // Handle URL parameters for SEO-friendly URLs
+  useEffect(() => {
+    const artist1 = searchParams.get('artist1');
+    const artist2 = searchParams.get('artist2');
+    
+    if (artist1 && artist2 && !pair) {
+      // Pre-populate search bars with URL parameters
+      handleBattleClick(artist1, artist2);
+    }
+  }, [searchParams, pair]);
+
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
     return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
@@ -105,7 +126,7 @@ export default function Home() {
       <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
         <div className="text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
-            Artist Compare
+            Compare Music Artists
           </h1>
           {!showContent && (
             <p className="sm:hidden text-base text-gray-400 font-medium mt-2">
@@ -123,7 +144,36 @@ export default function Home() {
       </section>
 
       {!showContent && (
-        <Description onBattleClick={handleBattleClick} />
+        <>
+          <Description onBattleClick={handleBattleClick} />
+          
+          {/* SEO Content - Hidden on mobile, only shows when no comparison is active */}
+          <div className="hidden md:block max-w-4xl mx-auto px-4 py-8">
+            <section className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-200 mb-4">
+                Compare Music Artists with Detailed Statistics
+              </h2>
+              <p className="text-gray-400 text-lg">
+                Get comprehensive comparisons of your favorite artists including Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.
+              </p>
+            </section>
+            
+            <section className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-200 mb-2">Billboard Charts</h3>
+                <p className="text-gray-400 text-sm">Compare Hot 100 hits, album sales, and chart performance</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-200 mb-2">Awards & Recognition</h3>
+                <p className="text-gray-400 text-sm">View Grammy wins, nominations, and RIAA certifications</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-200 mb-2">Streaming Data</h3>
+                <p className="text-gray-400 text-sm">Compare Spotify streams, monthly listeners, and popularity</p>
+              </div>
+            </section>
+          </div>
+        </>
       )}
 
       {showContent && (
