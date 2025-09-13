@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Info from "../components/Info";
@@ -46,7 +46,7 @@ const emptyArtist: Artist = {
   },
 };
 
-export default function Home() {
+function HomeContent() {
   const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
   const searchBarRef = useRef<any>(null);
@@ -192,3 +192,11 @@ export default function Home() {
      </div>
    );
  }
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-white">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
+  );
+}
