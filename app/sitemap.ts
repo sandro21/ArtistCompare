@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://artist-compare.vercel.app' // Update with your actual domain
   
   // Popular artist comparisons for SEO
@@ -23,6 +23,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     },
   ];
   

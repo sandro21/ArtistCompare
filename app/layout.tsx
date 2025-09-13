@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import PerformanceMonitor from "../components/PerformanceMonitor";
-import GoogleAnalytics from "../components/GoogleAnalytics";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -107,23 +105,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect to external domains for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i.scdn.co" />
-        
-        {/* DNS prefetch for better performance */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//i.scdn.co" />
-        
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
-          as="style"
-        />
-        
-        {/* Structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -158,8 +139,6 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} font-sans antialiased`}
       >
-        <PerformanceMonitor />
-        <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
         {children}
       </body>
     </html>

@@ -5,7 +5,7 @@ import { checkRateLimit } from '../../../lib/seo-utils';
 // GET /api/spotify-search?q=drake
 export async function GET(request: NextRequest) {
   // Rate limiting to prevent scraping
-  const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
   if (!checkRateLimit(ip, 20, 60000)) { // 20 requests per minute
     return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
   }
@@ -26,13 +26,7 @@ export async function GET(request: NextRequest) {
   
   try {
     const results = await searchArtists(q, limit);
-    return NextResponse.json({ results }, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600', // 5 min cache
-        'CDN-Cache-Control': 'public, s-maxage=300',
-        'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
-      },
-    });
+    return NextResponse.json({ results });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
