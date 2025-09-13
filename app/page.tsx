@@ -11,6 +11,12 @@ import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import Description from "../components/Description";
 import StickyArtistImages from "../components/StickyArtistImages";
+import SEOContent from "../components/SEOContent";
+import InternalLinking from "../components/InternalLinking";
+import AdvancedSchema from "../components/AdvancedSchema";
+import SocialOptimization from "../components/SocialOptimization";
+import SEOMonitoring from "../components/SEOMonitoring";
+import SEOAudit from "../components/SEOAudit";
 import { generateComparisonUrl } from "../lib/seo-utils";
 import type { Artist, ArtistPair } from "../types";
 
@@ -116,98 +122,122 @@ export default function Home() {
     }
   }, [searchParams, pair]);
 
+  // Preload critical resources
+  useEffect(() => {
+    // Preload Google Fonts
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap';
+    link.as = 'style';
+    document.head.appendChild(link);
+  }, []);
+
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
     return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
   }, [pair]);
 
   return (
-    <div className={`flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-6 px-4 sm:px-6 sm:gap-12 ${showContent ? 'pb-24 sm:pb-16' : ''}`}>
-      <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
-        <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
-            Compare Music Artists
-          </h1>
-          {!showContent && (
-            <p className="sm:hidden text-base text-gray-400 font-medium mt-2">
-              Pick two artists. See who wins.
-            </p>
-          )}
-        </div>
-        <SearchBar 
-          ref={searchBarRef} 
-          onSelectPair={onSelectPair} 
-          showStats={showContent}
-          onCompareClick={() => pair && setShowContent(true)}
-          hasPair={!!pair}
-        />
-      </section>
+    <>
+      {/* SEO Monitoring */}
+      <SEOMonitoring 
+        pageType={showContent ? 'comparison' : 'home'}
+        artist1={duo[0]?.artistName || duo[0]?.name}
+        artist2={duo[1]?.artistName || duo[1]?.name}
+      />
+      
+      {/* Advanced Schema Markup */}
+      <AdvancedSchema 
+        artist1={duo[0]?.artistName || duo[0]?.name}
+        artist2={duo[1]?.artistName || duo[1]?.name}
+        comparisonData={pair ? { artist1Stats: duo[0], artist2Stats: duo[1] } : undefined}
+      />
+      
+      {/* Social Media Optimization */}
+      <SocialOptimization 
+        artist1={duo[0]?.artistName || duo[0]?.name}
+        artist2={duo[1]?.artistName || duo[1]?.name}
+        comparisonData={pair}
+      />
 
-      {!showContent && (
-        <>
-          <Description onBattleClick={handleBattleClick} />
-          
-          {/* SEO Content - Hidden on mobile, only shows when no comparison is active */}
-          <div className="hidden md:block max-w-4xl mx-auto px-4 py-8">
-            <section className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-200 mb-4">
-                Compare Music Artists with Detailed Statistics
-              </h2>
-              <p className="text-gray-400 text-lg">
-                Get comprehensive comparisons of your favorite artists including Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.
+      <div className={`flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-6 px-4 sm:px-6 sm:gap-12 ${showContent ? 'pb-24 sm:pb-16' : ''}`}>
+        <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
+          <div className="text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
+              Compare Music Artists
+            </h1>
+            {!showContent && (
+              <p className="sm:hidden text-base text-gray-400 font-medium mt-2">
+                Pick two artists. See who wins.
               </p>
-            </section>
-            
-            <section className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">Billboard Charts</h3>
-                <p className="text-gray-400 text-sm">Compare Hot 100 hits, album sales, and chart performance</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">Awards & Recognition</h3>
-                <p className="text-gray-400 text-sm">View Grammy wins, nominations, and RIAA certifications</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">Streaming Data</h3>
-                <p className="text-gray-400 text-sm">Compare Spotify streams, monthly listeners, and popularity</p>
-              </div>
-            </section>
+            )}
           </div>
-        </>
-      )}
-
-      {showContent && (
-        <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative">
-          {/* Sticky Artist Images */}
-          <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
-          
-          <GlareHover
-            glareColor="#ffffff"
-            glareOpacity={0.3}
-            glareAngle={-30}
-            glareSize={400}
-            transitionDuration={1200}
-            playOnce={false}
-            className="w-full h-auto bg-transparent border-none"
-            style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
-          >
-            <Info artistA={duo[0]} artistB={duo[1]} />
-          </GlareHover>
-          <TopStreams
-            artistAId={duo[0]?.spotifyId || undefined}
-            artistBId={duo[1]?.spotifyId || undefined}
-            artistAName={duo[0]?.artistName || duo[0]?.name}
-            artistBName={duo[1]?.artistName || duo[1]?.name}
+          <SearchBar 
+            ref={searchBarRef} 
+            onSelectPair={onSelectPair} 
+            showStats={showContent}
+            onCompareClick={() => pair && setShowContent(true)}
+            hasPair={!!pair}
           />
-
-          <Streams artistA={duo[0]} artistB={duo[1]} />
-          <Charts artistA={duo[0]} artistB={duo[1]} />
-          <Awards artistA={duo[0]} artistB={duo[1]} />
-          <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
         </section>
-      )}
 
+        {!showContent && (
+          <>
+            <Description onBattleClick={handleBattleClick} />
+            
+            {/* SEO Content - Hidden on mobile, only shows when no comparison is active */}
+            <SEOContent />
+          </>
+        )}
 
-    </div>
+        {showContent && (
+          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative">
+            {/* Sticky Artist Images */}
+            <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
+            
+            <GlareHover
+              glareColor="#ffffff"
+              glareOpacity={0.3}
+              glareAngle={-30}
+              glareSize={400}
+              transitionDuration={1200}
+              playOnce={false}
+              className="w-full h-auto bg-transparent border-none"
+              style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
+            >
+              <Info artistA={duo[0]} artistB={duo[1]} />
+            </GlareHover>
+            <TopStreams
+              artistAId={duo[0]?.spotifyId || undefined}
+              artistBId={duo[1]?.spotifyId || undefined}
+              artistAName={duo[0]?.artistName || duo[0]?.name}
+              artistBName={duo[1]?.artistName || duo[1]?.name}
+            />
+
+            <Streams artistA={duo[0]} artistB={duo[1]} />
+            <Charts artistA={duo[0]} artistB={duo[1]} />
+            <Awards artistA={duo[0]} artistB={duo[1]} />
+            <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
+          </section>
+        )}
+
+        {/* Internal Linking - Only show when no comparison is active */}
+        {!showContent && (
+          <InternalLinking 
+            currentArtists={pair && duo[0]?.artistName && duo[1]?.artistName ? { 
+              artist1: duo[0].artistName, 
+              artist2: duo[1].artistName 
+            } : undefined}
+          />
+        )}
+      </div>
+      
+      {/* SEO Audit - Only in development */}
+      <SEOAudit 
+        pageType={showContent ? 'comparison' : 'home'}
+        artist1={duo[0]?.artistName || duo[0]?.name}
+        artist2={duo[1]?.artistName || duo[1]?.name}
+      />
+    </>
   );
 }

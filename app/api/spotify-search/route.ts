@@ -26,7 +26,13 @@ export async function GET(request: NextRequest) {
   
   try {
     const results = await searchArtists(q, limit);
-    return NextResponse.json({ results });
+    return NextResponse.json({ results }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600', // 5 min cache
+        'CDN-Cache-Control': 'public, s-maxage=300',
+        'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+      },
+    });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
