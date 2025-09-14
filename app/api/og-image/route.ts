@@ -4,7 +4,7 @@ import { checkRateLimit } from '../../../lib/seo-utils'
 export async function GET(request: NextRequest) {
   // Rate limiting to prevent abuse
   const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
-  if (!checkRateLimit(ip, 5, 60000)) { // 5 requests per minute
+  if (!checkRateLimit(ip, 20, 60000)) { // 20 requests per minute
     return new NextResponse('Rate limit exceeded', { status: 429 })
   }
   

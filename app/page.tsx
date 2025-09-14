@@ -127,7 +127,7 @@ function HomeContent() {
       <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
         <div className="text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-gray-200 uppercase">
-            Compare Music Artists
+            Artist Compare
           </h1>
           {!showContent && (
             <p className="sm:hidden text-base text-gray-400 font-medium mt-2">

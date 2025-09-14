@@ -49,7 +49,7 @@ export function generateComparisonUrl(artist1: string, artist2: string): string 
 // Rate limiting for API calls (simple in-memory store - use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
-export function checkRateLimit(ip: string, limit: number = 10, windowMs: number = 60000): boolean {
+export function checkRateLimit(ip: string, limit: number = 50, windowMs: number = 60000): boolean {
   const now = Date.now();
   const key = `rate_limit_${ip}`;
   const current = rateLimitStore.get(key);

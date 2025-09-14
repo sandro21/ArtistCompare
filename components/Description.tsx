@@ -47,6 +47,13 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
 					<div className="py-3 sm:py-4 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 cursor-pointer" 
 						 style={{ background: "rgba(0,0,0,0.4)" }}>
+						<div className="text-white font-bold text-base sm:text-lg px-4 mb-2">Streaming Data</div>
+						<div className="text-gray-300 text-sm sm:text-base px-4">
+							Compare Spotify streams, monthly listeners, and popularity
+						</div>
+					</div>
+					<div className="py-3 sm:py-4 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 cursor-pointer" 
+						 style={{ background: "rgba(0,0,0,0.4)" }}>
 						<div className="text-white font-bold text-base sm:text-lg px-4 mb-2">Billboard Charts</div>
 						<div className="text-gray-300 text-sm sm:text-base px-4">
 							Compare Hot 100 hits, album sales, and chart performance
@@ -57,13 +64,6 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 						<div className="text-white font-bold text-base sm:text-lg px-4 mb-2">Awards & Recognition</div>
 						<div className="text-gray-300 text-sm sm:text-base px-4">
 							View Grammy wins, nominations, and RIAA certifications
-						</div>
-					</div>
-					<div className="py-3 sm:py-4 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 cursor-pointer" 
-						 style={{ background: "rgba(0,0,0,0.4)" }}>
-						<div className="text-white font-bold text-base sm:text-lg px-4 mb-2">Streaming Data</div>
-						<div className="text-gray-300 text-sm sm:text-base px-4">
-							Compare Spotify streams, monthly listeners, and popularity
 						</div>
 					</div>
 				</div>
@@ -95,41 +95,41 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 				</div>
 				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] bg-emerald-700 transition-all duration-300 hover:scale-105 hover:bg-emerald-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
 					<button 
-						onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
+						onClick={() => onBattleClick?.("2Pac", "Biggie")}
 						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
 					>
 						<div className="text-white font-bold text-sm sm:text-lg px-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-							Nicki Minaj vs SZA
+							2Pac vs Biggie
 						</div>
 					</button>
 				</div>
 				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] bg-emerald-700 transition-all duration-300 hover:scale-105 hover:bg-emerald-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
 					<button 
-						onClick={() => onBattleClick?.("Ice Spice", "Latto")}
+						onClick={() => onBattleClick?.("Nicki Minaj", "Cardi B")}
 						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
 					>
 						<div className="text-white font-bold text-sm sm:text-lg px-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-							Ice Spice vs Latto
+							Nicki Minaj vs Cardi B
 						</div>
 					</button>
 				</div>
 				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] bg-emerald-700 transition-all duration-300 hover:scale-105 hover:bg-emerald-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
 					<button 
-						onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
+						onClick={() => onBattleClick?.("Prince", "Michael Jackson")}
 						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
 					>
 						<div className="text-white font-bold text-sm sm:text-lg px-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-							Pusha T vs Travis Scott
+							Prince vs Michael Jackson
 						</div>
 					</button>
 				</div>
 				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] bg-emerald-700 transition-all duration-300 hover:scale-105 hover:bg-emerald-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
 					<button 
-						onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
+						onClick={() => onBattleClick?.("Kanye West", "Taylor Swift")}
 						className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
 					>
 						<div className="text-white font-bold text-sm sm:text-lg px-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-							Taylor Swift vs Beyoncé
+							Kanye West vs Taylor Swift
 						</div>
 					</button>
 				</div>
@@ -156,30 +156,30 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 					</div>
 					<div className="flex gap-2">
 						<button 
-							onClick={() => onBattleClick?.("Nicki Minaj", "SZA")}
+							onClick={() => onBattleClick?.("2Pac", "Biggie")}
 							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
 						>
-							Nicki Minaj vs SZA
+							2Pac vs Biggie
 						</button>
 						<button 
-							onClick={() => onBattleClick?.("Ice Spice", "Latto")}
+							onClick={() => onBattleClick?.("Nicki Minaj", "Cardi B")}
 							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
 						>
-							Ice Spice vs Latto
+							Nicki Minaj vs Cardi B
 						</button>
 					</div>
 					<div className="flex gap-2">
 						<button 
-							onClick={() => onBattleClick?.("Pusha T", "Travis Scott")}
+							onClick={() => onBattleClick?.("Prince", "Michael Jackson")}
 							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
 						>
-							Pusha T vs Travis Scott
+							Prince vs Michael Jackson
 						</button>
 						<button 
-							onClick={() => onBattleClick?.("Taylor Swift", "Beyoncé")}
+							onClick={() => onBattleClick?.("Kanye West", "Taylor Swift")}
 							className="w-1/2 bg-emerald-700 text-white px-3 py-3 rounded-full text-xs font-semibold shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95 text-center"
 						>
-							Taylor Swift vs Beyoncé
+							Kanye West vs Taylor Swift
 						</button>
 					</div>
 				</div>
