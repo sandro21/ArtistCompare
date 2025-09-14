@@ -4,14 +4,19 @@ import crypto from 'crypto';
 const SECRET_KEY = process.env.URL_SECRET_KEY || 'artist-compare-secret-2024';
 
 export function obfuscateArtistNames(artist1: string, artist2: string): string {
-  const combined = `${artist1.toLowerCase()}-vs-${artist2.toLowerCase()}`;
+  // Replace spaces with hyphens and remove special characters for URL safety
+  const cleanArtist1 = artist1.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+  const cleanArtist2 = artist2.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+  const combined = `${cleanArtist1}-vs-${cleanArtist2}`;
   const hash = crypto.createHmac('sha256', SECRET_KEY).update(combined).digest('hex').substring(0, 8);
   return `${combined}-${hash}`;
 }
 
 export function deobfuscateArtistNames(obfuscated: string): { artist1: string; artist2: string } | null {
   try {
-    const parts = obfuscated.split('-');
+    // Handle URL decoding first
+    const decoded = decodeURIComponent(obfuscated);
+    const parts = decoded.split('-');
     if (parts.length < 3) return null;
     
     const hash = parts.pop();

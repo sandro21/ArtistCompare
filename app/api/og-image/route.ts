@@ -16,19 +16,47 @@ export async function GET(request: NextRequest) {
     return new NextResponse('Missing artist parameters', { status: 400 })
   }
   
-  // For now, return a simple text-based OG image
-  // In production, you'd want to generate actual images with canvas or a service like Vercel OG
+  // Enhanced OG image with better design
   const svg = `
     <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="630" fill="#1a1a1a"/>
-      <text x="600" y="200" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2d5a27;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#34d399;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="630" fill="url(#bg)"/>
+      
+      <!-- Background pattern -->
+      <circle cx="200" cy="150" r="80" fill="#10b981" opacity="0.1"/>
+      <circle cx="1000" cy="480" r="120" fill="#34d399" opacity="0.1"/>
+      <circle cx="950" cy="100" r="60" fill="#10b981" opacity="0.15"/>
+      
+      <!-- Main title -->
+      <text x="600" y="180" font-family="Arial, sans-serif" font-size="56" font-weight="bold" text-anchor="middle" fill="url(#textGradient)">
         ${artist1} vs ${artist2}
       </text>
-      <text x="600" y="280" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#cccccc">
-        Compare Music Artists - Stats, Charts & Awards
+      
+      <!-- VS separator -->
+      <rect x="580" y="200" width="40" height="4" fill="#10b981" rx="2"/>
+      
+      <!-- Subtitle -->
+      <text x="600" y="280" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#ffffff">
+        Artist Comparison
       </text>
-      <text x="600" y="350" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#888888">
-        Billboard Charts • Grammy Awards • Spotify Streams
+      
+      <!-- Features -->
+      <text x="600" y="340" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#cccccc">
+        Billboard Charts • Grammy Awards • RIAA Certifications • Spotify Streams
+      </text>
+      
+      <!-- Brand -->
+      <text x="600" y="580" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#10b981">
+        Artist Compare
       </text>
     </svg>
   `

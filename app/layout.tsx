@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "Compare Music Artists - Stats, Charts & Awards | Artist Compare",
     template: "%s | Artist Compare"
   },
-  description: "Compare your favorite music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, RIAA certifications, and streaming data. Find out who's the better artist!",
+  description: "Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, RIAA certifications, and streaming data.",
   keywords: [
     "compare artists",
     "music artist comparison", 
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://artist-compare.vercel.app',
     title: 'Compare Music Artists - Stats, Charts & Awards',
-    description: 'Compare your favorite music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
+    description: 'Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
     siteName: 'Artist Compare',
     images: [
       {
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Compare Music Artists - Stats, Charts & Awards',
-    description: 'Compare your favorite music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
+    description: 'Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
     images: ['/og-image.jpg'],
   },
   robots: {

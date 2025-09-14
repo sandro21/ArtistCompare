@@ -69,8 +69,72 @@ export default async function ComparePage({ params }: Props) {
     notFound()
   }
   
-  // Redirect to main page with pre-selected artists
-  // This preserves your existing functionality while providing SEO benefits
-  const redirectUrl = `/?artist1=${encodeURIComponent(artists.artist1)}&artist2=${encodeURIComponent(artists.artist2)}`
-  redirect(redirectUrl)
+  // Add structured data for the comparison
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${artists.artist1} vs ${artists.artist2} - Artist Comparison`,
+    "description": `Compare ${artists.artist1} and ${artists.artist2} with detailed music statistics, charts, and awards data.`,
+    "url": `https://artist-compare.vercel.app/compare/${slug}`,
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Artist Comparison",
+      "itemListElement": [
+        {
+          "@type": "MusicGroup",
+          "name": artists.artist1,
+          "url": `https://artist-compare.vercel.app/compare/${slug}`
+        },
+        {
+          "@type": "MusicGroup", 
+          "name": artists.artist2,
+          "url": `https://artist-compare.vercel.app/compare/${slug}`
+        }
+      ]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://artist-compare.vercel.app"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artist Comparison",
+          "item": `https://artist-compare.vercel.app/compare/${slug}`
+        }
+      ]
+    }
+  }
+  
+  return (
+    <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </head>
+      <body>
+        {/* Redirect to main page with pre-selected artists */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.location.href = '/?artist1=${encodeURIComponent(artists.artist1)}&artist2=${encodeURIComponent(artists.artist2)}';
+            `
+          }}
+        />
+        <div style={{ textAlign: 'center', padding: '2rem', color: '#10b981' }}>
+          <h1>Redirecting to comparison...</h1>
+          <p>If you are not redirected automatically, <a href="/?artist1=${encodeURIComponent(artists.artist1)}&artist2=${encodeURIComponent(artists.artist2)}" style={{ color: '#10b981' }}>click here</a>.</p>
+        </div>
+      </body>
+    </html>
+  )
 }
