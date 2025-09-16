@@ -14,7 +14,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'beyonce-vs-rihanna',
     'justin-bieber-vs-shawn-mendes',
     'drake-vs-travis-scott',
-    'taylor-swift-vs-billie-eilish'
+    'taylor-swift-vs-billie-eilish',
+    'drake-vs-the-weeknd',
+    'drake-vs-post-malone',
+    'drake-vs-21-savage',
+    'drake-vs-project-pat',
+    'drake-vs-walker-hayes',
+    'drake-vs-beach-boys',
+    'drake-vs-jackson-5',
+    'drake-vs-eagles',
+    'drake-vs-sza',
+    'drake-vs-vince-guaraldi-trio',
+    'drake-vs-paul-mccartney',
+    'drake-vs-henri-rene',
+    'drake-vs-post-malone',
+    'drake-vs-kendrick-lamar',
+    'drake-vs-kanye-west',
+    'drake-vs-pusha-t'
   ];
   
   const staticPages = [

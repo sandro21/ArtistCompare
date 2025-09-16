@@ -110,6 +110,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Search Console verification */}
+        <meta
+          name="google-site-verification"
+          content="cVgHmMsK9gj5mFLhwSb4nSynDJFxEqpMaN..."
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -117,27 +123,28 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Artist Compare",
-              "description": "Compare your favorite music artists side-by-side with detailed statistics, charts, and awards data.",
+              "description":
+                "Compare your favorite music artists side-by-side with detailed statistics, charts, and awards data.",
               "url": "https://artist-compare.vercel.app",
               "applicationCategory": "MusicApplication",
               "operatingSystem": "Web Browser",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
-                "priceCurrency": "USD"
+                "priceCurrency": "USD",
               },
               "creator": {
                 "@type": "Organization",
-                "name": "Artist Compare"
+                "name": "Artist Compare",
               },
               "featureList": [
                 "Billboard Charts Comparison",
-                "Grammy Awards Statistics", 
+                "Grammy Awards Statistics",
                 "RIAA Certifications",
                 "Spotify Streaming Data",
-                "Artist Statistics"
-              ]
-            })
+                "Artist Statistics",
+              ],
+            }),
           }}
         />
       </head>
@@ -149,3 +156,4 @@ export default function RootLayout({
     </html>
   );
 }
+
