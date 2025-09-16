@@ -113,7 +113,7 @@ export default function RootLayout({
         {/* Google Search Console verification */}
         <meta
           name="google-site-verification"
-          content="cVgHmMsK9gj5mFLhwSb4nSynDJFxEqpMaN..."
+          content="K1bbyZBCsNWwzD-a0pcDNzzets87M-FADFh920g-Pvk"
         />
 
         <script
