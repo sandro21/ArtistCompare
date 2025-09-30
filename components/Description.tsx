@@ -71,7 +71,7 @@ const Description = ({ onBattleClick }: DescriptionProps) => {
 
 			{/* Desktop/Tablet trending battles section */}
 			<div className="hidden sm:block w-full h-full flex flex-col px-4 background-color: rgba(255, 0, 0, 0.2);">
-				<h3 className="text-3xl font-medium text-white mb-6 mt-14 text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">Trending Comparisions🔥</h3>
+				<h3 className="text-3xl font-medium text-white mb-6 mt-14 text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">Trending Comparisions</h3>
 				<div className="grid grid-cols-2 lg:grid-cols-3 gap-4 text-center lg:background-color: rgba(255, 0, 0, 0.2); max-w-4xl mx-auto">
 				<div className="py-2 sm:py-3 rounded-2xl sm:rounded-[4rem] bg-emerald-700 transition-all duration-300 hover:scale-105 hover:bg-emerald-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
 					<button 
