@@ -57,7 +57,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
 
   const renderTable = (rows: TrackRow[] | null, loading: boolean, error: string | null, title: string, isRightSide: boolean = false) => (
     <div className="flex-1 min-w-[150px] sm:min-w-[250px]">
-      {loading && <div className="text-xs text-emerald-300/70">Loading...</div>}
+      {loading && <div className="text-xs text-[#5EE9B5]/85">Loading...</div>}
       {error && <div className="text-xs text-red-400">{error}</div>}
       {!loading && !error && rows && (
         <ul className="space-y-1 sm:space-y-2 text-sm">
@@ -69,32 +69,32 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
             const isLower = otherTrack ? t.totalStreams < otherTrack.totalStreams : false;
             
             return (
-              <li key={t.url} className="p-2 rounded-lg border border-emerald-400/30 bg-black/30">
+              <li key={t.url} className="p-2 rounded-lg border border-[#5EE9B5]/30 bg-black/30">
                 {isRightSide ? (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                     <div className="flex items-center gap-2 flex-1 justify-end min-w-0 sm:order-2">
                       <div className="flex flex-col items-end">
-                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 text-right min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
+                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-[#5EE9B5] text-right min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
                           {t.name}
                         </a>
                         <span className={`tabular-nums text-right text-xs sm:block md:hidden ${
-                          isHigher ? 'text-emerald-400 font-bold' : 
-                          isLower ? 'text-emerald-100' : 
-                          'text-emerald-200'
+                          isHigher ? 'text-[#5EE9B5] font-bold' : 
+                          isLower ? 'text-[#5EE9B5]/60' : 
+                          'text-[#5EE9B5]/80'
                         }`}>{t.totalStreamsFormatted}</span>
                       </div>
                       {t.albumImage && (
                         <img 
                           src={t.albumImage} 
                           alt={t.albumName || t.name}
-                          className="w-9 h-9 rounded object-cover border border-emerald-400/40 flex-shrink-0"
+                          className="w-9 h-9 rounded object-cover border border-[#5EE9B5]/40 flex-shrink-0"
                         />
                       )}
                     </div>
                     <span className={`tabular-nums text-right flex-shrink-0 hidden md:block md:order-1 ${
-                      isHigher ? 'text-emerald-400 font-bold' : 
-                      isLower ? 'text-emerald-100' : 
-                      'text-emerald-200'
+                      isHigher ? 'text-[#5EE9B5] font-bold' : 
+                      isLower ? 'text-[#5EE9B5]/60' : 
+                      'text-[#5EE9B5]/80'
                     }`}>{t.totalStreamsFormatted}</span>
                   </div>
                 ) : (
@@ -104,24 +104,24 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         <img 
                           src={t.albumImage} 
                           alt={t.albumName || t.name}
-                          className="w-9 h-9 rounded object-cover border border-emerald-400/40 flex-shrink-0"
+                          className="w-9 h-9 rounded object-cover border border-[#5EE9B5]/40 flex-shrink-0"
                         />
                       )}
                       <div className="flex flex-col">
-                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
+                        <a href={t.url} target="_blank" rel="noopener noreferrer" className="hover:text-[#5EE9B5] min-w-0 max-w-[90px] sm:max-w-[180px] md:max-w-[140px] truncate block" title={t.name}>
                           {t.name}
                         </a>
                         <span className={`tabular-nums text-xs sm:block md:hidden ${
-                          isHigher ? 'text-emerald-400 font-bold' : 
-                          isLower ? 'text-emerald-100' : 
-                          'text-emerald-200'
+                          isHigher ? 'text-[#5EE9B5] font-bold' : 
+                          isLower ? 'text-[#5EE9B5]/60' : 
+                          'text-[#5EE9B5]/80'
                         }`}>{t.totalStreamsFormatted}</span>
                       </div>
                     </div>
                     <span className={`tabular-nums text-right flex-shrink-0 hidden md:block ${
-                      isHigher ? 'text-emerald-400 font-bold' : 
-                      isLower ? 'text-emerald-100' : 
-                      'text-emerald-200'
+                      isHigher ? 'text-[#5EE9B5] font-bold' : 
+                      isLower ? 'text-[#5EE9B5]/60' : 
+                      'text-[#5EE9B5]/80'
                     }`}>{t.totalStreamsFormatted}</span>
                   </div>
                 )}

@@ -44,7 +44,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
             {activeYears.includes('(') ? (
               <>
                 {activeYears.split('(')[0].trim()}
-                <span className="text-green-400 ml-1">({activeYears.split('(')[1]}</span>
+                <span className="text-[#5EE9B5] ml-1">({activeYears.split('(')[1]}</span>
               </>
             ) : (
               activeYears

@@ -74,24 +74,24 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   let gradientDirection;
   
   if (isEqual) {
-    // When values are equal, show a gradient that's green in the middle and black on both sides
-    gradientDirection = 'linear-gradient(90deg, #081111 0%, #419369 50%, #081111 100%)'; // Black to green to black for tie
+    // When values are equal, show a gradient that's green (70% opacity) in the middle and black on both sides
+    gradientDirection = 'linear-gradient(90deg, #081111 0%, rgba(94,233,181,0.7) 50%, #081111 100%)'; // Black to green (70%) to black for tie
   } else if (artist1Rank && artist2Rank) {
     // When both have ranks, lower rank is better
     const isArtist2BetterRank = artist2Rank < artist1Rank;
     gradientDirection = isArtist2BetterRank
-      ? 'linear-gradient(90deg, #081111 50%, #419369 100%)' // Green on right (better rank)
-      : 'linear-gradient(90deg, #419369 0%, #081111 50%)'; // Green on left (better rank)
+      ? 'linear-gradient(90deg, #081111 50%, rgba(94,233,181,0.7) 100%)' // Green (70%) on right (better rank)
+      : 'linear-gradient(90deg, rgba(94,233,181,0.7) 0%, #081111 50%)'; // Green (70%) on left (better rank)
   } else if (metric.includes("Rank") || metric.includes("Ranking")) {
     // Legacy support for pure ranking metrics
     gradientDirection = isArtist2Higher 
-      ? 'linear-gradient(90deg, #419369 0%, #081111 50%)' // Green on lower (left) if right is higher (worse)
-      : 'linear-gradient(90deg, #081111 50%, #419369 100%)'; // Green on lower (right) if left is higher (worse)
+      ? 'linear-gradient(90deg, rgba(94,233,181,0.7) 0%, #081111 50%)' // Green (70%) on lower (left) if right is higher (worse)
+      : 'linear-gradient(90deg, #081111 50%, rgba(94,233,181,0.7) 100%)'; // Green (70%) on lower (right) if left is higher (worse)
   } else {
     // Default: higher values are better
     gradientDirection = isArtist2Higher 
-      ? 'linear-gradient(90deg, #081111 50%, #419369 100%)'  // Dark to green (right side higher)
-      : 'linear-gradient(90deg, #419369 0%, #081111 50%)'; // Green to dark (left side higher)
+      ? 'linear-gradient(90deg, #081111 50%, rgba(94,233,181,0.7) 100%)'  // Dark to green (70%) (right side higher)
+      : 'linear-gradient(90deg, rgba(94,233,181,0.7) 0%, #081111 50%)'; // Green (70%) to dark (left side higher)
   }
   return (
     <div
@@ -113,7 +113,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       {/* Metric Label (Center) */}
       <div className={`text-white text-m sm:text-lg font-medium flex flex-col items-center leading-tight text-center w-[50px] sm:w-auto whitespace-normal break-words ${labelClassName ?? ''}`}>
         <span>{metric}</span>
-        {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-emerald-300/70 mt-0.5">{subtitle}</span>}
+        {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-[#5EE9B5]/70 mt-0.5">{subtitle}</span>}
       </div>
       
       {/* Artist 2 Value (Right) */}

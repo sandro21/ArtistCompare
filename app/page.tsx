@@ -124,11 +124,11 @@ function HomeContent() {
   return (
     <div className="min-h-screen bg-black flex flex-col gap-12">
       {/* Navbar */}
-      <nav className="w-full h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 rounded-b-[4rem] flex justify-between px-8 py-4">
-        <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center gap-2 px-4">
+      <nav className="w-full h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 rounded-b-[4rem] flex justify-between px-8 py-4 animate-in fade-in duration-1000">
+        <Link href="/" onClick={() => { setShowContent(false); setPair(null); }} className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center gap-2 px-4">
           <img src="/icon.png" alt="icon" className="w-15 h-15" />
           <span className="font-bold text-black text-4xl">Artist Compare</span>
-        </div>
+        </Link>
         <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4">
           <Link href="/about" className="font-bold text-black text-2xl">Learn More</Link>
         </div>
@@ -139,7 +139,7 @@ function HomeContent() {
         {!showContent && (
           <>
             {/* Header */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 animate-in fade-in duration-1000 delay-200">
               <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-2 py-1">
                 <span className="font-bold text-black text-base">Real Statistics</span>
               </div>
@@ -150,7 +150,7 @@ function HomeContent() {
             </div>
 
             {/* Search Bar Components */}
-            <div className="flex justify-center gap-8">
+            <div className="flex justify-center gap-8 animate-in fade-in duration-1000 delay-500">
               <SearchBar 
                 ref={searchBarRef} 
                 onSelectPair={onSelectPair} 

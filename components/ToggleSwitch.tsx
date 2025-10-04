@@ -22,7 +22,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
         height: '1.875rem',
         flexShrink: 0,
         background: '#12261266',
-        boxShadow: '0 0 10px -0px rgba(56,217,133,0.9), 0 4px 10px rgba(0,0,0,0.35)'
+        boxShadow: '0 0 10px -0px rgba(94,233,181,0.9), 0 4px 10px rgba(0,0,0,0.35)'
       }}
     >
       {/* Button labels */}
@@ -48,7 +48,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
           width: '4.5rem',
           height: '1.25rem',
           borderRadius: '1.5rem',
-          background: 'linear-gradient(30deg, #3b844ca9, #218564d6)',
+          background: 'linear-gradient(30deg, #5EE9B5a9, #5EE9B5d6)',
           boxShadow: '0 0 0 1px rgba(255,255,255,0.12), 0 2px 4px rgba(0,0,0,0.35)',
           left: '6px',
           transform: `translate3d(${isLeft ? '0' : '66px'}, -50%, 0)`,

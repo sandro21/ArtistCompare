@@ -117,9 +117,9 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
       style={{
         flexShrink: 0,
         borderRadius: '3rem',
-        border: '1px solid #4BE295',
-        background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 53.85%, rgba(65, 147, 105, 0.28) 100%)',
-        boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
+        border: '1px solid #5EE9B5',
+        background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 53.85%, rgba(94, 233, 181, 0.28) 100%)',
+        boxShadow: '0 0 18.3px -3px #5EE9B5 inset, 0 0 20.6px 2px #5EE9B5'
       }}
       className="flex justify-evenly items-center p-4 sm:p-10 w-full min-w-[100%] h-64 sm:h-96"
     >

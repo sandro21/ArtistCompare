@@ -38,7 +38,7 @@ const RiaaCertifications: React.FC<RiaaCertificationsProps> = ({ artistA, artist
           style={{
             fontSize: '3.5rem',
             fontWeight: 600,
-            color: '#10b981', // Use a single green color from your palette
+            color: '#5EE9B5', // Use a single green color from your palette
             display: 'inline-block',
           }}
         >

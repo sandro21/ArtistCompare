@@ -136,10 +136,10 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
   }));
 
   const baseInputClasses = showStats 
-    ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300"
-    : "w-96 border-3 border-[#5EE9B5] rounded-full bg-gradient-to-r from-[#1A231F] to-[#24302A] px-6 py-3 text-white font-medium text-xl outline-none placeholder-white/70";
+    ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-[#5EE9B5] px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-[#5EE9B5]"
+    : "w-96 min-w-96 border-3 border-[#376348] rounded-full bg-gradient-to-r from-[#0F1412] to-[#1A1F1C] px-6 py-3 text-white font-medium text-xl outline-none placeholder-white/70 focus:border-[#5EE9B5] focus:bg-gradient-to-r focus:from-[#1A231F] focus:to-[#24302A] transition-all duration-300";
   const listClasses = showStats
-    ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm"
+    ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-[#5EE9B5] bg-black/80 backdrop-blur-sm"
     : "absolute z-20 mt-1 w-[calc(100%-0.5rem)] ml-1 max-h-60 overflow-hidden rounded-2xl border border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] backdrop-blur-sm";
 
   return (
@@ -147,14 +147,14 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
       <div className={`${showStats ? 'grid grid-cols-2 gap-3 sm:gap-16' : 'flex justify-center gap-8'}`}>
         {/* Artist A */}
         <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
-          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>
+          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-[#5EE9B5] uppercase font-semibold`}>Artist One</label>
           {selectedA ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
-              <div className="flex items-center gap-2 sm:gap-4">
-                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8'}`} />
-                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-xl'}`}>{selectedA.artistName}</span>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
+              <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 flex-shrink-0 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12'}`} />
+                <span className={`font-bold text-white truncate ${showStats ? 'text-sm sm:text-2xl' : 'text-2xl'}`}>{selectedA.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors" title="Change artist">
+              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors flex-shrink-0" title="Change artist">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -172,7 +172,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                 <div className="relative">
                   <ul className={listClasses}>
                     {loadingA && (
-                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-emerald-300/70 font-medium`}>Searching...</li>
+                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-[#5EE9B5]/70 font-medium`}>Searching...</li>
                     )}
                     {errorA && !loadingA && (
                       <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-red-400 font-medium`}>{errorA}</li>
@@ -198,7 +198,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                       </li>
                     ))}
                     {!loadingA && !errorA && resultsA.length === 0 && queryA.trim() && (
-                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-emerald-300/60 font-medium`}>No results</li>
+                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-[#5EE9B5]/60 font-medium`}>No results</li>
                     )}
                   </ul>
                 </div>
@@ -209,14 +209,14 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
         
         {/* Artist B */}
         <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
-          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist Two</label>
+          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-[#5EE9B5] uppercase font-semibold`}>Artist Two</label>
           {selectedB ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
-              <div className="flex items-center gap-2 sm:gap-4">
-                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8'}`} />
-                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-xl'}`}>{selectedB.artistName}</span>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
+              <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 flex-shrink-0 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12'}`} />
+                <span className={`font-bold text-white truncate ${showStats ? 'text-sm sm:text-2xl' : 'text-2xl'}`}>{selectedB.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors" title="Change artist">
+              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors flex-shrink-0" title="Change artist">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -234,7 +234,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                 <div className="relative">
                   <ul className={listClasses}>
                     {loadingB && (
-                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-emerald-300/70 font-medium`}>Searching...</li>
+                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-[#5EE9B5]/70 font-medium`}>Searching...</li>
                     )}
                     {errorB && !loadingB && (
                       <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-red-400 font-medium`}>{errorB}</li>
@@ -259,7 +259,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                       </li>
                     ))}
                     {!loadingB && !errorB && resultsB.length === 0 && queryB.trim() && (
-                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-emerald-300/60 font-medium`}>No results</li>
+                      <li className={`${showStats ? 'px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm' : 'px-4 sm:px-4 py-3 sm:py-3 text-base sm:text-sm'} text-[#5EE9B5]/60 font-medium`}>No results</li>
                     )}
                   </ul>
                 </div>

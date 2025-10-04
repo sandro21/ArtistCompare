@@ -16,9 +16,9 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
       
-      // Get the viewport height and trigger much earlier (around 0.5 viewport heights)
+      // Get the viewport height and trigger much earlier (around 0.2 viewport heights)
       const viewportHeight = window.innerHeight;
-      const triggerPoint = viewportHeight * 0.5;
+      const triggerPoint = viewportHeight * 0.2;
       
       setIsSticky(currentScrollY > triggerPoint);
     };
@@ -35,7 +35,7 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
     <div 
       className={`transition-all duration-500 ease-in-out z-40 hidden sm:block ${
         isSticky 
-          ? 'fixed top-16 w-screen pointer-events-none' 
+          ? 'fixed top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen pointer-events-none'  
           : 'absolute opacity-0 pointer-events-none'
       }`}
     >
@@ -53,9 +53,9 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
         <div className="flex flex-col items-center">
           {/* Bigger image with green glow */}
           <div 
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-green-400"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-[#5EE9B5]"
             style={{
-              boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
+              boxShadow: '0 0 8px -2px #5EE9B5 inset, 0 0 10px 1px #5EE9B5'
             }}
           >
             {artistA?.spotifyImageUrl ? (
@@ -96,9 +96,9 @@ const StickyArtistImages: React.FC<StickyArtistImagesProps> = ({ artistA, artist
         <div className="flex flex-col items-center">
           {/* Bigger image with green glow */}
           <div 
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-green-400"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-[#5EE9B5]"
             style={{
-              boxShadow: '0 0 18.3px -3px #419369 inset, 0 0 20.6px 2px #419369'
+              boxShadow: '0 0 8px -2px #5EE9B5 inset, 0 0 10px 1px #5EE9B5'
             }}
           >
             {artistB?.spotifyImageUrl ? (
