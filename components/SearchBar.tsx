@@ -137,25 +137,25 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
 
   const baseInputClasses = showStats 
     ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300"
-    : "w-full h-16 sm:h-16 rounded-full bg-transparent border border-emerald-400 px-4 sm:px-4 py-3 sm:py-3 text-lg sm:text-lg font-medium outline-none focus:ring-2 focus:ring-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_20px_rgba(16,185,129,0.6)] transition-shadow duration-300";
+    : "w-96 border-3 border-[#5EE9B5] rounded-full bg-gradient-to-r from-[#1A231F] to-[#24302A] px-6 py-3 text-white font-medium text-xl outline-none placeholder-white/70";
   const listClasses = showStats
     ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-sm"
-    : "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-emerald-400 bg-black/80 backdrop-blur-md sm:backdrop-blur-sm";
+    : "absolute z-20 mt-1 w-[calc(100%-0.5rem)] ml-1 max-h-60 overflow-hidden rounded-2xl border border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] backdrop-blur-sm";
 
   return (
     <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-3xl mx-auto">
-      <div className={`${showStats ? 'grid grid-cols-2 gap-3 sm:gap-16' : 'mt-7 flex flex-col sm:flex-row gap-3 sm:gap-16 items-center justify-center'}`}>
+      <div className={`${showStats ? 'grid grid-cols-2 gap-3 sm:gap-16' : 'flex justify-center gap-8'}`}>
         {/* Artist A */}
-        <div className={`relative ${showStats ? 'w-full' : 'w-full max-w-sm order-0'}`}>
-          <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>
+        <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
+          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist One</label>
           {selectedA ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-4 sm:px-4 py-3 sm:py-3'}`}>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
               <div className="flex items-center gap-2 sm:gap-4">
-                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className={`rounded-full object-cover border border-emerald-400/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12 sm:w-14 sm:h-14'}`} />
-                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-lg sm:text-2xl'}`}>{selectedA.artistName}</span>
+                <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8'}`} />
+                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-xl'}`}>{selectedA.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-emerald-300 hover:text-white p-1 rounded-full hover:bg-emerald-500/20 transition-colors" title="Change artist">
-                <svg className="w-10 sm:w-9 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button onClick={() => { setSelectedA(null); setQueryA(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors" title="Change artist">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -164,7 +164,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
             <div>
               <input
                 className={baseInputClasses}
-                placeholder={showStats ? "Search for an artist..." : "Search Artist 1..."}
+                placeholder="Search Artist 1..."
                 value={queryA}
                 onChange={e => setQueryA(e.target.value)}
               />
@@ -180,7 +180,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                     {!loadingA && !errorA && resultsA.map(r => (
                       <li key={r.id}>
                         <button
-                          className={`flex items-center w-full text-left hover:bg-emerald-500/20 rounded-xl ${showStats ? 'gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3' : 'gap-3 sm:gap-4 px-4 sm:px-4 py-3 sm:py-3'}`}
+                          className={`flex items-center w-full text-left hover:bg-[#5EE9B5]/20 rounded-xl ${showStats ? 'gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3' : 'gap-3 px-4 py-3'}`}
                           onClick={() => {
                             // Build a minimal SelectedArtist object from API result
                             setSelectedA({
@@ -191,9 +191,9 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                             setResultsA([]);
                           }}
                         >
-                          {r.image && <img src={r.image} className={`rounded-full object-cover border border-emerald-400/40 ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-10 sm:h-10'}`} />}
-                          {!r.image && <div className={`rounded-full border border-emerald-400/40 flex items-center justify-center text-emerald-300 font-medium ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10 text-xs' : 'w-10 h-10 sm:w-10 sm:h-10 text-base'}`}>N/A</div>}
-                          <span className={`font-medium text-white ${showStats ? 'text-sm sm:text-base' : 'text-lg sm:text-base'}`}>{r.name}</span>
+                          {r.image && <img src={r.image} className={`rounded-full object-cover border border-[#5EE9B5]/40 ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-8 h-8'}`} />}
+                          {!r.image && <div className={`rounded-full border border-[#5EE9B5]/40 flex items-center justify-center text-white font-medium ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10 text-xs' : 'w-8 h-8 text-sm'}`}>N/A</div>}
+                          <span className={`font-medium text-white ${showStats ? 'text-sm sm:text-base' : 'text-lg'}`}>{r.name}</span>
                         </button>
                       </li>
                     ))}
@@ -207,24 +207,17 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
           )}
         </div>
         
-        {/* VS Text - only show when not showing stats */}
-        {!showStats && (
-          <div className="flex items-center justify-center sm:hidden order-1">
-            <span className="text-2xl font-bold bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]">VS</span>
-          </div>
-        )}
-        
         {/* Artist B */}
-        <div className={`relative ${showStats ? 'w-full' : 'w-full max-w-sm order-2'}`}>
-          <label className={`${showStats ? 'block' : 'hidden sm:block'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist Two</label>
+        <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
+          <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-emerald-300 uppercase font-semibold`}>Artist Two</label>
           {selectedB ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-emerald-400 bg-gradient-to-b from-transparent to-emerald-800/30 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-4 sm:px-4 py-3 sm:py-3'}`}>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
               <div className="flex items-center gap-2 sm:gap-4">
-                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className={`rounded-full object-cover border border-emerald-400/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12 sm:w-14 sm:h-14'}`} />
-                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-lg sm:text-2xl'}`}>{selectedB.artistName}</span>
+                <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8'}`} />
+                <span className={`font-bold text-white ${showStats ? 'text-sm sm:text-2xl' : 'text-xl'}`}>{selectedB.artistName}</span>
               </div>
-              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-emerald-300 hover:text-white p-1 rounded-full hover:bg-emerald-500/20 transition-colors" title="Change artist">
-                <svg className="w-10 sm:w-9 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button onClick={() => { setSelectedB(null); setQueryB(""); }} className="text-white hover:text-[#5EE9B5] p-1 rounded-full hover:bg-[#5EE9B5]/20 transition-colors" title="Change artist">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -233,7 +226,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
             <div>
               <input
                 className={baseInputClasses}
-                placeholder={showStats ? "Search for an artist..." : "Search Artist 2..."}
+                placeholder="Search Artist 2..."
                 value={queryB}
                 onChange={e => setQueryB(e.target.value)}
               />
@@ -249,7 +242,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                     {!loadingB && !errorB && resultsB.map(r => (
                       <li key={r.id}>
                         <button
-                          className={`flex items-center w-full text-left hover:bg-emerald-500/20 rounded-xl ${showStats ? 'gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3' : 'gap-3 sm:gap-4 px-4 sm:px-4 py-3 sm:py-3'}`}
+                          className={`flex items-center w-full text-left hover:bg-[#5EE9B5]/20 rounded-xl ${showStats ? 'gap-2 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3' : 'gap-3 px-4 py-3'}`}
                           onClick={() => {
                             setSelectedB({
                               artistName: r.name,
@@ -259,9 +252,9 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                             setResultsB([]);
                           }}
                         >
-                          {r.image && <img src={r.image} className={`rounded-full object-cover border border-emerald-400/40 ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-10 sm:h-10'}`} />}
-                          {!r.image && <div className={`rounded-full border border-emerald-400/40 flex items-center justify-center text-emerald-300 font-medium ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10 text-xs' : 'w-10 h-10 sm:w-10 sm:h-10 text-base'}`}>N/A</div>}
-                          <span className={`font-medium text-white ${showStats ? 'text-sm sm:text-base' : 'text-lg sm:text-base'}`}>{r.name}</span>
+                          {r.image && <img src={r.image} className={`rounded-full object-cover border border-[#5EE9B5]/40 ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-8 h-8'}`} />}
+                          {!r.image && <div className={`rounded-full border border-[#5EE9B5]/40 flex items-center justify-center text-white font-medium ${showStats ? 'w-8 h-8 sm:w-10 sm:h-10 text-xs' : 'w-8 h-8 text-sm'}`}>N/A</div>}
+                          <span className={`font-medium text-white ${showStats ? 'text-sm sm:text-base' : 'text-lg'}`}>{r.name}</span>
                         </button>
                       </li>
                     ))}
@@ -275,21 +268,6 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
           )}
         </div>
       </div>
-      
-      {/* Compare button - only show when not showing stats and on mobile */}
-      {!showStats && onCompareClick && (
-        <div className="md:hidden w-full flex justify-center px-4 mt-6">
-          <button
-            disabled={!hasPair}
-            onClick={onCompareClick}
-            className={`w-[50%] py-3 text-2xl font-semibold rounded-full transition active:scale-[0.99] shadow-[0_0_10px_rgba(16,185,129,0.3)] ${
-              hasPair ? 'bg-emerald-500 text-black' : 'bg-emerald-800/40 text-emerald-300/70 cursor-not-allowed'
-            }`}
-          >
-            Compare
-          </button>
-        </div>
-      )}
     </div>
   );
 });

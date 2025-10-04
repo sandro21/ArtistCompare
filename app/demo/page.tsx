@@ -2,17 +2,9 @@
 import { useState, useMemo, useCallback, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import Info from "../components/Info";
-import TopStreams from "../components/TopStreams";
-import Streams from "../components/Streams";
-import RiaaCertifications from "../components/RiaaCertifications";
-import Charts from "../components/Charts";
-import Awards from "../components/Awards";
-import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
-import SearchBar from "../components/SearchBar";
-import StickyArtistImages from "../components/StickyArtistImages";
-import { generateComparisonUrl } from "../lib/seo-utils";
-import type { Artist, ArtistPair } from "../types";
+import SearchBar from "../../components/SearchBar";
+import { generateComparisonUrl } from "../../lib/seo-utils";
+import type { Artist, ArtistPair } from "../../types";
 
 // Empty fallback objects for when no artists are selected
 const emptyArtist: Artist = {
@@ -45,7 +37,7 @@ const emptyArtist: Artist = {
   },
 };
 
-function HomeContent() {
+function DemoContent() {
   const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
   const searchBarRef = useRef<any>(null);
@@ -121,6 +113,13 @@ function HomeContent() {
     return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
   }, [pair]);
 
+
+
+
+
+
+
+  
   return (
     <div className="min-h-screen bg-black flex flex-col gap-12">
       {/* Navbar */}
@@ -129,80 +128,42 @@ function HomeContent() {
           <img src="/icon.png" alt="icon" className="w-15 h-15" />
           <span className="font-bold text-black text-4xl">Artist Compare</span>
         </div>
-        <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4">
-          <Link href="/about" className="font-bold text-black text-2xl">Learn More</Link>
+        <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4 ">
+          <span className="font-bold text-black text-2xl">Learn More</span>
         </div>
       </nav>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center gap-18">
-        {!showContent && (
-          <>
-            {/* Header */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-2 py-1">
-                <span className="font-bold text-black text-base">Real Statistics</span>
-              </div>
-              <div className="text-white font-extrabold text-6xl">
-                Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
-              </div>
-              <div className="text-white font-medium text-2xl">Just Select Two Artists and see the magic</div>
-            </div>
+        {/* Header */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-2 py-1">
+            <span className="font-bold text-black text-base">Real Statistics</span>
+          </div>
+          <div className="text-white font-extrabold text-6xl">
+            Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
+          </div>
+          <div className="text-white font-medium text-2xl">Just Select Two Artists and see the magic</div>
+        </div>
 
-            {/* Search Bar Components */}
-            <div className="flex justify-center gap-8">
-              <SearchBar 
-                ref={searchBarRef} 
-                onSelectPair={onSelectPair} 
-                showStats={false}
-                onCompareClick={() => pair && setShowContent(true)}
-                hasPair={!!pair}
-              />
-            </div>
-
-          </>
-        )}
-
-        {showContent && (
-          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative">
-            {/* Sticky Artist Images */}
-            <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
-            
-            <GlareHover
-              glareColor="#ffffff"
-              glareOpacity={0.3}
-              glareAngle={-30}
-              glareSize={400}
-              transitionDuration={1200}
-              playOnce={false}
-              className="w-full h-auto bg-transparent border-none"
-              style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
-            >
-              <Info artistA={duo[0]} artistB={duo[1]} />
-            </GlareHover>
-            <TopStreams
-              artistAId={duo[0]?.spotifyId || undefined}
-              artistBId={duo[1]?.spotifyId || undefined}
-              artistAName={duo[0]?.artistName || duo[0]?.name}
-              artistBName={duo[1]?.artistName || duo[1]?.name}
-            />
-
-            <Streams artistA={duo[0]} artistB={duo[1]} />
-            <Charts artistA={duo[0]} artistB={duo[1]} />
-            <Awards artistA={duo[0]} artistB={duo[1]} />
-            <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
-          </section>
-        )}
+        {/* Search Bar Components */}
+        <div className="flex justify-center gap-8">
+           <div className="w-96 border-3 border-[#5EE9B5] rounded-full bg-gradient-to-r from-[#1A231F] to-[#24302A] flex items-center px-6 py-3">
+             <span className="text-white font-medium text-xl">Search Artist 1...</span>
+           </div>
+           <div className="w-96 border-3 border-[#5EE9B5] rounded-full bg-gradient-to-r from-[#1A231F] to-[#24302A] flex items-center px-6 py-2">
+             <span className="text-white font-medium text-xl">Search Artist 2...</span>
+           </div>
+        </div>
       </main>
-
     </div>
   );
- }
+}
 
-export default function Home() {
+export default function Demo() {
   return (
     <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-white">Loading...</div>}>
-      <HomeContent />
+      <DemoContent />
     </Suspense>
   );
 }
