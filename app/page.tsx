@@ -185,7 +185,7 @@ function HomeContent() {
             </div>
 
             {/* Search Bar Components */}
-            <div className="flex justify-center gap-8 animate-in fade-in duration-1000 delay-500">
+            <div className="flex justify-center gap-8 animate-in fade-in duration-1000 delay-500 relative z-10">
               <SearchBar 
                 ref={searchBarRef} 
                 onSelectPair={onSelectPair} 
@@ -197,7 +197,7 @@ function HomeContent() {
             </div>
 
             {/* Banner */}
-            <div className="fixed bottom-[20%] left-1/2 transform -translate-x-1/2 animate-in fade-in duration-1000 delay-700 w-full flex justify-center z-10">
+            <div className="fixed bottom-[20%] left-1/2 transform -translate-x-1/2 animate-in fade-in duration-1000 delay-700 w-full flex justify-center z-5">
               <img src="/banner.png" alt="banner" className="w-[70%]" />
             </div>
 

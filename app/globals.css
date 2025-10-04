@@ -100,7 +100,6 @@ body {
 /* Animation utilities */
 .animate-in {
   animation-fill-mode: both;
-  opacity: 0;
 }
 
 .fade-in {

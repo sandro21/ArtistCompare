@@ -97,7 +97,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
     <div
       style={{
         borderRadius: '4.4375rem',
-        border: '0 solid #000',
+        border: '1px solid #5EE9B5',
         background: gradientDirection,
         width: '100%',
       }}
@@ -113,7 +113,7 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
       {/* Metric Label (Center) */}
       <div className={`text-white text-m sm:text-lg font-medium flex flex-col items-center leading-tight text-center w-[50px] sm:w-auto whitespace-normal break-words ${labelClassName ?? ''}`}>
         <span>{metric}</span>
-        {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-[#5EE9B5]/70 mt-0.5">{subtitle}</span>}
+        {subtitle && <span className="text-[8px] sm:text-[10px] uppercase tracking-wide text-[#5EE9B5]/50 mt-0.5">{subtitle}</span>}
       </div>
       
       {/* Artist 2 Value (Right) */}
