@@ -48,6 +48,7 @@ const emptyArtist: Artist = {
 function HomeContent() {
   const [pair, setPair] = useState<ArtistPair | null>(null);
   const [showContent, setShowContent] = useState(false);
+  const [hasSeenGlow, setHasSeenGlow] = useState(false);
   const searchBarRef = useRef<any>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -64,7 +65,7 @@ function HomeContent() {
     // Generate SEO-friendly URL and update browser history
     if (a.artistName && b.artistName) {
       const seoUrl = generateComparisonUrl(a.artistName, b.artistName);
-      window.history.replaceState({}, '', seoUrl);
+      window.history.pushState({ showContent: true }, '', seoUrl);
     }
   }, []);
 
@@ -116,6 +117,40 @@ function HomeContent() {
     }
   }, [searchParams, pair]);
 
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      // When user clicks back button, reset to homepage
+      setShowContent(false);
+      setPair(null);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Trigger one-time glow effect when user first enters
+  useEffect(() => {
+    if (!hasSeenGlow && !showContent) {
+      const timer = setTimeout(() => {
+        setHasSeenGlow(true);
+      }, 1000); // Start glow after 1 second
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasSeenGlow, showContent]);
+
+  // Stop glow effect after duration
+  useEffect(() => {
+    if (hasSeenGlow) {
+      const timer = setTimeout(() => {
+        setHasSeenGlow(false);
+      }, 3000); // Stop glow after 3 seconds
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasSeenGlow]);
+
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
     return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
@@ -127,9 +162,9 @@ function HomeContent() {
       <nav className="w-full h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 rounded-b-[4rem] flex justify-between px-8 py-4 animate-in fade-in duration-1000">
         <Link href="/" onClick={() => { setShowContent(false); setPair(null); }} className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center gap-2 px-4">
           <img src="/icon.png" alt="icon" className="w-15 h-15" />
-          <span className="font-bold text-black text-4xl">Artist Compare</span>
+          <span className="font-bold text-black text-4xl">{showContent ? "Go Back" : "Artist Compare"}</span>
         </Link>
-        <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4">
+        <div className={`bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4 ${showContent ? 'hidden' : 'block'}`}>
           <Link href="/about" className="font-bold text-black text-2xl">Learn More</Link>
         </div>
       </nav>
@@ -157,40 +192,62 @@ function HomeContent() {
                 showStats={false}
                 onCompareClick={() => pair && setShowContent(true)}
                 hasPair={!!pair}
+                hasSeenGlow={hasSeenGlow}
               />
+            </div>
+
+            {/* Banner */}
+            <div className="fixed bottom-[20%] left-1/2 transform -translate-x-1/2 animate-in fade-in duration-1000 delay-700 w-full flex justify-center z-10">
+              <img src="/banner.png" alt="banner" className="w-[70%]" />
             </div>
 
           </>
         )}
 
         {showContent && (
-          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative">
+          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative animate-in fade-in duration-1000 delay-200">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
             
-            <GlareHover
-              glareColor="#ffffff"
-              glareOpacity={0.3}
-              glareAngle={-30}
-              glareSize={400}
-              transitionDuration={1200}
-              playOnce={false}
-              className="w-full h-auto bg-transparent border-none"
-              style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
-            >
-              <Info artistA={duo[0]} artistB={duo[1]} />
-            </GlareHover>
-            <TopStreams
-              artistAId={duo[0]?.spotifyId || undefined}
-              artistBId={duo[1]?.spotifyId || undefined}
-              artistAName={duo[0]?.artistName || duo[0]?.name}
-              artistBName={duo[1]?.artistName || duo[1]?.name}
-            />
+            <div className="animate-in fade-in duration-1000 delay-400">
+              <GlareHover
+                glareColor="#ffffff"
+                glareOpacity={0.3}
+                glareAngle={-30}
+                glareSize={400}
+                transitionDuration={1200}
+                playOnce={false}
+                className="w-full h-auto bg-transparent border-none"
+                style={{ background: 'none', width: '100%', maxWidth: '38rem', height: 'auto', border: 'none', borderRadius: '3rem' }}
+              >
+                <Info artistA={duo[0]} artistB={duo[1]} />
+              </GlareHover>
+            </div>
+            
+            <div className="animate-in fade-in duration-1000 delay-600">
+              <TopStreams
+                artistAId={duo[0]?.spotifyId || undefined}
+                artistBId={duo[1]?.spotifyId || undefined}
+                artistAName={duo[0]?.artistName || duo[0]?.name}
+                artistBName={duo[1]?.artistName || duo[1]?.name}
+              />
+            </div>
 
-            <Streams artistA={duo[0]} artistB={duo[1]} />
-            <Charts artistA={duo[0]} artistB={duo[1]} />
-            <Awards artistA={duo[0]} artistB={duo[1]} />
-            <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
+            <div className="animate-in fade-in duration-1000 delay-800">
+              <Streams artistA={duo[0]} artistB={duo[1]} />
+            </div>
+            
+            <div className="animate-in fade-in duration-1000 delay-1000">
+              <Charts artistA={duo[0]} artistB={duo[1]} />
+            </div>
+            
+            <div className="animate-in fade-in duration-1000 delay-1200">
+              <Awards artistA={duo[0]} artistB={duo[1]} />
+            </div>
+            
+            <div className="animate-in fade-in duration-1000 delay-1400">
+              <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
+            </div>
           </section>
         )}
       </main>

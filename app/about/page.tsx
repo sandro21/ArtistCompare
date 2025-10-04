@@ -1,192 +1,323 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Breadcrumbs from '../../components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'About Artist Compare - Music Artist Comparison Tool',
-  description: 'Learn about Artist Compare, the comprehensive music artist comparison tool. Compare Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.',
+  title: 'About Artist Compare - Music Artist Comparison Tool | Billboard Charts, Grammy Awards & Spotify Data',
+  description: 'Discover Artist Compare - the ultimate music artist comparison platform. Compare Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data. Free tool for music fans and industry professionals.',
   keywords: [
-    'about artist compare',
+    'artist compare',
     'music comparison tool',
-    'artist statistics',
-    'billboard charts',
-    'grammy awards',
-    'music data',
-    'artist comparison platform'
+    'billboard charts comparison',
+    'grammy awards comparison',
+    'spotify streaming data',
+    'music artist statistics',
+    'RIAA certifications',
+    'music industry data',
+    'artist popularity comparison',
+    'music analytics',
+    'billboard hot 100',
+    'billboard 200',
+    'music streaming statistics',
+    'artist ranking tool',
+    'music data visualization'
   ],
   openGraph: {
     title: 'About Artist Compare - Music Artist Comparison Tool',
-    description: 'Learn about Artist Compare, the comprehensive music artist comparison tool for comparing your favorite artists.',
+    description: 'The comprehensive platform for comparing music artists across Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.',
     type: 'website',
+    url: 'https://artist-compare.com/about',
+    siteName: 'Artist Compare',
+    images: [
+      {
+        url: '/og-image',
+        width: 1200,
+        height: 630,
+        alt: 'Artist Compare - Music Artist Comparison Tool',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Artist Compare - Music Artist Comparison Tool',
+    description: 'Compare your favorite artists across Billboard charts, Grammy awards, and Spotify data.',
+    images: ['/og-image'],
   },
   alternates: {
     canonical: '/about',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col items-center min-h-screen gap-[clamp(1rem,4vh,2rem)] pt-6 px-4 sm:px-6 sm:gap-8 pb-24 sm:pb-16">
-      {/* Header Section - Similar to main page */}
-      <section className="w-full flex flex-col items-center gap-[clamp(0.75rem,2.5vh,1.5rem)] sm:gap-6">
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide text-gray-200 uppercase">
-            About Artist Compare
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-300 mt-2 font-medium">
-            The comprehensive platform for comparing music artists
-          </p>
+    <div className="min-h-screen bg-black flex flex-col gap-12">
+      {/* Navbar */}
+      <nav className="w-full h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 rounded-b-[4rem] flex justify-between px-8 py-4 animate-in fade-in duration-1000">
+        <Link href="/" className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center gap-2 px-4">
+          <img src="/icon.png" alt="Artist Compare Logo" className="w-15 h-15" />
+          <span className="font-bold text-black text-4xl">Artist Compare</span>
+        </Link>
+        <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4">
+          <Link href="/" className="font-bold text-black text-2xl">Go Back</Link>
         </div>
-      </section>
+      </nav>
 
-      {/* Main Content in styled container - Similar to Description component */}
-      <section className="w-[95%] mx-auto mt-5 pb-4 pt-3 px-0 sm:w-[70%] sm:mt-8 sm:px-15 sm:py-11 rounded-4xl sm:rounded-[6rem] border border-emerald-400/100 relative"
-        style={{
-          background: "linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(64, 167, 114, 0.25) 100%)",
-          boxShadow: "none",
-        }}
-      >
-        <div className="space-y-8 px-4 sm:px-8">
-          {/* What is Artist Compare */}
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col items-center gap-18 px-4 sm:px-6">
+        {/* Header Section */}
+        <section className="flex flex-col items-center gap-2 animate-in fade-in duration-1000 delay-200">
+          <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-2 py-1">
+            <span className="font-bold text-black text-base">About Us</span>
+          </div>
+          <h1 className="text-white font-extrabold text-6xl text-center">
+            The Ultimate <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Music Comparison</span> Platform
+          </h1>
+          <p className="text-white font-medium text-2xl text-center max-w-4xl">
+            Compare your favorite artists with comprehensive data from Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming statistics.
+          </p>
+        </section>
+
+        {/* What is Artist Compare */}
+        <section className="w-full max-w-6xl animate-in fade-in duration-1000 delay-400">
+          <div 
+            className="rounded-3xl border-4 border-[#5EE9B5]/50 p-8 sm:p-12"
+            style={{
+              background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+              boxShadow: '0 0 30px -17px rgba(94, 233, 181, 0.83) inset, 0 0 30px -8px rgba(94, 233, 181, 0.74)',
+            }}
+          >
+            <h2 className="text-white font-bold text-4xl text-center mb-6">
               What is Artist Compare?
             </h2>
-            <p className="text-base sm:text-xl text-gray-300 max-w-5xl mx-auto font-medium">
-              A powerful tool designed to help music fans, industry professionals, and curious minds 
-              compare their favorite artists across multiple metrics with real-time data.
+            <p className="text-white text-xl text-center max-w-5xl mx-auto leading-relaxed">
+              Artist Compare is the most comprehensive music artist comparison platform available. 
+              We aggregate real-time data from multiple authoritative sources to provide accurate, 
+              up-to-date comparisons between your favorite artists across all major music metrics.
             </p>
           </div>
+        </section>
 
-          {/* Data Sources Grid - Similar to trending battles */}
-          <div className="w-full max-w-4xl mx-auto">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">Our Data Sources</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Billboard Charts</div>
-                <div className="text-gray-300 text-sm sm:text-base px-4">
-                  Hot 100 hits, album sales, and chart performance
-                </div>
-              </div>
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Grammy Awards</div>
-                <div className="text-gray-300 text-sm sm:text-base px-4">
-                  Wins, nominations, and recognition across all categories
-                </div>
-              </div>
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">RIAA Certifications</div>
-                <div className="text-gray-300 text-sm sm:text-base px-4">
-                  Gold, Platinum, and Diamond certifications
-                </div>
-              </div>
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Spotify Data</div>
-                <div className="text-gray-300 text-sm sm:text-base px-4">
-                  Monthly listeners, streams, and popularity rankings
-                </div>
-              </div>
+        {/* Data Sources */}
+        <section className="w-full max-w-6xl animate-in fade-in duration-1000 delay-600">
+          <h2 className="text-white font-bold text-4xl text-center mb-8">
+            Our Data Sources
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">Billboard Charts</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Comprehensive data from Billboard Hot 100 and Billboard 200 charts, including 
+                number one hits, top 10 entries, total weeks on chart, and album performance metrics.
+              </p>
+            </div>
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">Grammy Awards</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Complete Grammy Awards database including wins, nominations, and recognition 
+                across all categories from the Recording Academy's official records.
+              </p>
+            </div>
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">RIAA Certifications</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Official RIAA (Recording Industry Association of America) certifications 
+                including Gold, Platinum, and Diamond status for singles and albums.
+              </p>
+            </div>
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">Spotify Data</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Real-time Spotify streaming data including monthly listeners, total streams, 
+                follower counts, and popularity rankings from the world's largest music platform.
+              </p>
             </div>
           </div>
+        </section>
 
-          {/* How It Works - Similar to features */}
-          <div className="w-full max-w-5xl mx-auto">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">How It Works</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-center">
-                  <div className="bg-emerald-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-base font-bold mx-auto mb-3">
-                    1
-                  </div>
-                  <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Search Artists</div>
-                  <div className="text-gray-300 text-sm sm:text-base px-4">
-                    Find any artist in our comprehensive database
-                  </div>
-                </div>
+        {/* How It Works */}
+        <section className="w-full max-w-6xl animate-in fade-in duration-1000 delay-800">
+          <h2 className="text-white font-bold text-4xl text-center mb-8">
+            How It Works
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-8 text-center hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <div className="bg-[#5EE9B5] text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                1
               </div>
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-center">
-                  <div className="bg-emerald-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-base font-bold mx-auto mb-3">
-                    2
-                  </div>
-                  <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Compare Side-by-Side</div>
-                  <div className="text-gray-300 text-sm sm:text-base px-4">
-                    Select two artists for detailed comparisons
-                  </div>
-                </div>
+              <h3 className="text-white font-bold text-2xl mb-4">Search Artists</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Use our intelligent search to find any artist in our comprehensive database of thousands of popular musicians.
+              </p>
+            </div>
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-8 text-center hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <div className="bg-[#5EE9B5] text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                2
               </div>
-              <div className="py-4 sm:py-5 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:scale-105 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                   style={{ background: "rgba(0,0,0,0.4)" }}>
-                <div className="text-center">
-                  <div className="bg-emerald-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-base font-bold mx-auto mb-3">
-                    3
-                  </div>
-                  <div className="text-white font-bold text-base sm:text-xl px-4 mb-2">Analyze Results</div>
-                  <div className="text-gray-300 text-sm sm:text-base px-4">
-                    Review comprehensive statistics and data
-                  </div>
-                </div>
+              <h3 className="text-white font-bold text-2xl mb-4">Compare Side-by-Side</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Select two artists and instantly see detailed comparisons across all major music industry metrics.
+              </p>
+            </div>
+            <div 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-8 text-center hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <div className="bg-[#5EE9B5] text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                3
               </div>
+              <h3 className="text-white font-bold text-2xl mb-4">Analyze Results</h3>
+              <p className="text-white text-lg leading-relaxed">
+                Review comprehensive statistics, charts, and data visualizations to settle any music debate.
+              </p>
             </div>
           </div>
+        </section>
 
-          {/* FAQ Section - Similar styling */}
-          <div className="w-full max-w-5xl mx-auto">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h3>
-            <div className="space-y-4">
-              <details className="py-4 sm:py-6 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                       style={{ background: "rgba(0,0,0,0.4)" }}>
-                <summary className="font-bold text-white text-base sm:text-xl px-4 cursor-pointer">
-                  How often is the data updated?
-                </summary>
-                <p className="text-gray-300 text-sm sm:text-base mt-3 px-4">
-                  Our data is updated regularly. Billboard charts are updated weekly, 
-                  while streaming data and certifications are refreshed as new information becomes available.
-                </p>
-              </details>
-              <details className="py-4 sm:py-6 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                       style={{ background: "rgba(0,0,0,0.4)" }}>
-                <summary className="font-bold text-white text-base sm:text-xl px-4 cursor-pointer">
-                  Can I compare any two artists?
-                </summary>
-                <p className="text-gray-300 text-sm sm:text-base mt-3 px-8">
-                  Yes! Our database includes thousands of popular music artists. 
-                  Simply search for any artist and compare them with any other artist in our system.
-                </p>
-              </details>
-              <details className="py-4 sm:py-6 rounded-2xl sm:rounded-[4rem] border border-emerald-400/30 transition-all duration-300 hover:border-emerald-400/60 hover:bg-emerald-900/20" 
-                       style={{ background: "rgba(0,0,0,0.4)" }}>
-                <summary className="font-bold text-white text-base sm:text-xl px-4 cursor-pointer">
-                  Is Artist Compare free to use?
-                </summary>
-                <p className="text-gray-300 text-sm sm:text-base mt-3 px-8">
-                  Yes, Artist Compare is completely free to use. We believe everyone should have access 
-                  to comprehensive music artist data and comparisons.
-                </p>
-              </details>
-            </div>
+        {/* FAQ Section */}
+        <section className="w-full max-w-6xl animate-in fade-in duration-1000 delay-1000">
+          <h2 className="text-white font-bold text-4xl text-center mb-8">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            <details 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <summary className="text-white font-bold text-xl cursor-pointer mb-4">
+                How often is the data updated?
+              </summary>
+              <p className="text-white text-lg leading-relaxed">
+                Our data is updated regularly to ensure accuracy. Billboard charts are updated weekly, 
+                while streaming data and certifications are refreshed as new information becomes available. 
+                We strive to provide the most current data possible.
+              </p>
+            </details>
+            <details 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <summary className="text-white font-bold text-xl cursor-pointer mb-4">
+                Can I compare any two artists?
+              </summary>
+              <p className="text-white text-lg leading-relaxed">
+                Yes! Our database includes thousands of popular music artists from various genres and eras. 
+                Simply search for any artist and compare them with any other artist in our comprehensive system. 
+                We cover mainstream, indie, and international artists.
+              </p>
+            </details>
+            <details 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <summary className="text-white font-bold text-xl cursor-pointer mb-4">
+                Is Artist Compare free to use?
+              </summary>
+              <p className="text-white text-lg leading-relaxed">
+                Yes, Artist Compare is completely free to use. We believe everyone should have access 
+                to comprehensive music artist data and comparisons. No registration or subscription required.
+              </p>
+            </details>
+            <details 
+              className="rounded-3xl border-4 border-[#5EE9B5]/50 p-6 hover:border-[#5EE9B5] transition-all duration-300"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+                boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
+              }}
+            >
+              <summary className="text-white font-bold text-xl cursor-pointer mb-4">
+                What makes Artist Compare different from other music comparison tools?
+              </summary>
+              <p className="text-white text-lg leading-relaxed">
+                Artist Compare aggregates data from multiple authoritative sources (Billboard, Grammy, RIAA, Spotify) 
+                in one comprehensive platform. Our real-time data updates, intuitive interface, and detailed 
+                visualizations provide the most complete artist comparison experience available.
+              </p>
+            </details>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer CTA - Similar to main page footer */}
-      <div className="text-center mt-8">
-        <p className="text-gray-400 mb-4 text-base sm:text-lg">
-          Ready to start comparing artists?
-        </p>
-        <Link 
-          href="/" 
-          className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-semibold transition-colors shadow-lg hover:scale-105 duration-200 text-base sm:text-lg"
-        >
-          Start Comparing Artists
-        </Link>
-      </div>
+        {/* CTA Section */}
+        <section className="w-full max-w-6xl animate-in fade-in duration-1000 delay-1200 text-center">
+          <div 
+            className="rounded-3xl border-4 border-[#5EE9B5]/50 p-12"
+            style={{
+              background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.24) 110%)',
+              boxShadow: '0 0 30px -17px rgba(94, 233, 181, 0.83) inset, 0 0 30px -8px rgba(94, 233, 181, 0.74)',
+            }}
+          >
+            <h2 className="text-white font-bold text-4xl mb-6">
+              Ready to Settle the Debate?
+            </h2>
+            <p className="text-white text-xl mb-8 max-w-3xl mx-auto">
+              Start comparing your favorite artists now and discover who truly dominates the music industry.
+            </p>
+            <Link 
+              href="/" 
+              className="inline-block bg-[#5EE9B5] hover:bg-[#5EE9B5]/80 text-black px-12 py-4 rounded-full font-bold text-xl transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              Start Comparing Artists
+            </Link>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }

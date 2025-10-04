@@ -20,6 +20,7 @@ interface SearchBarProps {
   showStats?: boolean;
   onCompareClick?: () => void;
   hasPair?: boolean;
+  hasSeenGlow?: boolean;
 }
 
 interface SearchBarRef {
@@ -27,7 +28,7 @@ interface SearchBarRef {
 }
 
 // Temporary local search over static list; will be replaced with API search later
-const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair, showStats = false, onCompareClick, hasPair = false }, ref) => {
+const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair, showStats = false, onCompareClick, hasPair = false, hasSeenGlow = false }, ref) => {
   const [queryA, setQueryA] = useState("");
   const [queryB, setQueryB] = useState("");
   const [resultsA, setResultsA] = useState<ArtistOption[]>([]);
@@ -136,8 +137,8 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
   }));
 
   const baseInputClasses = showStats 
-    ? "w-full h-12 sm:h-16 rounded-full bg-transparent border border-[#5EE9B5] px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-[#5EE9B5]"
-    : "w-96 min-w-96 border-3 border-[#376348] rounded-full bg-gradient-to-r from-[#0F1412] to-[#1A1F1C] px-6 py-3 text-white font-medium text-xl outline-none placeholder-white/70 focus:border-[#5EE9B5] focus:bg-gradient-to-r focus:from-[#1A231F] focus:to-[#24302A] transition-all duration-300";
+    ? "w-[80%] h-12 sm:h-16 rounded-full bg-transparent border border-[#5EE9B5] px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg font-medium outline-none focus:ring-2 focus:ring-[#5EE9B5]"
+    : `w-96 min-w-96 border-2 border-[#5EE9B5]/80 rounded-full bg-gradient-to-r from-[#0A0D0B] to-[#0F1412] px-6 py-3 text-white font-medium text-xl outline-none placeholder-white/70 focus:border-4 focus:border-[#5EE9B5] focus:bg-gradient-to-r focus:from-[#1A231F] focus:to-[#24302A] focus:shadow-[0_0_15px_rgba(94,233,181,0.4)] transition-all duration-1000 ease-in-out`;
   const listClasses = showStats
     ? "absolute z-20 mt-1 sm:mt-2 w-[calc(100%-0.5rem)] ml-1 max-h-60 sm:max-h-80 overflow-hidden rounded-2xl border border-[#5EE9B5] bg-black/80 backdrop-blur-sm"
     : "absolute z-20 mt-1 w-[calc(100%-0.5rem)] ml-1 max-h-60 overflow-hidden rounded-2xl border border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] backdrop-blur-sm";
@@ -149,7 +150,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
         <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
           <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-[#5EE9B5] uppercase font-semibold`}>Artist One</label>
           {selectedA ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-5 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`} style={{ boxShadow: '0 0 15px rgba(94, 233, 181, 1)' }}>
               <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                 <img src={selectedA.spotifyImageUrl} alt={selectedA.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 flex-shrink-0 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12'}`} />
                 <span className={`font-bold text-white truncate ${showStats ? 'text-sm sm:text-2xl' : 'text-2xl'}`}>{selectedA.artistName}</span>
@@ -167,6 +168,10 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                 placeholder="Search Artist 1..."
                 value={queryA}
                 onChange={e => setQueryA(e.target.value)}
+                style={hasSeenGlow ? { 
+                  boxShadow: '0 0 15px rgba(94, 233, 181, 0.3), 0 0 25px rgba(94, 233, 181, 0.2), 0 0 35px rgba(94, 233, 181, 0.1)',
+                  transition: 'box-shadow 1s ease-in-out'
+                } : { transition: 'box-shadow 1s ease-in-out' }}
               />
               {(loadingA || errorA || resultsA.length > 0) && (
                 <div className="relative">
@@ -211,7 +216,7 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
         <div className={`relative ${showStats ? 'w-full' : 'w-full'}`}>
           <label className={`${showStats ? 'block' : 'hidden'} mb-1 sm:mb-2 text-xs sm:text-sm text-center sm:text-left tracking-wide text-[#5EE9B5] uppercase font-semibold`}>Artist Two</label>
           {selectedB ? (
-            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-3 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`}>
+            <div className={`flex items-center justify-between gap-2 sm:gap-4 rounded-full border-4 border-[#5EE9B5] bg-gradient-to-r from-[#1A231F] to-[#24302A] min-w-96 ${showStats ? 'px-3 sm:px-4 py-2 sm:py-3' : 'px-6 py-3'}`} style={{ boxShadow: '0 0 15px rgba(94, 233, 181, 0.4)' }}>
               <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                 <img src={selectedB.spotifyImageUrl} alt={selectedB.artistName} className={`rounded-full object-cover border border-[#5EE9B5]/50 flex-shrink-0 ${showStats ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-12 h-12'}`} />
                 <span className={`font-bold text-white truncate ${showStats ? 'text-sm sm:text-2xl' : 'text-2xl'}`}>{selectedB.artistName}</span>
@@ -229,6 +234,10 @@ const SearchBar = React.forwardRef<SearchBarRef, SearchBarProps>(({ onSelectPair
                 placeholder="Search Artist 2..."
                 value={queryB}
                 onChange={e => setQueryB(e.target.value)}
+                style={hasSeenGlow ? { 
+                  boxShadow: '0 0 15px rgba(94, 233, 181, 0.3), 0 0 25px rgba(94, 233, 181, 0.2), 0 0 35px rgba(94, 233, 181, 0.1)',
+                  transition: 'box-shadow 1s ease-in-out'
+                } : { transition: 'box-shadow 1s ease-in-out' }}
               />
               {(loadingB || errorB || resultsB.length > 0) && (
                 <div className="relative">
