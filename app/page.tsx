@@ -155,7 +155,7 @@ function HomeContent() {
 
   return (
     <div 
-      className={`min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12 ${!showContent ? 'desktop-bg' : ''}`}
+      className={`pb-18 min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12 ${!showContent ? 'desktop-bg' : ''}`}
     >
       {/* Navbar */}
       <nav className="w-full h-16 sm:h-20 md:h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 backdrop-blur-xs rounded-b-[2rem] sm:rounded-b-[3rem] md:rounded-b-[4rem] flex justify-between px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 animate-in fade-in duration-1000">
@@ -209,7 +209,7 @@ function HomeContent() {
         )}
 
         {showContent && (
-          <section className="flex flex-col items-center gap-6 sm:gap-10 md:gap-18 w-[90%] sm:w-full relative mb-15 mx-auto overflow-x-hidden">
+          <section className="flex flex-col items-center gap-10 sm:gap-18 w-[95%] sm:w-full relative">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
             
@@ -228,26 +228,17 @@ function HomeContent() {
               </GlareHover>
             </div>
             
-            <div className="w-full">
-              <TopStreams
-                artistAId={duo[0]?.spotifyId || undefined}
-                artistBId={duo[1]?.spotifyId || undefined}
-                artistAName={duo[0]?.artistName || duo[0]?.name}
-                artistBName={duo[1]?.artistName || duo[1]?.name}
-              />
-            </div>
+            <TopStreams
+              artistAId={duo[0]?.spotifyId || undefined}
+              artistBId={duo[1]?.spotifyId || undefined}
+              artistAName={duo[0]?.artistName || duo[0]?.name}
+              artistBName={duo[1]?.artistName || duo[1]?.name}
+            />
 
-            <div className="w-full">
-              <Streams artistA={duo[0]} artistB={duo[1]} />
-            </div>
-            
-            <div>
-              <Charts artistA={duo[0]} artistB={duo[1]} />
-            </div>
-            
-            <div className="w-full">
+            <Streams artistA={duo[0]} artistB={duo[1]} />
+            <Charts artistA={duo[0]} artistB={duo[1]} />
               <Awards artistA={duo[0]} artistB={duo[1]} />
-            </div>
+
             
             {/* <div className="animate-in fade-in duration-1000 delay-1400">
               <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
