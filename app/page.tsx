@@ -2,12 +2,12 @@
 import { useState, useMemo, useCallback, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import Info from "../components/Info";
-import TopStreams from "../components/TopStreams";
-import Streams from "../components/Streams";
-// import RiaaCertifications from "../components/RiaaCertifications";
-import Charts from "../components/Charts";
-import Awards from "../components/Awards";
+import Info from "./sections/Info";
+import TopStreams from "./sections/TopStreams";
+import Streams from "./sections/Streams";
+// import RiaaCertifications from "./sections/RiaaCertifications";
+import Charts from "./sections/Charts";
+import Awards from "./sections/Awards";
 import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import StickyArtistImages from "../components/StickyArtistImages";

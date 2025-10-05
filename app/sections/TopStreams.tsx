@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import SectionWrapper from './SectionWrapper';
+import SectionWrapper from '../../components/SectionWrapper';
 
 interface TrackRow {
   name: string;
@@ -79,7 +79,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         </a>
                         <span className={`tabular-nums text-right text-xs sm:block md:hidden ${
                           isHigher ? 'text-[#5EE9B5] font-bold' : 
-                          isLower ? 'text-[#5EE9B5]/60' : 
+                          isLower ? 'text-white' : 
                           'text-[#5EE9B5]/80'
                         }`}>{t.totalStreamsFormatted}</span>
                       </div>
@@ -93,7 +93,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                     </div>
                     <span className={`tabular-nums text-right flex-shrink-0 hidden md:block md:order-1 ${
                       isHigher ? 'text-[#5EE9B5] font-bold' : 
-                      isLower ? 'text-[#5EE9B5]/60' : 
+                      isLower ? 'text-white' : 
                       'text-[#5EE9B5]/80'
                     }`}>{t.totalStreamsFormatted}</span>
                   </div>
@@ -113,14 +113,14 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
                         </a>
                         <span className={`tabular-nums text-xs sm:block md:hidden ${
                           isHigher ? 'text-[#5EE9B5] font-bold' : 
-                          isLower ? 'text-[#5EE9B5]/60' : 
+                          isLower ? 'text-white' : 
                           'text-[#5EE9B5]/80'
                         }`}>{t.totalStreamsFormatted}</span>
                       </div>
                     </div>
                     <span className={`tabular-nums text-right flex-shrink-0 hidden md:block ${
                       isHigher ? 'text-[#5EE9B5] font-bold' : 
-                      isLower ? 'text-[#5EE9B5]/60' : 
+                      isLower ? 'text-white' : 
                       'text-[#5EE9B5]/80'
                     }`}>{t.totalStreamsFormatted}</span>
                   </div>

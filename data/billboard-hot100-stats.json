@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "generated_at": "2025-08-22T17:48:30.395Z",
+    "generated_at": "2025-10-05T19:33:49.714Z",
     "source_url": "https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv",
     "min_year": 1990,
-    "total_artists": 4527,
-    "total_unique_songs": 15044,
+    "total_artists": 4531,
+    "total_unique_songs": 15100,
     "version": "1.0.0"
   },
   "artists": {
@@ -115,7 +115,7 @@
     },
     "Justin Bieber": {
       "hot100": {
-        "entries": 119,
+        "entries": 121,
         "top10s": 27,
         "number1s": 8
       }
@@ -241,14 +241,14 @@
     },
     "Ed Sheeran": {
       "hot100": {
-        "entries": 58,
+        "entries": 59,
         "top10s": 9,
         "number1s": 2
       }
     },
     "Doja Cat": {
       "hot100": {
-        "entries": 28,
+        "entries": 29,
         "top10s": 9,
         "number1s": 2
       }
@@ -423,7 +423,7 @@
     },
     "Drake": {
       "hot100": {
-        "entries": 360,
+        "entries": 362,
         "top10s": 81,
         "number1s": 13
       }
@@ -675,7 +675,7 @@
     },
     "Parker McCollum": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0
       }
@@ -759,7 +759,7 @@
     },
     "Summer Walker": {
       "hot100": {
-        "entries": 36,
+        "entries": 38,
         "top10s": 0,
         "number1s": 0
       }
@@ -941,7 +941,7 @@
     },
     "Jason Aldean": {
       "hot100": {
-        "entries": 43,
+        "entries": 44,
         "top10s": 2,
         "number1s": 1
       }
@@ -1011,7 +1011,7 @@
     },
     "Gunna": {
       "hot100": {
-        "entries": 98,
+        "entries": 99,
         "top10s": 4,
         "number1s": 0
       }
@@ -1060,7 +1060,7 @@
     },
     "YoungBoy Never Broke Again": {
       "hot100": {
-        "entries": 101,
+        "entries": 102,
         "top10s": 1,
         "number1s": 0
       }
@@ -1200,14 +1200,14 @@
     },
     "Key Glock": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 0,
         "number1s": 0
       }
     },
     "Kehlani": {
       "hot100": {
-        "entries": 17,
+        "entries": 18,
         "top10s": 0,
         "number1s": 0
       }
@@ -1466,7 +1466,7 @@
     },
     "Yeat": {
       "hot100": {
-        "entries": 11,
+        "entries": 12,
         "top10s": 1,
         "number1s": 0
       }
@@ -1795,7 +1795,7 @@
     },
     "Lizzo": {
       "hot100": {
-        "entries": 8,
+        "entries": 9,
         "top10s": 4,
         "number1s": 2
       }
@@ -1809,7 +1809,7 @@
     },
     "Cardi B": {
       "hot100": {
-        "entries": 49,
+        "entries": 64,
         "top10s": 13,
         "number1s": 5
       }
@@ -1865,7 +1865,7 @@
     },
     "Don Toliver": {
       "hot100": {
-        "entries": 35,
+        "entries": 36,
         "top10s": 1,
         "number1s": 0
       }
@@ -1928,7 +1928,7 @@
     },
     "Marias": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0
       }
@@ -1942,7 +1942,7 @@
     },
     "Lady Gaga": {
       "hot100": {
-        "entries": 46,
+        "entries": 47,
         "top10s": 18,
         "number1s": 6
       }
@@ -2229,7 +2229,7 @@
     },
     "Jelly Roll": {
       "hot100": {
-        "entries": 18,
+        "entries": 21,
         "top10s": 0,
         "number1s": 0
       }
@@ -2264,7 +2264,7 @@
     },
     "Marshmello": {
       "hot100": {
-        "entries": 20,
+        "entries": 21,
         "top10s": 3,
         "number1s": 0
       }
@@ -2439,7 +2439,7 @@
     },
     "Offset": {
       "hot100": {
-        "entries": 32,
+        "entries": 33,
         "top10s": 2,
         "number1s": 0
       }
@@ -2579,7 +2579,7 @@
     },
     "Selena Gomez": {
       "hot100": {
-        "entries": 44,
+        "entries": 45,
         "top10s": 9,
         "number1s": 1
       }
@@ -2768,7 +2768,7 @@
     },
     "Rihanna": {
       "hot100": {
-        "entries": 62,
+        "entries": 63,
         "top10s": 32,
         "number1s": 14
       }
@@ -2999,8 +2999,8 @@
     },
     "Sabrina Carpenter": {
       "hot100": {
-        "entries": 20,
-        "top10s": 4,
+        "entries": 31,
+        "top10s": 5,
         "number1s": 2
       }
     },
@@ -3930,7 +3930,7 @@
     },
     "PARTYNEXTDOOR": {
       "hot100": {
-        "entries": 28,
+        "entries": 29,
         "top10s": 0,
         "number1s": 0
       }
@@ -4000,7 +4000,7 @@
     },
     "Stray Kids": {
       "hot100": {
-        "entries": 3,
+        "entries": 4,
         "top10s": 0,
         "number1s": 0
       }
@@ -4049,7 +4049,7 @@
     },
     "BigXthaPlug": {
       "hot100": {
-        "entries": 10,
+        "entries": 12,
         "top10s": 1,
         "number1s": 0
       }
@@ -4224,7 +4224,7 @@
     },
     "Tom MacDonald": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0
       }
@@ -4679,7 +4679,7 @@
     },
     "Twenty One Pilots": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -4700,7 +4700,7 @@
     },
     "Cash Cobain": {
       "hot100": {
-        "entries": 2,
+        "entries": 4,
         "top10s": 0,
         "number1s": 0
       }
@@ -4728,7 +4728,7 @@
     },
     "Ella Langley": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0
       }
@@ -4980,7 +4980,7 @@
     },
     "Chase Matthew": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5001,7 +5001,7 @@
     },
     "Zach Top": {
       "hot100": {
-        "entries": 1,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -5309,7 +5309,7 @@
     },
     "Laufey": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -5751,7 +5751,7 @@
     "Audrey Nuna": {
       "hot100": {
         "entries": 5,
-        "top10s": 1,
+        "top10s": 2,
         "number1s": 1
       }
     },
@@ -5793,14 +5793,14 @@
     "HUNTR/X: EJAE": {
       "hot100": {
         "entries": 4,
-        "top10s": 1,
+        "top10s": 2,
         "number1s": 1
       }
     },
     "REI AMI": {
       "hot100": {
         "entries": 4,
-        "top10s": 1,
+        "top10s": 2,
         "number1s": 1
       }
     },
@@ -5932,7 +5932,7 @@
     },
     "Mariah the Scientist": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5965,18 +5965,53 @@
         "number1s": 0
       }
     },
+    "Gavin Adcock": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Radiohead": {
+      "hot100": {
+        "entries": 4,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Olivia Dean": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Julia Wolf": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Dougie F": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Janet Jackson": {
+      "hot100": {
+        "entries": 19,
+        "top10s": 16,
+        "number1s": 6
+      }
+    },
     "Phil Collins": {
       "hot100": {
         "entries": 13,
         "top10s": 4,
         "number1s": 1
-      }
-    },
-    "Janet Jackson": {
-      "hot100": {
-        "entries": 18,
-        "top10s": 16,
-        "number1s": 6
       }
     },
     "Linda Ronstadt (Featuring Aaron Neville)": {
@@ -11176,13 +11211,6 @@
     "1 Of The Girls": {
       "hot100": {
         "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
-    "Radiohead": {
-      "hot100": {
-        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }

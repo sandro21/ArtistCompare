@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import SectionWrapper from './SectionWrapper';
-import AlbumsChart from './AlbumsChart';
-import SongsChart from './SongsChart';
-import ToggleSwitch from './ToggleSwitch';
-import type { Artist } from '../types';
+import SectionWrapper from '../../components/SectionWrapper';
+import AlbumsChart from '../../components/AlbumsChart';
+import SongsChart from '../../components/SongsChart';
+import ToggleSwitch from '../../components/ToggleSwitch';
+import type { Artist } from '../../types';
 
 interface ChartsProps {
   artistA: Artist | null;

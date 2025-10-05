@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ArtistCard from './ArtistCard';
-import type { Artist } from '../types';
+import ArtistCard from '../../components/ArtistCard';
+import type { Artist } from '../../types';
 
 interface InfoProps {
   artistA?: Artist | null;

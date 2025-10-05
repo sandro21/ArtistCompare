@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ComparisonBar from './ComparisonBar';
-import SectionWrapper from './SectionWrapper';
-import type { Artist } from '../types';
+import ComparisonBar from '../../components/ComparisonBar';
+import SectionWrapper from '../../components/SectionWrapper';
+import type { Artist } from '../../types';
 
 interface StreamsProps {
   artistA: Artist | null;

@@ -1,7 +1,7 @@
 import React from 'react';
-import ComparisonBar from './ComparisonBar';
-import SectionWrapper from './SectionWrapper';
-import { getGrammyData } from '../lib/grammy';
+import ComparisonBar from '../../components/ComparisonBar';
+import SectionWrapper from '../../components/SectionWrapper';
+import { getGrammyData } from '../../lib/grammy';
 
 interface AwardsProps {
   artistA: any;
