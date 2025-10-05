@@ -56,12 +56,8 @@ function HomeContent() {
 
   const onSelectPair = useCallback((a: Artist, b: Artist) => {
     setPair({ a, b });
-    // Desktop/tablet (>= md): immediately show content; Mobile/smaller waits for "Compare"
-    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
-      setShowContent(true);
-    } else {
-      setShowContent(false);
-    }
+    // Show content immediately for both mobile and desktop when both artists are selected
+    setShowContent(true);
     
     // Generate SEO-friendly URL and update browser history
     if (a.artistName && b.artistName) {
@@ -176,10 +172,10 @@ function HomeContent() {
           <>
             {/* Header */}
             <div className="flex flex-col items-center gap-1 sm:gap-2 animate-in fade-in duration-1000 delay-200">
-              <div className="bg-[#5EE9B5]/10 border-2 border-[#376348] flex rounded-full items-center px-3 py-1 transition-colors duration-200 cursor-pointer hover:bg-[#5EE9B5]/20 hover:border-[#5EE9B5]">
-                <span className="font-normal text-[#5EE9B5] text-base">Real Statistics</span>
+              <div className="bg-[#5EE9B5]/10 border-2 border-[#376348] flex rounded-full items-center px-3 py-1 transition-colors duration-200 cursor-pointer hover:bg-[#5EE9B5]/20 hover:border-[#5EE9B5] mb-1 sm:mb-0">
+                <span className="font-normal text-[#5EE9B5] text-sm sm:text-base">Real Statistics</span>
               </div>
-              <div className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center">
+              <div className="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center">
                 Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
               </div>
               <div className="text-white font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-center">Just Select Two Artists and see the magic</div>
