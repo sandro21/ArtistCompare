@@ -73,7 +73,11 @@ const ComparisonBar: React.FC<ComparisonBarProps> = ({
   // Otherwise, use the raw values (higher is better)
   let gradientDirection;
   
-  if (isEqual) {
+  // Special case: if both values are zero, render a fully non-colored bar
+  // (no green highlight at all)
+  if (artist1Value === 0 && artist2Value === 0) {
+    gradientDirection = 'linear-gradient(90deg, #081111 0%, #081111 100%)';
+  } else if (isEqual) {
     // When values are equal, show a gradient that's green (70% opacity) in the middle and black on both sides
     gradientDirection = 'linear-gradient(90deg, #081111 0%, rgba(94,233,181,0.7) 50%, #081111 100%)'; // Black to green (70%) to black for tie
   } else if (artist1Rank && artist2Rank) {
