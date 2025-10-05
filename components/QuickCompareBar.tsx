@@ -131,7 +131,7 @@ const QuickCompareBar: React.FC = () => {
             ref={rootRef}
             onPointerMove={handleMove}
             onPointerLeave={handleLeave}
-            className="max-w-6xl mx-auto flex flex-col gap-2 bg-[#0D110F] border border-[#23322D] rounded-4xl px-5 pt-3 pb-5 gap-3 justify-center relative transition-transform duration-500 ease-out hover:scale-105"
+            className="max-w-[90%]mx-auto flex flex-col gap-2 bg-[#0D110F] border border-[#23322D] rounded-4xl px-5 pt-3 pb-5 gap-3 justify-center relative transition-transform duration-500 ease-out hover:scale-105"
             style={
                 {
                     '--r': '150px',
@@ -141,10 +141,10 @@ const QuickCompareBar: React.FC = () => {
             }
         >
             <p className="text-white text-lg font-semibold text-center">Popular Matchups</p>
-            <div className="flex gap-4 overflow-x-auto justify-center">
+            <div className="flex flex-wrap gap-4 justify-center">
                 {comparisions.map((comparision) => (
                     <div
-                        className="cursor-pointer"
+                        className="cursor-pointer flex-shrink-0"
                         key={comparision.id}
                         onClick={() => {
                             window.location.href = comparision.comparisionLink;

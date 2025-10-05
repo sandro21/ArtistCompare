@@ -198,7 +198,7 @@ function HomeContent() {
             </div>
 
             {/* Quick Compare Bar */}
-            <div className=" px-4 animate-in fade-in duration-1000 delay-600">
+            <div className="px-4 animate-in fade-in duration-1000 delay-600">
               <QuickCompareBar />
             </div>
 
