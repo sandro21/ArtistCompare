@@ -39,7 +39,7 @@ const QuickCompareBar: React.FC = () => {
         },
         {
             id: 'young-thug-vs-gunna',
-            comparisionLink: 'http://localhost:3000/compare/young-thug-vs-gunna-55b90ee8',
+            comparisionLink: '/compare/young-thug-vs-gunna-55b90ee8',
             ArtistA: {
                 name: 'Young Thug',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb9f2fb33940aac624dc5d100d'
@@ -51,7 +51,7 @@ const QuickCompareBar: React.FC = () => {
         },
         {
             id: 'taylor-swift-vs-kanye-west',
-            comparisionLink: 'http://localhost:3000/compare/taylor-swift-vs-kanye-west-bb9cb9e0',
+            comparisionLink: '/compare/taylor-swift-vs-kanye-west-bb9cb9e0',
             ArtistA: {
                 name: 'Taylor Swift',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
@@ -63,7 +63,7 @@ const QuickCompareBar: React.FC = () => {
         },
         {
             id: 'cardi-b-vs-nicki-minaj',
-            comparisionLink: 'http://localhost:3000/compare/cardi-b-vs-nicki-minaj-94bb9875',
+            comparisionLink: '/compare/cardi-b-vs-nicki-minaj-94bb9875',
             ArtistA: {
                 name: 'Cardi B',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eba23286f24edd4a7dbdc6311d'
@@ -75,7 +75,7 @@ const QuickCompareBar: React.FC = () => {
         },
         {
             id: '2pac-vs-biggie',
-            comparisionLink: 'http://localhost:3000/compare/2pac-vs-the-notorious-big-8b4481f1',
+            comparisionLink: '/compare/2pac-vs-the-notorious-big-8b4481f1',
             ArtistA: {
                 name: '2Pac',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb7f5cc432c9c109248ebec1ac'
