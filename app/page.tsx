@@ -5,12 +5,13 @@ import Link from "next/link";
 import Info from "../components/Info";
 import TopStreams from "../components/TopStreams";
 import Streams from "../components/Streams";
-import RiaaCertifications from "../components/RiaaCertifications";
+// import RiaaCertifications from "../components/RiaaCertifications";
 import Charts from "../components/Charts";
 import Awards from "../components/Awards";
 import GlareHover from "../blocks/Animations/GlareHover/GlareHover";
 import SearchBar from "../components/SearchBar";
 import StickyArtistImages from "../components/StickyArtistImages";
+import QuickCompareBar from "../components/QuickCompareBar";
 import { generateComparisonUrl } from "../lib/seo-utils";
 import type { Artist, ArtistPair } from "../types";
 
@@ -175,8 +176,8 @@ function HomeContent() {
           <>
             {/* Header */}
             <div className="flex flex-col items-center gap-2 animate-in fade-in duration-1000 delay-200">
-              <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-2 py-1">
-                <span className="font-bold text-black text-base">Real Statistics</span>
+              <div className="bg-[#5EE9B5]/10 border-2 border-[#376348] flex rounded-full items-center px-3 py-1 transition-colors duration-200 cursor-pointer hover:bg-[#5EE9B5]/20 hover:border-[#5EE9B5]">
+                <span className="font-normal text-[#5EE9B5] text-base">Real Statistics</span>
               </div>
               <div className="text-white font-extrabold text-6xl">
                 Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
@@ -196,16 +197,21 @@ function HomeContent() {
               />
             </div>
 
-            {/* Banner */}
+            {/* Quick Compare Bar */}
+            <div className=" px-4 animate-in fade-in duration-1000 delay-600">
+              <QuickCompareBar />
+            </div>
+
+            {/* Banner
             <div className="fixed bottom-[20%] left-1/2 transform -translate-x-1/2 animate-in fade-in duration-1000 delay-700 w-full flex justify-center z-5">
               <img src="/banner.png" alt="banner" className="w-[70%]" />
-            </div>
+            </div> */}
 
           </>
         )}
 
         {showContent && (
-          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative animate-in fade-in duration-1000 delay-200">
+          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative animate-in fade-in duration-1000 delay-200 mb-15">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
             
@@ -245,9 +251,9 @@ function HomeContent() {
               <Awards artistA={duo[0]} artistB={duo[1]} />
             </div>
             
-            <div className="animate-in fade-in duration-1000 delay-1400">
+            {/* <div className="animate-in fade-in duration-1000 delay-1400">
               <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
-            </div>
+            </div> */}
           </section>
         )}
       </main>
