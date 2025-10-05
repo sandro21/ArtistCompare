@@ -209,7 +209,7 @@ function HomeContent() {
         )}
 
         {showContent && (
-          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative mb-15">
+          <section className="flex flex-col items-center gap-6 sm:gap-10 md:gap-18 w-[90%] sm:w-full relative mb-15 mx-auto overflow-x-hidden">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
             
@@ -228,7 +228,7 @@ function HomeContent() {
               </GlareHover>
             </div>
             
-            <div>
+            <div className="w-full">
               <TopStreams
                 artistAId={duo[0]?.spotifyId || undefined}
                 artistBId={duo[1]?.spotifyId || undefined}
@@ -237,7 +237,7 @@ function HomeContent() {
               />
             </div>
 
-            <div>
+            <div className="w-full">
               <Streams artistA={duo[0]} artistB={duo[1]} />
             </div>
             
@@ -245,7 +245,7 @@ function HomeContent() {
               <Charts artistA={duo[0]} artistB={duo[1]} />
             </div>
             
-            <div>
+            <div className="w-full">
               <Awards artistA={duo[0]} artistB={duo[1]} />
             </div>
             

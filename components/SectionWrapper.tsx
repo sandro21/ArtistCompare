@@ -19,7 +19,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 80%, rgba(94, 233, 181, 0.15) 110%)',
         boxShadow: '0 0 30px -17px rgba(94, 233, 181, 0.83) inset, 0 0 30px -8px rgba(94, 233, 181, 0.74)',
       }}
-      className={`px-4 py-5 sm:px-8 w-3xl`}
+      className={`px-4 py-5 sm:px-8 min-w-full sm:w-3xl flex-shrink-0`}
     >
       {header && (
         <div className={`font-bold text-2xl text-white text-center ${headerClassName ?? 'mb-6'}`}>
