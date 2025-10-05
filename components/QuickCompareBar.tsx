@@ -131,18 +131,19 @@ const QuickCompareBar: React.FC = () => {
             ref={rootRef}
             onPointerMove={handleMove}
             onPointerLeave={handleLeave}
-            className="max-w-[90%] mx-auto flex flex-col gap-1 sm:gap-2 bg-[#0D110F] border border-[#23322D] rounded-4xl px-3 sm:px-4 md:px-5 pt-2 sm:pt-3 pb-3 sm:pb-4 md:pb-5 gap-2 sm:gap-3 justify-center relative transition-transform duration-500 ease-out hover:scale-105"
+            className="max-w-max flex flex-col gap-1 sm:gap-2 bg-[#0D110F]/80 backdrop-blur-md border border-[#23322D] rounded-4xl px-3 sm:px-4 md:px-5 pt-2 sm:pt-3 pb-3 sm:pb-4 md:pb-5 gap-2 sm:gap-3 relative transition-transform duration-500 ease-out hover:scale-105"
             style={
                 {
                     '--r': '150px',
                     '--x': '50%',
-                    '--y': '50%'
+                    '--y': '50%',
+                    'width': 'max-content'
                 } as React.CSSProperties
             }
         >
             <p className="text-white text-lg font-semibold text-center">Popular Matchups</p>
-            <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center">
-                {comparisions.map((comparision) => (
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 md:gap-4 sm:items-center">
+                {comparisions.slice(0, typeof window !== 'undefined' && window.innerWidth < 640 ? 4 : 5).map((comparision) => (
                     <div
                         className="cursor-pointer flex-shrink-0"
                         key={comparision.id}

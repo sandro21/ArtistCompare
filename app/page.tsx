@@ -154,15 +154,17 @@ function HomeContent() {
   }, [pair]);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12">
+    <div 
+      className={`min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12 ${!showContent ? 'desktop-bg' : ''}`}
+    >
       {/* Navbar */}
-      <nav className="w-full h-16 sm:h-20 md:h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 rounded-b-[2rem] sm:rounded-b-[3rem] md:rounded-b-[4rem] flex justify-between px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 animate-in fade-in duration-1000">
+      <nav className="w-full h-16 sm:h-20 md:h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 backdrop-blur-xs rounded-b-[2rem] sm:rounded-b-[3rem] md:rounded-b-[4rem] flex justify-between px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 animate-in fade-in duration-1000">
         <Link href="/" onClick={() => { setShowContent(false); setPair(null); }} className="bg-[#5EE9B5] border-2 sm:border-3 border-[#376348] flex rounded-full items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4">
           <img src="/icon.png" alt="icon" className="w-8 h-8 sm:w-12 sm:h-12 md:w-15 md:h-15" />
           <span className="font-bold text-black text-lg sm:text-2xl md:text-4xl">{showContent ? "Go Back" : "Artist Compare"}</span>
         </Link>
-        <div className={`bg-[#5EE9B5] border-2 sm:border-3 border-[#376348] flex rounded-full items-center px-2 sm:px-3 md:px-4 ${showContent ? 'hidden' : 'block'}`}>
-          <Link href="/about" className="font-bold text-black text-sm sm:text-lg md:text-2xl">Learn More</Link>
+        <div className={`flex items-center pr-2 sm:pr-4 md:pr-6 ${showContent ? 'hidden' : 'block'}`}>
+          <Link href="/about" className="font-bold text-white text-sm sm:text-lg md:text-2xl">Learn More</Link>
         </div>
       </nav>
 
@@ -194,7 +196,7 @@ function HomeContent() {
             </div>
 
             {/* Quick Compare Bar */}
-            <div className="px-4 mt-6 sm:mt-0 animate-in fade-in duration-1000 delay-600">
+            <div className="mt-6 sm:mt-0 animate-in fade-in duration-1000 delay-600">
               <QuickCompareBar />
             </div>
 
@@ -207,11 +209,11 @@ function HomeContent() {
         )}
 
         {showContent && (
-          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative animate-in fade-in duration-1000 delay-200 mb-15">
+          <section className="flex flex-col items-center gap-10 sm:gap-18 w-full relative mb-15">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
             
-            <div className="animate-in fade-in duration-1000 delay-400">
+            <div>
               <GlareHover
                 glareColor="#ffffff"
                 glareOpacity={0.3}
@@ -226,7 +228,7 @@ function HomeContent() {
               </GlareHover>
             </div>
             
-            <div className="animate-in fade-in duration-1000 delay-600">
+            <div>
               <TopStreams
                 artistAId={duo[0]?.spotifyId || undefined}
                 artistBId={duo[1]?.spotifyId || undefined}
@@ -235,15 +237,15 @@ function HomeContent() {
               />
             </div>
 
-            <div className="animate-in fade-in duration-1000 delay-800">
+            <div>
               <Streams artistA={duo[0]} artistB={duo[1]} />
             </div>
             
-            <div className="animate-in fade-in duration-1000 delay-1000">
+            <div>
               <Charts artistA={duo[0]} artistB={duo[1]} />
             </div>
             
-            <div className="animate-in fade-in duration-1000 delay-1200">
+            <div>
               <Awards artistA={duo[0]} artistB={duo[1]} />
             </div>
             

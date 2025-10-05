@@ -172,3 +172,13 @@ body {
 .delay-1400 {
   animation-delay: 1400ms;
 }
+
+/* Desktop background */
+@media (min-width: 640px) {
+  .desktop-bg {
+    background-image: url('/bg.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
