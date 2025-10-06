@@ -16,7 +16,7 @@ interface TrendData {
   [key: string]: string | number;
 }
 
-const Trends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
+const GoogleTrends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
   const [data, setData] = useState<TrendData[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -98,4 +98,4 @@ const Trends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
   );
 };
 
-export default Trends;
+export default GoogleTrends;
