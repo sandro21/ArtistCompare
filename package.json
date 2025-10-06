@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "node scripts/post-build.js",
+    "pre-populate": "node scripts/pre-populate.js"
   },
   "dependencies": {
     "@types/cheerio": "^0.22.35",

@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && npm run postbuild",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "devCommand": "npm run dev",
@@ -19,5 +19,8 @@
         }
       ]
     }
-  ]
+  ],
+  "env": {
+    "PRE_POPULATE": "true"
+  }
 }
