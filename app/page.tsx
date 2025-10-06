@@ -14,6 +14,7 @@ import StickyArtistImages from "../components/StickyArtistImages";
 import QuickCompareBar from "../components/QuickCompareBar";
 import { generateComparisonUrl } from "../lib/seo-utils";
 import type { Artist, ArtistPair } from "../types";
+import GoogleTrends from "./sections/GoogleTrends";
 
 // Empty fallback objects for when no artists are selected
 const emptyArtist: Artist = {
@@ -212,7 +213,6 @@ function HomeContent() {
           <section className="flex flex-col items-center gap-10 sm:gap-18 w-[95%] sm:w-full relative">
             {/* Sticky Artist Images */}
             <StickyArtistImages artistA={duo[0]} artistB={duo[1]} />
-            
             <div>
               <GlareHover
                 glareColor="#ffffff"
@@ -227,22 +227,21 @@ function HomeContent() {
                 <Info artistA={duo[0]} artistB={duo[1]} />
               </GlareHover>
             </div>
-            
             <TopStreams
               artistAId={duo[0]?.spotifyId || undefined}
               artistBId={duo[1]?.spotifyId || undefined}
               artistAName={duo[0]?.artistName || duo[0]?.name}
               artistBName={duo[1]?.artistName || duo[1]?.name}
             />
-
             <Streams artistA={duo[0]} artistB={duo[1]} />
             <Charts artistA={duo[0]} artistB={duo[1]} />
-              <Awards artistA={duo[0]} artistB={duo[1]} />
-
+            <Awards artistA={duo[0]} artistB={duo[1]} />
+            <GoogleTrends artistA={duo[0]} artistB={duo[1]} />
             
             {/* <div className="animate-in fade-in duration-1000 delay-1400">
               <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
             </div> */}
+            
           </section>
         )}
       </main>
