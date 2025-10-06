@@ -1,12 +1,8 @@
 import { redirect, notFound } from "next/navigation";
 import { deobfuscateArtistNames } from "../../../lib/seo-utils";
 
-interface PageProps {
-  params: { slug: string };
-}
-
-export default function CompareSlugPage({ params }: PageProps) {
-  const { slug } = params;
+export default async function CompareSlugPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const decoded = deobfuscateArtistNames(slug);
 
   if (!decoded) {
