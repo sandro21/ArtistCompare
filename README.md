@@ -7,7 +7,7 @@ Built with Next.js, React, and Tailwind CSS.
 
 ## 🚀 Live Demo
 
-[View the deployed site here!](https://artist-compare.vercel.app/)
+[View the deployed site here!](https://artistcompare.com/)
 
 ---
 
