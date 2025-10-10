@@ -27,20 +27,12 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://artist-compare.com/about',
     siteName: 'Artist Compare',
-    images: [
-      {
-        url: '/og-image',
-        width: 1200,
-        height: 630,
-        alt: 'Artist Compare - Music Artist Comparison Tool',
-      },
-    ],
+
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About Artist Compare - Music Artist Comparison Tool',
     description: 'Compare your favorite artists across Billboard charts, Grammy awards, and Spotify data.',
-    images: ['/og-image'],
   },
   alternates: {
     canonical: '/about',

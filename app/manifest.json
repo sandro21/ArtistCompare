@@ -1,0 +1,35 @@
+{
+  "name": "Artist Compare - Music Artist Comparison Tool",
+  "short_name": "Artist Compare",
+  "description": "Compare music artists side-by-side with detailed stats, Billboard charts, Grammy awards, RIAA certifications, and streaming data",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D110F",
+  "theme_color": "#5EE9B5",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["music", "entertainment", "tools"],
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-mobile.png", 
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}

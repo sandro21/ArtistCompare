@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "Compare Music Artists - Stats, Charts & Awards | Artist Compare",
     template: "%s | Artist Compare"
   },
-  description: "Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, RIAA certifications, and streaming data.",
+  description: "Compare music artists side-by-side with comprehensive data from Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming statistics. Discover who's more successful between your favorite artists with detailed analytics and visualizations.",
   keywords: [
     "compare artists",
     "music artist comparison", 
@@ -49,6 +49,20 @@ export const metadata: Metadata = {
     "more nominations artist",
     "more grammy nominations artist",
     "more grammy wins artist",
+    "music industry analytics",
+    "artist performance metrics",
+    "music data visualization",
+    "streaming statistics comparison",
+    "billboard chart analysis",
+    "music artist rankings",
+    "artist success metrics",
+    "music streaming data",
+    "artist popularity trends",
+    "music charts comparison",
+    "celebrity comparison tool",
+    "music industry statistics",
+    "artist career comparison",
+    "music success analysis",
   ],
   authors: [{ name: "Artist Compare" }],
   creator: "Artist Compare",
@@ -58,7 +72,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://artist-compare.vercel.app'), // Update with your actual domain
+  metadataBase: new URL('https://artistcompare.com'),
   alternates: {
     canonical: '/',
   },
@@ -70,24 +84,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://artist-compare.vercel.app',
+    url: 'https://artistcompare.com',
     title: 'Compare Music Artists - Stats, Charts & Awards',
     description: 'Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
     siteName: 'Artist Compare',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Artist Compare - Compare Music Artists',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Compare Music Artists - Stats, Charts & Awards',
     description: 'Compare music artists side-by-side. View detailed stats, Billboard charts, Grammy awards, and streaming data.',
-    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -115,6 +120,11 @@ export default function RootLayout({
           name="google-site-verification"
           content="K1bbyZBCsNWwzD-a0pcDNzzets87M-FADFh920g-Pvk"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#5EE9B5" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Artist Compare" />
 
         <script
           type="application/ld+json"
@@ -124,8 +134,8 @@ export default function RootLayout({
               "@type": "WebApplication",
               "name": "Artist Compare",
               "description":
-                "Compare your favorite music artists side-by-side with detailed statistics, charts, and awards data.",
-              "url": "https://artist-compare.vercel.app",
+                "Compare music artists side-by-side with detailed statistics, charts, and awards data.",
+              "url": "https://artistcompare.com",
               "applicationCategory": "MusicApplication",
               "operatingSystem": "Web Browser",
               "offers": {
@@ -143,6 +153,7 @@ export default function RootLayout({
                 "RIAA Certifications",
                 "Spotify Streaming Data",
                 "Artist Statistics",
+                "Google Trends"
               ],
             }),
           }}
