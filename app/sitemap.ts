@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "https://artist-compare.com/compare/lil-durk-vs-youngboy-never-broke-again-acde8c3f",
     "https://artist-compare.com/compare/kanye-west-vs-drake-53c75e5a",
     "https://artist-compare.com/compare/taylor-swift-vs-kanye-west-bb9cb9e0",
-    "https://artist-compare.com/compare/2pac-vs-the-notorious-big-8b4481f1",
+    "https://artist-compare.com/compare/dave-vs-central-cee-98cdc752",
     "https://artist-compare.com/compare/young-thug-vs-gunna-55b90ee8",
     "https://artist-compare.com/compare/young-thug-vs-future-ca9adc91"
   ].map((url) => ({

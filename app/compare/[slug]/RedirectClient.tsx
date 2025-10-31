@@ -11,29 +11,10 @@ export default function RedirectClient({ target }: RedirectClientProps) {
   const router = useRouter();
 
   useEffect(() => {
-    // Longer delay to ensure crawlers can read the metadata before redirect
-    const timer = setTimeout(() => {
-      router.replace(target);
-    }, 2000); // 2 second delay for crawlers
-
-    return () => clearTimeout(timer);
+    // Immediate redirect - metadata is already in HTML head for crawlers
+    router.replace(target);
   }, [target, router]);
 
-  return (
-    <div style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      minHeight: '100vh',
-      fontFamily: 'system-ui, sans-serif'
-    }}>
-      <div style={{ textAlign: 'center' }}>
-        <p>Loading comparison...</p>
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
-          If you are not redirected,{' '}
-          <a href={target} style={{ color: '#5EE9B5' }}>click here</a>.
-        </p>
-      </div>
-    </div>
-  );
+  // Return null to render nothing while redirecting
+  return null;
 }

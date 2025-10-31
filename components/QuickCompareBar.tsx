@@ -38,27 +38,27 @@ const QuickCompareBar: React.FC = () => {
             }
         },
         {
-            id: 'young-thug-vs-gunna',
-            comparisionLink: '/compare/young-thug-vs-gunna-55b90ee8',
+            id: 'dave-vs-central-cee',
+            comparisionLink: '/compare/dave-vs-central-cee-98cdc752',
             ArtistA: {
-                name: 'Young Thug',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb9f2fb33940aac624dc5d100d'
+                name: 'Dave',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb2f23c7e361cef62490f44057'
             },
             ArtistB: {
-                name: 'Gunna',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eba998bc86f87b9fe7e2466110'
+                name: 'Central Cee',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebf6469f2cbf0a7e78744a3173'
             }
         },
         {
-            id: 'taylor-swift-vs-kanye-west',
-            comparisionLink: '/compare/taylor-swift-vs-kanye-west-bb9cb9e0',
+            id: 'nle-choppa-vs-nba-youngboy',
+            comparisionLink: '/compare/nle-choppa-vs-youngboy-never-broke-again-055d9ceb',
             ArtistA: {
-                name: 'Taylor Swift',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
+                name: 'NLE Choppa',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2c985e8509fc8788a5a5208'
             },
             ArtistB: {
-                name: 'Kanye West',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb6e835a500e791bf9c27a422a'
+                name: 'NBA YoungBoy',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb776e469c846c205685141317'
             }
         },
         {
@@ -74,15 +74,27 @@ const QuickCompareBar: React.FC = () => {
             }
         },
         {
-            id: '2pac-vs-biggie',
-            comparisionLink: '/compare/2pac-vs-the-notorious-big-8b4481f1',
+            id: 'olivia-rodrigo-vs-sabrina-carpenter',
+            comparisionLink: '/compare/olivia-rodrigo-vs-sabrina-carpenter-d3ab9b93',
             ArtistA: {
-                name: '2Pac',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb7f5cc432c9c109248ebec1ac'
+                name: 'Olivia Rodrigo',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe03a98785f3658f0b6461ec4'
             },
             ArtistB: {
-                name: 'Biggie',
-                spotifyImage: 'https://i.scdn.co/image/1b4858fbd24046a81cace5ee18d19c868262b91f'
+                name: 'Sabrina Carpenter',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb78e45cfa4697ce3c437cb455'
+            }
+        },
+        {
+            id: 'taylor-swift-vs-kanye-west',
+            comparisionLink: '/compare/taylor-swift-vs-kanye-west-bb9cb9e0',
+            ArtistA: {
+                name: 'Taylor Swift',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
+            },
+            ArtistB: {
+                name: 'Kanye West',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb6e835a500e791bf9c27a422a'
             }
         },
     ];
@@ -143,7 +155,7 @@ const QuickCompareBar: React.FC = () => {
         >
             <p className="text-white text-lg font-semibold text-center">Popular Matchups</p>
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 md:gap-4 sm:items-center">
-                {comparisions.slice(0, typeof window !== 'undefined' && window.innerWidth < 640 ? 4 : 5).map((comparision) => (
+                {comparisions.slice(0, 6).map((comparision) => (
                     <div
                         className="cursor-pointer flex-shrink-0"
                         key={comparision.id}

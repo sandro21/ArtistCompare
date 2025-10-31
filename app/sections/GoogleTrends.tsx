@@ -61,7 +61,7 @@ const GoogleTrends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
   };
 
   return (
-    <SectionWrapper header="Google Trends">
+    <SectionWrapper header="Google Trends Beta">
       <ToggleSwitch
         leftLabel="5 Years"
         rightLabel="1 Year"
