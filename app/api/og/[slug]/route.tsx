@@ -3,6 +3,10 @@ import { NextRequest } from 'next/server';
 import { deobfuscateArtistNames } from '../../../../lib/seo-utils';
 import { fetchAccessToken } from '../../../../lib/spotify';
 
+// ImageResponse works best in edge runtime, but we need Node.js for Spotify API
+// Try edge runtime first, if it fails, remove this line
+export const runtime = 'nodejs';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }

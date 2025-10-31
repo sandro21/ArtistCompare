@@ -1,6 +1,7 @@
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { deobfuscateArtistNames } from "../../../lib/seo-utils";
+import RedirectClient from "./RedirectClient";
 
 export async function generateMetadata({ 
   params 
@@ -67,10 +68,10 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
   }
 
   const { artist1, artist2 } = decoded;
-
-  // Redirect to the homepage with query params, which pre-populates and renders the comparison
   const target = `/?artist1=${encodeURIComponent(artist1)}&artist2=${encodeURIComponent(artist2)}`;
-  redirect(target);
+
+  // Render page with metadata (for crawlers) and client-side redirect (for users)
+  return <RedirectClient target={target} />;
 }
 
 
