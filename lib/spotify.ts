@@ -5,7 +5,7 @@ const TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 let cachedToken: { access_token: string; expires_at: number } | null = null;
 
-async function fetchAccessToken(): Promise<string> {
+export async function fetchAccessToken(): Promise<string> {
   if (cachedToken && Date.now() < cachedToken.expires_at) {
     return cachedToken.access_token;
   }

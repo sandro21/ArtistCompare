@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Info from "./sections/Info";
 import TopStreams from "./sections/TopStreams";
@@ -53,11 +54,20 @@ function HomeContent() {
   const { isInitialLoading, loadingProgress, startLoadingAnimation, stopLoading } = useLoadingScreen();
   const { pair, setPair, searchBarRef, hasUrlParams, onSelectPair } = useArtistSelection(startLoadingAnimation, isInitialLoading);
   const hasSeenGlow = useGlowEffect(!!pair, !!hasUrlParams);
+  const searchParams = useSearchParams();
 
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
     return [emptyArtist, emptyArtist]; // Use empty fallback instead of dummy data
   }, [pair]);
+
+  // Get artist names from URL params for loading screen
+  const urlArtist1 = searchParams.get('artist1');
+  const urlArtist2 = searchParams.get('artist2');
+  
+  // Use actual names from pair if available, otherwise fall back to URL params
+  const displayName1 = pair?.a?.artistName || pair?.a?.name || urlArtist1 || '';
+  const displayName2 = pair?.b?.artistName || pair?.b?.name || urlArtist2 || '';
 
   return (
     <div 
@@ -117,30 +127,15 @@ function HomeContent() {
         {(pair || hasUrlParams) && (
           <>
             {/* Loading Screen */}
-            {(isInitialLoading || (hasUrlParams && !pair)) && (
+            {isInitialLoading && (
               <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center gap-6 animate-in fade-in duration-300">
                 <div className="flex flex-col items-center gap-4">
-                  <div className="flex items-center gap-4">
-                    {duo[0]?.spotifyImageUrl && (
-                      <img 
-                        src={duo[0].spotifyImageUrl} 
-                        alt={duo[0]?.artistName || duo[0]?.name}
-                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border-2 border-[#5EE9B5] animate-pulse object-cover"
-                      />
-                    )}
-                    <div className="text-[#5EE9B5] text-2xl sm:text-3xl md:text-4xl font-bold">VS</div>
-                    {duo[1]?.spotifyImageUrl && (
-                      <img 
-                        src={duo[1].spotifyImageUrl} 
-                        alt={duo[1]?.artistName || duo[1]?.name}
-                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border-2 border-[#5EE9B5] animate-pulse object-cover"
-                      />
-                    )}
-                  </div>
                   <div className="flex flex-col items-center gap-2">
-                    <div className="text-white font-bold text-xl sm:text-2xl md:text-3xl text-center">
-                      {duo[0]?.artistName || duo[0]?.name} vs {duo[1]?.artistName || duo[1]?.name}
-                    </div>
+                    {(displayName1 || displayName2) && (
+                      <div className="text-white font-bold text-xl sm:text-2xl md:text-3xl text-center">
+                        {displayName1} vs {displayName2}
+                      </div>
+                    )}
                     <div className="w-48 sm:w-64 md:w-80 h-1 bg-[#5EE9B5]/20 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-[#5EE9B5] rounded-full transition-all duration-75 ease-linear" 
