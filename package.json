@@ -17,7 +17,7 @@
     "google-trends-api": "^4.9.2",
     "gsap": "^3.13.0",
     "https-proxy-agent": "^7.0.6",
-    "next": "15.4.5",
+    "next": "15.4.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "recharts": "^3.2.1",
