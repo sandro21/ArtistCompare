@@ -26,6 +26,18 @@ const QuickCompareBar: React.FC = () => {
 
     const comparisions: ComparisionData[] = [
         {
+            id: 'taylor-swift-vs-charli-xcx',
+            comparisionLink: '/compare/taylor-swift-vs-charli-xcx-bd8c91e8',
+            ArtistA: {
+                name: 'Taylor Swift',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
+            },
+            ArtistB: {
+                name: 'Charli XCX',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebdaa727dd396963ba92dd6377'
+            }
+        },
+        {
             id: 'drake-vs-kendrick',
             comparisionLink: '/compare/drake-vs-kendrick-lamar-d15b7c84',
             ArtistA: {
@@ -35,18 +47,6 @@ const QuickCompareBar: React.FC = () => {
             ArtistB: {
                 name: 'Kendrick Lamar',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb39ba6dcd4355c03de0b50918'
-            }
-        },
-        {
-            id: 'dave-vs-central-cee',
-            comparisionLink: '/compare/dave-vs-central-cee-98cdc752',
-            ArtistA: {
-                name: 'Dave',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb2f23c7e361cef62490f44057'
-            },
-            ArtistB: {
-                name: 'Central Cee',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebf6469f2cbf0a7e78744a3173'
             }
         },
         {
@@ -74,27 +74,15 @@ const QuickCompareBar: React.FC = () => {
             }
         },
         {
-            id: 'olivia-rodrigo-vs-sabrina-carpenter',
-            comparisionLink: '/compare/olivia-rodrigo-vs-sabrina-carpenter-d3ab9b93',
+            id: 'tyler-the-creator-vs-playboi-carti',
+            comparisionLink: '/compare/tyler-the-creator-vs-playboi-carti-a38b964a',
             ArtistA: {
-                name: 'Olivia Rodrigo',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe03a98785f3658f0b6461ec4'
+                name: 'Tyler, The Creator',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebdf2728294ff77dd11eeb18fb'
             },
             ArtistB: {
-                name: 'Sabrina Carpenter',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb78e45cfa4697ce3c437cb455'
-            }
-        },
-        {
-            id: 'taylor-swift-vs-kanye-west',
-            comparisionLink: '/compare/taylor-swift-vs-kanye-west-bb9cb9e0',
-            ArtistA: {
-                name: 'Taylor Swift',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
-            },
-            ArtistB: {
-                name: 'Kanye West',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb6e835a500e791bf9c27a422a'
+                name: 'Playboi Carti',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebba50ca67ffc3097f6ea1710a'
             }
         },
     ];
