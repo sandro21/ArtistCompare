@@ -22,6 +22,13 @@ export const useArtistSelection = (startLoadingAnimation: () => void, isInitialL
     if (a.artistName && b.artistName) {
       const seoUrl = generateComparisonUrl(a.artistName, b.artistName);
       window.history.pushState({}, '', seoUrl);
+      
+      // Log query to database (fire-and-forget)
+      fetch('/api/log-query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ artistA: a.artistName, artistB: b.artistName })
+      }).catch(err => console.error('Failed to log query:', err));
     }
   }, [isInitialLoading, startLoadingAnimation]);
 

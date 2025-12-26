@@ -31,7 +31,10 @@ export async function initializeTrendsTable() {
 			ON artist_trends(updated_at)
 		`;
 		
-		console.log('✅ Database table initialized');
+		// Also initialize query logs table
+		await initializeQueryLogsTable();
+		
+		console.log('✅ Database tables initialized');
 		return true;
 	} catch (error) {
 		console.error('❌ Error initializing database table:', error);
@@ -232,6 +235,101 @@ export async function getDatabaseStatus() {
 	} catch (error) {
 		console.error('Error getting database status:', error);
 		return [];
+	}
+}
+
+/**
+ * Initialize the query logs table
+ * Tracks all artist comparisons for analytics
+ */
+export async function initializeQueryLogsTable() {
+	try {
+		await sql`
+			CREATE TABLE IF NOT EXISTS query_logs (
+				id SERIAL PRIMARY KEY,
+				artist_a TEXT NOT NULL,
+				artist_b TEXT NOT NULL,
+				created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+			)
+		`;
+		
+		// Create indexes for common queries
+		await sql`
+			CREATE INDEX IF NOT EXISTS idx_query_logs_artists 
+			ON query_logs(artist_a, artist_b)
+		`;
+		
+		await sql`
+			CREATE INDEX IF NOT EXISTS idx_query_logs_created_at 
+			ON query_logs(created_at DESC)
+		`;
+		
+		console.log('✅ Query logs table initialized');
+		return true;
+	} catch (error) {
+		console.error('❌ Error initializing query logs table:', error);
+		throw error;
+	}
+}
+
+/**
+ * Log a query/comparison to the database
+ */
+export async function logQuery(
+	artistA: string,
+	artistB: string
+): Promise<boolean> {
+	try {
+		await sql`
+			INSERT INTO query_logs (artist_a, artist_b)
+			VALUES (${artistA}, ${artistB})
+		`;
+		return true;
+	} catch (error) {
+		console.error('Error logging query:', error);
+		return false;
+	}
+}
+
+/**
+ * Get query statistics
+ * Returns popular comparisons and total queries
+ */
+export async function getQueryStatistics(limit: number = 10) {
+	try {
+		// Get most popular comparisons
+		const popularComparisons = await sql`
+			SELECT 
+				artist_a,
+				artist_b,
+				COUNT(*) as query_count,
+				MAX(created_at) as last_queried
+			FROM query_logs
+			GROUP BY artist_a, artist_b
+			ORDER BY query_count DESC
+			LIMIT ${limit}
+		`;
+		
+		// Get total query count
+		const totalQueries = await sql`
+			SELECT COUNT(*) as count FROM query_logs
+		`;
+		
+		return {
+			totalQueries: parseInt(totalQueries[0]?.count || '0'),
+			popularComparisons: popularComparisons.map(row => ({
+				artistA: row.artist_a,
+				artistB: row.artist_b,
+				queryCount: parseInt(row.query_count),
+				lastQueried: row.last_queried
+			}))
+		};
+	} catch (error) {
+		console.error('Error getting query statistics:', error);
+		return {
+			totalQueries: 0,
+			popularComparisons: []
+		};
 	}
 }
 

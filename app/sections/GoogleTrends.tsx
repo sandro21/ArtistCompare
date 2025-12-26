@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import SectionWrapper from '../../components/SectionWrapper';
 import TrendChart from '../../components/TrendChart';
-import ToggleSwitch from '../../components/ToggleSwitch';
 import type { Artist } from '../../types';
 
 interface TrendsProps {
@@ -55,19 +54,44 @@ const GoogleTrends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
     }
   }, [artistA, artistB, range]);
 
-  const handleRangeChange = (isLeft: boolean) => {
-    const newRange = isLeft ? '5y' : '1y';
+  const handleRangeChange = (newRange: string) => {
     setRange(newRange);
   };
 
   return (
     <SectionWrapper header="Google Trends Beta">
-      <ToggleSwitch
-        leftLabel="5 Years"
-        rightLabel="1 Year"
-        isLeft={range === '5y'}
-        onToggle={handleRangeChange}
-      />
+      <div className="flex items-center justify-center gap-2 mb-8">
+        <button
+          onClick={() => handleRangeChange('1y')}
+          className={`px-4 py-2 rounded-full text-sm font-regular transition-all duration-300 ${
+            range === '1y'
+              ? 'bg-gradient-to-r from-[#5EE9B5a9] to-[#5EE9B5d6] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_2px_4px_rgba(0,0,0,0.35)]'
+              : 'text-white hover:text-gray-200'
+          }`}
+        >
+          1 Year
+        </button>
+        <button
+          onClick={() => handleRangeChange('5y')}
+          className={`px-4 py-2 rounded-full text-sm font-regular transition-all duration-300 ${
+            range === '5y'
+              ? 'bg-gradient-to-r from-[#5EE9B5a9] to-[#5EE9B5d6] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_2px_4px_rgba(0,0,0,0.35)]'
+              : 'text-white hover:text-gray-200'
+          }`}
+        >
+          5 Years
+        </button>
+        <button
+          onClick={() => handleRangeChange('10y')}
+          className={`px-4 py-2 rounded-full text-sm font-regular transition-all duration-300 ${
+            range === '10y'
+              ? 'bg-gradient-to-r from-[#5EE9B5a9] to-[#5EE9B5d6] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_2px_4px_rgba(0,0,0,0.35)]'
+              : 'text-white hover:text-gray-200'
+          }`}
+        >
+          10 Years
+        </button>
+      </div>
 
       <div className="transition-all duration-300 ease-in-out">
         {loading && (

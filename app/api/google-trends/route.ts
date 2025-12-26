@@ -3,7 +3,8 @@ import {
 	getMultipleArtistTrends, 
 	saveArtistTrends, 
 	saveMultipleArtistTrends,
-	getDatabaseStatus 
+	getDatabaseStatus,
+	getQueryStatistics
 } from '@/lib/db/trends';
 
 // Function to combine two artists' individual data for comparison
@@ -158,7 +159,7 @@ export async function GET(request: Request) {
 			});
 		}
 
-		// Make API call for both artists (but only save missing ones to database)
+		// Make API call for both artists and update both in database (refreshes cached data)
 		if (!artistAData || !artistBData) {
 			const queryString = `${a},${b}`;
 			const response = await fetch(`https://serpapi.com/search?engine=google_trends&q=${queryString}&date=all&data_type=TIMESERIES&api_key=${apiKey}`);
@@ -178,16 +179,12 @@ export async function GET(request: Request) {
 				value: item.values[1]?.extracted_value || 0
 			}));
 			
-			// Save missing artists to database
-			if (!artistAData) {
-				await saveArtistTrends(a, apiArtistAData);
-				artistAData = apiArtistAData;
-			}
+			// Update both artists in database (saves new ones, refreshes existing ones)
+			await saveArtistTrends(a, apiArtistAData);
+			await saveArtistTrends(b, apiArtistBData);
 			
-			if (!artistBData) {
-				await saveArtistTrends(b, apiArtistBData);
-				artistBData = apiArtistBData;
-			}
+			artistAData = apiArtistAData;
+			artistBData = apiArtistBData;
 			
 			apiCallsMade = 1;
 		}
@@ -285,12 +282,29 @@ export async function POST(request: Request) {
 		}
 	}
 	
+	if (action === 'query-stats' || action === 'query-statistics') {
+		try {
+			const limit = parseInt(searchParams.get('limit') || '10');
+			const stats = await getQueryStatistics(limit);
+			
+			return NextResponse.json({
+				ok: true,
+				...stats
+			});
+		} catch (error) {
+			return NextResponse.json(
+				{ error: 'Failed to get query statistics', details: error instanceof Error ? error.message : 'Unknown error' },
+				{ status: 500 }
+			);
+		}
+	}
+	
 	return NextResponse.json({
 		error: 'Invalid action'
 	}, { status: 400 });
 }
 
-// helper function to filter data by range: (all, 5yr, 1yr)
+// helper function to filter data by range: (all, 10yr, 5yr, 1yr)
 function filterDataByRange(data: any[], range: string) {
 	const now = new Date();
 	
@@ -304,6 +318,11 @@ function filterDataByRange(data: any[], range: string) {
 			const fiveYearsAgo = new Date();
 			fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
 			return data.filter(item => new Date(item.date) >= fiveYearsAgo);
+		}
+		case '10y': {
+			const tenYearsAgo = new Date();
+			tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
+			return data.filter(item => new Date(item.date) >= tenYearsAgo);
 		}
 		case 'all':
 		default: {
