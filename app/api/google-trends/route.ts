@@ -1,20 +1,10 @@
 import { NextResponse } from 'next/server';
-
-// Single unified cache for all artists (both pre-populated and user-discovered)
-const cache = new Map();
-
-// Cache entry structure: { data: [...], timestamp: Date }
-interface CacheEntry {
-	data: any[];
-	timestamp: Date;
-}
-
-// Check if cache entry is expired (older than 1 month)
-function isCacheExpired(timestamp: Date): boolean {
-	const oneMonthAgo = new Date();
-	oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-	return timestamp < oneMonthAgo;
-}
+import { 
+	getMultipleArtistTrends, 
+	saveArtistTrends, 
+	saveMultipleArtistTrends,
+	getDatabaseStatus 
+} from '@/lib/db/trends';
 
 // Function to combine two artists' individual data for comparison
 function combineArtistData(artistAData: any[], artistBData: any[], artistA: string, artistB: string) {
@@ -76,20 +66,22 @@ async function prePopulatePopularArtists(apiKey: string) {
 			
 			const timelineData = data.interest_over_time.timeline_data;
 			
-			// Cache each artist individually in unified cache
-			batch.forEach((artistName, index) => {
+			// Prepare artist data for database storage
+			const artistsToSave = batch.map((artistName, index) => {
 				const artistData = timelineData.map((item: any) => ({
 					date: item.date,
 					value: item.values[index]?.extracted_value || 0
 				}));
 				
-				// Store in unified cache
-				cache.set(artistName, {
-					data: artistData,
-					timestamp: new Date()
-				});
-				totalCached++;
+				return {
+					name: artistName,
+					data: artistData
+				};
 			});
+			
+			// Save all artists to database
+			const saveResult = await saveMultipleArtistTrends(artistsToSave);
+			totalCached += saveResult.saved;
 			
 			results.push({
 				batch: i + 1,
@@ -139,22 +131,17 @@ export async function GET(request: Request) {
 			);
 		}
 
-		// Check each artist individually in unified cache
+		// Check database for both artists at once (more efficient)
 		let artistAData = null;
 		let artistBData = null;
 		let apiCallsMade = 0;
 
-		// Check Artist A
-		if (cache.has(a) && !isCacheExpired(cache.get(a).timestamp)) {
-			artistAData = cache.get(a).data;
-		}
+		// Get both artists from database
+		const dbResults = await getMultipleArtistTrends([a, b]);
+		artistAData = dbResults.get(a) || null;
+		artistBData = dbResults.get(b) || null;
 
-		// Check Artist B
-		if (cache.has(b) && !isCacheExpired(cache.get(b).timestamp)) {
-			artistBData = cache.get(b).data;
-		}
-
-		// If both artists are cached, combine and return
+		// If both artists are in database, combine and return
 		if (artistAData && artistBData) {
 			const combinedData = combineArtistData(artistAData, artistBData, a, b);
 			const filteredData = filterDataByRange(combinedData, range);
@@ -163,21 +150,21 @@ export async function GET(request: Request) {
 				ok: true,
 				data: filteredData,
 				params: { a, b, range },
-				cached: true,
-				source: 'both-cached',
+				fromDatabase: true,
+				source: 'database',
 				apiCallsMade: 0,
 				totalDataPoints: combinedData.length,
 				filteredDataPoints: filteredData.length
 			});
 		}
 
-		// Make API call for both artists (but only cache missing ones)
+		// Make API call for both artists (but only save missing ones to database)
 		if (!artistAData || !artistBData) {
 			const queryString = `${a},${b}`;
 			const response = await fetch(`https://serpapi.com/search?engine=google_trends&q=${queryString}&date=all&data_type=TIMESERIES&api_key=${apiKey}`);
 			const data = await response.json();
 			
-			// Process and cache individual artist data
+			// Process artist data from API response
 			const timelineData = data.interest_over_time.timeline_data;
 			
 			// Process both artists from API response
@@ -191,20 +178,14 @@ export async function GET(request: Request) {
 				value: item.values[1]?.extracted_value || 0
 			}));
 			
-			// Only cache missing artists
+			// Save missing artists to database
 			if (!artistAData) {
-				cache.set(a, {
-					data: apiArtistAData,
-					timestamp: new Date()
-				});
+				await saveArtistTrends(a, apiArtistAData);
 				artistAData = apiArtistAData;
 			}
 			
 			if (!artistBData) {
-				cache.set(b, {
-					data: apiArtistBData,
-					timestamp: new Date()
-				});
+				await saveArtistTrends(b, apiArtistBData);
 				artistBData = apiArtistBData;
 			}
 			
@@ -219,8 +200,8 @@ export async function GET(request: Request) {
 			ok: true,
 			data: filteredData,
 			params: { a, b, range },
-			cached: apiCallsMade === 0,
-			source: apiCallsMade === 0 ? 'both-cached' : 'api-call',
+			fromDatabase: apiCallsMade === 0,
+			source: apiCallsMade === 0 ? 'database' : 'api-call',
 			apiCallsMade: apiCallsMade,
 			totalDataPoints: combinedData.length,
 			filteredDataPoints: filteredData.length
@@ -234,7 +215,7 @@ export async function GET(request: Request) {
 	}
 }
 
-// POST endpoint for pre-populate and cache management
+// POST endpoint for pre-populate and database management
 export async function POST(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const action = searchParams.get('action');
@@ -266,43 +247,42 @@ export async function POST(request: Request) {
 		}
 	}
 	
-	if (action === 'cache-status') {
-		const cacheKeys = Array.from(cache.keys());
-		const cacheData = cacheKeys.map(key => {
-			const entry: CacheEntry = cache.get(key);
-			const isExpired = isCacheExpired(entry.timestamp);
+	if (action === 'database-status' || action === 'db-status') {
+		try {
+			const dbData = await getDatabaseStatus();
 			
-			// Remove expired entries
-			if (isExpired) {
-				cache.delete(key);
-			}
-			
-			return {
-				artist: key,
-				dataPoints: entry.data?.length || 0,
-				firstDate: entry.data?.[0]?.date,
-				lastDate: entry.data?.[entry.data.length - 1]?.date,
-				cachedAt: entry.timestamp,
-				isExpired: isExpired,
-				cacheAge: Math.floor((Date.now() - entry.timestamp.getTime()) / (1000 * 60 * 60 * 24)) // days
-			};
-		}).filter(artist => !artist.isExpired); // Only show non-expired artists
-		
-		return NextResponse.json({
-			ok: true,
-			cacheSize: cache.size,
-			cachedArtists: cacheData,
-			totalDataPoints: cacheData.reduce((sum, artist) => sum + artist.dataPoints, 0),
-			expiredCount: cacheKeys.length - cacheData.length
-		});
+			return NextResponse.json({
+				ok: true,
+				totalArtists: dbData.length,
+				artists: dbData,
+				totalDataPoints: dbData.reduce((sum, artist) => sum + artist.dataPoints, 0)
+			});
+		} catch (error) {
+			return NextResponse.json(
+				{ error: 'Failed to get database status', details: error instanceof Error ? error.message : 'Unknown error' },
+				{ status: 500 }
+			);
+		}
 	}
 	
-	if (action === 'clear-cache') {
-		cache.clear();
-		return NextResponse.json({
-			ok: true,
-			message: 'Cache cleared'
-		});
+	// Legacy support: redirect old cache-status to database-status
+	if (action === 'cache-status') {
+		try {
+			const dbData = await getDatabaseStatus();
+			
+			return NextResponse.json({
+				ok: true,
+				totalArtists: dbData.length,
+				artists: dbData,
+				totalDataPoints: dbData.reduce((sum, artist) => sum + artist.dataPoints, 0),
+				note: 'cache-status is deprecated, use database-status instead'
+			});
+		} catch (error) {
+			return NextResponse.json(
+				{ error: 'Failed to get database status', details: error instanceof Error ? error.message : 'Unknown error' },
+				{ status: 500 }
+			);
+		}
 	}
 	
 	return NextResponse.json({

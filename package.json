@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "postbuild": "node scripts/post-build.js",
-    "pre-populate": "node scripts/pre-populate.js"
+    "pre-populate": "node scripts/pre-populate.js",
+    "init-db": "node scripts/init-db.js"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
     "@types/cheerio": "^0.22.35",
     "cheerio": "^1.1.2",
     "csv-parser": "^3.2.0",
