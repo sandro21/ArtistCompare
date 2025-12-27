@@ -253,6 +253,14 @@ export async function initializeQueryLogsTable() {
 			)
 		`;
 		
+		// Add new columns if they don't exist (for existing tables)
+		await sql`
+			ALTER TABLE query_logs 
+			ADD COLUMN IF NOT EXISTS ip_address TEXT,
+			ADD COLUMN IF NOT EXISTS user_agent TEXT,
+			ADD COLUMN IF NOT EXISTS session_id TEXT
+		`;
+		
 		// Create indexes for common queries
 		await sql`
 			CREATE INDEX IF NOT EXISTS idx_query_logs_artists 
@@ -262,6 +270,16 @@ export async function initializeQueryLogsTable() {
 		await sql`
 			CREATE INDEX IF NOT EXISTS idx_query_logs_created_at 
 			ON query_logs(created_at DESC)
+		`;
+		
+		await sql`
+			CREATE INDEX IF NOT EXISTS idx_query_logs_ip_address 
+			ON query_logs(ip_address)
+		`;
+		
+		await sql`
+			CREATE INDEX IF NOT EXISTS idx_query_logs_session_id 
+			ON query_logs(session_id)
 		`;
 		
 		console.log('✅ Query logs table initialized');
@@ -277,12 +295,15 @@ export async function initializeQueryLogsTable() {
  */
 export async function logQuery(
 	artistA: string,
-	artistB: string
+	artistB: string,
+	ipAddress?: string | null,
+	userAgent?: string | null,
+	sessionId?: string | null
 ): Promise<boolean> {
 	try {
 		await sql`
-			INSERT INTO query_logs (artist_a, artist_b)
-			VALUES (${artistA}, ${artistB})
+			INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id)
+			VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null})
 		`;
 		return true;
 	} catch (error) {

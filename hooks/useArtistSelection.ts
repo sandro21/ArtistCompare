@@ -24,10 +24,22 @@ export const useArtistSelection = (startLoadingAnimation: () => void, isInitialL
       window.history.pushState({}, '', seoUrl);
       
       // Log query to database (fire-and-forget)
+      // Get session ID from cookie if it exists
+      const getCookie = (name: string) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift();
+        return null;
+      };
+      
       fetch('/api/log-query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ artistA: a.artistName, artistB: b.artistName })
+        body: JSON.stringify({ 
+          artistA: a.artistName, 
+          artistB: b.artistName,
+          sessionId: getCookie('session_id')
+        })
       }).catch(err => console.error('Failed to log query:', err));
     }
   }, [isInitialLoading, startLoadingAnimation]);
