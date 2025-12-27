@@ -39,11 +39,19 @@ export async function GET(request: NextRequest) {
         fetchedAt: new Date().toISOString() 
       });
     } else {
-      // Fetch artist metrics and ranking in parallel
-      const [metricsData, rankingData] = await Promise.all([
+      // Fetch artist metrics and ranking in parallel with individual error handling
+      const [metricsResult, rankingResult] = await Promise.allSettled([
         fetchArtistMetrics(artistName, spotifyId),
         fetchArtistRanking(artistName)
       ]);
+
+      const metricsData = metricsResult.status === 'fulfilled' 
+        ? metricsResult.value 
+        : { totalStreams: '', monthlyListeners: '', followers: '', error: 'Metrics unavailable' };
+
+      const rankingData = rankingResult.status === 'fulfilled' 
+        ? rankingResult.value 
+        : { monthlyListenersRank: null, streamRank: null };
 
       return NextResponse.json({
         artistName,
@@ -66,60 +74,69 @@ export async function GET(request: NextRequest) {
 async function fetchArtistMetrics(artistName: string, spotifyId: string) {
   const url = `https://www.musicmetricsvault.com/artists/${encodeURIComponent(artistName)}/${spotifyId}`;
   
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-  });
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      },
+      signal: AbortSignal.timeout(30000), // 30 second timeout (site is very slow)
+      redirect: 'follow' // Follow redirects automatically
+    });
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} for artist metrics`);
+    if (!response.ok) {
+      console.warn(`Music Metrics Vault returned ${response.status} for artist metrics`);
+      throw new Error(`HTTP ${response.status} for artist metrics`);
+    }
+
+    const html = await response.text();
+    const $ = cheerio.load(html);
+
+    // Extract total streams
+    let totalStreams = '';
+    $('h2').each((_index: number, element: any) => {
+      const text = $(element).text().trim();
+      if (text === 'Total plays') {
+        const parentDiv = $(element).closest('div');
+        const nextDiv = parentDiv.next('div');
+        totalStreams = nextDiv.find('div').first().text().trim();
+        return false; // break the loop
+      }
+    });
+
+    // Extract monthly listeners
+    let monthlyListeners = '';
+    $('h2').each((_index: number, element: any) => {
+      const text = $(element).text().trim();
+      if (text === 'Monthly listeners') {
+        const parentDiv = $(element).closest('div');
+        const nextDiv = parentDiv.next('div');
+        monthlyListeners = nextDiv.text().trim();
+        return false; // break the loop
+      }
+    });
+
+    // Extract followers
+    let followers = '';
+    $('h2').each((_index: number, element: any) => {
+      const text = $(element).text().trim();
+      if (text === 'Followers') {
+        const parentDiv = $(element).closest('div');
+        const nextDiv = parentDiv.next('div');
+        followers = nextDiv.text().trim();
+        return false; // break the loop
+      }
+    });
+
+    console.log(`✅ Successfully fetched metrics for ${artistName}`);
+    return {
+      totalStreams,
+      monthlyListeners,
+      followers
+    };
+  } catch (error) {
+    console.error(`❌ Failed to fetch metrics for ${artistName}:`, error instanceof Error ? error.message : error);
+    throw error;
   }
-
-  const html = await response.text();
-  const $ = cheerio.load(html);
-
-  // Extract total streams
-  let totalStreams = '';
-  $('h2').each((_index: number, element: any) => {
-    const text = $(element).text().trim();
-    if (text === 'Total plays') {
-      const parentDiv = $(element).closest('div');
-      const nextDiv = parentDiv.next('div');
-      totalStreams = nextDiv.find('div').first().text().trim();
-      return false; // break the loop
-    }
-  });
-
-  // Extract monthly listeners
-  let monthlyListeners = '';
-  $('h2').each((_index: number, element: any) => {
-    const text = $(element).text().trim();
-    if (text === 'Monthly listeners') {
-      const parentDiv = $(element).closest('div');
-      const nextDiv = parentDiv.next('div');
-      monthlyListeners = nextDiv.text().trim();
-      return false; // break the loop
-    }
-  });
-
-  // Extract followers
-  let followers = '';
-  $('h2').each((_index: number, element: any) => {
-    const text = $(element).text().trim();
-    if (text === 'Followers') {
-      const parentDiv = $(element).closest('div');
-      const nextDiv = parentDiv.next('div');
-      followers = nextDiv.text().trim();
-      return false; // break the loop
-    }
-  });
-
-  return {
-    totalStreams,
-    monthlyListeners,
-    followers
-  };
 }
 
 // Function to fetch artist ranking from most popular artists page
@@ -149,7 +166,8 @@ async function fetchRankingFromPage(artistName: string, url: string) {
   const response = await fetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+    },
+    signal: AbortSignal.timeout(15000) // 15 second timeout
   });
 
   if (!response.ok) {
@@ -309,7 +327,8 @@ async function fetchTopTracksFromMusicMetrics(artistName: string, spotifyId: str
   const response = await fetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+    },
+    signal: AbortSignal.timeout(15000) // 15 second timeout
   });
 
   if (!response.ok) {

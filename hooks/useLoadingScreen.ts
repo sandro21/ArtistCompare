@@ -18,11 +18,13 @@ export const useLoadingScreen = () => {
     setIsInitialLoading(true);
     setLoadingProgress(0);
 
-    // Animate progress bar from 0 to 100 over 2 seconds
-    const duration = 2000; // 2 seconds
+    // Animate progress bar from 0 to 100 over 3.5 seconds
+    // This gives APIs time to load: Spotify (~2s), Google Trends (~3s), 
+    // Kworb top tracks (~1s), rankings (~0.2s), plus confidence calculation
+    const duration = 3800; // 3.5 seconds
     const interval = 50; // Update every 50ms for smooth animation
-    const steps = duration / interval; // 40 steps
-    const progressIncrement = 100 / steps; // ~2.5% per step
+    const steps = duration / interval; // 70 steps
+    const progressIncrement = 100 / steps; // ~1.43% per step
 
     let currentProgress = 0;
     loadingIntervalRef.current = setInterval(() => {
@@ -39,7 +41,7 @@ export const useLoadingScreen = () => {
       }
     }, interval);
 
-    // Hide loading screen after 2 seconds
+    // Hide loading screen after 3 seconds
     loadingTimeoutRef.current = setTimeout(() => {
       setIsInitialLoading(false);
       setLoadingProgress(0);

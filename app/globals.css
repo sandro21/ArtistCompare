@@ -86,6 +86,54 @@ body {
   100% { transform: translateX(0); opacity: 1; }
 }
 
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.2;
+  }
+  25% { 
+    transform: translateY(-20px) translateX(10px) rotate(5deg);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateY(-30px) translateX(-10px) rotate(-5deg);
+    opacity: 0.2;
+  }
+  75% { 
+    transform: translateY(-10px) translateX(15px) rotate(3deg);
+    opacity: 0.15;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  50% { 
+    transform: translateY(-5px) scale(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0% { 
+    transform: translateX(-100%);
+  }
+  100% { 
+    transform: translateX(100%);
+  }
+}
+
 /* Animation utilities */
 .animate-in {
   animation-fill-mode: both;
@@ -160,6 +208,27 @@ body {
 
 .delay-1400 {
   animation-delay: 1400ms;
+}
+
+/* Loading screen animations */
+.animate-float {
+  animation: float infinite ease-in-out;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 1.5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in;
 }
 
 /* Desktop background */

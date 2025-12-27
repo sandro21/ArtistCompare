@@ -127,8 +127,13 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
   if (loadingA || loadingB) {
     return (
       <SectionWrapper header="Streams">
-        <div className="text-center text-gray-400 py-8">
-          Loading streaming metrics...
+        <div className="text-center py-8">
+          <div className="text-[#5EE9B5] text-lg font-semibold mb-2">
+            ⚡ Quick! Try guessing the winner while this loads...
+          </div>
+          <div className="text-gray-400 text-sm">
+            Loading streaming metrics...
+          </div>
         </div>
       </SectionWrapper>
     );
@@ -138,9 +143,13 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
   if (errorA || errorB) {
     return (
       <SectionWrapper header="Streams">
-        <div className="text-center text-red-400 py-8">
-          {errorA && <div>Error loading {artistA.artistName}: {errorA}</div>}
-          {errorB && <div>Error loading {artistB.artistName}: {errorB}</div>}
+        <div className="text-center py-8">
+          <div className="text-[#5EE9B5] text-lg font-semibold mb-2">
+            Streaming stats unavailable right now
+          </div>
+          <div className="text-gray-400 text-sm">
+            Check out the other sections below! 👇
+          </div>
         </div>
       </SectionWrapper>
     );

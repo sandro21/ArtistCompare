@@ -128,12 +128,38 @@ function HomeContent() {
           <>
             {/* Loading Screen */}
             {isInitialLoading && (
-              <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center gap-6 animate-in fade-in duration-300">
-                <div className="flex flex-col items-center gap-4">
+              <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center gap-6 animate-in fade-in duration-300 overflow-hidden">
+                {/* Animated background particles */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {[...Array(12)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute text-2xl opacity-20 animate-float"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 3}s`,
+                        animationDuration: `${3 + Math.random() * 4}s`,
+                      }}
+                    >
+                      {['🎵', '🎶', '🎤', '🎧', '⭐'][Math.floor(Math.random() * 5)]}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col items-center gap-4 relative z-10">
                   <div className="flex flex-col items-center gap-2">
                     {(displayName1 || displayName2) && (
-                      <div className="text-white font-bold text-xl sm:text-2xl md:text-3xl text-center">
-                        {displayName1} vs {displayName2}
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <div className="text-white font-bold text-xl sm:text-2xl md:text-3xl text-center">
+                          {displayName1}
+                        </div>
+                        <div className="text-[#5EE9B5] font-black text-2xl sm:text-3xl md:text-4xl animate-bounce-subtle px-2">
+                          VS
+                        </div>
+                        <div className="text-white font-bold text-xl sm:text-2xl md:text-3xl text-center">
+                          {displayName2}
+                        </div>
                       </div>
                     )}
                     <div className="w-48 sm:w-64 md:w-80 h-1 bg-[#5EE9B5]/20 rounded-full overflow-hidden">
