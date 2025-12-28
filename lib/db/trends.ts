@@ -258,7 +258,10 @@ export async function initializeQueryLogsTable() {
 			ALTER TABLE query_logs 
 			ADD COLUMN IF NOT EXISTS ip_address TEXT,
 			ADD COLUMN IF NOT EXISTS user_agent TEXT,
-			ADD COLUMN IF NOT EXISTS session_id TEXT
+			ADD COLUMN IF NOT EXISTS session_id TEXT,
+			ADD COLUMN IF NOT EXISTS referrer TEXT,
+			ADD COLUMN IF NOT EXISTS origin TEXT,
+			ADD COLUMN IF NOT EXISTS request_headers JSONB
 		`;
 		
 		// Create indexes for common queries
@@ -298,13 +301,25 @@ export async function logQuery(
 	artistB: string,
 	ipAddress?: string | null,
 	userAgent?: string | null,
-	sessionId?: string | null
+	sessionId?: string | null,
+	referrer?: string | null,
+	origin?: string | null,
+	requestHeaders?: Record<string, string> | null
 ): Promise<boolean> {
 	try {
-		await sql`
-			INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id)
-			VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null})
-		`;
+		const headersJson = requestHeaders ? JSON.stringify(requestHeaders) : null;
+		
+		if (headersJson) {
+			await sql`
+				INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id, referrer, origin, request_headers)
+				VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null}, ${referrer || null}, ${origin || null}, ${headersJson}::jsonb)
+			`;
+		} else {
+			await sql`
+				INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id, referrer, origin, request_headers)
+				VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null}, ${referrer || null}, ${origin || null}, NULL)
+			`;
+		}
 		return true;
 	} catch (error) {
 		console.error('Error logging query:', error);

@@ -143,9 +143,9 @@ const QuickCompareBar: React.FC = () => {
         >
             <p className="text-white text-lg font-semibold text-center">Popular Matchups</p>
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 md:gap-4 sm:items-center">
-                {comparisions.slice(0, 6).map((comparision) => (
+                {comparisions.slice(0, 6).map((comparision, index) => (
                     <div
-                        className="cursor-pointer flex-shrink-0"
+                        className={`cursor-pointer flex-shrink-0 ${index >= 4 ? 'hidden sm:block' : ''}`}
                         key={comparision.id}
                         onClick={() => {
                             window.location.href = comparision.comparisionLink;
