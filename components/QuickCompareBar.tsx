@@ -27,7 +27,7 @@ const QuickCompareBar: React.FC = () => {
     const comparisions: ComparisionData[] = [
         {
             id: 'taylor-swift-vs-charli-xcx',
-            comparisionLink: '/compare/taylor-swift-vs-charli-xcx-bd8c91e8',
+            comparisionLink: '/compare/taylor-swift-vs-charli-xcx-18f66917',
             ArtistA: {
                 name: 'Taylor Swift',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'

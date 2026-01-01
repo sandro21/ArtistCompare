@@ -10,6 +10,11 @@ export const useArtistSelection = (startLoadingAnimation: () => void, isInitialL
   const hasUrlParams = searchParams.get('artist1') && searchParams.get('artist2');
 
   const onSelectPair = useCallback((a: Artist, b: Artist) => {
+    // Prevent comparing the same artist
+    if (a.spotifyId && b.spotifyId && a.spotifyId === b.spotifyId) {
+      return; // Same artist, don't proceed
+    }
+    
     // Set pair first
     setPair({ a, b });
     

@@ -91,12 +91,12 @@ function HomeContent() {
             {/* Header */}
             <div className="flex flex-col items-center gap-1 sm:gap-2 animate-in fade-in duration-1000 delay-200">
               <div className="bg-[#5EE9B5]/10 border-2 border-[#376348] flex rounded-full items-center px-3 py-1 transition-colors duration-200 cursor-pointer hover:bg-[#5EE9B5]/20 hover:border-[#5EE9B5] mb-1 sm:mb-0">
-                <span className="font-normal text-[#5EE9B5] text-sm sm:text-base">Real Statistics</span>
+                <span className="font-normal text-[#5EE9B5] text-sm sm:text-base">Spotify, Billboard, Grammys & More</span>
               </div>
               <div className="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center">
                 Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
               </div>
-              <div className="text-white font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-center">Just Select Two Artists and see the magic</div>
+              <div className="text-white font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-center">Choose Two Artists and See Who's Better. Numbers Don't Lie.</div>
             </div>
 
             {/* Search Bar Components */}
