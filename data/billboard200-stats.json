@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "generated_at": "2025-10-05T19:33:58.127Z",
+    "generated_at": "2026-01-01T21:20:03.980Z",
     "source_url": "https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv",
     "min_year": 1990,
-    "total_artists": 7485,
-    "total_unique_albums": 25877,
+    "total_artists": 7499,
+    "total_unique_albums": 25951,
     "version": "1.0.0"
   },
   "artists": {
@@ -58,10 +58,10 @@
     },
     "Taylor Swift": {
       "billboard200": {
-        "entries": 20,
-        "top10s": 18,
-        "number1s": 14,
-        "wks_on_chart": 3517
+        "entries": 21,
+        "top10s": 19,
+        "number1s": 15,
+        "wks_on_chart": 3642
       }
     },
     "Paul McCartney": {
@@ -69,7 +69,7 @@
         "entries": 32,
         "top10s": 15,
         "number1s": 6,
-        "wks_on_chart": 659
+        "wks_on_chart": 661
       }
     },
     "Eminem": {
@@ -77,7 +77,7 @@
         "entries": 13,
         "top10s": 13,
         "number1s": 11,
-        "wks_on_chart": 2448
+        "wks_on_chart": 2462
       }
     },
     "Michael Buble": {
@@ -85,15 +85,15 @@
         "entries": 17,
         "top10s": 8,
         "number1s": 4,
-        "wks_on_chart": 682
+        "wks_on_chart": 690
       }
     },
     "Mariah Carey": {
       "billboard200": {
-        "entries": 24,
-        "top10s": 18,
+        "entries": 25,
+        "top10s": 19,
         "number1s": 6,
-        "wks_on_chart": 961
+        "wks_on_chart": 971
       }
     },
     "Nat King Cole": {
@@ -101,7 +101,7 @@
         "entries": 5,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 132
+        "wks_on_chart": 139
       }
     },
     "Carrie Underwood": {
@@ -109,7 +109,7 @@
         "entries": 10,
         "top10s": 10,
         "number1s": 4,
-        "wks_on_chart": 743
+        "wks_on_chart": 744
       }
     },
     "Pentatonix": {
@@ -117,7 +117,7 @@
         "entries": 17,
         "top10s": 11,
         "number1s": 2,
-        "wks_on_chart": 317
+        "wks_on_chart": 326
       }
     },
     "Vince Guaraldi Trio": {
@@ -125,7 +125,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 124
+        "wks_on_chart": 133
       }
     },
     "Pop Smoke": {
@@ -138,10 +138,10 @@
     },
     "Various Artists": {
       "billboard200": {
-        "entries": 1460,
-        "top10s": 147,
+        "entries": 1463,
+        "top10s": 148,
         "number1s": 27,
-        "wks_on_chart": 12998
+        "wks_on_chart": 13023
       }
     },
     "Kid Cudi": {
@@ -154,10 +154,10 @@
     },
     "Ariana Grande": {
       "billboard200": {
-        "entries": 10,
-        "top10s": 8,
+        "entries": 11,
+        "top10s": 9,
         "number1s": 6,
-        "wks_on_chart": 773
+        "wks_on_chart": 809
       }
     },
     "Bing Crosby": {
@@ -165,7 +165,7 @@
         "entries": 6,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 203
+        "wks_on_chart": 211
       }
     },
     "Bad Bunny": {
@@ -173,7 +173,7 @@
         "entries": 9,
         "top10s": 7,
         "number1s": 4,
-        "wks_on_chart": 836
+        "wks_on_chart": 869
       }
     },
     "Megan Thee Stallion": {
@@ -189,7 +189,7 @@
         "entries": 4,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 50
+        "wks_on_chart": 57
       }
     },
     "Luke Combs": {
@@ -197,7 +197,7 @@
         "entries": 7,
         "top10s": 6,
         "number1s": 1,
-        "wks_on_chart": 986
+        "wks_on_chart": 1010
       }
     },
     "Harry Styles": {
@@ -213,7 +213,7 @@
         "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 45
+        "wks_on_chart": 51
       }
     },
     "Frank Sinatra": {
@@ -221,15 +221,15 @@
         "entries": 31,
         "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 691
+        "wks_on_chart": 699
       }
     },
     "Lil Baby": {
       "billboard200": {
-        "entries": 8,
+        "entries": 9,
         "top10s": 7,
         "number1s": 4,
-        "wks_on_chart": 834
+        "wks_on_chart": 851
       }
     },
     "Burl Ives": {
@@ -237,7 +237,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 72
+        "wks_on_chart": 77
       }
     },
     "Juice WRLD": {
@@ -245,7 +245,7 @@
         "entries": 6,
         "top10s": 6,
         "number1s": 2,
-        "wks_on_chart": 1029
+        "wks_on_chart": 1042
       }
     },
     "BTS": {
@@ -261,7 +261,7 @@
         "entries": 5,
         "top10s": 5,
         "number1s": 1,
-        "wks_on_chart": 1019
+        "wks_on_chart": 1053
       }
     },
     "Elvis Presley": {
@@ -269,15 +269,15 @@
         "entries": 46,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 776
+        "wks_on_chart": 781
       }
     },
     "Billie Eilish": {
       "billboard200": {
-        "entries": 7,
+        "entries": 8,
         "top10s": 3,
         "number1s": 2,
-        "wks_on_chart": 892
+        "wks_on_chart": 929
       }
     },
     "Andy Williams": {
@@ -285,7 +285,7 @@
         "entries": 6,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 96
+        "wks_on_chart": 102
       }
     },
     "Kelly Clarkson": {
@@ -293,7 +293,7 @@
         "entries": 12,
         "top10s": 9,
         "number1s": 3,
-        "wks_on_chart": 515
+        "wks_on_chart": 524
       }
     },
     "Jack Harlow": {
@@ -309,7 +309,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 43
+        "wks_on_chart": 48
       }
     },
     "Bobby Helms": {
@@ -317,7 +317,7 @@
         "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 32
+        "wks_on_chart": 38
       }
     },
     "Shawn Mendes": {
@@ -333,7 +333,7 @@
         "entries": 13,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 167
+        "wks_on_chart": 176
       }
     },
     "Kid LAROI": {
@@ -349,7 +349,7 @@
         "entries": 8,
         "top10s": 6,
         "number1s": 3,
-        "wks_on_chart": 1169
+        "wks_on_chart": 1196
       }
     },
     "NCT": {
@@ -373,7 +373,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 523
+        "wks_on_chart": 536
       }
     },
     "Queen": {
@@ -381,7 +381,7 @@
         "entries": 14,
         "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 1136
+        "wks_on_chart": 1149
       }
     },
     "AC/DC": {
@@ -405,7 +405,7 @@
         "entries": 11,
         "top10s": 9,
         "number1s": 5,
-        "wks_on_chart": 1576
+        "wks_on_chart": 1642
       }
     },
     "Dolly Parton": {
@@ -421,7 +421,7 @@
         "entries": 11,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 287
+        "wks_on_chart": 294
       }
     },
     "Wham!": {
@@ -429,7 +429,7 @@
         "entries": 3,
         "top10s": 1,
         "number1s": 1,
-        "wks_on_chart": 125
+        "wks_on_chart": 132
       }
     },
     "Fleetwood Mac": {
@@ -437,7 +437,7 @@
         "entries": 16,
         "top10s": 5,
         "number1s": 3,
-        "wks_on_chart": 1444
+        "wks_on_chart": 1470
       }
     },
     "Dua Lipa": {
@@ -453,15 +453,15 @@
         "entries": 10,
         "top10s": 6,
         "number1s": 0,
-        "wks_on_chart": 304
+        "wks_on_chart": 306
       }
     },
     "Beatles": {
       "billboard200": {
-        "entries": 36,
+        "entries": 38,
         "top10s": 23,
         "number1s": 16,
-        "wks_on_chart": 2762
+        "wks_on_chart": 2770
       }
     },
     "Eslabon Armado": {
@@ -477,7 +477,7 @@
         "entries": 20,
         "top10s": 18,
         "number1s": 11,
-        "wks_on_chart": 1208
+        "wks_on_chart": 1232
       }
     },
     "Lil Uzi Vert": {
@@ -485,7 +485,7 @@
         "entries": 8,
         "top10s": 5,
         "number1s": 3,
-        "wks_on_chart": 786
+        "wks_on_chart": 787
       }
     },
     "DaBaby": {
@@ -501,7 +501,7 @@
         "entries": 5,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 59
+        "wks_on_chart": 63
       }
     },
     "Chuck Berry": {
@@ -509,7 +509,7 @@
         "entries": 5,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 33
+        "wks_on_chart": 37
       }
     },
     "Kendrick Lamar": {
@@ -517,7 +517,7 @@
         "entries": 7,
         "top10s": 6,
         "number1s": 5,
-        "wks_on_chart": 1444
+        "wks_on_chart": 1483
       }
     },
     "Jose Feliciano": {
@@ -525,7 +525,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 32
+        "wks_on_chart": 36
       }
     },
     "Elton John": {
@@ -533,7 +533,7 @@
         "entries": 26,
         "top10s": 13,
         "number1s": 3,
-        "wks_on_chart": 1425
+        "wks_on_chart": 1439
       }
     },
     "Josh Groban": {
@@ -541,7 +541,7 @@
         "entries": 13,
         "top10s": 9,
         "number1s": 3,
-        "wks_on_chart": 543
+        "wks_on_chart": 545
       }
     },
     "Polo G": {
@@ -557,7 +557,7 @@
         "entries": 13,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 1817
+        "wks_on_chart": 1830
       }
     },
     "Wailers": {
@@ -565,7 +565,7 @@
         "entries": 10,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 1777
+        "wks_on_chart": 1790
       }
     },
     "Michael Jackson": {
@@ -573,7 +573,7 @@
         "entries": 22,
         "top10s": 9,
         "number1s": 6,
-        "wks_on_chart": 2155
+        "wks_on_chart": 2172
       }
     },
     "Machine Gun Kelly": {
@@ -589,7 +589,7 @@
         "entries": 6,
         "top10s": 6,
         "number1s": 5,
-        "wks_on_chart": 845
+        "wks_on_chart": 863
       }
     },
     "Rod Wave": {
@@ -597,7 +597,7 @@
         "entries": 7,
         "top10s": 7,
         "number1s": 3,
-        "wks_on_chart": 728
+        "wks_on_chart": 748
       }
     },
     "Justin Bieber": {
@@ -605,15 +605,15 @@
         "entries": 12,
         "top10s": 11,
         "number1s": 8,
-        "wks_on_chart": 777
+        "wks_on_chart": 794
       }
     },
     "Soundtrack": {
       "billboard200": {
-        "entries": 1233,
-        "top10s": 203,
+        "entries": 1234,
+        "top10s": 204,
         "number1s": 52,
-        "wks_on_chart": 18509
+        "wks_on_chart": 18536
       }
     },
     "Nirvana": {
@@ -621,15 +621,15 @@
         "entries": 12,
         "top10s": 5,
         "number1s": 4,
-        "wks_on_chart": 1076
+        "wks_on_chart": 1089
       }
     },
     "21 Savage": {
       "billboard200": {
-        "entries": 7,
-        "top10s": 6,
+        "entries": 8,
+        "top10s": 7,
         "number1s": 4,
-        "wks_on_chart": 630
+        "wks_on_chart": 632
       }
     },
     "Metro Boomin": {
@@ -637,7 +637,7 @@
         "entries": 11,
         "top10s": 8,
         "number1s": 5,
-        "wks_on_chart": 686
+        "wks_on_chart": 706
       }
     },
     "Morgan Wallen": {
@@ -645,7 +645,7 @@
         "entries": 5,
         "top10s": 4,
         "number1s": 3,
-        "wks_on_chart": 764
+        "wks_on_chart": 814
       }
     },
     "Creedence Clearwater Revival": {
@@ -653,7 +653,7 @@
         "entries": 4,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 1417
+        "wks_on_chart": 1430
       }
     },
     "Sia": {
@@ -661,7 +661,7 @@
         "entries": 7,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 244
+        "wks_on_chart": 248
       }
     },
     "King Von": {
@@ -677,7 +677,7 @@
         "entries": 7,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 210
+        "wks_on_chart": 211
       }
     },
     "Roddy Ricch": {
@@ -701,7 +701,7 @@
         "entries": 35,
         "top10s": 16,
         "number1s": 4,
-        "wks_on_chart": 740
+        "wks_on_chart": 760
       }
     },
     "Tyler": {
@@ -709,7 +709,7 @@
         "entries": 8,
         "top10s": 8,
         "number1s": 4,
-        "wks_on_chart": 791
+        "wks_on_chart": 820
       }
     },
     "Creator": {
@@ -717,31 +717,31 @@
         "entries": 8,
         "top10s": 8,
         "number1s": 4,
-        "wks_on_chart": 791
+        "wks_on_chart": 820
       }
     },
     "Khalid": {
       "billboard200": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 452
+        "wks_on_chart": 453
       }
     },
     "Bruce Springsteen": {
       "billboard200": {
-        "entries": 36,
-        "top10s": 16,
+        "entries": 37,
+        "top10s": 17,
         "number1s": 8,
-        "wks_on_chart": 522
+        "wks_on_chart": 552
       }
     },
     "Summer Walker": {
       "billboard200": {
-        "entries": 5,
-        "top10s": 3,
+        "entries": 6,
+        "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 406
+        "wks_on_chart": 421
       }
     },
     "Journey": {
@@ -749,7 +749,7 @@
         "entries": 12,
         "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 1131
+        "wks_on_chart": 1144
       }
     },
     "Lewis Capaldi": {
@@ -773,7 +773,7 @@
         "entries": 10,
         "top10s": 7,
         "number1s": 6,
-        "wks_on_chart": 994
+        "wks_on_chart": 1007
       }
     },
     "Stevie Wonder": {
@@ -781,7 +781,7 @@
         "entries": 7,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 267
+        "wks_on_chart": 271
       }
     },
     "Guns N' Roses": {
@@ -789,7 +789,7 @@
         "entries": 8,
         "top10s": 7,
         "number1s": 2,
-        "wks_on_chart": 1320
+        "wks_on_chart": 1332
       }
     },
     "Gwen Stefani": {
@@ -797,7 +797,7 @@
         "entries": 5,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 176
+        "wks_on_chart": 180
       }
     },
     "Carpenters": {
@@ -805,7 +805,7 @@
         "entries": 6,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 106
+        "wks_on_chart": 108
       }
     },
     "Mac Miller": {
@@ -813,7 +813,7 @@
         "entries": 13,
         "top10s": 8,
         "number1s": 1,
-        "wks_on_chart": 416
+        "wks_on_chart": 418
       }
     },
     "Lana Del Rey": {
@@ -821,7 +821,7 @@
         "entries": 10,
         "top10s": 9,
         "number1s": 2,
-        "wks_on_chart": 840
+        "wks_on_chart": 853
       }
     },
     "Beach Boys": {
@@ -829,7 +829,7 @@
         "entries": 19,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 520
+        "wks_on_chart": 523
       }
     },
     "Boris Karloff / Thurl Ravenscroft": {
@@ -845,7 +845,7 @@
         "entries": 17,
         "top10s": 17,
         "number1s": 14,
-        "wks_on_chart": 3545
+        "wks_on_chart": 3646
       }
     },
     "Prince": {
@@ -853,7 +853,7 @@
         "entries": 44,
         "top10s": 19,
         "number1s": 5,
-        "wks_on_chart": 1114
+        "wks_on_chart": 1116
       }
     },
     "Revolution": {
@@ -861,7 +861,7 @@
         "entries": 5,
         "top10s": 3,
         "number1s": 2,
-        "wks_on_chart": 242
+        "wks_on_chart": 244
       }
     },
     "Internet Money": {
@@ -877,7 +877,7 @@
         "entries": 9,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 267
+        "wks_on_chart": 269
       }
     },
     "Selena": {
@@ -893,7 +893,7 @@
         "entries": 20,
         "top10s": 11,
         "number1s": 1,
-        "wks_on_chart": 1049
+        "wks_on_chart": 1062
       }
     },
     "Heartbreakers": {
@@ -901,7 +901,7 @@
         "entries": 15,
         "top10s": 7,
         "number1s": 1,
-        "wks_on_chart": 889
+        "wks_on_chart": 902
       }
     },
     "Halsey": {
@@ -917,7 +917,7 @@
         "entries": 6,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 28
+        "wks_on_chart": 32
       }
     },
     "Garth Brooks": {
@@ -949,7 +949,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 10
+        "wks_on_chart": 11
       }
     },
     "Gunna": {
@@ -957,7 +957,7 @@
         "entries": 8,
         "top10s": 7,
         "number1s": 2,
-        "wks_on_chart": 505
+        "wks_on_chart": 518
       }
     },
     "for KING": {
@@ -965,7 +965,7 @@
         "entries": 6,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 68
+        "wks_on_chart": 70
       }
     },
     "COUNTRY": {
@@ -973,7 +973,7 @@
         "entries": 6,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 68
+        "wks_on_chart": 70
       }
     },
     "Pink Floyd": {
@@ -981,7 +981,7 @@
         "entries": 20,
         "top10s": 9,
         "number1s": 5,
-        "wks_on_chart": 1526
+        "wks_on_chart": 1533
       }
     },
     "White Stripes": {
@@ -1013,7 +1013,7 @@
         "entries": 10,
         "top10s": 5,
         "number1s": 4,
-        "wks_on_chart": 1137
+        "wks_on_chart": 1148
       }
     },
     "Metallica": {
@@ -1021,7 +1021,7 @@
         "entries": 21,
         "top10s": 12,
         "number1s": 6,
-        "wks_on_chart": 1625
+        "wks_on_chart": 1634
       }
     },
     "Ed Sheeran": {
@@ -1029,7 +1029,7 @@
         "entries": 11,
         "top10s": 8,
         "number1s": 4,
-        "wks_on_chart": 1198
+        "wks_on_chart": 1217
       }
     },
     "Sturgill Simpson": {
@@ -1053,7 +1053,7 @@
         "entries": 11,
         "top10s": 2,
         "number1s": 2,
-        "wks_on_chart": 183
+        "wks_on_chart": 184
       }
     },
     "Led Zeppelin": {
@@ -1069,7 +1069,7 @@
         "entries": 16,
         "top10s": 8,
         "number1s": 4,
-        "wks_on_chart": 1045
+        "wks_on_chart": 1057
       }
     },
     "Pearl Jam": {
@@ -1085,7 +1085,7 @@
         "entries": 6,
         "top10s": 1,
         "number1s": 1,
-        "wks_on_chart": 88
+        "wks_on_chart": 89
       }
     },
     "Friends": {
@@ -1117,7 +1117,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 3,
-        "wks_on_chart": 622
+        "wks_on_chart": 623
       }
     },
     "SZA": {
@@ -1125,7 +1125,7 @@
         "entries": 3,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 580
+        "wks_on_chart": 606
       }
     },
     "twenty one pilots": {
@@ -1146,10 +1146,10 @@
     },
     "Doja Cat": {
       "billboard200": {
-        "entries": 4,
-        "top10s": 3,
+        "entries": 5,
+        "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 412
+        "wks_on_chart": 426
       }
     },
     "My Chemical Romance": {
@@ -1157,7 +1157,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 283
+        "wks_on_chart": 293
       }
     },
     "Moneybagg Yo": {
@@ -1205,7 +1205,7 @@
         "entries": 15,
         "top10s": 11,
         "number1s": 7,
-        "wks_on_chart": 893
+        "wks_on_chart": 919
       }
     },
     "Arctic Monkeys": {
@@ -1213,7 +1213,7 @@
         "entries": 8,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 415
+        "wks_on_chart": 428
       }
     },
     "Gabby Barrett": {
@@ -1277,7 +1277,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 2,
-        "wks_on_chart": 223
+        "wks_on_chart": 236
       }
     },
     "Johnny Cash": {
@@ -1293,7 +1293,7 @@
         "entries": 4,
         "top10s": 3,
         "number1s": 2,
-        "wks_on_chart": 401
+        "wks_on_chart": 417
       }
     },
     "Kane Brown": {
@@ -1309,7 +1309,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 702
+        "wks_on_chart": 728
       }
     },
     "Ava Max": {
@@ -1325,7 +1325,7 @@
         "entries": 36,
         "top10s": 21,
         "number1s": 5,
-        "wks_on_chart": 1587
+        "wks_on_chart": 1598
       }
     },
     "Lil Tjay": {
@@ -1349,7 +1349,7 @@
         "entries": 4,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 1198
+        "wks_on_chart": 1211
       }
     },
     "Maluma": {
@@ -1365,7 +1365,7 @@
         "entries": 13,
         "top10s": 12,
         "number1s": 3,
-        "wks_on_chart": 755
+        "wks_on_chart": 756
       }
     },
     "Hozier": {
@@ -1373,7 +1373,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 494
+        "wks_on_chart": 507
       }
     },
     "Sam Hunt": {
@@ -1397,23 +1397,23 @@
         "entries": 10,
         "top10s": 8,
         "number1s": 2,
-        "wks_on_chart": 1038
+        "wks_on_chart": 1063
       }
     },
     "NF": {
       "billboard200": {
-        "entries": 6,
-        "top10s": 4,
+        "entries": 7,
+        "top10s": 5,
         "number1s": 2,
-        "wks_on_chart": 331
+        "wks_on_chart": 335
       }
     },
     "Young Thug": {
       "billboard200": {
-        "entries": 12,
-        "top10s": 8,
+        "entries": 13,
+        "top10s": 9,
         "number1s": 3,
-        "wks_on_chart": 270
+        "wks_on_chart": 273
       }
     },
     "Glass Animals": {
@@ -1445,7 +1445,7 @@
         "entries": 10,
         "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 1044
+        "wks_on_chart": 1053
       }
     },
     "Silver Bullet Band": {
@@ -1453,7 +1453,7 @@
         "entries": 6,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 976
+        "wks_on_chart": 985
       }
     },
     "A Boogie Wit da Hoodie": {
@@ -1485,7 +1485,7 @@
         "entries": 15,
         "top10s": 6,
         "number1s": 2,
-        "wks_on_chart": 878
+        "wks_on_chart": 891
       }
     },
     "Lynyrd Skynyrd": {
@@ -1493,7 +1493,7 @@
         "entries": 15,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 465
+        "wks_on_chart": 474
       }
     },
     "Kanye West": {
@@ -1501,7 +1501,7 @@
         "entries": 10,
         "top10s": 10,
         "number1s": 9,
-        "wks_on_chart": 1289
+        "wks_on_chart": 1302
       }
     },
     "Luke Bryan": {
@@ -1522,18 +1522,18 @@
     },
     "Jason Aldean": {
       "billboard200": {
-        "entries": 12,
+        "entries": 13,
         "top10s": 10,
         "number1s": 4,
-        "wks_on_chart": 869
+        "wks_on_chart": 880
       }
     },
     "Bryson Tiller": {
       "billboard200": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 490
+        "wks_on_chart": 504
       }
     },
     "Bon Jovi": {
@@ -1573,7 +1573,7 @@
         "entries": 8,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 402
+        "wks_on_chart": 411
       }
     },
     "Parker McCollum": {
@@ -1613,7 +1613,7 @@
         "entries": 5,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 120
+        "wks_on_chart": 121
       }
     },
     "Adele": {
@@ -1629,7 +1629,7 @@
         "entries": 17,
         "top10s": 11,
         "number1s": 5,
-        "wks_on_chart": 947
+        "wks_on_chart": 973
       }
     },
     "Bradley Cooper": {
@@ -1770,18 +1770,18 @@
     },
     "Jeff Tweedy": {
       "billboard200": {
-        "entries": 3,
+        "entries": 4,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 3
+        "wks_on_chart": 4
       }
     },
     "Ashnikko": {
       "billboard200": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 2
+        "wks_on_chart": 3
       }
     },
     "KIDS SEE GHOSTS": {
@@ -1834,10 +1834,10 @@
     },
     "Daniel Caesar": {
       "billboard200": {
-        "entries": 3,
-        "top10s": 0,
+        "entries": 4,
+        "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 181
+        "wks_on_chart": 212
       }
     },
     "Black Pumas": {
@@ -1850,10 +1850,10 @@
     },
     "Gucci Mane": {
       "billboard200": {
-        "entries": 28,
+        "entries": 29,
         "top10s": 7,
         "number1s": 0,
-        "wks_on_chart": 242
+        "wks_on_chart": 243
       }
     },
     "Bring Me The Horizon": {
@@ -1874,10 +1874,10 @@
     },
     "Tame Impala": {
       "billboard200": {
-        "entries": 3,
-        "top10s": 2,
+        "entries": 4,
+        "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 237
+        "wks_on_chart": 260
       }
     },
     "50 Cent": {
@@ -1885,15 +1885,15 @@
         "entries": 8,
         "top10s": 6,
         "number1s": 2,
-        "wks_on_chart": 412
+        "wks_on_chart": 416
       }
     },
     "Grateful Dead": {
       "billboard200": {
-        "entries": 111,
+        "entries": 112,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 295
+        "wks_on_chart": 296
       }
     },
     "Weezer": {
@@ -1917,7 +1917,7 @@
         "entries": 14,
         "top10s": 7,
         "number1s": 4,
-        "wks_on_chart": 980
+        "wks_on_chart": 983
       }
     },
     "Steven Wilson": {
@@ -1941,7 +1941,7 @@
         "entries": 14,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 470
+        "wks_on_chart": 483
       }
     },
     "Pooh Shiesty": {
@@ -2013,7 +2013,7 @@
         "entries": 11,
         "top10s": 7,
         "number1s": 1,
-        "wks_on_chart": 891
+        "wks_on_chart": 904
       }
     },
     "TOMORROW": {
@@ -2045,7 +2045,7 @@
         "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 105
+        "wks_on_chart": 118
       }
     },
     "Usher": {
@@ -2053,7 +2053,7 @@
         "entries": 12,
         "top10s": 9,
         "number1s": 4,
-        "wks_on_chart": 581
+        "wks_on_chart": 584
       }
     },
     "Kevin Gates": {
@@ -2077,7 +2077,7 @@
         "entries": 5,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 68
+        "wks_on_chart": 69
       }
     },
     "Daft Punk": {
@@ -2130,10 +2130,10 @@
     },
     "Bob Dylan": {
       "billboard200": {
-        "entries": 49,
+        "entries": 50,
         "top10s": 9,
         "number1s": 2,
-        "wks_on_chart": 325
+        "wks_on_chart": 326
       }
     },
     "Special Guest George Harrison": {
@@ -2205,7 +2205,7 @@
         "entries": 9,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 122
+        "wks_on_chart": 127
       }
     },
     "ABBA": {
@@ -2213,7 +2213,7 @@
         "entries": 4,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 405
+        "wks_on_chart": 418
       }
     },
     "Niko Moon": {
@@ -2229,7 +2229,7 @@
         "entries": 7,
         "top10s": 6,
         "number1s": 3,
-        "wks_on_chart": 663
+        "wks_on_chart": 672
       }
     },
     "Chevelle": {
@@ -2274,10 +2274,10 @@
     },
     "Zara Larsson": {
       "billboard200": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 24
+        "wks_on_chart": 25
       }
     },
     "Camilo": {
@@ -2453,7 +2453,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 2,
-        "wks_on_chart": 208
+        "wks_on_chart": 211
       }
     },
     "Karol G": {
@@ -2461,7 +2461,7 @@
         "entries": 6,
         "top10s": 3,
         "number1s": 1,
-        "wks_on_chart": 219
+        "wks_on_chart": 228
       }
     },
     "24kGoldn": {
@@ -2477,7 +2477,7 @@
         "entries": 4,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 135
+        "wks_on_chart": 161
       }
     },
     "Lil Nas X": {
@@ -2509,7 +2509,7 @@
         "entries": 25,
         "top10s": 14,
         "number1s": 5,
-        "wks_on_chart": 1081
+        "wks_on_chart": 1090
       }
     },
     "Lil Wayne": {
@@ -2517,15 +2517,15 @@
         "entries": 24,
         "top10s": 13,
         "number1s": 5,
-        "wks_on_chart": 894
+        "wks_on_chart": 904
       }
     },
     "Demi Lovato": {
       "billboard200": {
-        "entries": 9,
-        "top10s": 8,
+        "entries": 10,
+        "top10s": 9,
         "number1s": 1,
-        "wks_on_chart": 276
+        "wks_on_chart": 277
       }
     },
     "DMX": {
@@ -2589,7 +2589,7 @@
         "entries": 12,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 330
+        "wks_on_chart": 331
       }
     },
     "Steve Miller Band": {
@@ -2677,7 +2677,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 172
+        "wks_on_chart": 173
       }
     },
     "Deftones": {
@@ -2685,7 +2685,7 @@
         "entries": 10,
         "top10s": 7,
         "number1s": 0,
-        "wks_on_chart": 125
+        "wks_on_chart": 131
       }
     },
     "Myke Towers": {
@@ -2757,7 +2757,7 @@
         "entries": 9,
         "top10s": 5,
         "number1s": 2,
-        "wks_on_chart": 524
+        "wks_on_chart": 527
       }
     },
     "Gojira": {
@@ -2837,7 +2837,7 @@
         "entries": 13,
         "top10s": 7,
         "number1s": 4,
-        "wks_on_chart": 461
+        "wks_on_chart": 462
       }
     },
     "iTZY": {
@@ -2981,15 +2981,15 @@
         "entries": 8,
         "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 58
+        "wks_on_chart": 59
       }
     },
     "Kodak Black": {
       "billboard200": {
-        "entries": 12,
+        "entries": 13,
         "top10s": 5,
         "number1s": 1,
-        "wks_on_chart": 263
+        "wks_on_chart": 264
       }
     },
     "Rob Moose": {
@@ -3066,10 +3066,10 @@
     },
     "Olivia Rodrigo": {
       "billboard200": {
-        "entries": 3,
+        "entries": 4,
         "top10s": 2,
         "number1s": 2,
-        "wks_on_chart": 335
+        "wks_on_chart": 362
       }
     },
     "42 Dugg": {
@@ -3229,7 +3229,7 @@
         "entries": 9,
         "top10s": 7,
         "number1s": 1,
-        "wks_on_chart": 52
+        "wks_on_chart": 57
       }
     },
     "Maroon 5": {
@@ -3370,10 +3370,10 @@
     },
     "Rauw Alejandro": {
       "billboard200": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 132
+        "wks_on_chart": 140
       }
     },
     "Beartooth": {
@@ -3437,15 +3437,15 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 55
+        "wks_on_chart": 68
       }
     },
     "G Herbo": {
       "billboard200": {
-        "entries": 9,
+        "entries": 10,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 59
+        "wks_on_chart": 62
       }
     },
     "jxdn": {
@@ -3469,7 +3469,7 @@
         "entries": 7,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 58
+        "wks_on_chart": 71
       }
     },
     "Maneskin": {
@@ -3509,7 +3509,7 @@
         "entries": 5,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 268
+        "wks_on_chart": 275
       }
     },
     "Destiny's Child": {
@@ -3802,10 +3802,10 @@
     },
     "Aerosmith": {
       "billboard200": {
-        "entries": 19,
-        "top10s": 8,
+        "entries": 20,
+        "top10s": 9,
         "number1s": 2,
-        "wks_on_chart": 747
+        "wks_on_chart": 757
       }
     },
     "Dave East": {
@@ -3834,10 +3834,10 @@
     },
     "Nas": {
       "billboard200": {
-        "entries": 23,
+        "entries": 24,
         "top10s": 15,
         "number1s": 5,
-        "wks_on_chart": 289
+        "wks_on_chart": 290
       }
     },
     "George Harrison": {
@@ -3885,7 +3885,7 @@
         "entries": 11,
         "top10s": 7,
         "number1s": 1,
-        "wks_on_chart": 238
+        "wks_on_chart": 241
       }
     },
     "YNW Melly": {
@@ -3957,7 +3957,7 @@
         "entries": 6,
         "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 199
+        "wks_on_chart": 205
       }
     },
     "Aaliyah": {
@@ -4013,7 +4013,7 @@
         "entries": 8,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 306
+        "wks_on_chart": 319
       }
     },
     "Turnstile": {
@@ -4154,10 +4154,10 @@
     },
     "Hayley Williams": {
       "billboard200": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 2
+        "wks_on_chart": 6
       }
     },
     "Mitchell Tenpenny": {
@@ -4306,10 +4306,10 @@
     },
     "Brandi Carlile": {
       "billboard200": {
-        "entries": 9,
-        "top10s": 4,
+        "entries": 10,
+        "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 63
+        "wks_on_chart": 64
       }
     },
     "Farruko": {
@@ -4357,7 +4357,7 @@
         "entries": 5,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 157
+        "wks_on_chart": 168
       }
     },
     "aespa": {
@@ -4421,7 +4421,7 @@
         "entries": 15,
         "top10s": 9,
         "number1s": 5,
-        "wks_on_chart": 564
+        "wks_on_chart": 571
       }
     },
     "Ice Nine Kills": {
@@ -4466,10 +4466,10 @@
     },
     "Wale": {
       "billboard200": {
-        "entries": 9,
+        "entries": 10,
         "top10s": 4,
         "number1s": 2,
-        "wks_on_chart": 92
+        "wks_on_chart": 95
       }
     },
     "Duran Duran": {
@@ -4589,7 +4589,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 10
+        "wks_on_chart": 11
       }
     },
     "Crypt-Kickers": {
@@ -4597,7 +4597,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 16
+        "wks_on_chart": 17
       }
     },
     "Limp Bizkit": {
@@ -4618,10 +4618,10 @@
     },
     "Radiohead": {
       "billboard200": {
-        "entries": 16,
+        "entries": 17,
         "top10s": 6,
         "number1s": 2,
-        "wks_on_chart": 299
+        "wks_on_chart": 313
       }
     },
     "Snail Mail": {
@@ -4973,7 +4973,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 12
+        "wks_on_chart": 16
       }
     },
     "Yeat": {
@@ -5093,7 +5093,7 @@
         "entries": 4,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 135
+        "wks_on_chart": 148
       }
     },
     "Aaron Lewis": {
@@ -5418,10 +5418,10 @@
     },
     "Stray Kids": {
       "billboard200": {
-        "entries": 8,
-        "top10s": 8,
-        "number1s": 8,
-        "wks_on_chart": 90
+        "entries": 9,
+        "top10s": 9,
+        "number1s": 9,
+        "wks_on_chart": 108
       }
     },
     "Charli XCX": {
@@ -5429,15 +5429,15 @@
         "entries": 4,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 80
+        "wks_on_chart": 93
       }
     },
     "Rosalia": {
       "billboard200": {
-        "entries": 1,
-        "top10s": 0,
+        "entries": 2,
+        "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 9
+        "wks_on_chart": 15
       }
     },
     "GAYLE": {
@@ -5765,7 +5765,7 @@
         "entries": 5,
         "top10s": 3,
         "number1s": 3,
-        "wks_on_chart": 292
+        "wks_on_chart": 305
       }
     },
     "Toro y Moi": {
@@ -5813,7 +5813,7 @@
         "entries": 8,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 304
+        "wks_on_chart": 311
       }
     },
     "Thrive Worship": {
@@ -5826,10 +5826,10 @@
     },
     "HARDY": {
       "billboard200": {
-        "entries": 3,
+        "entries": 4,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 105
+        "wks_on_chart": 107
       }
     },
     "Florence + The Machine": {
@@ -5869,7 +5869,7 @@
         "entries": 8,
         "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 532
+        "wks_on_chart": 569
       }
     },
     "Flume": {
@@ -6045,7 +6045,7 @@
         "entries": 11,
         "top10s": 5,
         "number1s": 0,
-        "wks_on_chart": 193
+        "wks_on_chart": 194
       }
     },
     "MUNA": {
@@ -6109,7 +6109,7 @@
         "entries": 8,
         "top10s": 3,
         "number1s": 2,
-        "wks_on_chart": 164
+        "wks_on_chart": 194
       }
     },
     "black midi": {
@@ -6277,7 +6277,7 @@
         "entries": 5,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 145
+        "wks_on_chart": 157
       }
     },
     "Game": {
@@ -6333,7 +6333,7 @@
         "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 93
+        "wks_on_chart": 98
       }
     },
     "Madonna": {
@@ -6373,7 +6373,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 13
+        "wks_on_chart": 14
       }
     },
     "Muse": {
@@ -6418,18 +6418,18 @@
     },
     "Romeo Santos": {
       "billboard200": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 73
+        "wks_on_chart": 75
       }
     },
     "YUNGBLUD": {
       "billboard200": {
-        "entries": 4,
-        "top10s": 0,
+        "entries": 5,
+        "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 4
+        "wks_on_chart": 5
       }
     },
     "Sha EK": {
@@ -6597,7 +6597,7 @@
         "entries": 14,
         "top10s": 6,
         "number1s": 2,
-        "wks_on_chart": 378
+        "wks_on_chart": 379
       }
     },
     "LUCKI": {
@@ -6610,10 +6610,10 @@
     },
     "Kelsea Ballerini": {
       "billboard200": {
-        "entries": 7,
+        "entries": 8,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 150
+        "wks_on_chart": 151
       }
     },
     "Marina": {
@@ -6741,7 +6741,7 @@
         "entries": 3,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 160
+        "wks_on_chart": 174
       }
     },
     "Noah Kahan": {
@@ -6749,7 +6749,7 @@
         "entries": 5,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 153
+        "wks_on_chart": 166
       }
     },
     "Backstreet Boys": {
@@ -6885,7 +6885,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 109
+        "wks_on_chart": 110
       }
     },
     "Ray Parker Jr.": {
@@ -6909,7 +6909,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 3
+        "wks_on_chart": 4
       }
     },
     "Demon Hunter": {
@@ -7125,7 +7125,7 @@
         "entries": 6,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 190
+        "wks_on_chart": 203
       }
     },
     "Miguel": {
@@ -7253,7 +7253,7 @@
         "entries": 3,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 32
+        "wks_on_chart": 35
       }
     },
     "Shakewell": {
@@ -7269,7 +7269,7 @@
         "entries": 3,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 69
+        "wks_on_chart": 82
       }
     },
     "Dierks Bentley": {
@@ -7402,10 +7402,10 @@
     },
     "NMIXX": {
       "billboard200": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 2
+        "wks_on_chart": 3
       }
     },
     "Yng Lvcas": {
@@ -7581,7 +7581,7 @@
         "entries": 4,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 178
+        "wks_on_chart": 204
       }
     },
     "Megan Moroney": {
@@ -7589,7 +7589,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 103
+        "wks_on_chart": 107
       }
     },
     "Smashing Pumpkins": {
@@ -7610,10 +7610,10 @@
     },
     "Jonas Brothers": {
       "billboard200": {
-        "entries": 12,
+        "entries": 13,
         "top10s": 8,
         "number1s": 3,
-        "wks_on_chart": 238
+        "wks_on_chart": 243
       }
     },
     "Grupo Marca Registrada": {
@@ -7637,7 +7637,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 1,
-        "wks_on_chart": 44
+        "wks_on_chart": 56
       }
     },
     "Tina Turner": {
@@ -7730,10 +7730,10 @@
     },
     "P1Harmony": {
       "billboard200": {
-        "entries": 4,
-        "top10s": 0,
+        "entries": 5,
+        "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 5
+        "wks_on_chart": 7
       }
     },
     "Extreme": {
@@ -7773,7 +7773,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 184
+        "wks_on_chart": 202
       }
     },
     "Kim Petras": {
@@ -7866,10 +7866,10 @@
     },
     "Colter Wall": {
       "billboard200": {
-        "entries": 3,
+        "entries": 4,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 3
+        "wks_on_chart": 4
       }
     },
     "Eric Dolphy": {
@@ -8042,10 +8042,10 @@
     },
     "Laufey": {
       "billboard200": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 67
+        "wks_on_chart": 93
       }
     },
     "Ashley McBryde": {
@@ -8058,10 +8058,10 @@
     },
     "BOYNEXTDOOR": {
       "billboard200": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 4
+        "wks_on_chart": 5
       }
     },
     "Diddy": {
@@ -8173,7 +8173,7 @@
         "entries": 4,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 114
+        "wks_on_chart": 116
       }
     },
     "Troye Sivan": {
@@ -8245,7 +8245,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 15
+        "wks_on_chart": 23
       }
     },
     "New Power Generation": {
@@ -8330,10 +8330,10 @@
     },
     "Creed": {
       "billboard200": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 3,
         "number1s": 2,
-        "wks_on_chart": 474
+        "wks_on_chart": 487
       }
     },
     "Cardo": {
@@ -8405,7 +8405,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 53
+        "wks_on_chart": 54
       }
     },
     "Celine Dion": {
@@ -8413,7 +8413,7 @@
         "entries": 17,
         "top10s": 13,
         "number1s": 5,
-        "wks_on_chart": 857
+        "wks_on_chart": 858
       }
     },
     "Luis R Conriquez": {
@@ -8466,10 +8466,10 @@
     },
     "Wings": {
       "billboard200": {
-        "entries": 7,
+        "entries": 8,
         "top10s": 6,
         "number1s": 5,
-        "wks_on_chart": 395
+        "wks_on_chart": 396
       }
     },
     "¥$: Kanye West": {
@@ -8621,7 +8621,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 79
+        "wks_on_chart": 92
       }
     },
     "Waxahatchee": {
@@ -8653,7 +8653,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 91
+        "wks_on_chart": 116
       }
     },
     "Vampire Weekend": {
@@ -8709,7 +8709,7 @@
         "entries": 8,
         "top10s": 4,
         "number1s": 1,
-        "wks_on_chart": 135
+        "wks_on_chart": 148
       }
     },
     "ILLIT": {
@@ -8805,7 +8805,7 @@
         "entries": 6,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 135
+        "wks_on_chart": 144
       }
     },
     "Twenty One Pilots": {
@@ -8813,7 +8813,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 9
+        "wks_on_chart": 16
       }
     },
     "Gabito Ballesteros": {
@@ -8829,7 +8829,7 @@
         "entries": 2,
         "top10s": 2,
         "number1s": 1,
-        "wks_on_chart": 107
+        "wks_on_chart": 108
       }
     },
     "Train": {
@@ -8845,7 +8845,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 69
+        "wks_on_chart": 82
       }
     },
     "Ayra Starr": {
@@ -8989,7 +8989,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 74
+        "wks_on_chart": 91
       }
     },
     "Red Clay Strays": {
@@ -9021,7 +9021,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 52
+        "wks_on_chart": 65
       }
     },
     "Gavin Adcock": {
@@ -9029,7 +9029,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 8
+        "wks_on_chart": 17
       }
     },
     "Red Velvet": {
@@ -9061,7 +9061,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 15
+        "wks_on_chart": 31
       }
     },
     "Zach Top": {
@@ -9069,7 +9069,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 62
+        "wks_on_chart": 75
       }
     },
     "Foster The People": {
@@ -9085,7 +9085,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 57
+        "wks_on_chart": 60
       }
     },
     "FONTAINES D.C.": {
@@ -9141,7 +9141,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 34
+        "wks_on_chart": 35
       }
     },
     "Oasis": {
@@ -9149,7 +9149,7 @@
         "entries": 11,
         "top10s": 3,
         "number1s": 0,
-        "wks_on_chart": 157
+        "wks_on_chart": 158
       }
     },
     "David Kushner": {
@@ -9218,10 +9218,10 @@
     },
     "Treaty Oak Revival": {
       "billboard200": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 25
+        "wks_on_chart": 35
       }
     },
     "Keith Urban": {
@@ -9261,7 +9261,7 @@
         "entries": 2,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 78
+        "wks_on_chart": 91
       }
     },
     "Tucker Wetmore": {
@@ -9269,7 +9269,7 @@
         "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 36
+        "wks_on_chart": 47
       }
     },
     "Aphex Twin": {
@@ -9309,7 +9309,7 @@
         "entries": 6,
         "top10s": 6,
         "number1s": 1,
-        "wks_on_chart": 365
+        "wks_on_chart": 378
       }
     },
     "Chino Pacas": {
@@ -9349,7 +9349,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 47
+        "wks_on_chart": 56
       }
     },
     "Jimmy Fallon": {
@@ -9410,10 +9410,10 @@
     },
     "Original Broadway Cast Recording": {
       "billboard200": {
-        "entries": 50,
+        "entries": 51,
         "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 344
+        "wks_on_chart": 350
       }
     },
     "FLO": {
@@ -9426,10 +9426,10 @@
     },
     "Cynthia Erivo": {
       "billboard200": {
-        "entries": 2,
-        "top10s": 1,
+        "entries": 3,
+        "top10s": 2,
         "number1s": 0,
-        "wks_on_chart": 24
+        "wks_on_chart": 38
       }
     },
     "Marilyn Manson": {
@@ -9517,7 +9517,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 33
+        "wks_on_chart": 34
       }
     },
     "Fetty Wap": {
@@ -9530,18 +9530,18 @@
     },
     "OsamaSon": {
       "billboard200": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 1
+        "wks_on_chart": 2
       }
     },
     "Hurricane Wisdom": {
       "billboard200": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 3
+        "wks_on_chart": 6
       }
     },
     "Role Model": {
@@ -9549,7 +9549,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 5
+        "wks_on_chart": 8
       }
     },
     "Neton Vega": {
@@ -9557,7 +9557,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 31
+        "wks_on_chart": 39
       }
     },
     "Clave Especial": {
@@ -9573,7 +9573,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 29
+        "wks_on_chart": 32
       }
     },
     "Killswitch Engage": {
@@ -9901,7 +9901,7 @@
         "entries": 5,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 17
+        "wks_on_chart": 23
       }
     },
     "Goo Goo Dolls": {
@@ -9909,7 +9909,7 @@
         "entries": 12,
         "top10s": 4,
         "number1s": 0,
-        "wks_on_chart": 245
+        "wks_on_chart": 246
       }
     },
     "Clipse": {
@@ -9933,7 +9933,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 10
+        "wks_on_chart": 23
       }
     },
     "Black Sabbath": {
@@ -9973,7 +9973,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 9
+        "wks_on_chart": 18
       }
     },
     "MGK": {
@@ -10005,7 +10005,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 5
+        "wks_on_chart": 16
       }
     },
     "sombr": {
@@ -10013,7 +10013,7 @@
         "entries": 1,
         "top10s": 1,
         "number1s": 0,
-        "wks_on_chart": 5
+        "wks_on_chart": 18
       }
     },
     "Josiah Queen": {
@@ -10085,7 +10085,7 @@
         "entries": 1,
         "top10s": 0,
         "number1s": 0,
-        "wks_on_chart": 2
+        "wks_on_chart": 5
       }
     },
     "CHAEYOUNG": {
@@ -10109,7 +10109,7 @@
         "entries": 18,
         "top10s": 7,
         "number1s": 2,
-        "wks_on_chart": 406
+        "wks_on_chart": 408
       }
     },
     "Buckingham Nicks": {
@@ -10129,6 +10129,182 @@
       }
     },
     "Favors": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "Olivia Dean": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 1,
+        "number1s": 0,
+        "wks_on_chart": 13
+      }
+    },
+    "Yfn Lucci": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 6
+      }
+    },
+    "Geese": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "AFI": {
+      "billboard200": {
+        "entries": 9,
+        "top10s": 4,
+        "number1s": 1,
+        "wks_on_chart": 104
+      }
+    },
+    "Waylon Jennings": {
+      "billboard200": {
+        "entries": 6,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 12
+      }
+    },
+    "Twice": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "Not For Radio": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "CxM: S.COUPS": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "MINGYU": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "Mobb Deep": {
+      "billboard200": {
+        "entries": 9,
+        "top10s": 4,
+        "number1s": 0,
+        "wks_on_chart": 106
+      }
+    },
+    "bbno$": {
+      "billboard200": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 2
+      }
+    },
+    "All Time Low": {
+      "billboard200": {
+        "entries": 11,
+        "top10s": 5,
+        "number1s": 0,
+        "wks_on_chart": 44
+      }
+    },
+    "Mammoth": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "Dayseeker": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "Lily Allen": {
+      "billboard200": {
+        "entries": 5,
+        "top10s": 1,
+        "number1s": 0,
+        "wks_on_chart": 64
+      }
+    },
+    "Florence + the Machine": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 1,
+        "number1s": 0,
+        "wks_on_chart": 2
+      }
+    },
+    "YEONJUN": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 1,
+        "number1s": 0,
+        "wks_on_chart": 2
+      }
+    },
+    "5 Seconds of Summer": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 1,
+        "number1s": 0,
+        "wks_on_chart": 1
+      }
+    },
+    "EsDeeKid": {
+      "billboard200": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 6
+      }
+    },
+    "Neighbourhood": {
+      "billboard200": {
+        "entries": 5,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 61
+      }
+    },
+    "Prince Royce": {
+      "billboard200": {
+        "entries": 7,
+        "top10s": 0,
+        "number1s": 0,
+        "wks_on_chart": 64
+      }
+    },
+    "DJ Premier": {
       "billboard200": {
         "entries": 1,
         "top10s": 0,
@@ -12262,14 +12438,6 @@
         "top10s": 0,
         "number1s": 0,
         "wks_on_chart": 12
-      }
-    },
-    "Waylon Jennings": {
-      "billboard200": {
-        "entries": 5,
-        "top10s": 0,
-        "number1s": 0,
-        "wks_on_chart": 11
       }
     },
     "Linear": {
@@ -20392,14 +20560,6 @@
         "wks_on_chart": 7
       }
     },
-    "Mobb Deep": {
-      "billboard200": {
-        "entries": 8,
-        "top10s": 4,
-        "number1s": 0,
-        "wks_on_chart": 105
-      }
-    },
     "Adina Howard": {
       "billboard200": {
         "entries": 1,
@@ -26582,14 +26742,6 @@
         "top10s": 2,
         "number1s": 0,
         "wks_on_chart": 100
-      }
-    },
-    "AFI": {
-      "billboard200": {
-        "entries": 8,
-        "top10s": 4,
-        "number1s": 1,
-        "wks_on_chart": 103
       }
     },
     "Good Charlotte": {
@@ -37592,14 +37744,6 @@
         "wks_on_chart": 4
       }
     },
-    "All Time Low": {
-      "billboard200": {
-        "entries": 10,
-        "top10s": 5,
-        "number1s": 0,
-        "wks_on_chart": 43
-      }
-    },
     "Jens Lekman": {
       "billboard200": {
         "entries": 2,
@@ -37686,14 +37830,6 @@
         "top10s": 0,
         "number1s": 0,
         "wks_on_chart": 1
-      }
-    },
-    "Lily Allen": {
-      "billboard200": {
-        "entries": 4,
-        "top10s": 1,
-        "number1s": 0,
-        "wks_on_chart": 62
       }
     },
     "Weakerthans": {
@@ -44040,14 +44176,6 @@
         "wks_on_chart": 2
       }
     },
-    "Prince Royce": {
-      "billboard200": {
-        "entries": 6,
-        "top10s": 0,
-        "number1s": 0,
-        "wks_on_chart": 62
-      }
-    },
     "Neon Trees": {
       "billboard200": {
         "entries": 3,
@@ -49886,14 +50014,6 @@
         "top10s": 0,
         "number1s": 0,
         "wks_on_chart": 10
-      }
-    },
-    "Neighbourhood": {
-      "billboard200": {
-        "entries": 4,
-        "top10s": 0,
-        "number1s": 0,
-        "wks_on_chart": 60
       }
     },
     "R5": {
@@ -59785,14 +59905,6 @@
       }
     },
     "Boosie Badazz": {
-      "billboard200": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0,
-        "wks_on_chart": 1
-      }
-    },
-    "bbno$": {
       "billboard200": {
         "entries": 1,
         "top10s": 0,

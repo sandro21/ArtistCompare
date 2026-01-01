@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "generated_at": "2025-10-05T19:33:49.714Z",
+    "generated_at": "2026-01-01T21:19:47.084Z",
     "source_url": "https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv",
     "min_year": 1990,
-    "total_artists": 4531,
-    "total_unique_songs": 15100,
+    "total_artists": 4555,
+    "total_unique_songs": 15195,
     "version": "1.0.0"
   },
   "artists": {
@@ -157,7 +157,7 @@
     },
     "Morgan Wallen": {
       "hot100": {
-        "entries": 107,
+        "entries": 108,
         "top10s": 19,
         "number1s": 4
       }
@@ -199,14 +199,14 @@
     },
     "His Orchestra": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 0,
         "number1s": 0
       }
     },
     "Ariana Grande": {
       "hot100": {
-        "entries": 97,
+        "entries": 99,
         "top10s": 24,
         "number1s": 9
       }
@@ -220,7 +220,7 @@
     },
     "Bing Crosby": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 0,
         "number1s": 0
       }
@@ -248,7 +248,7 @@
     },
     "Doja Cat": {
       "hot100": {
-        "entries": 29,
+        "entries": 31,
         "top10s": 9,
         "number1s": 2
       }
@@ -395,7 +395,7 @@
     },
     "Post Malone": {
       "hot100": {
-        "entries": 97,
+        "entries": 98,
         "top10s": 15,
         "number1s": 6
       }
@@ -423,14 +423,14 @@
     },
     "Drake": {
       "hot100": {
-        "entries": 362,
+        "entries": 363,
         "top10s": 81,
         "number1s": 13
       }
     },
     "21 Savage": {
       "hot100": {
-        "entries": 106,
+        "entries": 111,
         "top10s": 17,
         "number1s": 2
       }
@@ -486,7 +486,7 @@
     },
     "Young Thug": {
       "hot100": {
-        "entries": 97,
+        "entries": 98,
         "top10s": 6,
         "number1s": 3
       }
@@ -528,9 +528,9 @@
     },
     "Taylor Swift": {
       "hot100": {
-        "entries": 265,
-        "top10s": 59,
-        "number1s": 12
+        "entries": 277,
+        "top10s": 69,
+        "number1s": 13
       }
     },
     "Dan + Shay": {
@@ -549,7 +549,7 @@
     },
     "Lil Baby": {
       "hot100": {
-        "entries": 156,
+        "entries": 157,
         "top10s": 13,
         "number1s": 0
       }
@@ -570,7 +570,7 @@
     },
     "Latto": {
       "hot100": {
-        "entries": 11,
+        "entries": 12,
         "top10s": 2,
         "number1s": 1
       }
@@ -647,7 +647,7 @@
     },
     "Rod Wave": {
       "hot100": {
-        "entries": 89,
+        "entries": 90,
         "top10s": 0,
         "number1s": 0
       }
@@ -668,7 +668,7 @@
     },
     "Cody Johnson": {
       "hot100": {
-        "entries": 7,
+        "entries": 10,
         "top10s": 0,
         "number1s": 0
       }
@@ -759,7 +759,7 @@
     },
     "Summer Walker": {
       "hot100": {
-        "entries": 38,
+        "entries": 45,
         "top10s": 0,
         "number1s": 0
       }
@@ -871,7 +871,7 @@
     },
     "Luke Combs": {
       "hot100": {
-        "entries": 38,
+        "entries": 39,
         "top10s": 3,
         "number1s": 0
       }
@@ -927,7 +927,7 @@
     },
     "HARDY": {
       "hot100": {
-        "entries": 9,
+        "entries": 10,
         "top10s": 0,
         "number1s": 0
       }
@@ -1039,7 +1039,7 @@
     },
     "Chris Brown": {
       "hot100": {
-        "entries": 119,
+        "entries": 120,
         "top10s": 17,
         "number1s": 2
       }
@@ -1060,7 +1060,7 @@
     },
     "YoungBoy Never Broke Again": {
       "hot100": {
-        "entries": 102,
+        "entries": 103,
         "top10s": 1,
         "number1s": 0
       }
@@ -1207,8 +1207,8 @@
     },
     "Kehlani": {
       "hot100": {
-        "entries": 18,
-        "top10s": 0,
+        "entries": 19,
+        "top10s": 1,
         "number1s": 0
       }
     },
@@ -1291,7 +1291,7 @@
     },
     "Megan Thee Stallion": {
       "hot100": {
-        "entries": 40,
+        "entries": 41,
         "top10s": 4,
         "number1s": 3
       }
@@ -1319,8 +1319,8 @@
     },
     "Tate McRae": {
       "hot100": {
-        "entries": 23,
-        "top10s": 2,
+        "entries": 28,
+        "top10s": 3,
         "number1s": 1
       }
     },
@@ -1466,7 +1466,7 @@
     },
     "Yeat": {
       "hot100": {
-        "entries": 12,
+        "entries": 13,
         "top10s": 1,
         "number1s": 0
       }
@@ -1641,7 +1641,7 @@
     },
     "Yahritza y Su Esencia": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -1711,7 +1711,7 @@
     },
     "Parmalee": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 0,
         "number1s": 0
       }
@@ -1865,14 +1865,14 @@
     },
     "Don Toliver": {
       "hot100": {
-        "entries": 36,
+        "entries": 37,
         "top10s": 1,
         "number1s": 0
       }
     },
     "Kid Cudi": {
       "hot100": {
-        "entries": 27,
+        "entries": 28,
         "top10s": 2,
         "number1s": 1
       }
@@ -2005,7 +2005,7 @@
     },
     "Quavo": {
       "hot100": {
-        "entries": 35,
+        "entries": 37,
         "top10s": 6,
         "number1s": 1
       }
@@ -2089,7 +2089,7 @@
     },
     "Glorilla": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -2131,7 +2131,7 @@
     },
     "Joji": {
       "hot100": {
-        "entries": 5,
+        "entries": 7,
         "top10s": 1,
         "number1s": 0
       }
@@ -2432,7 +2432,7 @@
     },
     "Trippie Redd": {
       "hot100": {
-        "entries": 36,
+        "entries": 37,
         "top10s": 0,
         "number1s": 0
       }
@@ -2460,7 +2460,7 @@
     },
     "Jackson Dean": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -2544,7 +2544,7 @@
     },
     "David Guetta": {
       "hot100": {
-        "entries": 25,
+        "entries": 26,
         "top10s": 7,
         "number1s": 0
       }
@@ -2642,7 +2642,7 @@
     },
     "GloRilla": {
       "hot100": {
-        "entries": 14,
+        "entries": 15,
         "top10s": 2,
         "number1s": 0
       }
@@ -2663,7 +2663,7 @@
     },
     "Megan Moroney": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 0,
         "number1s": 0
       }
@@ -2719,7 +2719,7 @@
     },
     "Pooh Shiesty": {
       "hot100": {
-        "entries": 7,
+        "entries": 8,
         "top10s": 0,
         "number1s": 0
       }
@@ -2817,14 +2817,14 @@
     },
     "Metro Boomin": {
       "hot100": {
-        "entries": 87,
+        "entries": 89,
         "top10s": 10,
         "number1s": 1
       }
     },
     "Young Nudy": {
       "hot100": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 0,
         "number1s": 0
       }
@@ -2859,7 +2859,7 @@
     },
     "RAYE": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -2999,8 +2999,8 @@
     },
     "Sabrina Carpenter": {
       "hot100": {
-        "entries": 31,
-        "top10s": 5,
+        "entries": 32,
+        "top10s": 6,
         "number1s": 2
       }
     },
@@ -3174,7 +3174,7 @@
     },
     "NF": {
       "hot100": {
-        "entries": 12,
+        "entries": 17,
         "top10s": 0,
         "number1s": 0
       }
@@ -3447,7 +3447,7 @@
     },
     "Sexyy Red": {
       "hot100": {
-        "entries": 9,
+        "entries": 10,
         "top10s": 1,
         "number1s": 0
       }
@@ -3475,7 +3475,7 @@
     },
     "Playboi Carti": {
       "hot100": {
-        "entries": 54,
+        "entries": 55,
         "top10s": 8,
         "number1s": 2
       }
@@ -3573,7 +3573,7 @@
     },
     "Fall Out Boy": {
       "hot100": {
-        "entries": 22,
+        "entries": 23,
         "top10s": 4,
         "number1s": 0
       }
@@ -3650,7 +3650,7 @@
     },
     "Diplo": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 1,
         "number1s": 0
       }
@@ -3769,7 +3769,7 @@
     },
     "Teddy Swims": {
       "hot100": {
-        "entries": 6,
+        "entries": 7,
         "top10s": 1,
         "number1s": 1
       }
@@ -3916,7 +3916,7 @@
     },
     "Tyla": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 1,
         "number1s": 0
       }
@@ -4000,7 +4000,7 @@
     },
     "Stray Kids": {
       "hot100": {
-        "entries": 4,
+        "entries": 5,
         "top10s": 0,
         "number1s": 0
       }
@@ -4028,7 +4028,7 @@
     },
     "John Scott Trotter": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -4049,7 +4049,7 @@
     },
     "BigXthaPlug": {
       "hot100": {
-        "entries": 12,
+        "entries": 13,
         "top10s": 1,
         "number1s": 0
       }
@@ -4728,7 +4728,7 @@
     },
     "Ella Langley": {
       "hot100": {
-        "entries": 5,
+        "entries": 6,
         "top10s": 0,
         "number1s": 0
       }
@@ -5141,7 +5141,7 @@
     },
     "Loe Shimmy": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5225,7 +5225,7 @@
     },
     "Cynthia Erivo": {
       "hot100": {
-        "entries": 5,
+        "entries": 8,
         "top10s": 0,
         "number1s": 0
       }
@@ -5267,7 +5267,7 @@
     },
     "Jonathan Bailey": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5337,7 +5337,7 @@
     },
     "Gwen Stefani": {
       "hot100": {
-        "entries": 20,
+        "entries": 21,
         "top10s": 5,
         "number1s": 1
       }
@@ -5436,7 +5436,7 @@
     "Leon Thomas": {
       "hot100": {
         "entries": 1,
-        "top10s": 0,
+        "top10s": 1,
         "number1s": 0
       }
     },
@@ -5534,7 +5534,7 @@
     "sombr": {
       "hot100": {
         "entries": 3,
-        "top10s": 0,
+        "top10s": 1,
         "number1s": 0
       }
     },
@@ -5568,7 +5568,7 @@
     },
     "YKNIECE": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5911,7 +5911,7 @@
     },
     "jessie murph": {
       "hot100": {
-        "entries": 1,
+        "entries": 2,
         "top10s": 0,
         "number1s": 0
       }
@@ -5932,7 +5932,7 @@
     },
     "Mariah the Scientist": {
       "hot100": {
-        "entries": 2,
+        "entries": 3,
         "top10s": 0,
         "number1s": 0
       }
@@ -5981,8 +5981,8 @@
     },
     "Olivia Dean": {
       "hot100": {
-        "entries": 1,
-        "top10s": 0,
+        "entries": 6,
+        "top10s": 1,
         "number1s": 0
       }
     },
@@ -6005,6 +6005,223 @@
         "entries": 19,
         "top10s": 16,
         "number1s": 6
+      }
+    },
+    "Tame Impala": {
+      "hot100": {
+        "entries": 3,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Breskii": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "YK NIECE": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Phil Wickham": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Mellow Rackz": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "A Boogie wit da Hoodie": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "JISOO": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "ZAYN": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Josiah Queen": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Le Sserafim": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "J-Hope": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Emmanuell Cortes": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Rockin' CJB": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "ROSALIA": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Emmanuel Cortes": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "MGK": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "James Arthur": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Anderson .Paak": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Monaleo": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Blake Roman": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Tones": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 1,
+        "number1s": 0
+      }
+    },
+    "I": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 1,
+        "number1s": 0
+      }
+    },
+    "Skooly": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "She": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Him": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "KATO": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Jon": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "EsDeeKid": {
+      "hot100": {
+        "entries": 2,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Andrews Sisters": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Rico Ace": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
+      }
+    },
+    "Sienna Spiro": {
+      "hot100": {
+        "entries": 1,
+        "top10s": 0,
+        "number1s": 0
       }
     },
     "Phil Collins": {
@@ -26083,13 +26300,6 @@
         "number1s": 0
       }
     },
-    "MGK": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
     "2Cellos": {
       "hot100": {
         "entries": 1,
@@ -29044,13 +29254,6 @@
         "number1s": 0
       }
     },
-    "James Arthur": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
     "XYLO": {
       "hot100": {
         "entries": 1,
@@ -30647,20 +30850,6 @@
         "number1s": 0
       }
     },
-    "Tones": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 1,
-        "number1s": 0
-      }
-    },
-    "I": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 1,
-        "number1s": 0
-      }
-    },
     "Ant Clemons": {
       "hot100": {
         "entries": 3,
@@ -30788,13 +30977,6 @@
       }
     },
     "Royce da 5'9\"": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
-    "Anderson .Paak": {
       "hot100": {
         "entries": 1,
         "top10s": 0,
@@ -31270,13 +31452,6 @@
         "number1s": 0
       }
     },
-    "Andrews Sisters": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
     "Popp Hunna": {
       "hot100": {
         "entries": 1,
@@ -31327,13 +31502,6 @@
       }
     },
     "Tenille Arts": {
-      "hot100": {
-        "entries": 1,
-        "top10s": 0,
-        "number1s": 0
-      }
-    },
-    "ROSALIA": {
       "hot100": {
         "entries": 1,
         "top10s": 0,
