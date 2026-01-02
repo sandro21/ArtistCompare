@@ -4,21 +4,35 @@ const https = require('https');
 
 // Configuration
 const BILLBOARD200_CSV_URL = 'https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv';
-const OUTPUT_FILE = 'data/billboard200-stats.json';
-const MIN_YEAR = 1990; // Only include data from 1990 onwards
+const OUTPUT_FILE = 'data/billboard200-stats-test.json';
+const MIN_YEAR = 1990;
 
-console.log('🎵 Starting accurate Billboard 200 data processing...');
+// List of 50 popular artists to test (includes artists with known capitalization issues)
+const TEST_ARTISTS = [
+  'Jay Z', 'JAY Z', 'Jay-Z', 'JAY-Z', // Test capitalization variants
+  'Drake', 'Taylor Swift', 'The Weeknd', 'Ariana Grande', 'Ed Sheeran',
+  'Post Malone', 'Billie Eilish', 'Dua Lipa', 'The Beatles', 'Eminem',
+  'Kanye West', 'Kendrick Lamar', 'Rihanna', 'Beyoncé', 'Bruno Mars',
+  'Justin Bieber', 'Adele', 'The Weeknd', 'Travis Scott', 'Lil Nas X',
+  'Cardi B', 'Nicki Minaj', 'SZA', 'Doja Cat', 'Megan Thee Stallion',
+  'Bad Bunny', 'J Balvin', 'The Rolling Stones', 'Queen', 'Elton John',
+  'Madonna', 'Michael Jackson', 'Prince', 'David Bowie', 'Bob Dylan',
+  'Stevie Wonder', 'Marvin Gaye', 'Aretha Franklin', 'Whitney Houston',
+  'Mariah Carey', 'Celine Dion', 'Shania Twain', 'Garth Brooks', 'Kenny Chesney',
+  'Luke Combs', 'Morgan Wallen', 'Chris Stapleton', 'Miranda Lambert'
+];
+
+console.log('🧪 TEST MODE: Processing Billboard 200 data for 50 popular artists only...');
 console.log(`📅 Processing data from ${MIN_YEAR} onwards`);
 console.log(`🔗 Source: ${BILLBOARD200_CSV_URL}`);
+console.log(`📝 Testing with ${TEST_ARTISTS.length} artists`);
 
 function normalizeArtistName(name) {
   if (!name) return '';
   return name
     .toLowerCase()
     .trim()
-    // Don't remove "the" or other words - keep original structure
-    // Don't remove punctuation - features like "Drake Featuring Rihanna" should stay distinct
-    .replace(/\s+/g, ' ') // Only collapse multiple spaces
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -40,7 +54,6 @@ function normalizeForGrouping(name) {
 function splitArtistCollaborations(performerText) {
   if (!performerText) return [];
   
-  // Split on common collaboration indicators
   const splitPatterns = [
     / featuring /i,
     / feat\.? /i,
@@ -54,7 +67,6 @@ function splitArtistCollaborations(performerText) {
   
   let artists = [performerText];
   
-  // Apply each split pattern
   splitPatterns.forEach(pattern => {
     let newArtists = [];
     artists.forEach(artist => {
@@ -64,20 +76,17 @@ function splitArtistCollaborations(performerText) {
     artists = newArtists;
   });
   
-  // Clean up each artist name
   return artists
     .map(artist => artist.trim())
     .filter(artist => artist.length > 0)
     .filter(artist => {
-      // Filter out common filler words that aren't artist names
       const lowerArtist = artist.toLowerCase();
       return !['the', 'and', 'or', 'his', 'her', 'orchestra', 'band', 'choir'].includes(lowerArtist);
     })
     .map(artist => {
-      // Clean up common prefixes/suffixes
       return artist
-        .replace(/^(the\s+)/i, '') // Remove leading "The"
-        .replace(/\s+(featuring|feat\.?|ft\.?|with).*$/i, '') // Remove trailing featuring clauses
+        .replace(/^(the\s+)/i, '')
+        .replace(/\s+(featuring|feat\.?|ft\.?|with).*$/i, '')
         .trim();
     })
     .filter(artist => artist.length > 0);
@@ -87,7 +96,7 @@ function normalizeAlbumTitle(title) {
   if (!title) return '';
   return title
     .toLowerCase()
-    .replace(/\s+/g, ' ') // Only collapse multiple spaces - keep punctuation for distinctness
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -95,11 +104,19 @@ function createAlbumKey(title, performer) {
   return `${normalizeAlbumTitle(title)}|||${normalizeArtistName(performer)}`;
 }
 
+// Check if artist should be included in test
+function shouldIncludeArtist(artistName) {
+  const normalized = normalizeForGrouping(artistName);
+  // Check if any test artist (normalized) matches
+  return TEST_ARTISTS.some(testArtist => normalizeForGrouping(testArtist) === normalized);
+}
+
 function downloadAndProcessBillboard200() {
   return new Promise((resolve, reject) => {
     const allEntries = [];
     let totalRows = 0;
     let filteredRows = 0;
+    let testArtistRows = 0;
 
     console.log('📥 Downloading Billboard 200 CSV data...');
     
@@ -116,22 +133,30 @@ function downloadAndProcessBillboard200() {
           // Filter for year and valid positions
           if (chartYear >= MIN_YEAR && !isNaN(peakPosition) && peakPosition >= 1 && peakPosition <= 200) {
             filteredRows++;
-            allEntries.push({
-              performer: row.performer.trim(),
-              title: row.title.trim(),
-              peakPosition: peakPosition,
-              currentPosition: isNaN(currentPosition) ? peakPosition : currentPosition,
-              chartWeek: row.chart_week,
-              chartYear: chartYear,
-              weeksOnChart: weeksOnChart
-            });
+            
+            // Check if this entry involves any of our test artists
+            const individualArtists = splitArtistCollaborations(row.performer.trim());
+            const hasTestArtist = individualArtists.some(artist => shouldIncludeArtist(artist));
+            
+            if (hasTestArtist) {
+              testArtistRows++;
+              allEntries.push({
+                performer: row.performer.trim(),
+                title: row.title.trim(),
+                peakPosition: peakPosition,
+                currentPosition: isNaN(currentPosition) ? peakPosition : currentPosition,
+                chartWeek: row.chart_week,
+                chartYear: chartYear,
+                weeksOnChart: weeksOnChart
+              });
+            }
           }
         })
         .on('end', () => {
           console.log(`✅ Downloaded and filtered data:`);
           console.log(`   Total rows processed: ${totalRows.toLocaleString()}`);
           console.log(`   Rows after filtering: ${filteredRows.toLocaleString()}`);
-          console.log(`   Filtered out: ${(totalRows - filteredRows).toLocaleString()} rows`);
+          console.log(`   Rows with test artists: ${testArtistRows.toLocaleString()}`);
           
           processBillboard200Data(allEntries);
           resolve();
@@ -164,11 +189,9 @@ function processBillboard200Data(entries) {
       });
     } else {
       const existing = uniqueAlbums.get(albumKey);
-      // Keep the best (lowest number) peak position
       if (entry.peakPosition < existing.bestPeakPosition) {
         existing.bestPeakPosition = entry.peakPosition;
       }
-      // Use the maximum weeks on chart seen for this album
       if (entry.weeksOnChart > existing.totalWeeksOnChart) {
         existing.totalWeeksOnChart = entry.weeksOnChart;
       }
@@ -183,11 +206,14 @@ function processBillboard200Data(entries) {
   const performerStats = new Map();
   
   uniqueAlbums.forEach((album, albumKey) => {
-    // Split the performer into individual artists
     const individualArtists = splitArtistCollaborations(album.performer);
     
-    // Count this album for each individual artist
     individualArtists.forEach(artist => {
+      // Only process if this artist is in our test list
+      if (!shouldIncludeArtist(artist)) {
+        return;
+      }
+      
       // Normalize the artist name for grouping (merges variants like "Jay Z" and "JAY-Z")
       const normalizedKey = normalizeForGrouping(artist);
       
@@ -217,15 +243,14 @@ function processBillboard200Data(entries) {
   // Step 3: Create final output structure
   const finalStats = {};
   
-  performerStats.forEach((stats, performer) => {
-    finalStats[performer] = {
+  performerStats.forEach((stats, normalizedKey) => {
+    finalStats[normalizedKey] = {
       billboard200: {
         entries: stats.entries,
         top10s: stats.top10s,
         number1s: stats.number1s,
         wks_on_chart: stats.wks_on_chart
       }
-      // Removed detailed album info - only keeping essential numbers
     };
   });
   
@@ -237,7 +262,9 @@ function processBillboard200Data(entries) {
       min_year: MIN_YEAR,
       total_artists: Object.keys(finalStats).length,
       total_unique_albums: uniqueAlbums.size,
-      version: '1.0.0'
+      version: '1.0.0-test',
+      test_mode: true,
+      test_artists: TEST_ARTISTS
     },
     artists: finalStats
   };
@@ -254,53 +281,32 @@ function processBillboard200Data(entries) {
   
   fs.writeFileSync(OUTPUT_FILE, formattedJson);
   
-  console.log(`✅ Billboard 200 stats saved to ${OUTPUT_FILE}`);
-  console.log(`📊 Processed ${Object.keys(finalStats).length.toLocaleString()} unique artists`);
+  console.log(`✅ Billboard 200 test stats saved to ${OUTPUT_FILE}`);
+  console.log(`📊 Processed ${Object.keys(finalStats).length.toLocaleString()} unique artists (normalized)`);
   
-  // Show some sample stats for verification
-  console.log('\n🔍 Sample stats for verification:');
-  const sampleArtists = ['Drake', 'Taylor Swift', 'The Beatles', 'Madonna', 'Elton John'];
+  // Show stats for verification
+  console.log('\n🔍 Stats for verification:');
+  const sampleArtists = ['Jay Z', 'Drake', 'Taylor Swift', 'The Beatles', 'Madonna', 'Elton John'];
   
   sampleArtists.forEach(artistName => {
-    // Try to find exact or partial match
-    let found = null;
-    let matchType = 'none';
+    const normalizedKey = normalizeForGrouping(artistName);
+    const stats = finalStats[normalizedKey];
     
-    // First try exact match
-    for (const [performer, stats] of Object.entries(finalStats)) {
-      if (normalizeArtistName(performer) === normalizeArtistName(artistName)) {
-        found = stats;
-        matchType = 'exact';
-        break;
-      }
-    }
-    
-    // Then try partial match
-    if (!found) {
-      for (const [performer, stats] of Object.entries(finalStats)) {
-        if (normalizeArtistName(performer).includes(normalizeArtistName(artistName))) {
-          found = stats;
-          matchType = 'partial';
-          break;
-        }
-      }
-    }
-    
-    if (found) {
-      console.log(`   ${artistName} (${matchType}): ${found.billboard200.entries} entries, ${found.billboard200.top10s} top 10s, ${found.billboard200.number1s} #1s, ${found.billboard200.wks_on_chart} weeks`);
+    if (stats) {
+      console.log(`   ${artistName} (${normalizedKey}): ${stats.billboard200.entries} entries, ${stats.billboard200.top10s} top 10s, ${stats.billboard200.number1s} #1s, ${stats.billboard200.wks_on_chart} weeks`);
     } else {
-      console.log(`   ${artistName}: Not found`);
+      console.log(`   ${artistName} (${normalizedKey}): Not found`);
     }
   });
   
-  console.log('\n✨ Processing complete! Check the numbers against Drake reference data.');
+  console.log('\n✨ Test processing complete! Check the numbers against Billboard.com for accuracy.');
 }
 
 // Run the processor
 if (require.main === module) {
   downloadAndProcessBillboard200()
     .then(() => {
-      console.log('🎉 Billboard 200 processing completed successfully!');
+      console.log('🎉 Billboard 200 test processing completed successfully!');
     })
     .catch(error => {
       console.error('❌ Error processing Billboard 200 data:', error);
@@ -309,3 +315,4 @@ if (require.main === module) {
 }
 
 module.exports = { downloadAndProcessBillboard200 };
+

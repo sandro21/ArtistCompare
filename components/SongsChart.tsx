@@ -8,10 +8,23 @@ interface SongsChartProps {
   artistB: Artist | null;
 }
 
+// Normalize artist name for Billboard lookup - converts to lowercase with dashes
+function normalizeForLookup(name: string): string {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')        // Replace spaces with dashes
+    .replace(/[^\w-]/g, '')      // Remove special characters except alphanumeric and dashes
+    .replace(/-+/g, '-')         // Collapse multiple dashes into single dash
+    .replace(/^-|-$/g, '');      // Remove leading/trailing dashes
+}
+
 const SongsChart: React.FC<SongsChartProps> = ({ artistA, artistB }) => {
   // Get Hot 100 stats by directly indexing the JSON data
-  const artistAName = artistA?.artistName || artistA?.name || '';
-  const artistBName = artistB?.artistName || artistB?.name || '';
+  // Normalize artist names to match the normalized keys in Billboard data
+  const artistAName = normalizeForLookup(artistA?.artistName || artistA?.name || '');
+  const artistBName = normalizeForLookup(artistB?.artistName || artistB?.name || '');
   
   const artistAHot100 = (hot100Data.artists as any)[artistAName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };
   const artistBHot100 = (hot100Data.artists as any)[artistBName] || { hot100: { entries: 0, top10s: 0, number1s: 0 } };

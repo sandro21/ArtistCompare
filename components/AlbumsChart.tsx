@@ -7,10 +7,23 @@ interface AlbumsChartProps {
   artistB: any;
 }
 
+// Normalize artist name for Billboard lookup - converts to lowercase with dashes
+function normalizeForLookup(name: string): string {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')        // Replace spaces with dashes
+    .replace(/[^\w-]/g, '')      // Remove special characters except alphanumeric and dashes
+    .replace(/-+/g, '-')         // Collapse multiple dashes into single dash
+    .replace(/^-|-$/g, '');      // Remove leading/trailing dashes
+}
+
 const AlbumsChart: React.FC<AlbumsChartProps> = ({ artistA, artistB }) => {
   // Get Billboard 200 stats by directly indexing the JSON data
-  const artistA200 = (billboard200Data.artists as any)[artistA?.artistName] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
-  const artistB200 = (billboard200Data.artists as any)[artistB?.artistName] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
+  // Normalize artist names to match the normalized keys in Billboard data
+  const artistA200 = (billboard200Data.artists as any)[normalizeForLookup(artistA?.artistName || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
+  const artistB200 = (billboard200Data.artists as any)[normalizeForLookup(artistB?.artistName || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
 
   return (
     <>
