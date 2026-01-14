@@ -96,7 +96,7 @@ function HomeContent() {
               <div className="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center">
                 Settle The <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Debate</span>
               </div>
-              <div className="text-white font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-center">Choose Two Artists and See Who's Better. Numbers Don't Lie.</div>
+              <div className="text-white font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-center">Choose Two Artists and See Who's Better.</div>
             </div>
 
             {/* Search Bar Components */}
