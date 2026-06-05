@@ -1,45 +1,28 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export const runtime = 'nodejs';
 
-// Old User-Agent forces Google Fonts to serve TTF (not woff2).
-// Satori only renders TTF/OTF — woff2 silently falls back to system font.
-const LEGACY_UA = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)';
-
 type FontDef = { name: string; data: ArrayBuffer; weight: 700 | 800; style: 'normal' };
 
-// Module-level cache — persists across requests on the same serverless instance.
-// Fonts are fetched once on cold start, then served instantly from memory.
-let _fontCache: FontDef[] | null = null;
-
-async function fetchFont(weight: 700 | 800): Promise<ArrayBuffer | null> {
+// Loaded once at module evaluation — synchronous disk read, zero network.
+function loadFonts(): FontDef[] {
   try {
-    const css = await fetch(
-      `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@${weight}&display=swap`,
-      { headers: { 'User-Agent': LEGACY_UA } },
-    ).then((r) => r.text());
-
-    const match = css.match(/url\(['"]?([^'")\s]+)['"]?\)/);
-    if (!match?.[1]) return null;
-
-    return fetch(match[1]).then((r) => r.arrayBuffer());
+    const base = join(process.cwd(), 'public', 'fonts');
+    const f700 = readFileSync(join(base, 'pjs-700.ttf'));
+    const f800 = readFileSync(join(base, 'pjs-800.ttf'));
+    return [
+      { name: 'PJS', data: f700.buffer.slice(f700.byteOffset, f700.byteOffset + f700.byteLength), weight: 700, style: 'normal' },
+      { name: 'PJS', data: f800.buffer.slice(f800.byteOffset, f800.byteOffset + f800.byteLength), weight: 800, style: 'normal' },
+    ];
   } catch {
-    return null;
+    return [];
   }
 }
 
-async function getFonts(): Promise<FontDef[]> {
-  if (_fontCache) return _fontCache;
-
-  const [f700, f800] = await Promise.all([fetchFont(700), fetchFont(800)]);
-
-  _fontCache = [];
-  if (f700) _fontCache.push({ name: 'PJS', data: f700, weight: 700, style: 'normal' });
-  if (f800) _fontCache.push({ name: 'PJS', data: f800, weight: 800, style: 'normal' });
-
-  return _fontCache;
-}
+const FONTS = loadFonts();
 
 function fmt(n: number): string {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
@@ -68,7 +51,7 @@ export async function GET(request: NextRequest) {
 
   // Load all three weights in parallel
   // Cached — instant after first cold start
-  const fonts = await getFonts();
+  const fonts = FONTS;
 
   const F  = fonts.length ? "'PJS', system-ui, sans-serif" : 'system-ui, sans-serif';
   const W  = 1200;
