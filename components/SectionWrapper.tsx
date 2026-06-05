@@ -35,34 +35,36 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         <button
           onClick={() => onShare(sharePayload!)}
           aria-label="Share this section"
-          className="absolute top-4 right-4 flex items-center justify-center transition-all duration-150"
+          className="absolute bottom-4 left-5 flex items-center gap-1.5 transition-all duration-150"
           style={{
-            width: 28,
-            height: 28,
-            borderRadius: '50%',
+            height: 26,
+            borderRadius: '2rem',
             background: 'rgba(94,233,181,0.08)',
-            border: '1px solid rgba(94,233,181,0.22)',
+            border: '1px solid rgba(94,233,181,0.38)',
             color: '#5EE9B5',
             cursor: 'pointer',
-            padding: 0,
+            padding: '0 10px 0 8px',
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.18)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.50)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.16)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.60)';
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.08)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.22)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.38)';
           }}
         >
-          {/* Share-nodes icon — three connected circles (universal internet share) */}
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          {/* Share-nodes icon — three connected circles */}
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none" style={{ flexShrink: 0 }}>
             <circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
             <circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
             <circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
             <line x1="3.8" y1="5.8" x2="9.2" y2="3.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
             <line x1="3.8" y1="7.2" x2="9.2" y2="9.8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
           </svg>
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.03em', lineHeight: 1 }}>
+            Share
+          </span>
         </button>
       )}
 
