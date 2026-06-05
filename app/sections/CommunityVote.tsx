@@ -14,7 +14,6 @@ interface CommunityVoteProps {
 type Phase =
   | { kind: 'idle' }
   | { kind: 'loading'; pending: 'a' | 'b' }
-  | { kind: 'voted-pending'; total: number; voted: 'a' | 'b' }
   | { kind: 'result'; votesA: number; votesB: number; voted: 'a' | 'b' };
 
 function pairKey(n1: string, n2: string): string {
@@ -59,11 +58,7 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
     voted: 'a' | 'b',
   ): Phase {
     const { votesA, votesB } = mapDbToDisplay(dbVA, dbVB);
-    const total = votesA + votesB;
-    if (total >= VOTE_THRESHOLD) {
-      return { kind: 'result', votesA, votesB, voted };
-    }
-    return { kind: 'voted-pending', total, voted };
+    return { kind: 'result', votesA, votesB, voted };
   }
 
   // On mount: restore previous vote for this pair
@@ -109,7 +104,7 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
 
   if (!artistA || !artistB) return null;
 
-  /* ── Results view (30+ votes) ── */
+  /* ── Results view ── */
   if (phase.kind === 'result') {
     const total = phase.votesA + phase.votesB;
     const pctA = Math.round((phase.votesA / total) * 100);
@@ -156,44 +151,12 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
           <span className="text-white font-bold text-base sm:text-lg">{pctB}%</span>
         </div>
 
-        {/* Total vote count */}
-        <p className="text-center text-white/30 text-xs mt-2">
-          {total.toLocaleString()} votes cast
-        </p>
-      </SectionWrapper>
-    );
-  }
-
-  /* ── Voted but not enough votes yet ── */
-  if (phase.kind === 'voted-pending') {
-    const votedName = phase.voted === 'a' ? nameA : nameB;
-    const progress = Math.min(phase.total, VOTE_THRESHOLD);
-
-    return (
-      <SectionWrapper header="Community's Favorite">
-        <div className="flex flex-col items-center gap-3 py-2">
-          <p className="text-white/70 text-sm text-center">
-            You voted for <span className="text-[#5EE9B5] font-semibold">{votedName}</span>
+        {/* Vote count — only shown once the pair has enough votes */}
+        {total >= VOTE_THRESHOLD && (
+          <p className="text-center text-white/30 text-xs mt-2">
+            {total.toLocaleString()} votes cast
           </p>
-          {/* Progress toward threshold */}
-          <div className="w-full flex flex-col gap-1.5">
-            <div
-              className="w-full h-2 rounded-full overflow-hidden"
-              style={{ background: 'rgba(255,255,255,0.08)' }}
-            >
-              <div
-                className="h-full rounded-full transition-all duration-500"
-                style={{
-                  width: `${(progress / VOTE_THRESHOLD) * 100}%`,
-                  background: 'rgba(94,233,181,0.65)',
-                }}
-              />
-            </div>
-            <p className="text-center text-xs text-white/35">
-              {progress} / {VOTE_THRESHOLD} votes — results reveal at {VOTE_THRESHOLD}
-            </p>
-          </div>
-        </div>
+        )}
       </SectionWrapper>
     );
   }
