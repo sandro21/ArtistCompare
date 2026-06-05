@@ -35,32 +35,33 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         <button
           onClick={() => onShare(sharePayload!)}
           aria-label="Share this section"
-          className="absolute top-4 right-4 flex items-center justify-center transition-opacity duration-150"
+          className="absolute top-4 right-4 flex items-center justify-center transition-all duration-150"
           style={{
-            width: 30,
-            height: 30,
+            width: 28,
+            height: 28,
             borderRadius: '50%',
-            background: 'rgba(255,255,255,0.07)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            color: 'rgba(255,255,255,0.40)',
+            background: 'rgba(94,233,181,0.08)',
+            border: '1px solid rgba(94,233,181,0.22)',
+            color: '#5EE9B5',
             cursor: 'pointer',
             padding: 0,
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.15)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.18)';
             (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.50)';
-            (e.currentTarget as HTMLButtonElement).style.color = '#5EE9B5';
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.07)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.40)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.08)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(94,233,181,0.22)';
           }}
         >
-          {/* Upload / share arrow icon */}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M7 1v7M4.5 3.5L7 1l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M2.5 9v2A1.5 1.5 0 004 12.5h6A1.5 1.5 0 0011.5 11V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          {/* Share-nodes icon — three connected circles (universal internet share) */}
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
+            <circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
+            <circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.3"/>
+            <line x1="3.8" y1="5.8" x2="9.2" y2="3.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+            <line x1="3.8" y1="7.2" x2="9.2" y2="9.8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
           </svg>
         </button>
       )}
