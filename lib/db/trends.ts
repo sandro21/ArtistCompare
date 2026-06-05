@@ -238,53 +238,78 @@ export async function getDatabaseStatus() {
 	}
 }
 
+export interface QueryLogGeo {
+	city?: string | null;
+	regionName?: string | null;
+	countryCode?: string | null;
+	org?: string | null;
+}
+
+let queryLogsSchemaReady: Promise<void> | null = null;
+
+async function ensureQueryLogsSchema(): Promise<void> {
+	if (!queryLogsSchemaReady) {
+		queryLogsSchemaReady = (async () => {
+			await sql`
+				CREATE TABLE IF NOT EXISTS query_logs (
+					id SERIAL PRIMARY KEY,
+					artist_a TEXT NOT NULL,
+					artist_b TEXT NOT NULL,
+					created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+				)
+			`;
+
+			await sql`
+				ALTER TABLE query_logs 
+				ADD COLUMN IF NOT EXISTS ip_address TEXT,
+				ADD COLUMN IF NOT EXISTS user_agent TEXT,
+				ADD COLUMN IF NOT EXISTS session_id TEXT,
+				ADD COLUMN IF NOT EXISTS referrer TEXT,
+				ADD COLUMN IF NOT EXISTS origin TEXT,
+				ADD COLUMN IF NOT EXISTS request_headers JSONB,
+				ADD COLUMN IF NOT EXISTS city TEXT,
+				ADD COLUMN IF NOT EXISTS region_name TEXT,
+				ADD COLUMN IF NOT EXISTS country_code TEXT,
+				ADD COLUMN IF NOT EXISTS org TEXT
+			`;
+
+			await sql`
+				CREATE INDEX IF NOT EXISTS idx_query_logs_artists 
+				ON query_logs(artist_a, artist_b)
+			`;
+
+			await sql`
+				CREATE INDEX IF NOT EXISTS idx_query_logs_created_at 
+				ON query_logs(created_at DESC)
+			`;
+
+			await sql`
+				CREATE INDEX IF NOT EXISTS idx_query_logs_ip_address 
+				ON query_logs(ip_address)
+			`;
+
+			await sql`
+				CREATE INDEX IF NOT EXISTS idx_query_logs_session_id 
+				ON query_logs(session_id)
+			`;
+
+			await sql`
+				CREATE INDEX IF NOT EXISTS idx_query_logs_country_code 
+				ON query_logs(country_code)
+			`;
+		})();
+	}
+
+	return queryLogsSchemaReady;
+}
+
 /**
  * Initialize the query logs table
  * Tracks all artist comparisons for analytics
  */
 export async function initializeQueryLogsTable() {
 	try {
-		await sql`
-			CREATE TABLE IF NOT EXISTS query_logs (
-				id SERIAL PRIMARY KEY,
-				artist_a TEXT NOT NULL,
-				artist_b TEXT NOT NULL,
-				created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-			)
-		`;
-		
-		// Add new columns if they don't exist (for existing tables)
-		await sql`
-			ALTER TABLE query_logs 
-			ADD COLUMN IF NOT EXISTS ip_address TEXT,
-			ADD COLUMN IF NOT EXISTS user_agent TEXT,
-			ADD COLUMN IF NOT EXISTS session_id TEXT,
-			ADD COLUMN IF NOT EXISTS referrer TEXT,
-			ADD COLUMN IF NOT EXISTS origin TEXT,
-			ADD COLUMN IF NOT EXISTS request_headers JSONB
-		`;
-		
-		// Create indexes for common queries
-		await sql`
-			CREATE INDEX IF NOT EXISTS idx_query_logs_artists 
-			ON query_logs(artist_a, artist_b)
-		`;
-		
-		await sql`
-			CREATE INDEX IF NOT EXISTS idx_query_logs_created_at 
-			ON query_logs(created_at DESC)
-		`;
-		
-		await sql`
-			CREATE INDEX IF NOT EXISTS idx_query_logs_ip_address 
-			ON query_logs(ip_address)
-		`;
-		
-		await sql`
-			CREATE INDEX IF NOT EXISTS idx_query_logs_session_id 
-			ON query_logs(session_id)
-		`;
-		
+		await ensureQueryLogsSchema();
 		console.log('✅ Query logs table initialized');
 		return true;
 	} catch (error) {
@@ -304,22 +329,45 @@ export async function logQuery(
 	sessionId?: string | null,
 	referrer?: string | null,
 	origin?: string | null,
-	requestHeaders?: Record<string, string> | null
+	requestHeaders?: Record<string, string> | null,
+	geo?: QueryLogGeo | null,
 ): Promise<boolean> {
 	try {
+		await ensureQueryLogsSchema();
+
 		const headersJson = requestHeaders ? JSON.stringify(requestHeaders) : null;
-		
-		if (headersJson) {
-			await sql`
-				INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id, referrer, origin, request_headers)
-				VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null}, ${referrer || null}, ${origin || null}, ${headersJson}::jsonb)
-			`;
-		} else {
-			await sql`
-				INSERT INTO query_logs (artist_a, artist_b, ip_address, user_agent, session_id, referrer, origin, request_headers)
-				VALUES (${artistA}, ${artistB}, ${ipAddress || null}, ${userAgent || null}, ${sessionId || null}, ${referrer || null}, ${origin || null}, NULL)
-			`;
-		}
+
+		await sql`
+			INSERT INTO query_logs (
+				artist_a,
+				artist_b,
+				ip_address,
+				user_agent,
+				session_id,
+				referrer,
+				origin,
+				request_headers,
+				city,
+				region_name,
+				country_code,
+				org
+			)
+			VALUES (
+				${artistA},
+				${artistB},
+				${ipAddress || null},
+				${userAgent || null},
+				${sessionId || null},
+				${referrer || null},
+				${origin || null},
+				${headersJson}::jsonb,
+				${geo?.city || null},
+				${geo?.regionName || null},
+				${geo?.countryCode || null},
+				${geo?.org || null}
+			)
+		`;
+
 		return true;
 	} catch (error) {
 		console.error('Error logging query:', error);

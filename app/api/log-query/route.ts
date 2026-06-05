@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { logQuery } from '@/lib/db/trends';
+import { lookupIpGeo } from '@/lib/geo/ip-api';
 import { cookies } from 'next/headers';
 
 // Generate or get session ID from cookie
@@ -61,8 +62,20 @@ export async function POST(request: Request) {
 			if (value) requestHeaders[name] = value;
 		}
 
-		// Log query (fire-and-forget style, don't block on errors)
-		await logQuery(artistA, artistB, ipAddress, userAgent, finalSessionId, referrer, origin, requestHeaders);
+		const geo = await lookupIpGeo(ipAddress);
+
+		// Log query (don't block user response on DB errors)
+		await logQuery(
+			artistA,
+			artistB,
+			ipAddress,
+			userAgent,
+			finalSessionId,
+			referrer,
+			origin,
+			requestHeaders,
+			geo,
+		);
 
 		const response = NextResponse.json({ ok: true, sessionId: finalSessionId });
 		
