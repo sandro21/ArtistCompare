@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
 import { getTrackDetails } from '../../../lib/spotify';
+import { parseMetricValue } from '../../../lib/utils/formatters';
 
 // Simple in-memory cache for top tracks to avoid repeated requests
 interface CacheEntry { data: any; expires: number }
@@ -70,6 +71,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// Extract a stat value from Music Metrics Vault's card layout (label p → value p)
+function extractStatCardValue($: cheerio.CheerioAPI, label: string): string {
+  let value = '';
+  $('p.text-sm.font-medium.text-gray-500').each((_index, element) => {
+    if ($(element).text().trim() === label) {
+      value = $(element).next('p.text-2xl.font-bold.text-gray-900').text().trim();
+      return false;
+    }
+  });
+  return value;
+}
+
 // Function to fetch artist metrics from individual artist page
 async function fetchArtistMetrics(artistName: string, spotifyId: string) {
   const url = `https://www.musicmetricsvault.com/artists/${encodeURIComponent(artistName)}/${spotifyId}`;
@@ -91,41 +104,9 @@ async function fetchArtistMetrics(artistName: string, spotifyId: string) {
     const html = await response.text();
     const $ = cheerio.load(html);
 
-    // Extract total streams
-    let totalStreams = '';
-    $('h2').each((_index: number, element: any) => {
-      const text = $(element).text().trim();
-      if (text === 'Total plays') {
-        const parentDiv = $(element).closest('div');
-        const nextDiv = parentDiv.next('div');
-        totalStreams = nextDiv.find('div').first().text().trim();
-        return false; // break the loop
-      }
-    });
-
-    // Extract monthly listeners
-    let monthlyListeners = '';
-    $('h2').each((_index: number, element: any) => {
-      const text = $(element).text().trim();
-      if (text === 'Monthly listeners') {
-        const parentDiv = $(element).closest('div');
-        const nextDiv = parentDiv.next('div');
-        monthlyListeners = nextDiv.text().trim();
-        return false; // break the loop
-      }
-    });
-
-    // Extract followers
-    let followers = '';
-    $('h2').each((_index: number, element: any) => {
-      const text = $(element).text().trim();
-      if (text === 'Followers') {
-        const parentDiv = $(element).closest('div');
-        const nextDiv = parentDiv.next('div');
-        followers = nextDiv.text().trim();
-        return false; // break the loop
-      }
-    });
+    const monthlyListeners = extractStatCardValue($, 'Monthly Listeners');
+    const followers = extractStatCardValue($, 'Followers');
+    const totalStreams = extractStatCardValue($, 'Total Streams');
 
     console.log(`✅ Successfully fetched metrics for ${artistName}`);
     return {
@@ -161,6 +142,76 @@ async function fetchArtistRanking(artistName: string) {
   }
 }
 
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#039;/g, "'");
+}
+
+function findArtistRankInHtml($: cheerio.CheerioAPI, artistName: string): number | null {
+  const normalizedName = artistName.toLowerCase();
+
+  // Primary: Livewire snapshot contains the full ranked artist list
+  const snapshotEls = $('[wire\\:snapshot]');
+  for (let i = 0; i < snapshotEls.length; i++) {
+    const raw = $(snapshotEls[i]).attr('wire:snapshot');
+    if (!raw?.includes('allArtists')) continue;
+
+    try {
+      const data = JSON.parse(decodeHtmlEntities(raw));
+      const allArtists = data?.data?.allArtists?.[0];
+      if (!Array.isArray(allArtists)) continue;
+
+      for (const entry of allArtists) {
+        const artist = entry?.[0];
+        if (artist?.name?.toLowerCase() === normalizedName) {
+          const rank = artist._original_rank;
+          return typeof rank === 'number' ? rank : null;
+        }
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  // Fallback: JSON-LD ItemList (limited to top entries)
+  const jsonLdScripts = $('script[type="application/ld+json"]');
+  for (let i = 0; i < jsonLdScripts.length; i++) {
+    try {
+      const data = JSON.parse($(jsonLdScripts[i]).html() || '');
+      if (data['@type'] !== 'ItemList' || !Array.isArray(data.itemListElement)) continue;
+
+      const match = data.itemListElement.find(
+        (item: { item?: { name?: string }; position?: number }) =>
+          item?.item?.name?.toLowerCase() === normalizedName,
+      );
+      if (match?.position) return match.position;
+    } catch {
+      continue;
+    }
+  }
+
+  // Fallback: visible ranking rows in the initial HTML
+  let ranking: number | null = null;
+  $('div.flex.items-center.gap-4.p-3').each((_index, element) => {
+    const $row = $(element);
+    const name = $row.find('h3.text-sm.font-semibold').text().trim();
+    if (name.toLowerCase() === normalizedName) {
+      const rankText = $row.find('.w-8.text-center span').first().text().trim();
+      const parsed = parseInt(rankText, 10);
+      if (!isNaN(parsed)) {
+        ranking = parsed;
+        return false;
+      }
+    }
+  });
+
+  return ranking;
+}
+
 // Helper function to fetch ranking from a specific page
 async function fetchRankingFromPage(artistName: string, url: string) {
   const response = await fetch(url, {
@@ -177,26 +228,7 @@ async function fetchRankingFromPage(artistName: string, url: string) {
   const html = await response.text();
   const $ = cheerio.load(html);
 
-  let ranking = null;
-
-  // Look for the artist in the table rows
-  $('tr').each((_index: number, row: any) => {
-    const $row = $(row);
-    
-    // Check if this row contains the artist name
-    const xShowAttr = $row.attr('x-show');
-    if (xShowAttr && xShowAttr.includes(`'${artistName}'`)) {
-      // Extract the ranking number from the first td
-      const rankingText = $row.find('td:first-child div').text().trim();
-      const parsedRanking = parseInt(rankingText);
-      if (!isNaN(parsedRanking)) {
-        ranking = parsedRanking;
-        return false; // break the loop
-      }
-    }
-  });
-
-  return ranking;
+  return findArtistRankInHtml($, artistName);
 }
 
 // Function to fetch top tracks from Music Metrics Vault
@@ -340,49 +372,38 @@ async function fetchTopTracksFromMusicMetrics(artistName: string, spotifyId: str
 
   const tracks: any[] = [];
 
-  // Find the "Most popular tracks" section and extract the table data
+  // Find the "Popular Tracks" section and extract list items
   $('h2').each((_index: number, element: any) => {
     const text = $(element).text().trim();
-    if (text === 'Most popular tracks') {
-      // Navigate to the table within this section
-      const parentDiv = $(element).closest('div');
-      const tableContainer = parentDiv.parent().find('table');
-      
-      // Extract data from table rows (skip header)
-      tableContainer.find('tbody tr').each((rowIndex: number, row: any) => {
-        if (rowIndex >= 5) return false; // Only get top 5 tracks
+    if (text === 'Popular Tracks') {
+      const section = $(element).closest('.bg-white.rounded-xl, .bg-white.shadow-sm, section, div').first();
+      const trackRows = section.find('.divide-y > div.flex.items-center.gap-4');
+
+      trackRows.each((rowIndex: number, row: any) => {
+        if (rowIndex >= 5) return false;
 
         const $row = $(row);
-        
-        // Extract image
-        const imgElement = $row.find('img').first();
-        const albumImage = imgElement.attr('data-src') || imgElement.attr('src') || null;
-        
-        // Extract track name and Spotify URL
-        const trackCell = $row.find('td:nth-child(2)');
-        const trackName = trackCell.find('.font-medium').text().trim();
-        const spotifyLink = trackCell.find('a[href*="spotify.com"]').attr('href') || '';
-        
-        // Extract play count
-        const playsCell = $row.find('td:nth-child(3)');
-        const playsText = playsCell.text().trim().replace(/,/g, '');
-        const totalStreams = parseInt(playsText) || 0;
-        
+        const trackName = $row.find('p.text-sm.font-medium.text-gray-900').first().text().trim();
+        const streamsText = $row.find('.text-right p.text-sm.font-semibold.text-gray-900').first().text().trim();
+        const spotifyLink = $row.find('a[href*="spotify.com/track/"]').attr('href') || '';
+        const albumImage = $row.find('img').attr('src') || $row.find('img').attr('data-src') || null;
+        const totalStreams = parseMetricValue(streamsText);
+
         if (trackName && totalStreams > 0) {
           tracks.push({
             name: trackName,
             url: spotifyLink,
             totalStreams,
             totalStreamsFormatted: totalStreams.toLocaleString('en-US'),
-            dailyStreams: null, // Music Metrics Vault doesn't provide daily streams
+            dailyStreams: null,
             dailyStreamsFormatted: null,
             albumImage,
-            albumName: null // Could be extracted if needed, but not required per user request
+            albumName: null,
           });
         }
       });
-      
-      return false; // break the outer loop
+
+      return false;
     }
   });
 

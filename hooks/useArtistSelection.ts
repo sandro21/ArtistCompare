@@ -1,100 +1,123 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { generateComparisonUrl } from '../lib/seo-utils';
-import type { Artist, ArtistPair } from '../types';
+import { getArtistName } from '../lib/utils/artist';
+import type { Artist, ArtistPair, SelectedArtist } from '../types';
 
 export const useArtistSelection = (startLoadingAnimation: () => void, isInitialLoading: boolean) => {
   const [pair, setPair] = useState<ArtistPair | null>(null);
-  const searchBarRef = useRef<any>(null);
+  const [selectedA, setSelectedA] = useState<SelectedArtist | null>(null);
+  const [selectedB, setSelectedB] = useState<SelectedArtist | null>(null);
   const searchParams = useSearchParams();
-  const hasUrlParams = searchParams.get('artist1') && searchParams.get('artist2');
+  const hasUrlParams = !!(searchParams.get('artist1') && searchParams.get('artist2'));
 
   const onSelectPair = useCallback((a: Artist, b: Artist) => {
-    // Prevent comparing the same artist
     if (a.spotifyId && b.spotifyId && a.spotifyId === b.spotifyId) {
-      return; // Same artist, don't proceed
+      return;
     }
-    
-    // Set pair first
+
     setPair({ a, b });
-    
-    // Start loading only if not already loading
+
     if (!isInitialLoading) {
       startLoadingAnimation();
     }
-    
-    // Generate SEO-friendly URL and update browser history
-    if (a.artistName && b.artistName) {
-      const seoUrl = generateComparisonUrl(a.artistName, b.artistName);
+
+    const aName = getArtistName(a);
+    const bName = getArtistName(b);
+    if (aName && bName) {
+      const seoUrl = generateComparisonUrl(aName, bName);
       window.history.pushState({}, '', seoUrl);
-      
-      // Log query to database (fire-and-forget)
-      // Get session ID from cookie if it exists
+
       const getCookie = (name: string) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop()?.split(';').shift();
         return null;
       };
-      
+
       fetch('/api/log-query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          artistA: a.artistName, 
-          artistB: b.artistName,
-          sessionId: getCookie('session_id')
-        })
+        body: JSON.stringify({
+          artistA: aName,
+          artistB: bName,
+          sessionId: getCookie('session_id'),
+        }),
       }).catch(err => console.error('Failed to log query:', err));
     }
   }, [isInitialLoading, startLoadingAnimation]);
 
+  const onSelectA = useCallback((artist: SelectedArtist | null) => {
+    setSelectedA(artist);
+  }, []);
+
+  const onSelectB = useCallback((artist: SelectedArtist | null) => {
+    setSelectedB(artist);
+  }, []);
+
+  // Trigger comparison once per unique pair — guarded so callback identity changes
+  // (e.g. isInitialLoading flipping) don't re-fire the comparison and restart loading.
+  const lastFiredRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (selectedA && selectedB) {
+      const key = `${selectedA.spotifyId}|${selectedB.spotifyId}`;
+      if (lastFiredRef.current !== key) {
+        lastFiredRef.current = key;
+        onSelectPair(selectedA as unknown as Artist, selectedB as unknown as Artist);
+      }
+    } else {
+      lastFiredRef.current = null;
+    }
+  }, [selectedA, selectedB, onSelectPair]);
+
+  const resetPair = useCallback(() => {
+    setPair(null);
+    setSelectedA(null);
+    setSelectedB(null);
+    lastFiredRef.current = null;
+  }, []);
+
   const handleBattleClick = useCallback(async (artist1: string, artist2: string) => {
     try {
-      // Search for both artists
-      const [search1, search2] = await Promise.all([
-        fetch(`/api/spotify-search?q=${encodeURIComponent(artist1)}&limit=1`),
-        fetch(`/api/spotify-search?q=${encodeURIComponent(artist2)}&limit=1`)
+      const settled = await Promise.allSettled([
+        fetch(`/api/spotify-search?q=${encodeURIComponent(artist1)}&limit=1`).then(r => r.json()),
+        fetch(`/api/spotify-search?q=${encodeURIComponent(artist2)}&limit=1`).then(r => r.json()),
       ]);
 
-      const [data1, data2] = await Promise.all([
-        search1.json(),
-        search2.json()
-      ]);
+      const data1 = settled[0].status === 'fulfilled' ? settled[0].value : null;
+      const data2 = settled[1].status === 'fulfilled' ? settled[1].value : null;
 
-      if (data1.results?.[0] && data2.results?.[0]) {
-        const artistA = {
-          artistName: data1.results[0].name,
-          spotifyImageUrl: data1.results[0].image || 'https://via.placeholder.com/64?text=?',
-          spotifyId: data1.results[0].id,
-        } as Artist;
+      const r1 = data1?.results?.[0];
+      const r2 = data2?.results?.[0];
 
-        const artistB = {
-          artistName: data2.results[0].name,
-          spotifyImageUrl: data2.results[0].image || 'https://via.placeholder.com/64?text=?',
-          spotifyId: data2.results[0].id,
-        } as Artist;
+      if (r1 && r2) {
+        const artistA: SelectedArtist = {
+          artistName: r1.name,
+          spotifyImageUrl: r1.image || 'https://via.placeholder.com/64?text=?',
+          spotifyId: r1.id,
+        };
 
-        // Set artists in search bars and call onSelectPair
-        if (searchBarRef.current) {
-          searchBarRef.current.setSelectedArtists(artistA, artistB);
-        }
-        onSelectPair(artistA, artistB);
+        const artistB: SelectedArtist = {
+          artistName: r2.name,
+          spotifyImageUrl: r2.image || 'https://via.placeholder.com/64?text=?',
+          spotifyId: r2.id,
+        };
+
+        setSelectedA(artistA);
+        setSelectedB(artistB);
       }
     } catch (error) {
       console.error('Error searching for artists:', error);
     }
-  }, [onSelectPair]);
+  }, []);
 
   // Handle URL parameters for SEO-friendly URLs
   useEffect(() => {
     const artist1 = searchParams.get('artist1');
     const artist2 = searchParams.get('artist2');
-    
+
     if (artist1 && artist2 && !pair) {
-      // Start loading immediately
       startLoadingAnimation();
-      // Pre-populate search bars with URL parameters
       handleBattleClick(artist1, artist2);
     }
   }, [searchParams, pair, handleBattleClick, startLoadingAnimation]);
@@ -102,21 +125,20 @@ export const useArtistSelection = (startLoadingAnimation: () => void, isInitialL
   // Handle browser back button
   useEffect(() => {
     const handlePopState = () => {
-      // When user clicks back button, reset to homepage
-      setPair(null);
+      resetPair();
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [setPair]);
+  }, [resetPair]);
 
   return {
     pair,
-    setPair,
-    searchBarRef,
+    resetPair,
+    selectedA,
+    selectedB,
+    onSelectA,
+    onSelectB,
     hasUrlParams,
-    onSelectPair,
-    handleBattleClick,
   };
 };
-

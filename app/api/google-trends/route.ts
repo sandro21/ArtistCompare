@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { 
-	getMultipleArtistTrends, 
-	saveArtistTrends, 
+import {
+	getMultipleArtistTrends,
+	saveArtistTrends,
 	saveMultipleArtistTrends,
 	getDatabaseStatus,
-	getQueryStatistics
+	getQueryStatistics,
 } from '@/lib/db/trends';
 
 // Function to combine two artists' individual data for comparison
@@ -163,8 +163,11 @@ export async function GET(request: Request) {
 		if (!artistAData || !artistBData) {
 			const queryString = `${a},${b}`;
 			const response = await fetch(`https://serpapi.com/search?engine=google_trends&q=${queryString}&date=all&data_type=TIMESERIES&api_key=${apiKey}`);
+			if (!response.ok) {
+				throw new Error(`SerpAPI request failed: HTTP ${response.status}`);
+			}
 			const data = await response.json();
-			
+
 			// Process artist data from API response
 			const timelineData = data.interest_over_time.timeline_data;
 			
@@ -306,28 +309,24 @@ export async function POST(request: Request) {
 
 // helper function to filter data by range: (all, 10yr, 5yr, 1yr)
 function filterDataByRange(data: any[], range: string) {
-	const now = new Date();
-	
+	if (range === 'all') return data;
+
+	const boundary = new Date();
 	switch (range) {
-		case '1y': {
-			const oneYearAgo = new Date();
-			oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-			return data.filter(item => new Date(item.date) >= oneYearAgo);
-		}
-		case '5y': {
-			const fiveYearsAgo = new Date();
-			fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
-			return data.filter(item => new Date(item.date) >= fiveYearsAgo);
-		}
-		case '10y': {
-			const tenYearsAgo = new Date();
-			tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
-			return data.filter(item => new Date(item.date) >= tenYearsAgo);
-		}
-		case 'all':
-		default: {
-			return data; // Return all data
-		}
+		case '1y':
+			boundary.setFullYear(boundary.getFullYear() - 1);
+			break;
+		case '5y':
+			boundary.setFullYear(boundary.getFullYear() - 5);
+			break;
+		case '10y':
+			boundary.setFullYear(boundary.getFullYear() - 10);
+			break;
+		default:
+			return data;
 	}
+
+	const boundaryTime = boundary.getTime();
+	return data.filter(item => new Date(item.date).getTime() >= boundaryTime);
 }
 

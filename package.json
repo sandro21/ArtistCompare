@@ -9,7 +9,8 @@
     "lint": "next lint",
     "postbuild": "node scripts/post-build.js",
     "pre-populate": "node scripts/pre-populate.js",
-    "init-db": "node scripts/init-db.js"
+    "init-db": "node scripts/init-db.js",
+    "update-billboard": "node scripts/process-hot100-accurate.js && node scripts/process-billboard200-accurate.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",

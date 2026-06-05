@@ -48,16 +48,18 @@ export async function POST(request: Request) {
 		const ipAddress = getClientIp(request);
 		const userAgent = request.headers.get('user-agent') || null;
 		const finalSessionId = sessionId || await getOrCreateSessionId();
-		
+
 		// Get referrer and origin
 		const referrer = request.headers.get('referer') || request.headers.get('referrer') || null;
 		const origin = request.headers.get('origin') || null;
-		
-		// Get all request headers as JSON object
+
+		// Whitelist headers — only persist what we actually need to keep
+		const HEADER_WHITELIST = ['user-agent', 'referer'] as const;
 		const requestHeaders: Record<string, string> = {};
-		request.headers.forEach((value, key) => {
-			requestHeaders[key] = value;
-		});
+		for (const name of HEADER_WHITELIST) {
+			const value = request.headers.get(name);
+			if (value) requestHeaders[name] = value;
+		}
 
 		// Log query (fire-and-forget style, don't block on errors)
 		await logQuery(artistA, artistB, ipAddress, userAgent, finalSessionId, referrer, origin, requestHeaders);

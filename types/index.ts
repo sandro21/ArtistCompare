@@ -68,6 +68,21 @@ export interface MusicMetrics {
   streamRank?: number | null;
 }
 
+// Spotify artist details (songs/albums/singles totals)
+export interface SpotifyDetails {
+  totalTracks: number;
+  totalAlbums: number;
+  totalSingles: number;
+  totalReleases: number;
+}
+
+// Used by SearchBar selection callbacks
+export interface SelectedArtist {
+  artistName: string;
+  spotifyImageUrl: string;
+  spotifyId: string;
+}
+
 // Component prop types
 export interface ArtistComponentProps {
   artistA: Artist | null;
