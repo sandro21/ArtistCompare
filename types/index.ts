@@ -14,11 +14,6 @@ export interface Artist {
     monthlyListeners: number;
     totalStreams: number;
   };
-  riaaCertifications?: {
-    Gold: number;
-    Platinum: number;
-    Diamond: number;
-  };
   charts?: {
     billboardHot100Number1s: number;
     billboardHot100Top10s: number;

@@ -1,7 +1,7 @@
 {
   "name": "Artist Compare - Music Artist Comparison Tool",
   "short_name": "Artist Compare",
-  "description": "Compare music artists side-by-side with detailed stats, Billboard charts, Grammy awards, RIAA certifications, and streaming data",
+  "description": "Compare music artists side-by-side with detailed stats, Billboard charts, Grammy awards, and streaming data",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0D110F",

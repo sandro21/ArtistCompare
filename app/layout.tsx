@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: "Compare Music Artists - Stats, Charts & Awards | Artist Compare",
     template: "%s | Artist Compare"
   },
-  description: "Compare music artists side-by-side with comprehensive data from Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming statistics. Discover who's more successful between your favorite artists with detailed analytics and visualizations.",
+  description: "Compare music artists side-by-side with comprehensive data from Billboard charts, Grammy awards, and Spotify streaming statistics. Discover who's more successful between your favorite artists with detailed analytics and visualizations.",
   keywords: [
     "compare artists",
     "music artist comparison", 
@@ -41,8 +41,6 @@ export const metadata: Metadata = {
     "more charted artist",
     "less awarded artist",
     "more awarded artist",
-    "less certified artist",
-    "more certified artist",
     "less nominated artist",
     "more nominated artist",
     "less wins artist",
@@ -151,7 +149,6 @@ export default function RootLayout({
               "featureList": [
                 "Billboard Charts Comparison",
                 "Grammy Awards Statistics",
-                "RIAA Certifications",
                 "Spotify Streaming Data",
                 "Artist Statistics",
                 "Google Trends"

@@ -194,10 +194,6 @@ function HomeContent() {
                 <Awards artistA={duo[0]} artistB={duo[1]} />
                 <GoogleTrends artistA={duo[0]} artistB={duo[1]} />
                 
-                {/* <div className="animate-in fade-in duration-1000 delay-1400">
-                  <RiaaCertifications artistA={duo[0]} artistB={duo[1]} />
-                </div> */}
-                
               </section>
             )}
           </>

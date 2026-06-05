@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'About Artist Compare - Music Artist Comparison Tool | Billboard Charts, Grammy Awards & Spotify Data',
-  description: 'Discover Artist Compare - the ultimate music artist comparison platform. Compare Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data. Free tool for music fans and industry professionals.',
+  description: 'Discover Artist Compare - the ultimate music artist comparison platform. Compare Billboard charts, Grammy awards, and Spotify streaming data. Free tool for music fans and industry professionals.',
   keywords: [
     'artist compare',
     'music comparison tool',
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
     'grammy awards comparison',
     'spotify streaming data',
     'music artist statistics',
-    'RIAA certifications',
     'music industry data',
     'artist popularity comparison',
     'music analytics',
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'About Artist Compare - Music Artist Comparison Tool',
-    description: 'The comprehensive platform for comparing music artists across Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming data.',
+    description: 'The comprehensive platform for comparing music artists across Billboard charts, Grammy awards, and Spotify streaming data.',
     type: 'website',
     url: 'https://artist-compare.com/about',
     siteName: 'Artist Compare',
@@ -75,7 +74,7 @@ export default function AboutPage() {
             The Ultimate <span className="bg-gradient-to-r from-white/100 to-[#5EE9B5] bg-clip-text text-transparent">Music Comparison</span> Platform
           </h1>
           <p className="text-white font-medium text-2xl text-center max-w-4xl">
-            Compare your favorite artists with comprehensive data from Billboard charts, Grammy awards, RIAA certifications, and Spotify streaming statistics.
+            Compare your favorite artists with comprehensive data from Billboard charts, Grammy awards, and Spotify streaming statistics.
           </p>
         </section>
 
@@ -138,10 +137,10 @@ export default function AboutPage() {
                 boxShadow: '0 0 15px -10px rgba(94, 233, 181, 0.4) inset, 0 0 15px -5px rgba(94, 233, 181, 0.3)',
               }}
             >
-              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">RIAA Certifications</h3>
+              <h3 className="text-[#5EE9B5] font-bold text-2xl mb-4">Google Trends</h3>
               <p className="text-white text-lg leading-relaxed">
-                Official RIAA (Recording Industry Association of America) certifications 
-                including Gold, Platinum, and Diamond status for singles and albums.
+                Search interest over time to compare cultural momentum and public attention
+                between artists across configurable time ranges.
               </p>
             </div>
             <div 
@@ -278,7 +277,7 @@ export default function AboutPage() {
                 What makes Artist Compare different from other music comparison tools?
               </summary>
               <p className="text-white text-lg leading-relaxed">
-                Artist Compare aggregates data from multiple authoritative sources (Billboard, Grammy, RIAA, Spotify) 
+                Artist Compare aggregates data from multiple authoritative sources (Billboard, Grammy, Spotify, Google Trends) 
                 in one comprehensive platform. Our real-time data updates, intuitive interface, and detailed 
                 visualizations provide the most complete artist comparison experience available.
               </p>

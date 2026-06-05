@@ -20,14 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
     const comparePages: MetadataRoute.Sitemap = [
+    "https://artist-compare.com/compare/drake-vs-jay-z-a4e6e20e",
     "https://artist-compare.com/compare/drake-vs-kendrick-lamar-d15b7c84",
-    "https://artist-compare.com/compare/cardi-b-vs-nicki-minaj-94bb9875",
-    "https://artist-compare.com/compare/lil-durk-vs-youngboy-never-broke-again-acde8c3f",
+    "https://artist-compare.com/compare/olivia-rodrigo-vs-sabrina-carpenter-d3ab9b93",
+    "https://artist-compare.com/compare/cardi-b-vs-latto-75b720fe",
+    "https://artist-compare.com/compare/taylor-swift-vs-bad-bunny-385fdc95",
     "https://artist-compare.com/compare/kanye-west-vs-drake-53c75e5a",
-    "https://artist-compare.com/compare/taylor-swift-vs-kanye-west-bb9cb9e0",
-    "https://artist-compare.com/compare/dave-vs-central-cee-98cdc752",
-    "https://artist-compare.com/compare/young-thug-vs-gunna-55b90ee8",
-    "https://artist-compare.com/compare/young-thug-vs-future-ca9adc91"
+    "https://artist-compare.com/compare/cardi-b-vs-nicki-minaj-94bb9875",
   ].map((url) => ({
     url,
     lastModified: now,

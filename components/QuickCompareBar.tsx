@@ -26,15 +26,15 @@ const QuickCompareBar: React.FC = () => {
 
     const comparisions: ComparisionData[] = [
         {
-            id: 'taylor-swift-vs-charli-xcx',
-            comparisionLink: '/compare/taylor-swift-vs-charli-xcx-18f66917',
+            id: 'drake-vs-jay-z',
+            comparisionLink: '/compare/drake-vs-jay-z-a4e6e20e',
             ArtistA: {
-                name: 'Taylor Swift',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
+                name: 'Drake',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9'
             },
             ArtistB: {
-                name: 'Charli XCX',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebdaa727dd396963ba92dd6377'
+                name: 'Jay-Z',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb219724d177787df4dc9d8614'
             }
         },
         {
@@ -50,39 +50,39 @@ const QuickCompareBar: React.FC = () => {
             }
         },
         {
-            id: 'nle-choppa-vs-nba-youngboy',
-            comparisionLink: '/compare/nle-choppa-vs-youngboy-never-broke-again-055d9ceb',
+            id: 'olivia-rodrigo-vs-sabrina-carpenter',
+            comparisionLink: '/compare/olivia-rodrigo-vs-sabrina-carpenter-d3ab9b93',
             ArtistA: {
-                name: 'NLE Choppa',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2c985e8509fc8788a5a5208'
+                name: 'Olivia Rodrigo',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe654806251e2661def1f4e65'
             },
             ArtistB: {
-                name: 'NBA YoungBoy',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb776e469c846c205685141317'
+                name: 'Sabrina Carpenter',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb78e45cfa4697ce3c437cb455'
             }
         },
         {
-            id: 'cardi-b-vs-nicki-minaj',
-            comparisionLink: '/compare/cardi-b-vs-nicki-minaj-94bb9875',
+            id: 'cardi-b-vs-latto',
+            comparisionLink: '/compare/cardi-b-vs-latto-75b720fe',
             ArtistA: {
                 name: 'Cardi B',
                 spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eba23286f24edd4a7dbdc6311d'
             },
             ArtistB: {
-                name: 'Nicki Minaj',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb07a50f0a9a8f11e5a1102cbd'
+                name: 'Latto',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb2d805d9a367bdad2096ab817'
             }
         },
         {
-            id: 'tyler-the-creator-vs-playboi-carti',
-            comparisionLink: '/compare/tyler-the-creator-vs-playboi-carti-a38b964a',
+            id: 'taylor-swift-vs-bad-bunny',
+            comparisionLink: '/compare/taylor-swift-vs-bad-bunny-385fdc95',
             ArtistA: {
-                name: 'Tyler, The Creator',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebdf2728294ff77dd11eeb18fb'
+                name: 'Taylor Swift',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e'
             },
             ArtistB: {
-                name: 'Playboi Carti',
-                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5ebba50ca67ffc3097f6ea1710a'
+                name: 'Bad Bunny',
+                spotifyImage: 'https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13'
             }
         },
     ];

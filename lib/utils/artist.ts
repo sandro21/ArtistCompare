@@ -13,11 +13,6 @@ export const EMPTY_ARTIST: Artist = {
     monthlyListeners: 0,
     totalStreams: 0,
   },
-  riaaCertifications: {
-    Gold: 0,
-    Platinum: 0,
-    Diamond: 0,
-  },
   charts: {
     billboardHot100Number1s: 0,
     billboardHot100Top10s: 0,
