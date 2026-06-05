@@ -3,30 +3,63 @@ import { Metadata } from "next";
 import { deobfuscateArtistNames } from "../../../lib/seo-utils";
 import RedirectClient from "./RedirectClient";
 
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> 
+const SECTION_TITLES: Record<string, string> = {
+  streams:   'Streaming Stats',
+  billboard: 'Billboard Charts',
+  grammy:    'Grammy Awards',
+};
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string>>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const sp = await searchParams;
   const decoded = deobfuscateArtistNames(slug);
 
   if (!decoded) {
-    return {
-      title: "Artist Comparison Not Found",
-    };
+    return { title: 'Artist Comparison Not Found' };
   }
 
   const { artist1, artist2 } = decoded;
-  // Handle different deployment scenarios
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-                   'https://artistcompare.com';
-  const ogImageUrl = `${baseUrl}/api/og/${slug}`;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+    'https://artistcompare.com';
   const comparisonUrl = `${baseUrl}/compare/${slug}`;
 
+  // Section-specific share embed
+  const share = sp.share;
+  const d     = sp.d;
+  if (share && d) {
+    try {
+      const ogRelativeUrl  = atob(d);
+      const absoluteOgUrl  = `${baseUrl}${ogRelativeUrl}`;
+      const section = SECTION_TITLES[share] ?? share;
+      const title   = `${artist1} vs ${artist2} — ${section}`;
+      const description = `${artist1} vs ${artist2} on ${section}. See the full breakdown on ArtistCompare.com`;
+      return {
+        title,
+        description,
+        openGraph: {
+          type: 'website', title, description,
+          url: `${comparisonUrl}?share=${share}`,
+          images: [{ url: absoluteOgUrl, width: 1200, height: 630, alt: title }],
+          siteName: 'ArtistCompare',
+        },
+        twitter: { card: 'summary_large_image', title, description, images: [absoluteOgUrl] },
+        alternates: { canonical: comparisonUrl },
+      };
+    } catch { /* fall through */ }
+  }
+
+  // Default comparison metadata
+  const ogImageUrl = `${baseUrl}/api/og/${slug}`;
   const title = `${artist1} vs ${artist2} - Artist Comparison`;
-  const description = `Compare ${artist1} vs ${artist2} with comprehensive stats: Billboard charts, Grammy awards, Spotify streams, and more. See who's more successful!`;
+  const description = `Compare ${artist1} vs ${artist2} with comprehensive stats: Billboard charts, Grammy awards, Spotify streams, and more.`;
 
   return {
     title,
@@ -36,25 +69,11 @@ export async function generateMetadata({
       title,
       description,
       url: comparisonUrl,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${artist1} vs ${artist2} - Artist Comparison`,
-        },
-      ],
-      siteName: 'Artist Compare',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${artist1} vs ${artist2}` }],
+      siteName: 'ArtistCompare',
     },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [ogImageUrl],
-    },
-    alternates: {
-      canonical: comparisonUrl,
-    },
+    twitter: { card: 'summary_large_image', title, description, images: [ogImageUrl] },
+    alternates: { canonical: comparisonUrl },
   };
 }
 

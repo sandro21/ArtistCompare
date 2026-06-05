@@ -21,12 +21,15 @@ function buildOgUrl(payload: SharePayload): string {
   return `/api/og/share?${params.toString()}`;
 }
 
-function buildShareUrl(payload: SharePayload): string {
+function buildShareUrl(payload: SharePayload, ogRelativeUrl: string): string {
   if (typeof window === 'undefined') return '';
   const base = window.location.href.split('?')[0];
-  const existing = new URLSearchParams(window.location.search);
-  existing.set('section', payload.sectionId);
-  return `${base}?${existing.toString()}`;
+  const sp = new URLSearchParams(window.location.search);
+  // Keep existing artist params (artist1, artist2) and add share context
+  sp.set('share', payload.sectionId);
+  // Encode the relative og URL so generateMetadata can inject it as og:image
+  try { sp.set('d', btoa(ogRelativeUrl)); } catch { /* skip on invalid chars */ }
+  return `${base}?${sp.toString()}`;
 }
 
 export default function ShareModal({ payload, onClose }: ShareModalProps) {
@@ -36,7 +39,7 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
 
   const ogUrl = buildOgUrl(payload);
 
-  const shareUrl = typeof window !== 'undefined' ? buildShareUrl(payload) : '';
+  const shareUrl = typeof window !== 'undefined' ? buildShareUrl(payload, ogUrl) : '';
 
   // Close on Escape
   useEffect(() => {
