@@ -71,8 +71,10 @@ export async function GET(request: NextRequest) {
   }
 }
 
+type CheerioLoaded = ReturnType<typeof cheerio.load>;
+
 // Extract a stat value from Music Metrics Vault's card layout (label p → value p)
-function extractStatCardValue($: cheerio.CheerioAPI, label: string): string {
+function extractStatCardValue($: CheerioLoaded, label: string): string {
   let value = '';
   $('p.text-sm.font-medium.text-gray-500').each((_index, element) => {
     if ($(element).text().trim() === label) {
@@ -151,7 +153,7 @@ function decodeHtmlEntities(str: string): string {
     .replace(/&#039;/g, "'");
 }
 
-function findArtistRankInHtml($: cheerio.CheerioAPI, artistName: string): number | null {
+function findArtistRankInHtml($: CheerioLoaded, artistName: string): number | null {
   const normalizedName = artistName.toLowerCase();
 
   // Primary: Livewire snapshot contains the full ranked artist list
