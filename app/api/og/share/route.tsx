@@ -57,10 +57,12 @@ export async function GET(request: NextRequest) {
   const W  = 1200;
   const H  = 630;
   const PX = 60;   // horizontal padding
-  const PY = 46;   // vertical padding
-  const PH = 64;   // artist photo diameter
-  const BH = 76;   // bar height
-  const BG = 16;   // gap between bars
+  const PY = 38;   // vertical padding
+  const PH = 96;   // artist photo diameter
+  const BG = 14;   // gap between bars
+  // bar height scales down so 4 bars + footer always fit within H
+  const n  = Math.min(bars.length || 1, 4);
+  const BH = Math.min(84, Math.floor((H - PY * 2 - 96 - 20 - 36 - 20 - 36 - BG * (n - 1)) / n));
 
   // Exact background from globals.css
   const BG_COLOR = '#0a0a0a';
@@ -90,8 +92,7 @@ export async function GET(request: NextRequest) {
         }}>
 
           {/* Left: photo + name */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-            {/* Both photos get the same StickyArtistImages green treatment */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
             <div style={{
               width: PH, height: PH,
               borderRadius: '50%',
@@ -103,20 +104,20 @@ export async function GET(request: NextRequest) {
             }}>
               {aImg
                 ? <img src={aImg} width={PH} height={PH} style={{ objectFit: 'cover' }} />
-                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: F }}>
-                    {artistA[0]?.toUpperCase()}
+                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 36, fontWeight: 800, fontFamily: F }}>
+                    {artistA[0]}
                   </div>
               }
             </div>
-            <span style={{ color: '#ffffff', fontSize: 52, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
-              {artistA.toUpperCase()}
+            <span style={{ color: '#ffffff', fontSize: 40, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
+              {artistA}
             </span>
           </div>
 
           {/* Right: name + photo (mirrored) */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-            <span style={{ color: '#ffffff', fontSize: 52, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
-              {artistB.toUpperCase()}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+            <span style={{ color: '#ffffff', fontSize: 40, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
+              {artistB}
             </span>
             <div style={{
               width: PH, height: PH,
@@ -129,8 +130,8 @@ export async function GET(request: NextRequest) {
             }}>
               {bImg
                 ? <img src={bImg} width={PH} height={PH} style={{ objectFit: 'cover' }} />
-                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: F }}>
-                    {artistB[0]?.toUpperCase()}
+                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 36, fontWeight: 800, fontFamily: F }}>
+                    {artistB[0]}
                   </div>
               }
             </div>
@@ -138,7 +139,7 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Section title — matches SectionWrapper header: font-bold text-2xl text-white text-center ── */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28, marginBottom: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20, marginBottom: 20 }}>
           <span style={{ color: '#ffffff', fontSize: 36, fontWeight: 800, fontFamily: F }}>
             {title}
           </span>
@@ -205,8 +206,8 @@ export async function GET(request: NextRequest) {
           <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 700, fontFamily: F }}>
             {source ?? ''}
           </span>
-          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: F }}>
-            Artistcompare.com
+          <span style={{ color: '#ffffff', fontSize: 26, fontWeight: 800, fontFamily: F }}>
+            ArtistCompare.com
           </span>
         </div>
       </div>
