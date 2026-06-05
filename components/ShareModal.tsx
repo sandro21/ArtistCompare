@@ -57,9 +57,15 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2500);
     } catch { /* clipboard denied */ }
   }, [shareUrl]);
+
+  // Auto-copy when the modal opens
+  useEffect(() => {
+    handleCopy();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTwitter = useCallback(() => {
     const text = encodeURIComponent(
@@ -118,7 +124,7 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3">
-          <span className="text-white font-semibold text-sm tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '0.08em' }}>
+          <span className="font-semibold text-base" style={{ color: '#ffffff' }}>
             Share {payload.sectionTitle}
           </span>
           <button
@@ -167,12 +173,12 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
               </svg>
             ) : (
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="6" y="6" width="9" height="9" rx="1.5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"/>
-                <path d="M12 6V4.5A1.5 1.5 0 0010.5 3h-7A1.5 1.5 0 002 4.5v7A1.5 1.5 0 003.5 13H5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
+                <rect x="6" y="6" width="9" height="9" rx="1.5" stroke="#ffffff" strokeWidth="1.5"/>
+                <path d="M12 6V4.5A1.5 1.5 0 0010.5 3h-7A1.5 1.5 0 002 4.5v7A1.5 1.5 0 003.5 13H5" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             )}
-            <span className="text-[11px] font-medium" style={{ color: copied ? '#5EE9B5' : 'rgba(255,255,255,0.55)' }}>
-              {copied ? 'Copied!' : 'Copy link'}
+            <span className="text-[11px] font-medium" style={{ color: copied ? '#5EE9B5' : '#ffffff' }}>
+              {copied ? 'Link copied!' : 'Copy link'}
             </span>
           </button>
 
@@ -185,9 +191,9 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
             onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; }}
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M13.5 2.5h2.25L11.25 8 16.5 15.5H12L8.5 10.75 4.5 15.5H2.25l4.75-5.75L1.5 2.5H6.1l3.15 4.5 4.25-4.5Z" fill="rgba(255,255,255,0.7)"/>
+              <path d="M13.5 2.5h2.25L11.25 8 16.5 15.5H12L8.5 10.75 4.5 15.5H2.25l4.75-5.75L1.5 2.5H6.1l3.15 4.5 4.25-4.5Z" fill="#ffffff"/>
             </svg>
-            <span className="text-[11px] font-medium text-white/55">Post on X</span>
+            <span className="text-[11px] font-medium text-white">Post on X</span>
           </button>
 
           {/* Reddit */}
@@ -198,15 +204,28 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
             onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.09)'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; }}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <circle cx="9" cy="9" r="7.5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.4"/>
-              <circle cx="9" cy="8.5" r="3" stroke="rgba(255,255,255,0.7)" strokeWidth="1.4"/>
-              <circle cx="6.5" cy="10" r="0.8" fill="rgba(255,255,255,0.7)"/>
-              <circle cx="11.5" cy="10" r="0.8" fill="rgba(255,255,255,0.7)"/>
-              <path d="M7 11.5s.5 1 2 1 2-1 2-1" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
-              <path d="M12.5 5.5l-1.5.5M12.5 5.5a1 1 0 110 .8" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
+            {/* Reddit Snoo alien icon */}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              {/* body */}
+              <circle cx="10" cy="11.5" r="5.5" fill="rgba(255,255,255,0.85)"/>
+              {/* head */}
+              <circle cx="10" cy="5.5" r="2.5" fill="rgba(255,255,255,0.85)"/>
+              {/* antenna */}
+              <line x1="10" y1="3" x2="12.5" y2="1.2" stroke="rgba(255,255,255,0.85)" strokeWidth="1.2" strokeLinecap="round"/>
+              <circle cx="12.9" cy="0.9" r="0.9" fill="rgba(255,255,255,0.85)"/>
+              {/* eyes */}
+              <circle cx="8.5" cy="5.2" r="0.6" fill="#0d1a15"/>
+              <circle cx="11.5" cy="5.2" r="0.6" fill="#0d1a15"/>
+              {/* ears */}
+              <circle cx="5.2" cy="10.5" r="1.5" fill="rgba(255,255,255,0.85)"/>
+              <circle cx="14.8" cy="10.5" r="1.5" fill="rgba(255,255,255,0.85)"/>
+              {/* face eyes */}
+              <circle cx="8" cy="11" r="0.9" fill="#0d1a15"/>
+              <circle cx="12" cy="11" r="0.9" fill="#0d1a15"/>
+              {/* smile */}
+              <path d="M7.5 13.5 Q10 15.5 12.5 13.5" stroke="#0d1a15" strokeWidth="1" strokeLinecap="round" fill="none"/>
             </svg>
-            <span className="text-[11px] font-medium text-white/55">Reddit</span>
+            <span className="text-[11px] font-medium text-white">Reddit</span>
           </button>
 
           {/* Download */}
@@ -222,11 +241,11 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
               <div className="w-[18px] h-[18px] rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(255,255,255,0.4)', borderTopColor: 'transparent' }} />
             ) : (
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M9 2v9m0 0L6 8m3 3l3-3" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M3 13.5v.5a1.5 1.5 0 001.5 1.5h9A1.5 1.5 0 0015 14v-.5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M9 2v9m0 0L6 8m3 3l3-3" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 13.5v.5a1.5 1.5 0 001.5 1.5h9A1.5 1.5 0 0015 14v-.5" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             )}
-            <span className="text-[11px] font-medium text-white/55">
+            <span className="text-[11px] font-medium text-white">
               {downloading ? 'Saving…' : 'Download'}
             </span>
           </button>
