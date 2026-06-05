@@ -36,7 +36,7 @@ export async function generateMetadata({
   const d     = sp.d;
   if (share && d) {
     try {
-      const ogRelativeUrl  = atob(d);
+      const ogRelativeUrl  = decodeURIComponent(atob(d));
       const absoluteOgUrl  = `${baseUrl}${ogRelativeUrl}`;
       const section = SECTION_TITLES[share] ?? share;
       const title   = `${artist1} vs ${artist2} — ${section}`;

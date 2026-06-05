@@ -24,11 +24,15 @@ function buildOgUrl(payload: SharePayload): string {
 function buildShareUrl(payload: SharePayload, ogRelativeUrl: string): string {
   if (typeof window === 'undefined') return '';
   const base = window.location.href.split('?')[0];
-  const sp = new URLSearchParams(window.location.search);
-  // Keep existing artist params (artist1, artist2) and add share context
-  sp.set('share', payload.sectionId);
-  // Encode the relative og URL so generateMetadata can inject it as og:image
-  try { sp.set('d', btoa(ogRelativeUrl)); } catch { /* skip on invalid chars */ }
+  // Build params from payload directly — never trust window.location.search,
+  // which may still contain a previous comparison's artist params.
+  const sp = new URLSearchParams({
+    artist1: payload.artistAName,
+    artist2: payload.artistBName,
+    share: payload.sectionId,
+  });
+  // encodeURIComponent first so btoa never sees non-Latin-1 chars
+  try { sp.set('d', btoa(encodeURIComponent(ogRelativeUrl))); } catch { /* skip */ }
   return `${base}?${sp.toString()}`;
 }
 

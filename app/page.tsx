@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   if (share && d) {
     try {
-      const ogRelativeUrl = atob(d);                   // decode
+      const ogRelativeUrl = decodeURIComponent(atob(d)); // decode (reverses encodeURIComponent+btoa)
       const absoluteOgUrl = `${BASE_URL}${ogRelativeUrl}`;
       const a1 = params.artist1 || 'Artist A';
       const a2 = params.artist2 || 'Artist B';
