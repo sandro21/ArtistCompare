@@ -59,8 +59,8 @@ export async function GET(request: NextRequest) {
   const PX = 60;   // horizontal padding
   const PY = 46;   // vertical padding
   const PH = 64;   // artist photo diameter
-  const BH = 46;   // bar height
-  const BG = 10;   // gap between bars
+  const BH = 76;   // bar height
+  const BG = 16;   // gap between bars
 
   // Exact background from globals.css
   const BG_COLOR = '#0a0a0a';
@@ -138,8 +138,8 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Section title — matches SectionWrapper header: font-bold text-2xl text-white text-center ── */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, marginBottom: 20 }}>
-          <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 700, fontFamily: F }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28, marginBottom: 24 }}>
+          <span style={{ color: '#ffffff', fontSize: 36, fontWeight: 800, fontFamily: F }}>
             {title}
           </span>
         </div>
@@ -177,15 +177,15 @@ export async function GET(request: NextRequest) {
                 }}
               >
                 {/* artist1Value — font-bold text-base sm:text-lg text-white */}
-                <span style={{ color: '#ffffff', fontSize: 19, fontWeight: 700, fontFamily: F }}>
+                <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 800, fontFamily: F }}>
                   {fmt(bar.a)}
                 </span>
                 {/* metric label — text-white text-m font-medium */}
-                <span style={{ color: '#ffffff', fontSize: 16, fontWeight: 700, fontFamily: F }}>
+                <span style={{ color: '#ffffff', fontSize: 24, fontWeight: 700, fontFamily: F }}>
                   {bar.l}
                 </span>
                 {/* artist2Value */}
-                <span style={{ color: '#ffffff', fontSize: 19, fontWeight: 700, fontFamily: F }}>
+                <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 800, fontFamily: F }}>
                   {fmt(bar.b)}
                 </span>
               </div>
