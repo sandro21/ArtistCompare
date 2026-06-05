@@ -166,7 +166,6 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
 
   return (
     <SectionWrapper header="Community's Favorite">
-      <p className="text-center text-white/50 text-sm mb-5">Who do you think is better?</p>
       <div className="flex items-center gap-3">
         {/* Artist A */}
         <button
@@ -174,22 +173,22 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
           onClick={() => handleVote('a')}
           className="flex-1 flex flex-col items-center gap-2 rounded-2xl py-5 px-3 transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           style={{
-            border: '2px solid rgba(94,233,181,0.35)',
+            border: '2px solid rgba(255,255,255,0.18)',
             background:
               isLoading && (phase as { pending: 'a' | 'b' }).pending === 'a'
-                ? 'rgba(94,233,181,0.15)'
-                : 'rgba(94,233,181,0.05)',
+                ? 'rgba(255,255,255,0.10)'
+                : 'rgba(255,255,255,0.04)',
           }}
           onMouseEnter={(e) => {
             if (!isLoading) {
-              (e.currentTarget as HTMLButtonElement).style.border = '2px solid rgba(94,233,181,0.85)';
-              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.12)';
+              (e.currentTarget as HTMLButtonElement).style.border = '2px solid rgba(255,255,255,0.55)';
+              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.09)';
             }
           }}
           onMouseLeave={(e) => {
             if (!isLoading) {
-              (e.currentTarget as HTMLButtonElement).style.border = '2px solid rgba(94,233,181,0.35)';
-              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(94,233,181,0.05)';
+              (e.currentTarget as HTMLButtonElement).style.border = '2px solid rgba(255,255,255,0.18)';
+              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)';
             }
           }}
         >
@@ -198,18 +197,18 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
               src={artistImage(artistA)}
               alt={nameA}
               className="w-16 h-16 rounded-full object-cover"
-              style={{ border: '2px solid rgba(94,233,181,0.50)' }}
+              style={{ border: '2px solid rgba(255,255,255,0.25)' }}
             />
           ) : (
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center text-black text-xl font-bold"
-              style={{ background: '#5EE9B5' }}
+              style={{ background: 'rgba(255,255,255,0.80)' }}
             >
               {nameA[0]}
             </div>
           )}
           <span className="text-white font-semibold text-sm text-center leading-tight">{nameA}</span>
-          <span className="text-xs font-medium" style={{ color: '#5EE9B5' }}>
+          <span className="text-xs font-medium text-white/50">
             {isLoading && (phase as { pending: 'a' | 'b' }).pending === 'a' ? '…' : 'Vote'}
           </span>
         </button>
