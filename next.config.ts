@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ensure TTF font files are bundled into the OG image serverless function
+  outputFileTracingIncludes: {
+    '/api/og/share': ['./public/fonts/*.ttf'],
+  },
+
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['gsap', 'three'],

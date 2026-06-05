@@ -7,22 +7,36 @@ export const runtime = 'nodejs';
 
 type FontDef = { name: string; data: ArrayBuffer; weight: 700 | 800; style: 'normal' };
 
-// Loaded once at module evaluation — synchronous disk read, zero network.
-function loadFonts(): FontDef[] {
+// Try synchronous disk read (works locally + when outputFileTracingIncludes bundles the files).
+// Falls back to fetching from the public static URL (always works on Vercel production).
+async function loadFont(weight: 700 | 800): Promise<ArrayBuffer | null> {
   try {
-    const base = join(process.cwd(), 'public', 'fonts');
-    const f700 = readFileSync(join(base, 'pjs-700.ttf'));
-    const f800 = readFileSync(join(base, 'pjs-800.ttf'));
-    return [
-      { name: 'PJS', data: f700.buffer.slice(f700.byteOffset, f700.byteOffset + f700.byteLength), weight: 700, style: 'normal' },
-      { name: 'PJS', data: f800.buffer.slice(f800.byteOffset, f800.byteOffset + f800.byteLength), weight: 800, style: 'normal' },
-    ];
-  } catch {
-    return [];
-  }
+    const buf = readFileSync(join(process.cwd(), 'public', 'fonts', `pjs-${weight}.ttf`));
+    return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+  } catch { /* disk read failed — fall through */ }
+
+  try {
+    const base =
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+      'https://artistcompare.com';
+    const res = await fetch(`${base}/fonts/pjs-${weight}.ttf`);
+    if (!res.ok) return null;
+    return res.arrayBuffer();
+  } catch { return null; }
 }
 
-const FONTS = loadFonts();
+// Module-level cache — populated once per cold start.
+let _fontCache: FontDef[] | null = null;
+
+async function getFonts(): Promise<FontDef[]> {
+  if (_fontCache) return _fontCache;
+  const [f700, f800] = await Promise.all([loadFont(700), loadFont(800)]);
+  _fontCache = [];
+  if (f700) _fontCache.push({ name: 'PJS', data: f700, weight: 700, style: 'normal' });
+  if (f800) _fontCache.push({ name: 'PJS', data: f800, weight: 800, style: 'normal' });
+  return _fontCache;
+}
 
 function fmt(n: number): string {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
@@ -51,7 +65,7 @@ export async function GET(request: NextRequest) {
 
   // Load all three weights in parallel
   // Cached — instant after first cold start
-  const fonts = FONTS;
+  const fonts = await getFonts();
 
   const F  = fonts.length ? "'PJS', system-ui, sans-serif" : 'system-ui, sans-serif';
   const W  = 1200;
