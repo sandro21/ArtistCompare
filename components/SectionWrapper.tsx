@@ -35,7 +35,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         <button
           onClick={() => onShare(sharePayload!)}
           aria-label="Share this section"
-          className="absolute bottom-4 left-5 flex items-center gap-1.5 transition-all duration-150"
+          className="absolute top-4 right-5 flex items-center gap-1.5 transition-all duration-150"
           style={{
             height: 26,
             borderRadius: '2rem',
