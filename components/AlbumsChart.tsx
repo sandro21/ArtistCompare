@@ -1,29 +1,18 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
 import billboard200Data from '@/data/billboard200-stats.json';
+import { normalizeForBillboardLookup } from '@/lib/utils/normalize';
 
 interface AlbumsChartProps {
   artistA: any;
   artistB: any;
 }
 
-// Normalize artist name for Billboard lookup - converts to lowercase with dashes
-function normalizeForLookup(name: string): string {
-  if (!name) return '';
-  return name
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')        // Replace spaces with dashes
-    .replace(/[^\w-]/g, '')      // Remove special characters except alphanumeric and dashes
-    .replace(/-+/g, '-')         // Collapse multiple dashes into single dash
-    .replace(/^-|-$/g, '');      // Remove leading/trailing dashes
-}
-
 const AlbumsChart: React.FC<AlbumsChartProps> = ({ artistA, artistB }) => {
   // Get Billboard 200 stats by directly indexing the JSON data
   // Normalize artist names to match the normalized keys in Billboard data
-  const artistA200 = (billboard200Data.artists as any)[normalizeForLookup(artistA?.artistName || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
-  const artistB200 = (billboard200Data.artists as any)[normalizeForLookup(artistB?.artistName || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
+  const artistA200 = (billboard200Data.artists as any)[normalizeForBillboardLookup(artistA?.artistName || artistA?.name || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
+  const artistB200 = (billboard200Data.artists as any)[normalizeForBillboardLookup(artistB?.artistName || artistB?.name || '')] || { billboard200: { entries: 0, top10s: 0, number1s: 0, wks_on_chart: 0 } };
 
   return (
     <>

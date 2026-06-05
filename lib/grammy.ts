@@ -1,4 +1,5 @@
 import grammyData from '../data/grammy.json';
+import { normalizeForComparison } from './utils/normalize';
 
 interface GrammyData {
   artist: string;
@@ -12,9 +13,12 @@ interface GrammyData {
  * @returns Object containing wins and nominations, or null if not found
  */
 export function getGrammyData(artistName: string): { wins: number; nominations: number } | null {
-  // First, try exact match
-  const exactMatch = grammyData.find((artist: GrammyData) => 
-    artist.artist.toLowerCase() === artistName.toLowerCase()
+  const searchKey = normalizeForComparison(artistName);
+  if (!searchKey) return null;
+
+  // First, try exact match (accent-insensitive)
+  const exactMatch = grammyData.find((artist: GrammyData) =>
+    normalizeForComparison(artist.artist) === searchKey
   );
   
   if (exactMatch) {
@@ -27,8 +31,8 @@ export function getGrammyData(artistName: string): { wins: number; nominations: 
   // If no exact match, try very restrictive partial match for slight variations only
   // Only match if the names are very similar (difference of a few characters)
   const partialMatch = grammyData.find((artist: GrammyData) => {
-    const artistLower = artist.artist.toLowerCase().trim();
-    const searchLower = artistName.toLowerCase().trim();
+    const artistLower = normalizeForComparison(artist.artist);
+    const searchLower = searchKey;
     
     // Only allow partial match if:
     // 1. The search name is at least 80% of the database name length
