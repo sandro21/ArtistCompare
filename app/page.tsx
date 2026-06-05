@@ -12,6 +12,7 @@ import SearchBar from "../components/SearchBar";
 import StickyArtistImages from "../components/StickyArtistImages";
 import QuickCompareBar from "../components/QuickCompareBar";
 import GoogleTrends from "./sections/GoogleTrends";
+import CommunityVote from "./sections/CommunityVote";
 import { useLoadingScreen } from "../hooks/useLoadingScreen";
 import { useArtistSelection } from "../hooks/useArtistSelection";
 import { useGlowEffect } from "../hooks/useGlowEffect";
@@ -183,6 +184,7 @@ function HomeContent() {
                     <Info artistA={duo[0]} artistB={duo[1]} />
                   </GlareHover>
                 </div>
+                <CommunityVote artistA={duo[0]} artistB={duo[1]} />
                 <TopStreams
                   artistAId={duo[0]?.spotifyId || undefined}
                   artistBId={duo[1]?.spotifyId || undefined}
