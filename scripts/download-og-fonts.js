@@ -1,6 +1,11 @@
 /**
- * Downloads Plus Jakarta Sans TTF files (weights 700, 800) from Google Fonts
- * and saves them to public/fonts/ for use in the OG image route.
+ * Downloads genuine Plus Jakarta Sans static TTF files (weights 700, 800)
+ * from the official GitHub repo and saves them to public/fonts/ for the OG route.
+ *
+ * NOTE: Google Fonts' css2 "kit=" URLs serve obfuscated/transformed subsets
+ * whose binary header is NOT a valid OpenType signature — Satori rejects them
+ * with "Unsupported OpenType signature". The static TTFs below are real fonts.
+ *
  * Run once: node scripts/download-og-fonts.js
  */
 const fs = require('fs');
@@ -9,28 +14,36 @@ const path = require('path');
 const OUT_DIR = path.join(__dirname, '../public/fonts');
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
-const UA = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)';
+const SOURCES = [
+  {
+    weight: 700,
+    url: 'https://raw.githubusercontent.com/tokotype/PlusJakartaSans/master/fonts/ttf/PlusJakartaSans-Bold.ttf',
+  },
+  {
+    weight: 800,
+    url: 'https://raw.githubusercontent.com/tokotype/PlusJakartaSans/master/fonts/ttf/PlusJakartaSans-ExtraBold.ttf',
+  },
+];
 
-async function downloadWeight(weight) {
-  console.log(`Fetching CSS for weight ${weight}...`);
-  const css = await fetch(
-    `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@${weight}&display=swap`,
-    { headers: { 'User-Agent': UA } }
-  ).then(r => r.text());
-
-  const match = css.match(/url\((['"]?)([^'")\s]+)\1\)/);
-  const url = match?.[2];
-  if (!url) throw new Error(`No font URL found for weight ${weight}.\nCSS:\n${css.slice(0, 400)}`);
-
-  console.log(`Downloading ${url}`);
-  const buf = await fetch(url).then(r => r.arrayBuffer());
-  const dest = path.join(OUT_DIR, `pjs-${weight}.ttf`);
-  fs.writeFileSync(dest, Buffer.from(buf));
-  console.log(`✓ Saved ${dest} (${(buf.byteLength / 1024).toFixed(1)} KB)`);
+function assertValidTtf(buf, label) {
+  const sig = buf.subarray(0, 4).toString('hex');
+  // Valid sfnt signatures: 00010000 (TrueType), 4f54544f ("OTTO"), 74727565 ("true")
+  const ok = sig === '00010000' || sig === '4f54544f' || sig === '74727565';
+  if (!ok) {
+    throw new Error(`${label}: invalid font signature 0x${sig} — not a usable TTF/OTF`);
+  }
 }
 
 (async () => {
-  await downloadWeight(700);
-  await downloadWeight(800);
-  console.log('\nDone. Commit public/fonts/pjs-700.ttf and public/fonts/pjs-800.ttf.');
-})().catch(e => { console.error(e); process.exit(1); });
+  for (const { weight, url } of SOURCES) {
+    console.log(`Downloading weight ${weight} from ${url}`);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    const buf = Buffer.from(await res.arrayBuffer());
+    assertValidTtf(buf, `weight ${weight}`);
+    const dest = path.join(OUT_DIR, `pjs-${weight}.ttf`);
+    fs.writeFileSync(dest, buf);
+    console.log(`✓ Saved ${dest} (${(buf.length / 1024).toFixed(1)} KB, sig OK)`);
+  }
+  console.log('\nDone. Both fonts have valid OpenType signatures.');
+})().catch(e => { console.error('\nFAILED:', e.message); process.exit(1); });
