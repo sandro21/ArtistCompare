@@ -3,32 +3,31 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'nodejs';
 
-// Fetch Plus Jakarta Sans font binary from Google Fonts
-async function fetchPlusJakartaSans(weight: 600 | 700 | 800): Promise<ArrayBuffer | null> {
+// Old User-Agent forces Google Fonts to serve TTF (not woff2).
+// Satori only renders TTF/OTF — woff2 silently falls back to system font.
+const LEGACY_UA = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)';
+
+async function fetchFont(weight: 500 | 700 | 800): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
       `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@${weight}&display=swap`,
-      {
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        },
-      },
+      { headers: { 'User-Agent': LEGACY_UA } },
     ).then((r) => r.text());
 
-    const fontUrl = css.match(/url\(([^)]+)\)/)?.[1];
-    if (!fontUrl) return null;
+    // Strip any quotes around the URL
+    const match = css.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+    if (!match?.[1]) return null;
 
-    return fetch(fontUrl).then((r) => r.arrayBuffer());
+    return fetch(match[1]).then((r) => r.arrayBuffer());
   } catch {
     return null;
   }
 }
 
-function formatOgNum(n: number): string {
+function fmt(n: number): string {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
-  if (n >= 10_000) return (n / 1_000).toFixed(0) + 'K';
+  if (n >= 1_000_000)     return (n / 1_000_000).toFixed(1) + 'M';
+  if (n >= 10_000)        return (n / 1_000).toFixed(0) + 'K';
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
@@ -48,117 +47,130 @@ export async function GET(request: NextRequest) {
   try {
     const raw = searchParams.get('bars');
     if (raw) bars = JSON.parse(raw) as Bar[];
-  } catch { /* empty bars */ }
+  } catch { /* empty */ }
 
-  // Load fonts in parallel — fall back gracefully if fetch fails
-  const [font700, font800] = await Promise.all([
-    fetchPlusJakartaSans(700),
-    fetchPlusJakartaSans(800),
+  // Load all three weights in parallel
+  const [f500, f700, f800] = await Promise.all([
+    fetchFont(500),
+    fetchFont(700),
+    fetchFont(800),
   ]);
 
-  const fonts = [] as { name: string; data: ArrayBuffer; weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900; style: 'normal' }[];
-  if (font700) fonts.push({ name: 'Plus Jakarta Sans', data: font700, weight: 700 as const, style: 'normal' as const });
-  if (font800) fonts.push({ name: 'Plus Jakarta Sans', data: font800, weight: 800 as const, style: 'normal' as const });
+  const fonts: {
+    name: string;
+    data: ArrayBuffer;
+    weight: 500 | 700 | 800;
+    style: 'normal';
+  }[] = [];
+  if (f500) fonts.push({ name: 'PJS', data: f500, weight: 500, style: 'normal' });
+  if (f700) fonts.push({ name: 'PJS', data: f700, weight: 700, style: 'normal' });
+  if (f800) fonts.push({ name: 'PJS', data: f800, weight: 800, style: 'normal' });
 
-  const FONT = fonts.length > 0 ? "'Plus Jakarta Sans', sans-serif" : 'system-ui, sans-serif';
+  const F  = fonts.length ? "'PJS', system-ui, sans-serif" : 'system-ui, sans-serif';
+  const W  = 1200;
+  const H  = 630;
+  const PX = 60;   // horizontal padding
+  const PY = 46;   // vertical padding
+  const PH = 64;   // artist photo diameter
+  const BH = 46;   // bar height
+  const BG = 10;   // gap between bars
 
-  const W     = 1200;
-  const H     = 630;
-  const PX    = 60;
-  const PY    = 48;
-  const PHOTO = 62;
-  const BAR_H = 46;
-  const BAR_GAP = 10;
+  // Exact background from globals.css
+  const BG_COLOR = '#0a0a0a';
+  // Exact ComparisonBar gradient stops
+  const GREEN = 'rgba(94,233,181,0.70)';
+  const DARK  = '#081111';
 
   return new ImageResponse(
     (
       <div
         style={{
-          width: W,
-          height: H,
-          background: '#000000',
+          width: W, height: H,
+          background: BG_COLOR,
           display: 'flex',
           flexDirection: 'column',
           padding: `${PY}px ${PX}px`,
-          fontFamily: FONT,
+          fontFamily: F,
         }}
       >
         {/* ── Artist row ── */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
-        >
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}>
+
           {/* Left: photo + name */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-            {aImg ? (
-              <img
-                src={aImg}
-                width={PHOTO}
-                height={PHOTO}
-                style={{ borderRadius: '50%', border: '2.5px solid #5EE9B5', objectFit: 'cover', flexShrink: 0 }}
-              />
-            ) : (
-              <div style={{
-                width: PHOTO, height: PHOTO, borderRadius: '50%',
-                background: '#111', border: '2.5px solid #5EE9B5',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: FONT,
-              }}>
-                {artistA[0]?.toUpperCase()}
-              </div>
-            )}
-            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, fontFamily: FONT, letterSpacing: '-0.5px' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            {/* Both photos get the same StickyArtistImages green treatment */}
+            <div style={{
+              width: PH, height: PH,
+              borderRadius: '50%',
+              border: '2px solid #5EE9B5',
+              boxShadow: '0 0 10px 1px #5EE9B5',
+              overflow: 'hidden',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              {aImg
+                ? <img src={aImg} width={PH} height={PH} style={{ objectFit: 'cover' }} />
+                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: F }}>
+                    {artistA[0]?.toUpperCase()}
+                  </div>
+              }
+            </div>
+            <span style={{ color: '#ffffff', fontSize: 52, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
               {artistA.toUpperCase()}
             </span>
           </div>
 
-          {/* Right: name + photo */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, fontFamily: FONT, letterSpacing: '-0.5px' }}>
+          {/* Right: name + photo (mirrored) */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <span style={{ color: '#ffffff', fontSize: 52, fontWeight: 800, fontFamily: F, letterSpacing: '-0.5px' }}>
               {artistB.toUpperCase()}
             </span>
-            {bImg ? (
-              <img
-                src={bImg}
-                width={PHOTO}
-                height={PHOTO}
-                style={{ borderRadius: '50%', border: '2.5px solid rgba(255,255,255,0.35)', objectFit: 'cover', flexShrink: 0 }}
-              />
-            ) : (
-              <div style={{
-                width: PHOTO, height: PHOTO, borderRadius: '50%',
-                background: '#111', border: '2.5px solid rgba(255,255,255,0.35)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontSize: 26, fontWeight: 800, fontFamily: FONT,
-              }}>
-                {artistB[0]?.toUpperCase()}
-              </div>
-            )}
+            <div style={{
+              width: PH, height: PH,
+              borderRadius: '50%',
+              border: '2px solid #5EE9B5',
+              boxShadow: '0 0 10px 1px #5EE9B5',
+              overflow: 'hidden',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              {bImg
+                ? <img src={bImg} width={PH} height={PH} style={{ objectFit: 'cover' }} />
+                : <div style={{ width: PH, height: PH, background: '#1a2e25', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: F }}>
+                    {artistB[0]?.toUpperCase()}
+                  </div>
+              }
+            </div>
           </div>
         </div>
 
-        {/* ── Section title ── */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 26, marginBottom: 18 }}>
-          <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 600, fontFamily: FONT }}>
+        {/* ── Section title — matches SectionWrapper header: font-bold text-2xl text-white text-center ── */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, marginBottom: 20 }}>
+          <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 700, fontFamily: F }}>
             {title}
           </span>
         </div>
 
-        {/* ── Metric bars ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: BAR_GAP, flex: 1 }}>
+        {/* ── Bars — exact ComparisonBar styling ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: BG, flex: 1 }}>
           {bars.slice(0, 4).map((bar, i) => {
-            const total = bar.a + bar.b;
-            const aWins = bar.a >= bar.b;
-            const bg    = total === 0
-              ? '#0a0a0a'
-              : aWins
-                ? 'linear-gradient(90deg, rgba(94,233,181,0.70) 0%, #081111 55%)'
-                : 'linear-gradient(90deg, #081111 45%, rgba(94,233,181,0.70) 100%)';
+            const total  = bar.a + bar.b;
+            const aWins  = bar.a > bar.b;
+            const isEqual = bar.a === bar.b;
+
+            const bg = (total === 0)
+              ? `linear-gradient(90deg, ${DARK} 0%, ${DARK} 100%)`
+              : isEqual
+                ? `linear-gradient(90deg, ${DARK} 0%, ${GREEN} 50%, ${DARK} 100%)`
+                : aWins
+                  ? `linear-gradient(90deg, ${GREEN} 0%, ${DARK} 50%)`
+                  : `linear-gradient(90deg, ${DARK} 50%, ${GREEN} 100%)`;
 
             return (
               <div
@@ -169,21 +181,25 @@ export async function GET(request: NextRequest) {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   width: '100%',
-                  height: BAR_H,
-                  borderRadius: 100,
+                  height: BH,
+                  // matches ComparisonBar: borderRadius '4.4375rem' ≈ 71px, border '1px solid #5EE9B5'
+                  borderRadius: 71,
                   border: '1px solid #5EE9B5',
                   background: bg,
-                  padding: '0 26px',
+                  padding: '0 24px',
                 }}
               >
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: FONT, minWidth: 40 }}>
-                  {formatOgNum(bar.a)}
+                {/* artist1Value — font-bold text-base sm:text-lg text-white */}
+                <span style={{ color: '#ffffff', fontSize: 19, fontWeight: 700, fontFamily: F }}>
+                  {fmt(bar.a)}
                 </span>
-                <span style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, fontWeight: 500, fontFamily: FONT }}>
+                {/* metric label — text-white text-m font-medium */}
+                <span style={{ color: '#ffffff', fontSize: 16, fontWeight: 500, fontFamily: F }}>
                   {bar.l}
                 </span>
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: FONT, minWidth: 40, textAlign: 'right' }}>
-                  {formatOgNum(bar.b)}
+                {/* artist2Value */}
+                <span style={{ color: '#ffffff', fontSize: 19, fontWeight: 700, fontFamily: F }}>
+                  {fmt(bar.b)}
                 </span>
               </div>
             );
@@ -194,15 +210,15 @@ export async function GET(request: NextRequest) {
         <div style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
-          marginTop: 14,
+          marginTop: 16,
         }}>
-          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500, fontFamily: FONT }}>
-            {source || ''}
+          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500, fontFamily: F }}>
+            {source ?? ''}
           </span>
-          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500, fontFamily: FONT }}>
+          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500, fontFamily: F }}>
             Artistcompare.com
           </span>
         </div>
