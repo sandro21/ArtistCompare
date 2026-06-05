@@ -3,6 +3,28 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'nodejs';
 
+// Fetch Plus Jakarta Sans font binary from Google Fonts
+async function fetchPlusJakartaSans(weight: 600 | 700 | 800): Promise<ArrayBuffer | null> {
+  try {
+    const css = await fetch(
+      `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@${weight}&display=swap`,
+      {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        },
+      },
+    ).then((r) => r.text());
+
+    const fontUrl = css.match(/url\(([^)]+)\)/)?.[1];
+    if (!fontUrl) return null;
+
+    return fetch(fontUrl).then((r) => r.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
 function formatOgNum(n: number): string {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
@@ -28,10 +50,22 @@ export async function GET(request: NextRequest) {
     if (raw) bars = JSON.parse(raw) as Bar[];
   } catch { /* empty bars */ }
 
-  const W = 1200;
-  const H = 630;
-  const PX = 60; // horizontal padding
-  const PY = 48; // vertical padding
+  // Load fonts in parallel — fall back gracefully if fetch fails
+  const [font700, font800] = await Promise.all([
+    fetchPlusJakartaSans(700),
+    fetchPlusJakartaSans(800),
+  ]);
+
+  const fonts = [] as { name: string; data: ArrayBuffer; weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900; style: 'normal' }[];
+  if (font700) fonts.push({ name: 'Plus Jakarta Sans', data: font700, weight: 700 as const, style: 'normal' as const });
+  if (font800) fonts.push({ name: 'Plus Jakarta Sans', data: font800, weight: 800 as const, style: 'normal' as const });
+
+  const FONT = fonts.length > 0 ? "'Plus Jakarta Sans', sans-serif" : 'system-ui, sans-serif';
+
+  const W     = 1200;
+  const H     = 630;
+  const PX    = 60;
+  const PY    = 48;
   const PHOTO = 62;
   const BAR_H = 46;
   const BAR_GAP = 10;
@@ -46,7 +80,7 @@ export async function GET(request: NextRequest) {
           display: 'flex',
           flexDirection: 'column',
           padding: `${PY}px ${PX}px`,
-          fontFamily: 'system-ui, -apple-system, Arial, sans-serif',
+          fontFamily: FONT,
         }}
       >
         {/* ── Artist row ── */}
@@ -66,33 +100,26 @@ export async function GET(request: NextRequest) {
                 src={aImg}
                 width={PHOTO}
                 height={PHOTO}
-                style={{
-                  borderRadius: '50%',
-                  border: '2.5px solid #5EE9B5',
-                  objectFit: 'cover',
-                  flexShrink: 0,
-                }}
+                style={{ borderRadius: '50%', border: '2.5px solid #5EE9B5', objectFit: 'cover', flexShrink: 0 }}
               />
             ) : (
-              <div
-                style={{
-                  width: PHOTO, height: PHOTO, borderRadius: '50%',
-                  background: '#111', border: '2.5px solid #5EE9B5',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#5EE9B5', fontSize: 28, fontWeight: 800,
-                }}
-              >
+              <div style={{
+                width: PHOTO, height: PHOTO, borderRadius: '50%',
+                background: '#111', border: '2.5px solid #5EE9B5',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#5EE9B5', fontSize: 26, fontWeight: 800, fontFamily: FONT,
+              }}>
                 {artistA[0]?.toUpperCase()}
               </div>
             )}
-            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, letterSpacing: '-0.5px' }}>
+            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, fontFamily: FONT, letterSpacing: '-0.5px' }}>
               {artistA.toUpperCase()}
             </span>
           </div>
 
           {/* Right: name + photo */}
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, letterSpacing: '-0.5px' }}>
+            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, fontFamily: FONT, letterSpacing: '-0.5px' }}>
               {artistB.toUpperCase()}
             </span>
             {bImg ? (
@@ -100,22 +127,15 @@ export async function GET(request: NextRequest) {
                 src={bImg}
                 width={PHOTO}
                 height={PHOTO}
-                style={{
-                  borderRadius: '50%',
-                  border: '2.5px solid rgba(255,255,255,0.35)',
-                  objectFit: 'cover',
-                  flexShrink: 0,
-                }}
+                style={{ borderRadius: '50%', border: '2.5px solid rgba(255,255,255,0.35)', objectFit: 'cover', flexShrink: 0 }}
               />
             ) : (
-              <div
-                style={{
-                  width: PHOTO, height: PHOTO, borderRadius: '50%',
-                  background: '#111', border: '2.5px solid rgba(255,255,255,0.35)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontSize: 28, fontWeight: 800,
-                }}
-              >
+              <div style={{
+                width: PHOTO, height: PHOTO, borderRadius: '50%',
+                background: '#111', border: '2.5px solid rgba(255,255,255,0.35)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', fontSize: 26, fontWeight: 800, fontFamily: FONT,
+              }}>
                 {artistB[0]?.toUpperCase()}
               </div>
             )}
@@ -123,33 +143,18 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Section title ── */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 26,
-            marginBottom: 18,
-          }}
-        >
-          <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 600 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 26, marginBottom: 18 }}>
+          <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 600, fontFamily: FONT }}>
             {title}
           </span>
         </div>
 
         {/* ── Metric bars ── */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            gap: BAR_GAP,
-            flex: 1,
-          }}
-        >
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: BAR_GAP, flex: 1 }}>
           {bars.slice(0, 4).map((bar, i) => {
-            const total  = bar.a + bar.b;
-            const aWins  = bar.a >= bar.b;
-            const bg     = total === 0
+            const total = bar.a + bar.b;
+            const aWins = bar.a >= bar.b;
+            const bg    = total === 0
               ? '#0a0a0a'
               : aWins
                 ? 'linear-gradient(90deg, rgba(94,233,181,0.70) 0%, #081111 55%)'
@@ -171,13 +176,13 @@ export async function GET(request: NextRequest) {
                   padding: '0 26px',
                 }}
               >
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, minWidth: 40 }}>
+                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: FONT, minWidth: 40 }}>
                   {formatOgNum(bar.a)}
                 </span>
-                <span style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, fontWeight: 500 }}>
+                <span style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, fontWeight: 500, fontFamily: FONT }}>
                   {bar.l}
                 </span>
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, minWidth: 40, textAlign: 'right' }}>
+                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: FONT, minWidth: 40, textAlign: 'right' }}>
                   {formatOgNum(bar.b)}
                 </span>
               </div>
@@ -186,25 +191,23 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Footer ── */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            width: '100%',
-            marginTop: 14,
-          }}
-        >
-          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500 }}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          justifyContent: 'space-between',
+          width: '100%',
+          marginTop: 14,
+        }}>
+          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500, fontFamily: FONT }}>
             {source || ''}
           </span>
-          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500 }}>
+          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500, fontFamily: FONT }}>
             Artistcompare.com
           </span>
         </div>
       </div>
     ),
-    { width: W, height: H },
+    { width: W, height: H, fonts },
   );
 }
