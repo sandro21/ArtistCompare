@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import HomeContentWrapper from './HomeContent';
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-  'https://artistcompare.com';
+// Resolve the public-facing origin from the request host so OG image URLs
+// always point to the canonical domain (artistcompare.com) — never the
+// auth-protected *.vercel.app deployment URL, which crawlers can't fetch.
+async function getBaseUrl(): Promise<string> {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  try {
+    const h = await headers();
+    const host = h.get('x-forwarded-host') || h.get('host');
+    if (host) {
+      const proto = h.get('x-forwarded-proto') || 'https';
+      return `${proto}://${host}`;
+    }
+  } catch { /* headers unavailable */ }
+  return 'https://artistcompare.com';
+}
 
 const SECTION_TITLES: Record<string, string> = {
   streams:  'Streaming Stats',
@@ -20,6 +32,7 @@ export async function generateMetadata({
   const params = await searchParams;
   const share = params.share;   // e.g. "billboard"
   const d     = params.d;       // base64-encoded relative og URL
+  const BASE_URL = await getBaseUrl();
 
   if (share && d) {
     try {

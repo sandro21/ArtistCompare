@@ -1,7 +1,23 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import { deobfuscateArtistNames } from "../../../lib/seo-utils";
 import RedirectClient from "./RedirectClient";
+
+// Resolve public origin from request host so OG URLs use the canonical domain,
+// not the auth-protected *.vercel.app deployment URL.
+async function getBaseUrl(): Promise<string> {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  try {
+    const h = await headers();
+    const host = h.get('x-forwarded-host') || h.get('host');
+    if (host) {
+      const proto = h.get('x-forwarded-proto') || 'https';
+      return `${proto}://${host}`;
+    }
+  } catch { /* headers unavailable */ }
+  return 'https://artistcompare.com';
+}
 
 const SECTION_TITLES: Record<string, string> = {
   streams:   'Streaming Stats',
@@ -25,10 +41,7 @@ export async function generateMetadata({
   }
 
   const { artist1, artist2 } = decoded;
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-    'https://artistcompare.com';
+  const baseUrl = await getBaseUrl();
   const comparisonUrl = `${baseUrl}/compare/${slug}`;
 
   // Section-specific share embed
