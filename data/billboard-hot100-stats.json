@@ -1,5 +1,5 @@
 {
-"metadata":{"generated_at":"2026-06-05T17:56:18.195Z","source_url":"https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv","min_year":1990,"total_artists":4521,"total_unique_songs":15538,"version":"1.0.0"},
+"metadata":{"generated_at":"2026-06-05T18:09:52.660Z","source_url":"https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv","min_year":1990,"total_artists":4521,"total_unique_songs":15538,"version":"1.0.0"},
 "artists":{
   "000-maniacs":{"hot100":{"entries":5,"top10s":0,"number1s":0}},
   "070-shake":{"hot100":{"entries":1,"top10s":0,"number1s":0}},

@@ -1,5 +1,5 @@
 {
-"metadata":{"generated_at":"2026-06-05T17:56:19.916Z","source_url":"https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv","min_year":1990,"total_artists":7470,"total_unique_albums":26068,"version":"1.0.0"},
+"metadata":{"generated_at":"2026-06-05T18:09:55.841Z","source_url":"https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv","min_year":1990,"total_artists":7470,"total_unique_albums":26068,"version":"1.0.0"},
 "artists":{
   "000-maniacs":{"billboard200":{"entries":4,"top10s":0,"number1s":0,"wks_on_chart":125}},
   "1-1-six":{"billboard200":{"entries":1,"top10s":0,"number1s":0,"wks_on_chart":1}},
