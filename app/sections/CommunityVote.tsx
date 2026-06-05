@@ -117,7 +117,7 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
       : 'linear-gradient(90deg, #081111 45%, rgba(94,233,181,0.70) 100%)';
 
     return (
-      <SectionWrapper header="Community's Favorite">
+      <SectionWrapper header="People's Favorite">
         {/* Artist name labels */}
         <div className="flex justify-between items-end mb-2 px-1">
           <div className="flex flex-col items-start max-w-[45%]">
@@ -165,7 +165,7 @@ export default function CommunityVote({ artistA, artistB }: CommunityVoteProps) 
   const isLoading = phase.kind === 'loading';
 
   return (
-    <SectionWrapper header="Community's Favorite">
+    <SectionWrapper header="People's Favorite">
       <div className="flex items-center gap-3">
         {/* Artist A */}
         <button

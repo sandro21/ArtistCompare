@@ -64,7 +64,7 @@ const GoogleTrends: React.FC<TrendsProps> = ({ artistA, artistB }) => {
   }, [data, range]);
 
   return (
-    <SectionWrapper header="Google Trends Beta">
+    <SectionWrapper header="Google Trends">
       <div className="flex items-center justify-center gap-2 mb-8">
         {TIME_RANGES.map(({ value, label }) => (
           <button
