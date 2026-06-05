@@ -6,8 +6,8 @@ export const runtime = 'nodejs';
 function formatOgNum(n: number): string {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
-  if (n >= 1_000) return Math.round(n / 1_000) + 'K';
-  return n.toString();
+  if (n >= 10_000) return (n / 1_000).toFixed(0) + 'K';
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 interface Bar { l: string; a: number; b: number; }
@@ -15,25 +15,26 @@ interface Bar { l: string; a: number; b: number; }
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-  const artistA   = searchParams.get('a') || 'Artist A';
-  const artistB   = searchParams.get('b') || 'Artist B';
-  const aImg      = searchParams.get('aImg') || null;
-  const bImg      = searchParams.get('bImg') || null;
-  const title     = searchParams.get('title') || 'Comparison';
+  const artistA = searchParams.get('a') || 'Artist A';
+  const artistB = searchParams.get('b') || 'Artist B';
+  const aImg    = searchParams.get('aImg') || null;
+  const bImg    = searchParams.get('bImg') || null;
+  const title   = searchParams.get('title') || 'Comparison';
+  const source  = searchParams.get('source') || null;
 
   let bars: Bar[] = [];
   try {
     const raw = searchParams.get('bars');
     if (raw) bars = JSON.parse(raw) as Bar[];
-  } catch { /* fall through with empty bars */ }
+  } catch { /* empty bars */ }
 
-  const PAD = 56;
-  const W   = 1200;
-  const H   = 630;
-
-  const circleSize = 120;
-  const barH       = 46;
-  const barGap     = 10;
+  const W = 1200;
+  const H = 630;
+  const PX = 60; // horizontal padding
+  const PY = 48; // vertical padding
+  const PHOTO = 62;
+  const BAR_H = 46;
+  const BAR_GAP = 10;
 
   return new ImageResponse(
     (
@@ -41,121 +42,142 @@ export async function GET(request: NextRequest) {
         style={{
           width: W,
           height: H,
-          background: 'linear-gradient(160deg, #0a0e0d 0%, #0d1a15 60%, #081111 100%)',
+          background: '#000000',
           display: 'flex',
           flexDirection: 'column',
-          padding: PAD,
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          padding: `${PY}px ${PX}px`,
+          fontFamily: 'system-ui, -apple-system, Arial, sans-serif',
         }}
       >
-        {/* Artist row */}
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', marginBottom: 24 }}>
-          {/* Artist A */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16, flex: 1 }}>
+        {/* ── Artist row ── */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          {/* Left: photo + name */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
             {aImg ? (
               <img
                 src={aImg}
-                width={circleSize}
-                height={circleSize}
-                style={{ borderRadius: '50%', border: '3px solid #5EE9B5', objectFit: 'cover' }}
+                width={PHOTO}
+                height={PHOTO}
+                style={{
+                  borderRadius: '50%',
+                  border: '2.5px solid #5EE9B5',
+                  objectFit: 'cover',
+                  flexShrink: 0,
+                }}
               />
             ) : (
               <div
                 style={{
-                  width: circleSize, height: circleSize, borderRadius: '50%',
-                  background: '#1e2e29', border: '3px solid #5EE9B5',
+                  width: PHOTO, height: PHOTO, borderRadius: '50%',
+                  background: '#111', border: '2.5px solid #5EE9B5',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#5EE9B5', fontSize: 48, fontWeight: 700,
+                  color: '#5EE9B5', fontSize: 28, fontWeight: 800,
                 }}
               >
-                {artistA[0]?.toUpperCase() || 'A'}
+                {artistA[0]?.toUpperCase()}
               </div>
             )}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 700, maxWidth: 300 }}>
-                {artistA}
-              </span>
-            </div>
+            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, letterSpacing: '-0.5px' }}>
+              {artistA.toUpperCase()}
+            </span>
           </div>
 
-          {/* VS */}
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#5EE9B5', fontSize: 32, fontWeight: 900,
-            padding: '0 24px', opacity: 0.7,
-          }}>
-            VS
-          </div>
-
-          {/* Artist B */}
-          <div style={{ display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', gap: 16, flex: 1 }}>
+          {/* Right: name + photo */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
+            <span style={{ color: '#ffffff', fontSize: 50, fontWeight: 800, letterSpacing: '-0.5px' }}>
+              {artistB.toUpperCase()}
+            </span>
             {bImg ? (
               <img
                 src={bImg}
-                width={circleSize}
-                height={circleSize}
-                style={{ borderRadius: '50%', border: '3px solid rgba(255,255,255,0.30)', objectFit: 'cover' }}
+                width={PHOTO}
+                height={PHOTO}
+                style={{
+                  borderRadius: '50%',
+                  border: '2.5px solid rgba(255,255,255,0.35)',
+                  objectFit: 'cover',
+                  flexShrink: 0,
+                }}
               />
             ) : (
               <div
                 style={{
-                  width: circleSize, height: circleSize, borderRadius: '50%',
-                  background: '#1e1e1e', border: '3px solid rgba(255,255,255,0.30)',
+                  width: PHOTO, height: PHOTO, borderRadius: '50%',
+                  background: '#111', border: '2.5px solid rgba(255,255,255,0.35)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontSize: 48, fontWeight: 700,
+                  color: '#fff', fontSize: 28, fontWeight: 800,
                 }}
               >
-                {artistB[0]?.toUpperCase() || 'B'}
+                {artistB[0]?.toUpperCase()}
               </div>
             )}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
-              <span style={{ color: '#ffffff', fontSize: 28, fontWeight: 700, maxWidth: 300, textAlign: 'right' }}>
-                {artistB}
-              </span>
-            </div>
           </div>
         </div>
 
-        {/* Section title */}
-        <div style={{
-          color: '#5EE9B5', fontSize: 22, fontWeight: 600,
-          letterSpacing: 2, textTransform: 'uppercase',
-          marginBottom: 18, opacity: 0.85,
-        }}>
-          {title}
+        {/* ── Section title ── */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: 26,
+            marginBottom: 18,
+          }}
+        >
+          <span style={{ color: '#ffffff', fontSize: 30, fontWeight: 600 }}>
+            {title}
+          </span>
         </div>
 
-        {/* Metric bars */}
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: barGap, flex: 1 }}>
+        {/* ── Metric bars ── */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            gap: BAR_GAP,
+            flex: 1,
+          }}
+        >
           {bars.slice(0, 4).map((bar, i) => {
             const total  = bar.a + bar.b;
             const aWins  = bar.a >= bar.b;
-            const gradient = aWins
-              ? 'linear-gradient(90deg, rgba(94,233,181,0.68) 0%, #081111 58%)'
-              : 'linear-gradient(90deg, #081111 42%, rgba(94,233,181,0.68) 100%)';
+            const bg     = total === 0
+              ? '#0a0a0a'
+              : aWins
+                ? 'linear-gradient(90deg, rgba(94,233,181,0.70) 0%, #081111 55%)'
+                : 'linear-gradient(90deg, #081111 45%, rgba(94,233,181,0.70) 100%)';
 
             return (
               <div
                 key={i}
                 style={{
-                  display: 'flex', flexDirection: 'row',
-                  alignItems: 'center', justifyContent: 'space-between',
-                  width: '100%', height: barH,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  height: BAR_H,
                   borderRadius: 100,
                   border: '1px solid #5EE9B5',
-                  background: total === 0
-                    ? '#0a0e0d'
-                    : gradient,
-                  padding: '0 28px',
+                  background: bg,
+                  padding: '0 26px',
                 }}
               >
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700 }}>
+                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, minWidth: 40 }}>
                   {formatOgNum(bar.a)}
                 </span>
                 <span style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, fontWeight: 500 }}>
                   {bar.l}
                 </span>
-                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700 }}>
+                <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, minWidth: 40, textAlign: 'right' }}>
                   {formatOgNum(bar.b)}
                 </span>
               </div>
@@ -163,13 +185,22 @@ export async function GET(request: NextRequest) {
           })}
         </div>
 
-        {/* Watermark */}
-        <div style={{
-          display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end',
-          marginTop: 16,
-        }}>
-          <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 15, fontWeight: 500, letterSpacing: 0.5 }}>
-            artistcompare.com
+        {/* ── Footer ── */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            width: '100%',
+            marginTop: 14,
+          }}
+        >
+          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500 }}>
+            {source || ''}
+          </span>
+          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500 }}>
+            Artistcompare.com
           </span>
         </div>
       </div>

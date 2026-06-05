@@ -34,26 +34,28 @@ const Charts: React.FC<ChartsProps> = ({ artistA, artistB, onShare }) => {
 
   const albumsPayload: SharePayload = {
     sectionId: 'billboard-albums',
-    sectionTitle: 'Billboard 200',
+    sectionTitle: 'Billboard Charts',
     artistAName: nameA,
     artistBName: nameB,
     artistAImg: imgA,
     artistBImg: imgB,
+    source: 'From: Billboard 200™',
     bars: [
-      { label: '#1s',         valueA: a200.number1s,    valueB: b200.number1s    },
-      { label: 'Top 10s',     valueA: a200.top10s,      valueB: b200.top10s      },
-      { label: 'Entries',     valueA: a200.entries,     valueB: b200.entries     },
+      { label: '#1s',         valueA: a200.number1s,     valueB: b200.number1s     },
+      { label: 'Top 10s',     valueA: a200.top10s,       valueB: b200.top10s       },
+      { label: 'Entries',     valueA: a200.entries,      valueB: b200.entries      },
       { label: 'Total Weeks', valueA: a200.wks_on_chart, valueB: b200.wks_on_chart },
     ],
   };
 
   const songsPayload: SharePayload = {
     sectionId: 'billboard-songs',
-    sectionTitle: 'Billboard Hot 100',
+    sectionTitle: 'Billboard Charts',
     artistAName: nameA,
     artistBName: nameB,
     artistAImg: imgA,
     artistBImg: imgB,
+    source: 'From: Billboard Hot 100™',
     bars: [
       { label: '#1s',     valueA: aH100.number1s, valueB: bH100.number1s },
       { label: 'Top 10s', valueA: aH100.top10s,   valueB: bH100.top10s   },

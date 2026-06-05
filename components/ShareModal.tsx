@@ -17,6 +17,7 @@ function buildOgUrl(payload: SharePayload): string {
   });
   if (payload.artistAImg) params.set('aImg', payload.artistAImg);
   if (payload.artistBImg) params.set('bImg', payload.artistBImg);
+  if (payload.source)    params.set('source', payload.source);
   return `/api/og/share?${params.toString()}`;
 }
 

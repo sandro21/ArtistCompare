@@ -99,4 +99,5 @@ export interface SharePayload {
   artistAImg?: string;
   artistBImg?: string;
   bars: MetricBar[];
+  source?: string;
 }
