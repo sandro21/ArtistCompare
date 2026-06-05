@@ -7,14 +7,19 @@ export const runtime = 'nodejs';
 // Satori only renders TTF/OTF — woff2 silently falls back to system font.
 const LEGACY_UA = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)';
 
-async function fetchFont(weight: 500 | 700 | 800): Promise<ArrayBuffer | null> {
+type FontDef = { name: string; data: ArrayBuffer; weight: 700 | 800; style: 'normal' };
+
+// Module-level cache — persists across requests on the same serverless instance.
+// Fonts are fetched once on cold start, then served instantly from memory.
+let _fontCache: FontDef[] | null = null;
+
+async function fetchFont(weight: 700 | 800): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
       `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@${weight}&display=swap`,
       { headers: { 'User-Agent': LEGACY_UA } },
     ).then((r) => r.text());
 
-    // Strip any quotes around the URL
     const match = css.match(/url\(['"]?([^'")\s]+)['"]?\)/);
     if (!match?.[1]) return null;
 
@@ -22,6 +27,18 @@ async function fetchFont(weight: 500 | 700 | 800): Promise<ArrayBuffer | null> {
   } catch {
     return null;
   }
+}
+
+async function getFonts(): Promise<FontDef[]> {
+  if (_fontCache) return _fontCache;
+
+  const [f700, f800] = await Promise.all([fetchFont(700), fetchFont(800)]);
+
+  _fontCache = [];
+  if (f700) _fontCache.push({ name: 'PJS', data: f700, weight: 700, style: 'normal' });
+  if (f800) _fontCache.push({ name: 'PJS', data: f800, weight: 800, style: 'normal' });
+
+  return _fontCache;
 }
 
 function fmt(n: number): string {
@@ -50,21 +67,8 @@ export async function GET(request: NextRequest) {
   } catch { /* empty */ }
 
   // Load all three weights in parallel
-  const [f500, f700, f800] = await Promise.all([
-    fetchFont(500),
-    fetchFont(700),
-    fetchFont(800),
-  ]);
-
-  const fonts: {
-    name: string;
-    data: ArrayBuffer;
-    weight: 500 | 700 | 800;
-    style: 'normal';
-  }[] = [];
-  if (f500) fonts.push({ name: 'PJS', data: f500, weight: 500, style: 'normal' });
-  if (f700) fonts.push({ name: 'PJS', data: f700, weight: 700, style: 'normal' });
-  if (f800) fonts.push({ name: 'PJS', data: f800, weight: 800, style: 'normal' });
+  // Cached — instant after first cold start
+  const fonts = await getFonts();
 
   const F  = fonts.length ? "'PJS', system-ui, sans-serif" : 'system-ui, sans-serif';
   const W  = 1200;
@@ -194,7 +198,7 @@ export async function GET(request: NextRequest) {
                   {fmt(bar.a)}
                 </span>
                 {/* metric label — text-white text-m font-medium */}
-                <span style={{ color: '#ffffff', fontSize: 16, fontWeight: 500, fontFamily: F }}>
+                <span style={{ color: '#ffffff', fontSize: 16, fontWeight: 700, fontFamily: F }}>
                   {bar.l}
                 </span>
                 {/* artist2Value */}
@@ -215,10 +219,10 @@ export async function GET(request: NextRequest) {
           width: '100%',
           marginTop: 16,
         }}>
-          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 500, fontFamily: F }}>
+          <span style={{ color: '#5EE9B5', fontSize: 13, fontWeight: 700, fontFamily: F }}>
             {source ?? ''}
           </span>
-          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 500, fontFamily: F }}>
+          <span style={{ color: '#ffffff', fontSize: 20, fontWeight: 700, fontFamily: F }}>
             Artistcompare.com
           </span>
         </div>
