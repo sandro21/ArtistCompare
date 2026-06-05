@@ -83,3 +83,20 @@ export interface ArtistComponentProps {
   artistA: Artist | null;
   artistB: Artist | null;
 }
+
+// Share / export flow
+export interface MetricBar {
+  label: string;
+  valueA: number;
+  valueB: number;
+}
+
+export interface SharePayload {
+  sectionId: string;
+  sectionTitle: string;
+  artistAName: string;
+  artistBName: string;
+  artistAImg?: string;
+  artistBImg?: string;
+  bars: MetricBar[];
+}

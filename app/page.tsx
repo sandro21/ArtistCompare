@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, Suspense } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Info from "./sections/Info";
@@ -13,10 +13,12 @@ import StickyArtistImages from "../components/StickyArtistImages";
 import QuickCompareBar from "../components/QuickCompareBar";
 import GoogleTrends from "./sections/GoogleTrends";
 import CommunityVote from "./sections/CommunityVote";
+import ShareModal from "../components/ShareModal";
 import { useLoadingScreen } from "../hooks/useLoadingScreen";
 import { useArtistSelection } from "../hooks/useArtistSelection";
 import { useGlowEffect } from "../hooks/useGlowEffect";
 import { EMPTY_ARTIST, getArtistName } from "../lib/utils/artist";
+import type { SharePayload } from "../types";
 
 const PARTICLE_EMOJIS = ['🎵', '🎶', '🎤', '🎧', '⭐'];
 
@@ -26,6 +28,8 @@ function HomeContent() {
   const { pair, resetPair, selectedA, selectedB, onSelectA, onSelectB, hasUrlParams } = useArtistSelection(startLoadingAnimation, isInitialLoading);
   const hasSeenGlow = useGlowEffect(!!pair, !!hasUrlParams);
   const searchParams = useSearchParams();
+
+  const [sharePayload, setSharePayload] = useState<SharePayload | null>(null);
 
   const duo = useMemo(() => {
     if (pair) return [pair.a, pair.b];
@@ -191,9 +195,9 @@ function HomeContent() {
                   artistAName={getArtistName(duo[0])}
                   artistBName={getArtistName(duo[1])}
                 />
-                <Streams artistA={duo[0]} artistB={duo[1]} />
-                <Charts artistA={duo[0]} artistB={duo[1]} />
-                <Awards artistA={duo[0]} artistB={duo[1]} />
+                <Streams artistA={duo[0]} artistB={duo[1]} onShare={setSharePayload} />
+                <Charts artistA={duo[0]} artistB={duo[1]} onShare={setSharePayload} />
+                <Awards artistA={duo[0]} artistB={duo[1]} onShare={setSharePayload} />
                 <GoogleTrends artistA={duo[0]} artistB={duo[1]} />
                 
               </section>
@@ -202,9 +206,12 @@ function HomeContent() {
         )}
       </main>
 
+      {sharePayload && (
+        <ShareModal payload={sharePayload} onClose={() => setSharePayload(null)} />
+      )}
     </div>
   );
- }
+}
 
 export default function Home() {
   return (

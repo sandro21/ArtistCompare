@@ -4,14 +4,15 @@ import SectionWrapper from '../../components/SectionWrapper';
 import { useMusicMetrics } from '../../hooks/useMusicMetrics';
 import { parseMetricValue } from '../../lib/utils/formatters';
 import { getArtistName } from '../../lib/utils/artist';
-import type { Artist } from '../../types';
+import type { Artist, SharePayload } from '../../types';
 
 interface StreamsProps {
   artistA: Artist | null;
   artistB: Artist | null;
+  onShare?: (payload: SharePayload) => void;
 }
 
-const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
+const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
   const { metrics: metricsA, loading: loadingA, error: errorA } = useMusicMetrics(getArtistName(artistA), artistA?.spotifyId);
   const { metrics: metricsB, loading: loadingB, error: errorB } = useMusicMetrics(getArtistName(artistB), artistB?.spotifyId);
 
@@ -65,8 +66,22 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB }) => {
     );
   }
 
+  const sharePayload: SharePayload = {
+    sectionId: 'streams',
+    sectionTitle: 'Streaming Stats',
+    artistAName: getArtistName(artistA),
+    artistBName: getArtistName(artistB),
+    artistAImg: artistA.spotifyImageUrl || artistA.spotifyImage || artistA.image,
+    artistBImg: artistB.spotifyImageUrl || artistB.spotifyImage || artistB.image,
+    bars: [
+      { label: 'Monthly Listeners', valueA: parseMetricValue(metricsA.monthlyListeners), valueB: parseMetricValue(metricsB.monthlyListeners) },
+      { label: 'All-Time Streams',  valueA: parseMetricValue(metricsA.totalStreams),      valueB: parseMetricValue(metricsB.totalStreams)      },
+      { label: 'Spotify Followers', valueA: parseMetricValue(metricsA.followers),         valueB: parseMetricValue(metricsB.followers)         },
+    ],
+  };
+
   return (
-    <SectionWrapper header="Streams">
+    <SectionWrapper header="Streams" sharePayload={sharePayload} onShare={onShare}>
       <ComparisonBar
         artist1Value={parseMetricValue(metricsA.totalStreams)}
         artist2Value={parseMetricValue(metricsB.totalStreams)}
