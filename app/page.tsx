@@ -52,7 +52,7 @@ export async function generateMetadata({
           title,
           description,
           url: `${BASE_URL}/?artist1=${encodeURIComponent(a1)}&artist2=${encodeURIComponent(a2)}&share=${share}`,
-          images: [{ url: absoluteOgUrl, width: 1200, height: 630, alt: title }],
+          images: [{ url: absoluteOgUrl, width: 1200, height: 630, alt: title, type: 'image/png' }],
           siteName: 'ArtistCompare',
         },
         twitter: {

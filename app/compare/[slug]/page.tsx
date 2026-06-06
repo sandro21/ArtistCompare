@@ -60,7 +60,7 @@ export async function generateMetadata({
         openGraph: {
           type: 'website', title, description,
           url: `${comparisonUrl}?share=${share}`,
-          images: [{ url: absoluteOgUrl, width: 1200, height: 630, alt: title }],
+          images: [{ url: absoluteOgUrl, width: 1200, height: 630, alt: title, type: 'image/png' }],
           siteName: 'ArtistCompare',
         },
         twitter: { card: 'summary_large_image', title, description, images: [absoluteOgUrl] },
@@ -82,7 +82,7 @@ export async function generateMetadata({
       title,
       description,
       url: comparisonUrl,
-      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${artist1} vs ${artist2}` }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${artist1} vs ${artist2}`, type: 'image/png' }],
       siteName: 'ArtistCompare',
     },
     twitter: { card: 'summary_large_image', title, description, images: [ogImageUrl] },

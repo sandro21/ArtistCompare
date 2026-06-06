@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://artist-compare.com'
+  const baseUrl = 'https://artistcompare.com'
   
   return {
     rules: {
       userAgent: '*',
-      allow: ['/', '/api/og/'],
+      allow: ['/', '/og/', '/api/og/'],
       disallow: '/api/',
     },
     sitemap: `${baseUrl}/sitemap.xml`,

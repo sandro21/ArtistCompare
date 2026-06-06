@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   // Ensure TTF font files are bundled into the OG image serverless function
   outputFileTracingIncludes: {
     '/api/og/share': ['./public/fonts/*.ttf'],
+    '/og/share': ['./public/fonts/*.ttf'],
   },
 
   // Performance optimizations
