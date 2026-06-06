@@ -1,10 +1,15 @@
 import React from 'react';
 import ComparisonBar from '../../components/ComparisonBar';
 import SectionWrapper from '../../components/SectionWrapper';
+import SourceAttribution from '../../components/SourceAttribution';
 import { useMusicMetrics } from '../../hooks/useMusicMetrics';
 import { parseMetricValue } from '../../lib/utils/formatters';
 import { getArtistName } from '../../lib/utils/artist';
 import type { Artist, SharePayload } from '../../types';
+
+const SECTION_HEADER = 'Spotify Stats';
+const SOURCE_LABEL = 'Source: musicmetricsvault.com';
+const SOURCE_URL = 'https://www.musicmetricsvault.com';
 
 interface StreamsProps {
   artistA: Artist | null;
@@ -18,7 +23,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
 
   if (!artistA || !artistB) {
     return (
-      <SectionWrapper header="Streams">
+      <SectionWrapper header={SECTION_HEADER}>
         <div className="text-center text-gray-400 py-8">
           Select two artists to compare their streaming metrics
         </div>
@@ -28,7 +33,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
 
   if (loadingA || loadingB) {
     return (
-      <SectionWrapper header="Streams">
+      <SectionWrapper header={SECTION_HEADER}>
         <div className="text-center py-8">
           <div className="text-[#5EE9B5] text-lg font-semibold mb-2">
             ⚡ Quick! Try guessing the winner while this loads...
@@ -43,10 +48,10 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
 
   if (errorA || errorB) {
     return (
-      <SectionWrapper header="Streams">
+      <SectionWrapper header={SECTION_HEADER}>
         <div className="text-center py-8">
           <div className="text-[#5EE9B5] text-lg font-semibold mb-2">
-            Streaming stats unavailable right now
+            Spotify stats unavailable right now
           </div>
           <div className="text-gray-400 text-sm">
             Check out the other sections below! 👇
@@ -58,7 +63,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
 
   if (!metricsA || !metricsB) {
     return (
-      <SectionWrapper header="Streams">
+      <SectionWrapper header={SECTION_HEADER}>
         <div className="text-center text-gray-400 py-8">
           No streaming data available
         </div>
@@ -68,11 +73,12 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
 
   const sharePayload: SharePayload = {
     sectionId: 'streams',
-    sectionTitle: 'Streaming Stats',
+    sectionTitle: SECTION_HEADER,
     artistAName: getArtistName(artistA),
     artistBName: getArtistName(artistB),
     artistAImg: artistA.spotifyImageUrl || artistA.spotifyImage || artistA.image,
     artistBImg: artistB.spotifyImageUrl || artistB.spotifyImage || artistB.image,
+    source: SOURCE_LABEL,
     bars: [
       { label: 'Monthly Listeners', valueA: parseMetricValue(metricsA.monthlyListeners), valueB: parseMetricValue(metricsB.monthlyListeners) },
       { label: 'All-Time Streams',  valueA: parseMetricValue(metricsA.totalStreams),      valueB: parseMetricValue(metricsB.totalStreams)      },
@@ -81,7 +87,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
   };
 
   return (
-    <SectionWrapper header="Streams" sharePayload={sharePayload} onShare={onShare}>
+    <SectionWrapper header={SECTION_HEADER} sharePayload={sharePayload} onShare={onShare}>
       <ComparisonBar
         artist1Value={parseMetricValue(metricsA.totalStreams)}
         artist2Value={parseMetricValue(metricsB.totalStreams)}
@@ -103,6 +109,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
         metric="Spotify Followers"
         labelClassName="max-w-[120px] sm:max-w-[140px] md:max-w-none"
       />
+      <SourceAttribution href={SOURCE_URL}>{SOURCE_LABEL}</SourceAttribution>
     </SectionWrapper>
   );
 };

@@ -5,7 +5,7 @@ const https = require('https');
 // Configuration
 const BILLBOARD200_CSV_URL = 'https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv';
 const OUTPUT_FILE = 'data/billboard200-stats-test.json';
-const MIN_YEAR = 1990;
+const { MIN_YEAR } = require('./billboard-config');
 
 // List of 50 popular artists to test (includes artists with known capitalization issues)
 const TEST_ARTISTS = [

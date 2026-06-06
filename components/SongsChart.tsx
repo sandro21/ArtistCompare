@@ -1,8 +1,11 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
+import SourceAttribution from './SourceAttribution';
 import hot100Data from '@/data/billboard-hot100-stats.json';
 import { normalizeForBillboardLookup } from '@/lib/utils/normalize';
 import type { Artist } from '../types';
+
+const hot100MinYear = hot100Data.metadata.min_year;
 
 interface SongsChartProps {
   artistA: Artist | null;
@@ -36,9 +39,9 @@ const SongsChart: React.FC<SongsChartProps> = ({ artistA, artistB }) => {
         artist2Value={artistBHot100.hot100.entries} 
         metric="Entries" 
       />
-      <div className="text-[#5EE9B5] text-xs font-semibold tracking-wide mt-1 text-center w-full sm:text-left">
-        From: Billboard Hot 100<span className="align-super text-[10px] ml-0.5">™</span>
-      </div>
+      <SourceAttribution>
+        From: Billboard Hot 100<span className="align-super text-[10px] ml-0.5">™</span> (After {hot100MinYear})
+      </SourceAttribution>
     </>
   );
 };

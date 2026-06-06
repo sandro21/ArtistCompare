@@ -5,7 +5,7 @@ const https = require('https');
 // Configuration
 const HOT100_CSV_URL = 'https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv';
 const OUTPUT_FILE = 'data/billboard-hot100-stats-test.json';
-const MIN_YEAR = 1990;
+const { MIN_YEAR } = require('./billboard-config');
 
 // List of 50 popular artists to test (includes artists with known capitalization issues)
 const TEST_ARTISTS = [

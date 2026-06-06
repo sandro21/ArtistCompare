@@ -2,13 +2,14 @@ name: Update Billboard stats
 
 on:
   schedule:
-    # 1st of every month at 06:00 UTC
+    # 1st of every month at 06:00 UTC — full reprocess from MIN_YEAR (scripts/billboard-config.js)
     - cron: '0 6 1 * *'
   workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     permissions:
       contents: write
 
@@ -22,7 +23,8 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run update-billboard
+      - name: Reprocess Hot 100 + Billboard 200 (from MIN_YEAR)
+        run: npm run update-billboard
 
       - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v5

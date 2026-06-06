@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import SectionWrapper from '../../components/SectionWrapper';
+import SourceAttribution from '../../components/SourceAttribution';
 
 interface TrackRow {
   name: string;
@@ -139,6 +140,7 @@ const TopStreams: React.FC<TopStreamsProps> = ({ artistAId, artistBId, artistANa
         {renderTable(aData, loadingA, errorA, artistAName, false)}
         {renderTable(bData, loadingB, errorB, artistBName, true)}
       </div>
+      <SourceAttribution href="https://kworb.net">Source: kworb.net</SourceAttribution>
     </SectionWrapper>
   );
 };

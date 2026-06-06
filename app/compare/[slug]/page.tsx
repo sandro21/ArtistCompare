@@ -20,7 +20,7 @@ async function getBaseUrl(): Promise<string> {
 }
 
 const SECTION_TITLES: Record<string, string> = {
-  streams:   'Streaming Stats',
+  streams:   'Spotify Stats',
   billboard: 'Billboard Charts',
   grammy:    'Grammy Awards',
 };

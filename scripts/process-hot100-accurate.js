@@ -5,7 +5,7 @@ const https = require('https');
 // Configuration
 const HOT100_CSV_URL = 'https://raw.githubusercontent.com/utdata/rwd-billboard-data/main/data-out/hot-100-current.csv';
 const OUTPUT_FILE = 'data/billboard-hot100-stats.json';
-const MIN_YEAR = 1990; // CAN BE CHANGED! MIN YEAR
+const { MIN_YEAR } = require('./billboard-config');
 
 console.log('1. Starting accurate Hot 100 data processing...');
 console.log(`2. Processing data from ${MIN_YEAR} onwards`);

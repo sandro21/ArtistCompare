@@ -39,7 +39,7 @@ const Charts: React.FC<ChartsProps> = ({ artistA, artistB, onShare }) => {
     artistBName: nameB,
     artistAImg: imgA,
     artistBImg: imgB,
-    source: 'From: Billboard 200™',
+    source: `From: Billboard 200™ (After ${billboard200Data.metadata.min_year})`,
     bars: [
       { label: '#1s',         valueA: a200.number1s,     valueB: b200.number1s     },
       { label: 'Top 10s',     valueA: a200.top10s,       valueB: b200.top10s       },
@@ -55,7 +55,7 @@ const Charts: React.FC<ChartsProps> = ({ artistA, artistB, onShare }) => {
     artistBName: nameB,
     artistAImg: imgA,
     artistBImg: imgB,
-    source: 'From: Billboard Hot 100™',
+    source: `From: Billboard Hot 100™ (After ${hot100Data.metadata.min_year})`,
     bars: [
       { label: '#1s',     valueA: aH100.number1s, valueB: bH100.number1s },
       { label: 'Top 10s', valueA: aH100.top10s,   valueB: bH100.top10s   },

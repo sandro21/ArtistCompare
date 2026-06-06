@@ -1,7 +1,10 @@
 import React from 'react';
 import ComparisonBar from './ComparisonBar';
+import SourceAttribution from './SourceAttribution';
 import billboard200Data from '@/data/billboard200-stats.json';
 import { normalizeForBillboardLookup } from '@/lib/utils/normalize';
+
+const billboard200MinYear = billboard200Data.metadata.min_year;
 
 interface AlbumsChartProps {
   artistA: any;
@@ -37,9 +40,9 @@ const AlbumsChart: React.FC<AlbumsChartProps> = ({ artistA, artistB }) => {
         artist2Value={artistB200.billboard200.wks_on_chart} 
         metric="Total Weeks" 
       />
-      <div className="text-[#5EE9B5] text-xs font-semibold tracking-wide mt-1 text-center w-full sm:text-left">
-        From: Billboard 200<span className="align-super text-[10px] ml-0.5">™</span>
-      </div>
+      <SourceAttribution>
+        From: Billboard 200<span className="align-super text-[10px] ml-0.5">™</span> (After {billboard200MinYear})
+      </SourceAttribution>
     </>
   );
 };

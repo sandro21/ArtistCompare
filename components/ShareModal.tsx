@@ -74,26 +74,6 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleTwitter = useCallback(() => {
-    const text = encodeURIComponent(
-      `Who wins this matchup? ${payload.artistAName} vs ${payload.artistBName} — ${payload.sectionTitle}`,
-    );
-    window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`,
-      '_blank',
-    );
-  }, [payload, shareUrl]);
-
-  const handleReddit = useCallback(() => {
-    const title = encodeURIComponent(
-      `${payload.artistAName} vs ${payload.artistBName} — ${payload.sectionTitle}`,
-    );
-    window.open(
-      `https://www.reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${title}`,
-      '_blank',
-    );
-  }, [payload, shareUrl]);
-
   const handleDownload = useCallback(async () => {
     setDownloading(true);
     try {
@@ -168,7 +148,7 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
           {/* Copy link */}
           <button
             onClick={handleCopy}
-            className="group flex flex-col items-center gap-1.5 py-3 rounded-xl transition-all duration-200 hover:scale-[1.04] active:scale-95 cursor-pointer"
+            className="group col-span-3 flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
             style={{
               background: copied ? 'rgba(94,233,181,0.15)' : 'rgba(255,255,255,0.06)',
               border: `1px solid ${copied ? 'rgba(94,233,181,0.55)' : 'rgba(255,255,255,0.14)'}`,
@@ -190,33 +170,11 @@ export default function ShareModal({ payload, onClose }: ShareModalProps) {
             </span>
           </button>
 
-          {/* Twitter / X */}
-          <button
-            onClick={handleTwitter}
-            className="group flex flex-col items-center gap-1.5 py-3 rounded-xl border border-white/[0.14] bg-white/[0.06] transition-all duration-200 hover:bg-white/[0.13] hover:border-white/30 hover:scale-[1.04] active:scale-95 cursor-pointer"
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="transition-transform duration-200 group-hover:-translate-y-0.5">
-              <path d="M13.5 2.5h2.25L11.25 8 16.5 15.5H12L8.5 10.75 4.5 15.5H2.25l4.75-5.75L1.5 2.5H6.1l3.15 4.5 4.25-4.5Z" fill="#ffffff"/>
-            </svg>
-            <span className="text-[11px] font-medium text-white">Post on X</span>
-          </button>
-
-          {/* Reddit */}
-          <button
-            onClick={handleReddit}
-            className="group flex flex-col items-center gap-1.5 py-3 rounded-xl border border-white/[0.14] bg-white/[0.06] transition-all duration-200 hover:bg-[rgba(255,69,0,0.15)] hover:border-[rgba(255,69,0,0.4)] hover:scale-[1.04] active:scale-95 cursor-pointer"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" className="transition-transform duration-200 group-hover:-translate-y-0.5">
-              <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
-            </svg>
-            <span className="text-[11px] font-medium text-white">Reddit</span>
-          </button>
-
           {/* Download */}
           <button
             onClick={handleDownload}
             disabled={downloading}
-            className="group flex flex-col items-center gap-1.5 py-3 rounded-xl border border-white/[0.14] bg-white/[0.06] transition-all duration-200 hover:bg-white/[0.13] hover:border-white/30 hover:scale-[1.04] active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+            className="group col-span-1 flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl border border-white/[0.14] bg-white/[0.06] transition-all duration-200 hover:bg-white/[0.13] hover:border-white/30 hover:scale-[1.04] active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
           >
             {downloading ? (
               <div className="w-[18px] h-[18px] rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(255,255,255,0.4)', borderTopColor: 'transparent' }} />

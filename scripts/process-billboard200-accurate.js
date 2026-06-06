@@ -5,7 +5,7 @@ const https = require('https');
 // Configuration
 const BILLBOARD200_CSV_URL = 'https://raw.githubusercontent.com/utdata/rwd-billboard-data/refs/heads/main/data-out/billboard-200-current.csv';
 const OUTPUT_FILE = 'data/billboard200-stats.json';
-const MIN_YEAR = 1990; // Only include data from 1990 onwards
+const { MIN_YEAR } = require('./billboard-config');
 
 console.log('🎵 Starting accurate Billboard 200 data processing...');
 console.log(`📅 Processing data from ${MIN_YEAR} onwards`);
