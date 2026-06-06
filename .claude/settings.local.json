@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o C:/Users/College/AppData/Local/Temp/home.html -w \"HTTP=%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o C:/Users/College/AppData/Local/Temp/compare.html -w \"HTTP=%{http_code}\\\\n\" \"http://localhost:3000/?artist1=Drake&artist2=Kendrick%20Lamar\")",
+      "Bash(curl -s -o /dev/null -w \"search HTTP=%{http_code}\\\\n\" \"http://localhost:3000/api/spotify-search?q=Drake&limit=1\")",
+      "Bash(curl -s -o /dev/null -w \"spotify-search=%{http_code} \" \"http://localhost:3000/api/spotify-search?q=Drake&limit=1\")",
+      "Bash(curl -s -o /dev/null -w \"spotify-search-kendrick=%{http_code} \" \"http://localhost:3000/api/spotify-search?q=Kendrick%20Lamar&limit=1\")",
+      "Bash(curl -s -o /dev/null -w \"google-trends=%{http_code}\\\\n\" \"http://localhost:3000/api/google-trends?a=Drake&b=Kendrick%20Lamar&range=1y\")",
+      "Bash(npx tsc *)",
+      "Bash(curl -s \"http://localhost:3002/api/spotify-search?q=Drake&limit=1\")",
+      "Bash(curl -s \"http://localhost:3002/api/spotify-artist-details?spotifyId=3TVXtAsR1Inumwj472S9r4\")",
+      "Bash(curl -s \"http://localhost:3002/api/spotify-release-years?spotifyId=3TVXtAsR1Inumwj472S9r4\")",
+      "Bash(curl -s \"http://localhost:3002/api/google-trends?a=Drake&b=Kendrick%20Lamar&range=5y\")",
+      "Bash(tasklist /FI \"PID eq 30968\")",
+      "Bash(node scripts/process-hot100-accurate.js)",
+      "Bash(node scripts/process-billboard200-accurate.js)",
+      "Bash(curl -s -o /dev/null -w \"port3000=%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"port3002=%{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\" --max-time 3 http://localhost:3000/)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\" --max-time 3 http://localhost:3002/)",
+      "Bash(curl *)"
+    ]
+  }
+}
