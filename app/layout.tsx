@@ -119,10 +119,13 @@ export default function RootLayout({
           name="google-site-verification"
           content="K1bbyZBCsNWwzD-a0pcDNzzets87M-FADFh920g-Pvk"
         />
-        {/* Impact.com site verification */}
+        {/* Impact.com site verification (Impact reads a `value` attribute, which
+            isn't in React's <meta> types, so we spread it via an untyped object). */}
         <meta
-          name="impact-site-verification"
-          value="42788bb6-a5d4-4b23-8a08-1cf0a6f5ca31"
+          {...({
+            name: 'impact-site-verification',
+            value: '42788bb6-a5d4-4b23-8a08-1cf0a6f5ca31',
+          } as Record<string, string>)}
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#5EE9B5" />
