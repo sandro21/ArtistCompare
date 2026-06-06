@@ -14,6 +14,7 @@ import QuickCompareBar from '../components/QuickCompareBar';
 import GoogleTrends from './sections/GoogleTrends';
 import CommunityVote from './sections/CommunityVote';
 import ShareModal from '../components/ShareModal';
+import SiteFooter from '../components/SiteFooter';
 import { useLoadingScreen } from '../hooks/useLoadingScreen';
 import { useArtistSelection } from '../hooks/useArtistSelection';
 import { useGlowEffect } from '../hooks/useGlowEffect';
@@ -172,6 +173,8 @@ function HomeContent() {
           </>
         )}
       </main>
+
+      <SiteFooter />
 
       {sharePayload && (
         <ShareModal payload={sharePayload} onClose={() => setSharePayload(null)} />

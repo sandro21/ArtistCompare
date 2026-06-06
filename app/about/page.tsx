@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import SiteFooter from '../../components/SiteFooter'
 
 export const metadata: Metadata = {
   title: 'About Artist Compare - Music Artist Comparison Tool | Billboard Charts, Grammy Awards & Spotify Data',
@@ -59,7 +60,7 @@ export default function AboutPage() {
           <span className="font-bold text-black text-4xl">Artist Compare</span>
         </Link>
         <div className="bg-[#5EE9B5] border-3 border-[#376348] flex rounded-full items-center px-4">
-          <Link href="/" className="font-bold text-black text-2xl">Go Back</Link>
+          <Link href="/" className="font-bold text-black text-2xl">Compare Again</Link>
         </div>
       </nav>
 
@@ -309,6 +310,8 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   )
 }

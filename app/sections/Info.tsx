@@ -1,6 +1,7 @@
 import React from 'react';
 import ArtistCard from '../../components/ArtistCard';
 import { useArtistInfo } from '../../hooks/useArtistInfo';
+import { useTickets } from '../../hooks/useTickets';
 import { EMPTY_ARTIST, getArtistName } from '../../lib/utils/artist';
 import type { Artist } from '../../types';
 
@@ -15,6 +16,9 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
 
   const aInfo = useArtistInfo(a?.spotifyId);
   const bInfo = useArtistInfo(b?.spotifyId);
+
+  const aTickets = useTickets(a?.spotifyId, getArtistName(a));
+  const bTickets = useTickets(b?.spotifyId, getArtistName(b));
 
   return (
     <div
@@ -35,6 +39,9 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
           activeYears={aInfo.releaseYears || a.activeYears}
           songsCount={aInfo.loading ? undefined : aInfo.details?.totalTracks}
           albumsCount={aInfo.loading ? undefined : aInfo.details?.totalAlbums}
+          ticketsUrl={aTickets.tickets?.url}
+          onTour={aTickets.tickets?.onTour}
+          eventCount={aTickets.tickets?.eventCount}
         />
       )}
       {/* Artist 2 */}
@@ -45,6 +52,9 @@ const Info: React.FC<InfoProps> = ({ artistA, artistB }) => {
           activeYears={bInfo.releaseYears || b.activeYears}
           songsCount={bInfo.loading ? undefined : bInfo.details?.totalTracks}
           albumsCount={bInfo.loading ? undefined : bInfo.details?.totalAlbums}
+          ticketsUrl={bTickets.tickets?.url}
+          onTour={bTickets.tickets?.onTour}
+          eventCount={bTickets.tickets?.eventCount}
         />
       )}
     </div>

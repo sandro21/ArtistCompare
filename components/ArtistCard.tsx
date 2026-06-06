@@ -1,4 +1,5 @@
 import React from 'react';
+import GetTicketsButton from './GetTicketsButton';
 
 interface ArtistCardProps {
   artistName: string;
@@ -6,6 +7,9 @@ interface ArtistCardProps {
   activeYears?: string;
   songsCount?: number;
   albumsCount?: number;
+  ticketsUrl?: string | null;
+  onTour?: boolean;
+  eventCount?: number;
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = ({
@@ -14,6 +18,9 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
   activeYears,
   songsCount,
   albumsCount,
+  ticketsUrl,
+  onTour,
+  eventCount,
 }) => {
   return (
     <div className="flex flex-col items-center mx-2 sm:mx-4">
@@ -31,6 +38,11 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
           </span>
         )}
       </div>
+
+      {/* Get Tickets (only when the artist has upcoming shows) */}
+      {onTour && ticketsUrl && (
+        <GetTicketsButton href={ticketsUrl} artistName={artistName} eventCount={eventCount} />
+      )}
 
       {/* Artist Name */}
       <h2 className="text-lg sm:text-2xl font-bold text-white mb-1 sm:mb-2 text-center">

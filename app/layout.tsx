@@ -119,6 +119,11 @@ export default function RootLayout({
           name="google-site-verification"
           content="K1bbyZBCsNWwzD-a0pcDNzzets87M-FADFh920g-Pvk"
         />
+        {/* Impact.com site verification */}
+        <meta
+          name="impact-site-verification"
+          value="42788bb6-a5d4-4b23-8a08-1cf0a6f5ca31"
+        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#5EE9B5" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

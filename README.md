@@ -33,6 +33,21 @@ Built with Next.js, React, and Tailwind CSS.
 
 ---
 
+## 🔑 Environment Variables
+
+Set these in `.env.local` (local) and in your Vercel project settings (production):
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `SEATGEEK_CLIENT_ID` | For tickets | SeatGeek Platform API client id (server-only). |
+| `SEATGEEK_CLIENT_SECRET` | Optional | SeatGeek client secret for higher rate limits. |
+| `SEATGEEK_AFFILIATE_ID` | For payouts | Affiliate id appended as `aid` to ticket links. Without it, links still work but aren't attributed. |
+| `POSTGRES_URL` / `DATABASE_URL` | For caching/votes | Neon Postgres connection (also caches tour lookups). |
+
+> The "Get Tickets" button under each artist only appears when SeatGeek reports upcoming shows. If `SEATGEEK_CLIENT_ID` is unset, the feature degrades silently and nothing renders.
+
+---
+
 ## 📝 Notes
 
 - If an external API is down, the app will gracefully show fallback messages.

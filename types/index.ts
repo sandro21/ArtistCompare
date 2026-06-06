@@ -71,6 +71,14 @@ export interface SpotifyDetails {
   totalReleases: number;
 }
 
+// Tour / affiliate ticketing (SeatGeek)
+export interface TicketInfo {
+  onTour: boolean;
+  url: string | null;
+  eventCount: number;
+  performerName?: string | null;
+}
+
 // Used by SearchBar selection callbacks
 export interface SelectedArtist {
   artistName: string;
