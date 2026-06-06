@@ -61,6 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           ) : (
             <div>
               <input
+                suppressHydrationWarning
                 className={baseInputClasses}
                 placeholder="Search Artist 1..."
                 value={queryA}
@@ -122,6 +123,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           ) : (
             <div>
               <input
+                suppressHydrationWarning
                 className={baseInputClasses}
                 placeholder="Search Artist 2..."
                 value={queryB}

@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import SiteFooter from '../../components/SiteFooter'
 
 export const metadata: Metadata = {
   title: 'About Artist Compare - Music Artist Comparison Tool | Billboard Charts, Grammy Awards & Spotify Data',
@@ -311,7 +310,6 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <SiteFooter />
     </div>
   )
 }

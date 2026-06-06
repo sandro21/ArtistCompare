@@ -14,7 +14,6 @@ import QuickCompareBar from '../components/QuickCompareBar';
 import GoogleTrends from './sections/GoogleTrends';
 import CommunityVote from './sections/CommunityVote';
 import ShareModal from '../components/ShareModal';
-import SiteFooter from '../components/SiteFooter';
 import { useLoadingScreen } from '../hooks/useLoadingScreen';
 import { useArtistSelection } from '../hooks/useArtistSelection';
 import { useGlowEffect } from '../hooks/useGlowEffect';
@@ -56,7 +55,7 @@ function HomeContent() {
 
   return (
     <div
-      className={`pb-18 min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12 ${!pair && !hasUrlParams ? 'desktop-bg' : ''}`}
+      className={`min-h-screen bg-black flex flex-col gap-6 sm:gap-8 md:gap-12 ${!pair && !hasUrlParams ? 'desktop-bg' : ''}`}
     >
       {/* Navbar */}
       <nav className="w-full h-16 sm:h-20 md:h-24 bg-gradient-to-r from-[#00FF44]/5 to-[#99FFD9]/12 backdrop-blur-xs rounded-b-[2rem] sm:rounded-b-[3rem] md:rounded-b-[4rem] flex justify-between px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 animate-in fade-in duration-1000">
@@ -64,9 +63,6 @@ function HomeContent() {
           <img src="/icon.png" alt="icon" className="w-8 h-8 sm:w-12 sm:h-12 md:w-15 md:h-15" />
           <span className="font-bold text-black text-lg sm:text-2xl md:text-4xl">{pair ? 'Go Back' : 'Artist Compare'}</span>
         </Link>
-        <div className={`flex items-center pr-2 sm:pr-4 md:pr-6 ${pair ? 'hidden' : 'block'}`}>
-          <Link href="/about" className="font-bold text-white text-sm sm:text-lg md:text-2xl">Learn More</Link>
-        </div>
       </nav>
 
       {/* Main Content */}
@@ -173,8 +169,6 @@ function HomeContent() {
           </>
         )}
       </main>
-
-      <SiteFooter />
 
       {sharePayload && (
         <ShareModal payload={sharePayload} onClose={() => setSharePayload(null)} />

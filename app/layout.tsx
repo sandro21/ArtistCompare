@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import SiteFooter from "../components/SiteFooter";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -112,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Google Search Console verification */}
         <meta
@@ -166,9 +167,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${plusJakartaSans.variable} font-sans antialiased`}
+        suppressHydrationWarning
+        className={`${plusJakartaSans.variable} font-sans antialiased pb-10`}
       >
         {children}
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

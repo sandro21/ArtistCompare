@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import SiteFooter from './SiteFooter';
 
 interface LegalPageProps {
   badge: string;
@@ -20,7 +19,7 @@ const LegalPage: React.FC<LegalPageProps> = ({ badge, title, subtitle, lastUpdat
           <span className="font-bold text-black text-xl sm:text-4xl">Artist Compare</span>
         </Link>
         <div className="bg-[#5EE9B5] border-2 sm:border-3 border-[#376348] flex rounded-full items-center px-3 sm:px-4">
-          <Link href="/" className="font-bold text-black text-base sm:text-2xl">Compare Again</Link>
+          <Link href="/" className="font-bold text-black text-base sm:text-2xl">Go Back</Link>
         </div>
       </nav>
 
@@ -50,8 +49,6 @@ const LegalPage: React.FC<LegalPageProps> = ({ badge, title, subtitle, lastUpdat
           {children}
         </article>
       </main>
-
-      <SiteFooter />
     </div>
   );
 };
