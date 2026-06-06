@@ -4,8 +4,6 @@ import SourceAttribution from './SourceAttribution';
 import billboard200Data from '@/data/billboard200-stats.json';
 import { normalizeForBillboardLookup } from '@/lib/utils/normalize';
 
-const billboard200MinYear = billboard200Data.metadata.min_year;
-
 interface AlbumsChartProps {
   artistA: any;
   artistB: any;
@@ -41,7 +39,7 @@ const AlbumsChart: React.FC<AlbumsChartProps> = ({ artistA, artistB }) => {
         metric="Total Weeks" 
       />
       <SourceAttribution>
-        From: Billboard 200<span className="align-super text-[10px] ml-0.5">™</span> (After {billboard200MinYear})
+        From: Billboard 200<span className="align-super text-[10px] ml-0.5">™</span>
       </SourceAttribution>
     </>
   );

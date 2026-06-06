@@ -5,8 +5,6 @@ import hot100Data from '@/data/billboard-hot100-stats.json';
 import { normalizeForBillboardLookup } from '@/lib/utils/normalize';
 import type { Artist } from '../types';
 
-const hot100MinYear = hot100Data.metadata.min_year;
-
 interface SongsChartProps {
   artistA: Artist | null;
   artistB: Artist | null;
@@ -40,7 +38,7 @@ const SongsChart: React.FC<SongsChartProps> = ({ artistA, artistB }) => {
         metric="Entries" 
       />
       <SourceAttribution>
-        From: Billboard Hot 100<span className="align-super text-[10px] ml-0.5">™</span> (After {hot100MinYear})
+        From: Billboard Hot 100<span className="align-super text-[10px] ml-0.5">™</span>
       </SourceAttribution>
     </>
   );

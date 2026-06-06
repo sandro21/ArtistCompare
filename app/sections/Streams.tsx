@@ -9,7 +9,6 @@ import type { Artist, SharePayload } from '../../types';
 
 const SECTION_HEADER = 'Spotify Stats';
 const SOURCE_LABEL = 'Source: musicmetricsvault.com';
-const SOURCE_URL = 'https://www.musicmetricsvault.com';
 
 interface StreamsProps {
   artistA: Artist | null;
@@ -109,7 +108,7 @@ const Streams: React.FC<StreamsProps> = ({ artistA, artistB, onShare }) => {
         metric="Spotify Followers"
         labelClassName="max-w-[120px] sm:max-w-[140px] md:max-w-none"
       />
-      <SourceAttribution href={SOURCE_URL}>{SOURCE_LABEL}</SourceAttribution>
+      <SourceAttribution>{SOURCE_LABEL}</SourceAttribution>
     </SectionWrapper>
   );
 };
